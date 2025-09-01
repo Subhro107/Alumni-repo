@@ -7,148 +7,497 @@
     <link rel="stylesheet" href="style.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f8f9fa;
+        }
+
+        .top-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            background: white;
+            border-bottom: 1px solid #e0e0e0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo {
+            width: 40px;
+            height: 40px;
+            background: #4285f4;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .brand-name {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .search-container {
+            position: relative;
+        }
+
+        .search-input {
+            padding: 8px 40px 8px 16px;
+            border: 1px solid #ddd;
+            border-radius: 20px;
+            width: 300px;
+            outline: none;
+            font-size: 14px;
+        }
+
+        .search-icon {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #666;
+        }
+
+        .notification-bell {
+            position: relative;
+            background: none;
+            border: none;
+            font-size: 1.2rem;
+            color: #666;
+            cursor: pointer;
+        }
+
+        .notification-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: #e74c3c;
+            color: white;
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            font-size: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #666;
+        }
+
         .dashboard-container {
             display: flex;
-            min-height: 100vh;
+            min-height: calc(100vh - 80px);
         }
 
         .sidebar {
             width: 250px;
-            background: #2c3e50;
-            color: white;
-            padding: 2rem;
+            background: white;
+            border-right: 1px solid #e0e0e0;
+            padding: 2rem 0;
         }
 
         .main-content {
             flex: 1;
             padding: 2rem;
             background: #f8f9fa;
-        }
-
-        .sidebar h2 {
-            margin-bottom: 2rem;
-        }
+            }
 
         .menu-item {
             display: flex;
             align-items: center;
-            padding: 1rem;
-            color: white;
+            padding: 1rem 2rem;
+            color: #666;
             text-decoration: none;
-            transition: background 0.3s;
+            transition: all 0.3s;
+            border-left: 3px solid transparent;
         }
 
-        .menu-item:hover {
-            background: #34495e;
+        .menu-item:hover, .menu-item.active {
+            background: #f8f9fa;
+            color: #4285f4;
+            border-left-color: #4285f4;
         }
 
         .menu-item i {
             margin-right: 1rem;
+            width: 20px;
         }
 
-        .logout-btn {
-            margin-top: 2rem;
-            padding: 0.8rem;
-            background: #e74c3c;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            width: 100%;
+        .welcome-header {
+            margin-bottom: 1rem;
         }
 
-        .dashboard-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 2rem;
+        .welcome-header h1 {
+            color: #333;
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .welcome-subtitle {
+            color: #666;
+            font-size: 1rem;
         }
 
         .stats-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1rem;
-            margin-bottom: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
         }
 
         .stat-card {
             background: white;
             padding: 1.5rem;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            border-radius: 12px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
         }
 
-        .stat-card h3 {
-            color: #2c3e50;
+        .stat-content h3 {
+            color: #666;
+            font-size: 0.9rem;
+            font-weight: 500;
             margin-bottom: 0.5rem;
         }
 
-        .stat-card p {
+        .stat-content .number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #333;
+        }
+
+        .stat-content .subtitle {
+            color: #999;
+            font-size: 0.8rem;
+        }
+
+        .stat-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             font-size: 1.5rem;
-            color: #3498db;
-            font-weight: bold;
+            color: white;
+        }
+
+        .stat-icon.blue { background: #4285f4; }
+        .stat-icon.green { background: #34a853; }
+        .stat-icon.orange { background: #fbbc04; }
+        .stat-icon.purple { background: #9c27b0; }
+        .stat-icon.red { background: #ea4335; }
+
+        .bottom-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .activity-section, .quick-actions {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .activity-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .activity-item:last-child {
+            border-bottom: none;
+        }
+
+        .activity-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .activity-dot.blue { background: #4285f4; }
+        .activity-dot.green { background: #34a853; }
+        .activity-dot.orange { background: #fbbc04; }
+
+        .activity-content h4 {
+            color: #333;
+            font-size: 0.9rem;
+            margin-bottom: 0.2rem;
+        }
+
+        .activity-content p {
+            color: #666;
+            font-size: 0.8rem;
+        }
+
+        .quick-actions-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .action-button {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1.5rem;
+            background: #f8f9fa;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            text-decoration: none;
+            color: #333;
+            transition: all 0.3s;
+        }
+
+        .action-button:hover {
+            background: #e3f2fd;
+            transform: translateY(-2px);
+        }
+
+        .action-button i {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .action-button.blue i { color: #4285f4; }
+        .action-button.green i { color: #34a853; }
+        .action-button.orange i { color: #fbbc04; }
+        .action-button.red i { color: #ea4335; }
+
+        .action-button span {
+            font-size: 0.9rem;
+            font-weight: 500;
         }
     </style>
 </head>
 <body>
+    <!-- Top Header -->
+    <div class="top-header">
+        <div class="header-left">
+            <div class="logo">AU</div>
+            <span class="brand-name">Alumni Connect</span>
+        </div>
+        <div class="header-right">
+            <div class="search-container">
+                <input type="text" class="search-input" placeholder="Search alumni, events...">
+                <i class="fas fa-search search-icon"></i>
+            </div>
+            <button class="notification-bell">
+                <i class="fas fa-bell"></i>
+                <span class="notification-count">3</span>
+            </button>
+            <div class="user-profile">
+                <i class="fas fa-user-circle" style="font-size: 1.5rem;"></i>
+                <span>Admin One</span>
+            </div>
+        </div>
+    </div>
+
     <div class="dashboard-container">
-        <div class="sidebar">
-            <h2>Admin Dashboard</h2>
+            <div class="sidebar">
             <nav>
                 <a href="#" class="menu-item active">
                     <i class="fas fa-tachometer-alt"></i>
                     Dashboard
                 </a>
-                <a href="#" class="menu-item">
+                <a href="alumni-dashboard.html" class="menu-item">
                     <i class="fas fa-users"></i>
-                    Manage Users
+                    Alumni Directory
                 </a>
-                <a href="#" class="menu-item">
+                <a href="events.html" class="menu-item">
                     <i class="fas fa-calendar-alt"></i>
                     Events
                 </a>
-                <a href="#" class="menu-item">
+                <a href="forums.html" class="menu-item">
+                    <i class="fas fa-comments"></i>
+                    Forums
+                </a>
+                <a href="mentorship.html" class="menu-item">
+                    <i class="fas fa-handshake"></i>
+                    Mentorship
+                </a>
+                <a href="career-center.html" class="menu-item">
+                    <i class="fas fa-briefcase"></i>
+                    Career Center
+                </a>
+                <a href="profile-settings.html" class="menu-item">
+                    <i class="fas fa-cog"></i>
+                    Profile Settings
+                </a>
+                <a href="analytics.html" class="menu-item">
+                    <i class="fas fa-chart-line"></i>
+                    Analytics
+                </a>
+                <a href="announcements.html" class="menu-item">
                     <i class="fas fa-bullhorn"></i>
                     Announcements
                 </a>
-                <a href="#" class="menu-item">
-                    <i class="fas fa-cog"></i>
-                    Settings
+                <a href="admin-panel.html" class="menu-item">
+                    <i class="fas fa-user-shield"></i>
+                    Admin Panel
                 </a>
             </nav>
-            <button onclick="location.href='login.html'" class="logout-btn">
-                <i class="fas fa-sign-out-alt"></i> Logout
-            </button>
         </div>
 
         <div class="main-content">
-            <div class="dashboard-header">
-                <h1>Welcome, Admin</h1>
-                <div class="user-profile">
-                    <i class="fas fa-user-circle"></i>
-                </div>
+            <div class="welcome-header">
+                <h1>Welcome back, Admin!</h1>
+                <p class="welcome-subtitle">Here's what's happening in your alumni network</p>
             </div>
 
             <div class="stats-grid">
                 <div class="stat-card">
-                    <h3>Total Users</h3>
-                    <p>1,234</p>
+                    <div class="stat-content">
+                        <h3>Total Alumni</h3>
+                        <div class="number">1</div>
+                        <div class="subtitle">Registered in the platform</div>
+                    </div>
+                    <div class="stat-icon blue">
+                        <i class="fas fa-users"></i>
+                    </div>
                 </div>
+
                 <div class="stat-card">
-                    <h3>Active Alumni</h3>
-                    <p>789</p>
+                    <div class="stat-content">
+                        <h3>Upcoming Events</h3>
+                        <div class="number">0</div>
+                        <div class="subtitle">This month</div>
+                    </div>
+                    <div class="stat-icon green">
+                        <i class="fas fa-calendar-alt"></i>
+                    </div>
                 </div>
+
                 <div class="stat-card">
-                    <h3>Current Students</h3>
-                    <p>445</p>
+                    <div class="stat-content">
+                        <h3>Job Opportunities</h3>
+                        <div class="number">0</div>
+                        <div class="subtitle">Active postings</div>
+                    </div>
+                    <div class="stat-icon purple">
+                        <i class="fas fa-briefcase"></i>
+                    </div>
                 </div>
+
                 <div class="stat-card">
-                    <h3>Recent Events</h3>
-                    <p>12</p>
+                    <div class="stat-content">
+                        <h3>Total Donations</h3>
+                        <div class="number">$0</div>
+                        <div class="subtitle">This year</div>
+                    </div>
+                    <div class="stat-icon red">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-content">
+                        <h3>Active Mentorships</h3>
+                        <div class="number">0</div>
+                        <div class="subtitle">Current matches</div>
+                    </div>
+                    <div class="stat-icon blue">
+                        <i class="fas fa-user-friends"></i>
+                    </div>
                 </div>
             </div>
 
-            <!-- Add more dashboard content here -->
+            <div class="bottom-section">
+                <div class="activity-section">
+                    <h2 class="section-title">
+                        <i class="fas fa-bell"></i>
+                        Recent Activity
+                    </h2>
+                    <div class="activity-item">
+                        <div class="activity-dot blue"></div>
+                        <div class="activity-content">
+                            <h4>New alumni registration</h4>
+                            <p>Sarah Johnson (Class of 2020) joined</p>
+                        </div>
+                    </div>
+                    <div class="activity-item">
+                        <div class="activity-dot green"></div>
+                        <div class="activity-content">
+                            <h4>Upcoming event reminder</h4>
+                            <p>Annual Alumni Gala - 2 weeks away</p>
+                        </div>
+                    </div>
+                    <div class="activity-item">
+                        <div class="activity-dot orange"></div>
+                        <div class="activity-content">
+                            <h4>New mentorship match</h4>
+                            <p>You've been matched with a student</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="quick-actions">
+                    <h2 class="section-title">Quick Actions</h2>
+                    <div class="quick-actions-grid">
+                        <a href="#" class="action-button blue">
+                            <i class="fas fa-user-plus"></i>
+                            <span>Find Alumni</span>
+                        </a>
+                        <a href="#" class="action-button green">
+                            <i class="fas fa-calendar-plus"></i>
+                            <span>View Events</span>
+                        </a>
+                        <a href="#" class="action-button red">
+                            <i class="fas fa-heart"></i>
+                            <span>Donate</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 

@@ -159,6 +159,7 @@
         </div>
     </div>
 
+    <script src="app.js"></script>
     <script>
         // Get all the forms
         const roleSelection = document.getElementById('roleSelection');
@@ -191,24 +192,17 @@
             adminLoginForm.classList.remove('active');
         }
 
-        // Form submission handlers
-        studentLoginForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            // Add authentication logic here
-            window.location.href = 'student-dashboard.html';
+        // Initialize form visibility
+        document.addEventListener('DOMContentLoaded', function() {
+            showRoleSelection(); // Always show role selection first
+            // Just clear the session data without redirecting
+            if (window.loginManager) {
+                localStorage.removeItem('userSession');
+                window.loginManager.currentUser = null;
+            }
         });
 
-        alumniLoginForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            // Add authentication logic here
-            window.location.href = 'alumni-dashboard.html';
-        });
-
-        adminLoginForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            // Add authentication logic here
-            window.location.href = 'admin-dashboard.html';
-        });
+        // The form submission is now handled by the LoginManager in app.js
     </script>
 </body>
 </html>
