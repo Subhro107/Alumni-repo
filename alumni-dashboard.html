@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alumni Dashboard - Alumni Connect</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .dashboard-container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .sidebar {
+            width: 250px;
+            background: #2c3e50;
+            color: white;
+            padding: 2rem;
+        }
+
+        .main-content {
+            flex: 1;
+            padding: 2rem;
+            background: #f8f9fa;
+        }
+
+        .sidebar h2 {
+            margin-bottom: 2rem;
+        }
+
+        .menu-item {
+            display: flex;
+            align-items: center;
+            padding: 1rem;
+            color: white;
+            text-decoration: none;
+            transition: background 0.3s;
+        }
+
+        .menu-item:hover {
+            background: #34495e;
+        }
+
+        .menu-item i {
+            margin-right: 1rem;
+        }
+
+        .logout-btn {
+            margin-top: 2rem;
+            padding: 0.8rem;
+            background: #e74c3c;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        .dashboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .activity-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .activity-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .activity-card h3 {
+            color: #2c3e50;
+            margin-bottom: 1rem;
+        }
+
+        .activity-card p {
+            color: #666;
+            margin-bottom: 1rem;
+        }
+
+        .action-btn {
+            background: #3498db;
+            color: white;
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .action-btn:hover {
+            background: #2980b9;
+        }
+
+        .post-job-btn {
+            background: #27ae60;
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-bottom: 2rem;
+        }
+
+        .post-job-btn:hover {
+            background: #219a52;
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard-container">
+        <div class="sidebar">
+            <h2>Alumni Dashboard</h2>
+            <nav>
+                <a href="#" class="menu-item active">
+                    <i class="fas fa-tachometer-alt"></i>
+                    Dashboard
+                </a>
+                <a href="#" class="menu-item">
+                    <i class="fas fa-briefcase"></i>
+                    Post Jobs
+                </a>
+                <a href="#" class="menu-item">
+                    <i class="fas fa-hands-helping"></i>
+                    Mentorship
+                </a>
+                <a href="#" class="menu-item">
+                    <i class="fas fa-calendar-alt"></i>
+                    Events
+                </a>
+                <a href="#" class="menu-item">
+                    <i class="fas fa-user"></i>
+                    Profile
+                </a>
+            </nav>
+            <button onclick="location.href='login.html'" class="logout-btn">
+                <i class="fas fa-sign-out-alt"></i> Logout
+            </button>
+        </div>
+
+        <div class="main-content">
+            <div class="dashboard-header">
+                <h1>Welcome, Alumni</h1>
+                <div class="user-profile">
+                    <i class="fas fa-user-circle"></i>
+                </div>
+            </div>
+
+            <button class="post-job-btn">
+                <i class="fas fa-plus"></i> Post New Job Opportunity
+            </button>
+
+            <h2>Recent Activities</h2>
+            <div class="activity-grid">
+                <div class="activity-card">
+                    <h3>Mentorship Requests</h3>
+                    <p>5 students have requested mentorship</p>
+                    <button class="action-btn">View Requests</button>
+                </div>
+                <div class="activity-card">
+                    <h3>Your Job Postings</h3>
+                    <p>2 active job postings</p>
+                    <button class="action-btn">Manage Postings</button>
+                </div>
+                <div class="activity-card">
+                    <h3>Upcoming Events</h3>
+                    <p>Career guidance workshop next week</p>
+                    <button class="action-btn">View Details</button>
+                </div>
+            </div>
+
+            <!-- Add more dashboard content here -->
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Alumni Connect</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .login-container {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(rgba(44, 62, 80, 0.8), rgba(44, 62, 80, 0.8)),
+                        url('https://source.unsplash.com/random/1920x1080?university') center/cover;
+        }
+
+        .login-box {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .login-box h2 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 2rem;
+        }
+
+        .role-selection {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .role-btn {
+            padding: 1rem;
+            border: none;
+            border-radius: 5px;
+            background: #f8f9fa;
+            color: #2c3e50;
+            cursor: pointer;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            transition: all 0.3s;
+        }
+
+        .role-btn:hover {
+            background: #3498db;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .role-btn i {
+            margin-right: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .back-btn {
+            display: inline-block;
+            margin-top: 1rem;
+            color: #2c3e50;
+            text-decoration: none;
+        }
+
+        .back-btn:hover {
+            color: #3498db;
+        }
+
+        .login-form {
+            display: none;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .login-form.active {
+            display: flex;
+        }
+
+        .login-form input {
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        .login-form button {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 0.8rem;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background 0.3s;
+        }
+
+        .login-form button:hover {
+            background: #2980b9;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-box">
+            <h2>Login to Alumni Connect</h2>
+            
+            <!-- Role Selection -->
+            <div class="role-selection" id="roleSelection">
+                <button class="role-btn" onclick="showLoginForm('student')">
+                    <i class="fas fa-user-graduate"></i>
+                    Student Login
+                </button>
+                <button class="role-btn" onclick="showLoginForm('alumni')">
+                    <i class="fas fa-users"></i>
+                    Alumni Login
+                </button>
+                <button class="role-btn" onclick="showLoginForm('admin')">
+                    <i class="fas fa-user-shield"></i>
+                    Admin Login
+                </button>
+            </div>
+
+            <!-- Student Login Form -->
+            <form id="studentLogin" class="login-form">
+                <h3><i class="fas fa-user-graduate"></i> Student Login</h3>
+                <input type="email" placeholder="College Email" required>
+                <input type="password" placeholder="Password" required>
+                <button type="submit">Login</button>
+                <button type="button" class="back-btn" onclick="showRoleSelection()">Back to Selection</button>
+            </form>
+
+            <!-- Alumni Login Form -->
+            <form id="alumniLogin" class="login-form">
+                <h3><i class="fas fa-users"></i> Alumni Login</h3>
+                <input type="email" placeholder="Email" required>
+                <input type="password" placeholder="Password" required>
+                <button type="submit">Login</button>
+                <button type="button" class="back-btn" onclick="showRoleSelection()">Back to Selection</button>
+            </form>
+
+            <!-- Admin Login Form -->
+            <form id="adminLogin" class="login-form">
+                <h3><i class="fas fa-user-shield"></i> Admin Login</h3>
+                <input type="text" placeholder="Admin ID" required>
+                <input type="password" placeholder="Password" required>
+                <button type="submit">Login</button>
+                <button type="button" class="back-btn" onclick="showRoleSelection()">Back to Selection</button>
+            </form>
+
+            <a href="index.html" class="back-btn">
+                <i class="fas fa-arrow-left"></i> Back to Home
+            </a>
+        </div>
+    </div>
+
+    <script>
+        // Get all the forms
+        const roleSelection = document.getElementById('roleSelection');
+        const studentLoginForm = document.getElementById('studentLogin');
+        const alumniLoginForm = document.getElementById('alumniLogin');
+        const adminLoginForm = document.getElementById('adminLogin');
+
+        // Function to show login form based on role
+        function showLoginForm(role) {
+            roleSelection.style.display = 'none';
+            
+            switch(role) {
+                case 'student':
+                    studentLoginForm.classList.add('active');
+                    break;
+                case 'alumni':
+                    alumniLoginForm.classList.add('active');
+                    break;
+                case 'admin':
+                    adminLoginForm.classList.add('active');
+                    break;
+            }
+        }
+
+        // Function to show role selection
+        function showRoleSelection() {
+            roleSelection.style.display = 'flex';
+            studentLoginForm.classList.remove('active');
+            alumniLoginForm.classList.remove('active');
+            adminLoginForm.classList.remove('active');
+        }
+
+        // Form submission handlers
+        studentLoginForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            // Add authentication logic here
+            window.location.href = 'student-dashboard.html';
+        });
+
+        alumniLoginForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            // Add authentication logic here
+            window.location.href = 'alumni-dashboard.html';
+        });
+
+        adminLoginForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            // Add authentication logic here
+            window.location.href = 'admin-dashboard.html';
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Dashboard - Alumni Connect</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .dashboard-container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .sidebar {
+            width: 250px;
+            background: #2c3e50;
+            color: white;
+            padding: 2rem;
+        }
+
+        .main-content {
+            flex: 1;
+            padding: 2rem;
+            background: #f8f9fa;
+        }
+
+        .sidebar h2 {
+            margin-bottom: 2rem;
+        }
+
+        .menu-item {
+            display: flex;
+            align-items: center;
+            padding: 1rem;
+            color: white;
+            text-decoration: none;
+            transition: background 0.3s;
+        }
+
+        .menu-item:hover {
+            background: #34495e;
+        }
+
+        .menu-item i {
+            margin-right: 1rem;
+        }
+
+        .logout-btn {
+            margin-top: 2rem;
+            padding: 0.8rem;
+            background: #e74c3c;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        .dashboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .opportunities-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .opportunity-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .opportunity-card h3 {
+            color: #2c3e50;
+            margin-bottom: 1rem;
+        }
+
+        .opportunity-card p {
+            color: #666;
+            margin-bottom: 1rem;
+        }
+
+        .apply-btn {
+            background: #3498db;
+            color: white;
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .apply-btn:hover {
+            background: #2980b9;
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard-container">
+        <div class="sidebar">
+            <h2>Student Dashboard</h2>
+            <nav>
+                <a href="#" class="menu-item active">
+                    <i class="fas fa-tachometer-alt"></i>
+                    Dashboard
+                </a>
+                <a href="#" class="menu-item">
+                    <i class="fas fa-briefcase"></i>
+                    Job Opportunities
+                </a>
+                <a href="#" class="menu-item">
+                    <i class="fas fa-user-tie"></i>
+                    Find Mentor
+                </a>
+                <a href="#" class="menu-item">
+                    <i class="fas fa-calendar-alt"></i>
+                    Events
+                </a>
+                <a href="#" class="menu-item">
+                    <i class="fas fa-user"></i>
+                    Profile
+                </a>
+            </nav>
+            <button onclick="location.href='login.html'" class="logout-btn">
+                <i class="fas fa-sign-out-alt"></i> Logout
+            </button>
+        </div>
+
+        <div class="main-content">
+            <div class="dashboard-header">
+                <h1>Welcome, Student</h1>
+                <div class="user-profile">
+                    <i class="fas fa-user-circle"></i>
+                </div>
+            </div>
+
+            <h2>Latest Opportunities</h2>
+            <div class="opportunities-grid">
+                <div class="opportunity-card">
+                    <h3>Software Developer Internship</h3>
+                    <p>Tech Corp Inc.</p>
+                    <p>3 months internship opportunity for final year students</p>
+                    <button class="apply-btn">Apply Now</button>
+                </div>
+                <div class="opportunity-card">
+                    <h3>Marketing Assistant</h3>
+                    <p>Global Marketing Solutions</p>
+                    <p>6 months internship with possibility of full-time role</p>
+                    <button class="apply-btn">Apply Now</button>
+                </div>
+                <div class="opportunity-card">
+                    <h3>Research Assistant</h3>
+                    <p>University Research Lab</p>
+                    <p>Part-time opportunity for research enthusiasts</p>
+                    <button class="apply-btn">Apply Now</button>
+                </div>
+            </div>
+
+            <!-- Add more dashboard content here -->
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
