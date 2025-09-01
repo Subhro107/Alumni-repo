@@ -1,0 +1,259 @@
+*{
+    margin: 0;
+    font-family: Arial;
+    border: border-box;
+}
+/* navigation bar */
+.navbar{
+    height: 55px;
+    background-color:#0f1111 ;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+/* amazon logo */
+.nav-logo{
+    height: 50px;
+    width: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.logo{
+    background-image: url("logo.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    height:100%;
+    width: 100%;
+}
+.border{
+    border: 2px solid transparent;
+}
+.border:hover{
+ border:2px solid white ;
+}
+/* delivery address */
+.add-one{
+    color: #CCCCCC;
+    font-size: 0.85rem;
+    margin-left: 15px;
+}
+.add-two{
+    color: #FFFFFF;
+    font-size: 1rem;
+    margin-left: 3px;
+}
+.add-icon{
+    display: flex;
+    align-items: center;
+}
+/* search bar */
+.nav-search{
+    display: flex;
+    justify-content: space-evenly;
+    width: 620px;
+    height: 40px;
+    border-radius: 4px;
+    
+}
+.nav-search:hover{
+    border: 2px solid orange;
+}
+.search-select{
+    background-color: #f3f3f3;
+    width:50px ;
+    text-align: center;
+    border-top-left-radius: 4px;
+    border-bottom-left-radius:4px ;
+    border: none;
+}
+.search-input{
+    width: 550px;
+    font-size: 1rem;
+    border: none;
+}
+.search-icon{
+    width:40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2rem;
+    background-color: rgb(232, 176, 37);
+    border-top-right-radius: 4px;
+    border-bottom-right-radius:4px ;
+    color: black;
+}
+/* sign in box */
+span{
+    font-size: 0.72rem;
+}
+.nav-two{
+    font-size:0.8rem;
+    font-weight: 900;
+}
+/* return-order box */
+span{
+    font-size: 0.72rem;
+}
+.nav-two{
+    font-size:0.8rem;
+    font-weight: 900;
+}
+/* cart */
+.nav-cart i{
+font-size: 30px;
+}
+.nav-cart{
+font-size: 0.8rem;
+}
+/* panel */
+.panel{
+    height: 40px;
+    background-color: #222f3d;
+    display: flex;
+    color: #FFFFFF;
+    align-items: center;
+    justify-content: left;
+}
+.panel-all{
+    font-weight: 600;
+
+}
+.panel-op p{
+    display: inline;
+margin-left: 10px;
+}
+.panel-op{
+    width:95%;
+    font-size: 14px;
+}
+/*background image */
+.homepage{
+    background-image: url("pic1.jpg");
+    background-size: cover;
+    height: 300px;
+}
+/* shopping */
+.shop-section{
+    display: flex;
+    flex-wrap:wrap ;
+    justify-content: space-evenly;
+    background-color: bisque;
+}
+.box{
+    height: 300px ;
+    width: 23%;
+    margin-top: 15px;
+    background-color: #FFFFFF;
+    padding: 20px 0px 15px;
+}
+.box-img{
+    height: 200px;
+    background-size: cover;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+.box-content{
+    margin-left: 10px;
+    margin-right: 10px;
+}
+.box-content p{
+    color: #4685c9;
+}
+/* footer */
+.foot-panel{
+      background-color: #374758;
+      color: white;
+      height: 50px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 0.85rem;
+}
+.foot-panel2{
+    background-color: #222f3d;
+      color: white;
+      height: 300px;
+      display: flex;
+      justify-content: space-evenly;
+}
+ul{
+    margin-top: 10px;
+}
+ul a{
+    display: block;
+    font-size: 0.85rem;
+    margin-top: 10px;
+    color: #dddddd;
+}
+.foot-panel3{
+    background-color: #050f1a;
+    color: white;
+    border-top: 0.5px solid white;
+    height: 70px;
+    display: flex;
+    justify-content: center ;
+    align-items: center;
+}
+.logo{
+    background-image: url(logo.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 50px;
+    width: 100px;
+}
+.foot-panel4{
+    background-color: #0f1111;
+    color: white;
+    height: 100px;
+}
+.pages{
+    font-size: 0.7rem;
+    text-align: center;
+    padding: 25px;
+}
+.copyright{
+    padding-top: 5px;
+    font-size: 0.7rem;
+    text-align: center;
+}
+@media (max-width: 1024px){
+
+  .nav-search {
+    width: 80%;
+  }
+  .box {
+    width: 45%;
+  }
+}
+
+@media (max-width: 768px){
+  .navbar {
+    flex-wrap: wrap;
+    height: auto;
+    padding: 10px;
+  }
+
+  .nav-search{
+    width: 100%;
+    margin-top: 10px;
+  }
+
+  .shop-section{
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .box {
+    width: 80%;
+  }
+
+  .foot-panel2{
+    flex-direction: column;
+    align-items: center;
+    height: auto;
+  }
+}
