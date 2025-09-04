@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Forums - Alumni Connect</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Events - Alumni Connect</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
         * {
@@ -214,6 +214,9 @@
             <div class="user-profile">
                 <i class="fas fa-user-circle" style="font-size: 1.5rem;"></i>
                 <span>Admin One</span>
+                <button class="logout-btn" onclick="loginManager.logout()" style="margin-left: 1rem; padding: 0.5rem 1rem; background: #ea4335; color: white; border: none; border-radius: 6px; cursor: pointer;">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </button>
             </div>
         </div>
     </div>
@@ -225,15 +228,15 @@
                     <i class="fas fa-tachometer-alt"></i>
                     Dashboard
                 </a>
-                <a href="alumni-dashboard.html" class="menu-item">
+                <a href="alumni_directory.html" class="menu-item">
                     <i class="fas fa-users"></i>
                     Alumni Directory
                 </a>
-                <a href="events.html" class="menu-item">
+                <a href="events.html" class="menu-item active">
                     <i class="fas fa-calendar-alt"></i>
                     Events
                 </a>
-                <a href="forums.html" class="menu-item active">
+                <a href="forums.html" class="menu-item">
                     <i class="fas fa-comments"></i>
                     Forums
                 </a>
@@ -266,20 +269,20 @@
 
         <div class="main-content">
             <div class="page-header">
-                <h1>Forums</h1>
-                <p class="page-subtitle">Join discussions and connect with the alumni community</p>
+                <h1>Events</h1>
+                <p class="page-subtitle">Discover and manage alumni events and gatherings</p>
             </div>
 
             <div class="empty-state">
                 <div class="empty-state-icon">
-                    <i class="fas fa-comments"></i>
+                    <i class="fas fa-calendar-alt"></i>
                 </div>
-                <h3>No Forum Discussions</h3>
-                <p>The forums are currently quiet. Be the first to start a discussion and connect with fellow alumni on topics that matter to you.</p>
+                <h3>No Events Scheduled</h3>
+                <p>There are currently no events scheduled. Check back later for upcoming alumni gatherings, networking events, and special occasions.</p>
             </div>
         </div>
     </div>
 
-    <script src="app.js"></script>
+    <script src="../assets/js/app.js"></script>
 </body>
 </html>

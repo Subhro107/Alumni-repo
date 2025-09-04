@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - Alumni Connect</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="assets/css/style.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
         .login-container {
@@ -129,8 +129,8 @@
             <!-- Student Login Form -->
             <form id="studentLogin" class="login-form">
                 <h3><i class="fas fa-user-graduate"></i> Student Login</h3>
-                <input type="email" placeholder="College Email" required>
-                <input type="password" placeholder="Password" required>
+                <input type="email" placeholder="College Email" required id="studentLoginEmail">
+                <input type="password" placeholder="Password" required id="studentLoginPassword">
                 <button type="submit">Login</button>
                 <button type="button" class="back-btn" onclick="showRoleSelection()">Back to Selection</button>
             </form>
@@ -159,7 +159,7 @@
         </div>
     </div>
 
-    <script src="app.js"></script>
+    <script src="assets/js/app.js"></script>
     <script>
         // Get all the forms
         const roleSelection = document.getElementById('roleSelection');

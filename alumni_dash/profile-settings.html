@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profile Settings - Alumni Connect</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Inter', Arial, sans-serif;
+      background: #f7f8fa;
+      color: #222;
+    }
+    .container {
+      display: flex;
+      min-height: 100vh;
+    }
+    .sidebar {
+      width: 240px;
+      background: #fff;
+      border-right: 1px solid #e5e7eb;
+      padding: 24px 0;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .sidebar .logo {
+      font-weight: 700;
+      font-size: 1.3rem;
+      padding: 0 24px 24px 24px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .sidebar nav {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .sidebar nav a {
+      text-decoration: none;
+      color: #222;
+      padding: 10px 24px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 500;
+      transition: background 0.2s;
+    }
+    .sidebar nav a.active, .sidebar nav a:hover {
+      background: #eaf3ff;
+      color: #2563eb;
+    }
+    .main {
+      flex: 1;
+      padding: 32px 40px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .header .title {
+      font-size: 2rem;
+      font-weight: 700;
+    }
+    .header .profile {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .header .profile .avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: #e5e7eb;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      color: #2563eb;
+    }
+    .profile-content {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .profile-form {
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+      padding: 24px;
+    }
+    .profile-form h2 {
+      margin-top: 0;
+      margin-bottom: 24px;
+      font-size: 1.5rem;
+      color: #1f2937;
+    }
+    .form-section {
+      margin-bottom: 32px;
+    }
+    .form-section h3 {
+      font-size: 1.2rem;
+      margin-bottom: 16px;
+      color: #374151;
+      padding-bottom: 8px;
+      border-bottom: 1px solid #e5e7eb;
+    }
+    .form-row {
+      display: flex;
+      gap: 24px;
+      margin-bottom: 24px;
+    }
+    .form-group {
+      flex: 1;
+      margin-bottom: 24px;
+    }
+    .form-group label {
+      display: block;
+      margin-bottom: 10px;
+      font-weight: 500;
+      color: #4b5563;
+    }
+    .form-group input, 
+    .form-group select, 
+    .form-group textarea {
+      width: 100%;
+      padding: 12px 16px;
+      border: 1px solid #d1d5db;
+      border-radius: 6px;
+      font-size: 1rem;
+      font-family: inherit;
+      box-sizing: border-box;
+    }
+    .form-group textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+    .form-group input:focus, 
+    .form-group select:focus, 
+    .form-group textarea:focus {
+      outline: none;
+      border-color: #2563eb;
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+    }
+    .form-group .helper {
+      font-size: 0.85rem;
+      color: #6b7280;
+      margin-top: 4px;
+    }
+    .profile-photo {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      margin-bottom: 24px;
+    }
+    .avatar-preview {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      background: #e5e7eb;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.5rem;
+      font-weight: 600;
+      color: #2563eb;
+    }
+    .avatar-controls {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .avatar-controls .btn {
+      padding: 8px 12px;
+    }
+    .btn {
+      background: #2563eb;
+      color: white;
+      border: none;
+      padding: 10px 16px;
+      border-radius: 8px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .btn:hover {
+      background: #1d4ed8;
+    }
+    .btn.secondary {
+      background: #f3f4f6;
+      color: #4b5563;
+    }
+    .btn.secondary:hover {
+      background: #e5e7eb;
+    }
+    .form-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 16px;
+      margin-top: 32px;
+      padding-top: 16px;
+      border-top: 1px solid #e5e7eb;
+    }
+    @media (max-width: 900px) {
+      .main { padding: 16px 8px; }
+      .sidebar { width: 100px; padding: 12px 0; }
+      .sidebar .logo { font-size: 1rem; padding: 0 8px 12px 8px; }
+      .sidebar nav a { padding: 8px 8px; font-size: 0.95rem; }
+      .form-row { flex-direction: column; gap: 16px; margin-bottom: 16px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <aside class="sidebar">
+      <div class="logo"><span style="background:#2563eb;color:#fff;border-radius:50%;padding:4px 10px;font-weight:700;">AU</span> Alumni Connect</div>
+      <nav>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="alumni-directory.html">Alumni Directory</a>
+        <a href="events.html">Events</a>
+        <a href="forums.html">Forums</a>
+        <a href="mentorship.html">Mentorship</a>
+        <a href="career-center.html">Career Center</a>
+        <a href="profile-settings.html" class="active">Profile Settings</a>
+        <a href="give-back.html">Give Back</a>
+      </nav>
+    </aside>
+    <main class="main">
+      <div class="header">
+        <div class="title">Profile Settings</div>
+        <div class="profile">
+          <span style="position:relative;">
+            <span style="position:absolute;top:-8px;right:-8px;background:#ef4444;color:#fff;font-size:0.8rem;border-radius:50%;padding:2px 6px;font-weight:700;">3</span>
+            <svg width="24" height="24" fill="none" stroke="#888" stroke-width="2" viewBox="0 0 24 24"><path d="M18 8a6 6 0 10-12 0c0 7-3 9-3 9h18s-3-2-3-9"/></svg>
+          </span>
+          <span class="avatar">SM</span>
+          <span style="font-weight:600;">Subhro Maitra</span>
+        </div>
+      </div>
+      
+      <div class="profile-content">
+        <div class="profile-form">
+          <h2>Personal Information</h2>
+          
+          <div class="form-section">
+            <div class="profile-photo">
+              <div class="avatar-preview">SM</div>
+              <div class="avatar-controls">
+                <button class="btn">Upload Photo</button>
+                <button class="btn secondary">Remove</button>
+                <span class="helper">JPEG or PNG, max 2MB</span>
+              </div>
+            </div>
+          </div>
+          
+          <div class="form-section">
+            <h3>Basic Details</h3>
+            <div class="form-group">
+              <label for="firstName">First Name*</label>
+              <input type="text" id="firstName" value="Subhro" required>
+            </div>
+            <div class="form-group">
+              <label for="lastName">Last Name*</label>
+              <input type="text" id="lastName" value="Maitra" required>
+            </div>
+            
+            <div class="form-group">
+              <label for="email">Email Address*</label>
+              <input type="email" id="email" value="subhro.maitra@example.com" required>
+            </div>
+            <div class="form-group">
+              <label for="phone">Phone Number</label>
+              <input type="tel" id="phone" placeholder="+91 98765 43210">
+            </div>
+            
+            <div class="form-group">
+              <label for="birthdate">Date of Birth</label>
+              <input type="date" id="birthdate">
+            </div>
+            <div class="form-group">
+              <label for="gender">Gender</label>
+              <select id="gender">
+                <option value="" selected disabled>Select</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="other">Other</option>
+                <option value="prefer-not">Prefer not to say</option>
+              </select>
+            </div>
+          </div>
+          
+          <div class="form-section">
+            <h3>Contact Information</h3>
+            <div class="form-group">
+              <label for="country">Country</label>
+              <select id="country">
+                <option value="India">India</option>
+                <option value="United States">United States</option>
+                <option value="United Kingdom">United Kingdom</option>
+                <option value="Canada">Canada</option>
+                <option value="Australia">Australia</option>
+                <option value="Germany">Germany</option>
+                <option value="Japan">Japan</option>
+                <!-- Add more countries -->
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="city">City</label>
+              <input type="text" id="city" placeholder="Mumbai">
+            </div>
+            
+            <div class="form-group">
+              <label for="address">Address</label>
+              <textarea id="address" placeholder="Your current address"></textarea>
+            </div>
+          </div>
+          
+          <div class="form-section">
+            <h3>Education Details</h3>
+            <div class="form-group">
+              <label for="collegeName">College/University Name*</label>
+              <input type="text" id="collegeName" placeholder="Your Institution Name" required>
+            </div>
+            <div class="form-group">
+              <label for="degree">Degree*</label>
+              <input type="text" id="degree" placeholder="B.Tech, M.Sc, etc." required>
+            </div>
+            <div class="form-group">
+              <label for="major">Major/Field of Study*</label>
+              <input type="text" id="major" placeholder="Computer Science, Mechanical Engineering, etc." required>
+            </div>
+            <div class="form-group">
+              <label for="graduationYear">Graduation Year*</label>
+              <select id="graduationYear" required>
+                <option value="" selected disabled>Select Year</option>
+                <option value="2025">2025</option>
+                <option value="2024">2024</option>
+                <option value="2023">2023</option>
+                <option value="2022">2022</option>
+                <option value="2021">2021</option>
+                <option value="2020">2020</option>
+                <option value="2019">2019</option>
+                <option value="2018">2018</option>
+                <!-- Add more years -->
+              </select>
+            </div>
+          </div>
+          
+          <div class="form-section">
+            <h3>Professional Information</h3>
+            <div class="form-group">
+              <label for="company">Current Company</label>
+              <input type="text" id="company" placeholder="Company Name">
+            </div>
+            <div class="form-group">
+              <label for="jobTitle">Job Title</label>
+              <input type="text" id="jobTitle" placeholder="Your Current Position">
+            </div>
+            <div class="form-group">
+              <label for="industry">Industry</label>
+              <select id="industry">
+                <option value="" selected disabled>Select Industry</option>
+                <option value="Technology">Technology</option>
+                <option value="Healthcare">Healthcare</option>
+                <option value="Finance">Finance</option>
+                <option value="Education">Education</option>
+                <option value="Manufacturing">Manufacturing</option>
+                <option value="Retail">Retail</option>
+                <option value="Consulting">Consulting</option>
+                <!-- Add more industries -->
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="experience">Years of Experience</label>
+              <select id="experience">
+                <option value="" selected disabled>Select</option>
+                <option value="0-2">0-2 years</option>
+                <option value="3-5">3-5 years</option>
+                <option value="6-10">6-10 years</option>
+                <option value="11-15">11-15 years</option>
+                <option value="15+">15+ years</option>
+              </select>
+            </div>
+          </div>
+          
+          <div class="form-section">
+            <h3>Additional Information</h3>
+            <div class="form-group">
+              <label for="bio">Bio/About Me</label>
+              <textarea id="bio" placeholder="Tell us about yourself, your achievements, interests, etc."></textarea>
+              <div class="helper">This information will be visible to other alumni in the network</div>
+            </div>
+            
+            <div class="form-group">
+              <label for="linkedin">LinkedIn Profile</label>
+              <input type="url" id="linkedin" placeholder="https://linkedin.com/in/yourprofile">
+            </div>
+            <div class="form-group">
+              <label for="website">Personal Website/Portfolio</label>
+              <input type="url" id="website" placeholder="https://yourwebsite.com">
+            </div>
+          </div>
+          
+          <div class="form-actions">
+            <button class="btn secondary">Cancel</button>
+            <button class="btn">Save Changes</button>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+</body>
+</html>

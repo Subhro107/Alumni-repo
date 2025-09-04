@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alumni Connect - Bridge the Gap</title>
+    <link rel="stylesheet" href="assets/css/style12.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="logo">
+            <h1>Alumni Connect</h1>
+        </div>
+        <div class="nav-links">
+            <a href="#home">Home</a>
+            <a href="#features">Features</a>
+            <a href="#about">About</a>
+            <a href="#contact">Contact</a>
+            <a href="login.html" class="login-btn">Login</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero" id="home">
+        <div class="hero-content">
+            <h1>Welcome to Alumni Connect</h1>
+            <p>Connect. Grow. Succeed. Together</p>
+            <a href="register.html" class="cta-btn">Join Alumni Connect</a>
+        </div>
+    </header>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <h2>Our Features</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <i class="fas fa-users"></i>
+                <h3>Networking</h3>
+                <p>Connect with alumni and students from your institution</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-briefcase"></i>
+                <h3>Job Opportunities</h3>
+                <p>Access exclusive job postings and career guidance</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-calendar-alt"></i>
+                <h3>Events</h3>
+                <p>Participate in alumni meets and professional workshops</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-graduation-cap"></i>
+                <h3>Mentorship</h3>
+                <p>Get mentored by experienced alumni</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <h2>Who We Are</h2>
+        <div class="about-content">
+            <div class="about-text">
+                <p>Alumni Connect is a platform designed to strengthen the bond between educational institutions, their alumni, and current students. We facilitate meaningful connections that benefit everyone in the network.</p>
+                <div class="stats">
+                    <div class="stat-item">
+                        <span class="stat-icon"><i class="fas fa-users" style="color:#007BFF; font-size:1.7em; vertical-align:middle; margin-right:8px;"></i></span>
+                        <h3>1000+</h3>
+                        <p>Active Alumni</p>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-icon"><i class="fas fa-handshake" style="color:#007BFF; font-size:1.7em; vertical-align:middle; margin-right:8px;"></i></span>
+                        <h3>50+</h3>
+                        <p>Partner Institutions</p>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-icon"><i class="fas fa-chart-line" style="color:#007BFF; font-size:1.7em; vertical-align:middle; margin-right:8px;"></i></span>
+                        <h3>200+</h3>
+                        <p>Success Stories</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+     <!-- Report a problem -->
+    <section class="contact" id="contact">
+        <h1 class="contact-main-heading">Contact Us</h1>
+        <div class="contact-form-container wide">
+            <form class="contact-form" id="mainContactForm">
+                <div class="form-group">
+                    <label for="name">  Full Name <span class="required">*</span></label>
+                    <input type="text" id="name" name="name" placeholder="Enter your full name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email Address <span class="required">*</span></label>
+                    <input type="email" id="email" name="email" placeholder="Enter your email address" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">Your Message <span class="required">*</span></label>
+                    <textarea id="message" name="message" rows="5" placeholder="Type your message here..." required></textarea>
+                </div>
+                <button type="submit" class="contact-btn">Send Message</button>
+                <div id="contact-confirmation" style="display:none; color:#007BFF; margin-top:1rem; text-align:center; font-weight:500;">Thank you for your message! We'll get back to you shortly.</div>
+            </form>
+            <div class="contact-alternatives">
+                <p>Prefer another way? Email us at <a href="mailto:hello@alumniconnect.com">hello@alumniconnect.com</a> or connect on <a href="https://linkedin.com" target="_blank">LinkedIn</a>.</p>
+            </div>
+        </div>
+        <script>
+        document.getElementById('mainContactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            this.reset();
+            document.getElementById('contact-confirmation').style.display = 'block';
+        });
+        </script>
+    </section>
+
+    <!-- Footer -->
+        <footer class="modern-footer">
+            <div class="footer-columns">
+                <div class="footer-col">
+                    <h3 class="footer-logo">Alumni Connect</h3>
+                    <p class="footer-tagline">Bridging the gap between past and present.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Contact Us</h4>
+                    <ul class="footer-contact">
+                        <li><a href="mailto:info@alumniconnect.com">info@alumniconnect.com</a></li>
+                        <li><a href="tel:+12345678900">+1-234-567-8900</a></li>
+                    </ul>
+                    <div class="footer-social">
+                        <span>Follow Us</span>
+                        <ul class="social-icons">
+                            <li><a href="https://facebook.com" target="_blank" aria-label="Facebook">
+                                <svg width="24" height="24" fill="#f4f4f4" viewBox="0 0 24 24"><path d="M22.675 0h-21.35c-.733 0-1.325.592-1.325 1.326v21.348c0 .733.592 1.326 1.325 1.326h11.495v-9.294h-3.128v-3.622h3.128v-2.672c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.797.143v3.24l-1.918.001c-1.504 0-1.797.715-1.797 1.763v2.313h3.587l-.467 3.622h-3.12v9.294h6.116c.733 0 1.325-.593 1.325-1.326v-21.349c0-.734-.592-1.326-1.325-1.326z"/></svg>
+                            </a></li>
+                            <li><a href="https://twitter.com" target="_blank" aria-label="Twitter">
+                                <svg width="24" height="24" fill="#f4f4f4" viewBox="0 0 24 24"><path d="M24 4.557a9.83 9.83 0 0 1-2.828.775 4.932 4.932 0 0 0 2.165-2.724c-.951.564-2.005.974-3.127 1.195a4.916 4.916 0 0 0-8.38 4.482c-4.083-.205-7.697-2.162-10.126-5.144a4.822 4.822 0 0 0-.666 2.475c0 1.708.87 3.216 2.188 4.099a4.904 4.904 0 0 1-2.228-.616c-.054 2.281 1.581 4.415 3.949 4.89a4.936 4.936 0 0 1-2.224.084c.627 1.956 2.444 3.377 4.6 3.418a9.867 9.867 0 0 1-6.102 2.104c-.396 0-.787-.023-1.175-.069a13.945 13.945 0 0 0 7.548 2.212c9.058 0 14.009-7.513 14.009-14.009 0-.213-.005-.425-.014-.636a10.025 10.025 0 0 0 2.459-2.548z"/></svg>
+                            </a></li>
+                            <li><a href="https://linkedin.com" target="_blank" aria-label="LinkedIn">
+                                <svg width="24" height="24" fill="#f4f4f4" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.761 0 5-2.239 5-5v-14c0-2.761-2.239-5-5-5zm-11 19h-3v-10h3v10zm-1.5-11.268c-.966 0-1.75-.784-1.75-1.75s.784-1.75 1.75-1.75 1.75.784 1.75 1.75-.784 1.75-1.75 1.75zm13.5 11.268h-3v-5.604c0-1.337-.026-3.063-1.868-3.063-1.868 0-2.156 1.459-2.156 2.968v5.699h-3v-10h2.881v1.367h.041c.401-.761 1.379-1.563 2.838-1.563 3.036 0 3.599 2.001 3.599 4.601v5.595z"/></svg>
+                            </a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>©️ 2025 Alumni Connect. All rights reserved.</p>
+            </div>
+        </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>

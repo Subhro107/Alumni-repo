@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Events - Alumni Connect</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Inter', Arial, sans-serif;
+      background: #f7f8fa;
+      color: #222;
+    }
+    .container {
+      display: flex;
+      min-height: 100vh;
+    }
+    .sidebar {
+      width: 240px;
+      background: #fff;
+      border-right: 1px solid #e5e7eb;
+      padding: 24px 0;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .sidebar .logo {
+      font-weight: 700;
+      font-size: 1.3rem;
+      padding: 0 24px 24px 24px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .sidebar nav {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .sidebar nav a {
+      text-decoration: none;
+      color: #222;
+      padding: 10px 24px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 500;
+      transition: background 0.2s;
+    }
+    .sidebar nav a.active, .sidebar nav a:hover {
+      background: #eaf3ff;
+      color: #2563eb;
+    }
+    .main {
+      flex: 1;
+      padding: 32px 40px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .header .title {
+      font-size: 2rem;
+      font-weight: 700;
+    }
+    .header .search {
+      flex: 1;
+      margin: 0 32px;
+      max-width: 400px;
+    }
+    .header .search input {
+      width: 100%;
+      padding: 8px 16px;
+      border-radius: 8px;
+      border: 1px solid #e5e7eb;
+      font-size: 1rem;
+    }
+    .header .profile {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .header .profile .avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: #e5e7eb;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      color: #2563eb;
+    }
+    .events-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+    }
+    .events-header h2 {
+      font-size: 1.5rem;
+      margin: 0;
+      color: #374151;
+    }
+    .events-container {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+    .events-section {
+      margin-bottom: 32px;
+    }
+    .events-row {
+      display: flex;
+      gap: 24px;
+      overflow-x: auto;
+      padding-bottom: 16px;
+      margin-top: 16px;
+      scrollbar-width: thin;
+      scrollbar-color: #d1d5db #f3f4f6;
+    }
+    .events-row::-webkit-scrollbar {
+      height: 6px;
+    }
+    .events-row::-webkit-scrollbar-track {
+      background: #f3f4f6;
+      border-radius: 3px;
+    }
+    .events-row::-webkit-scrollbar-thumb {
+      background: #d1d5db;
+      border-radius: 3px;
+    }
+    .event-card {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      min-width: 300px;
+      max-width: 300px;
+      overflow: hidden;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .event-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+    }
+    .event-image {
+      height: 160px;
+      background: linear-gradient(135deg, #3b82f6, #2563eb);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 48px;
+    }
+    .event-content {
+      padding: 16px;
+    }
+    .event-date {
+      font-size: 0.875rem;
+      color: #2563eb;
+      font-weight: 500;
+      margin-bottom: 8px;
+    }
+    .event-title {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: #111827;
+    }
+    .event-description {
+      font-size: 0.875rem;
+      color: #6b7280;
+      margin-bottom: 16px;
+      line-height: 1.4;
+    }
+    .event-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.875rem;
+    }
+    .event-attendees {
+      color: #6b7280;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .event-action {
+      color: #2563eb;
+      font-weight: 500;
+      cursor: pointer;
+    }
+    .btn {
+      background: #2563eb;
+      color: white;
+      border: none;
+      padding: 10px 16px;
+      border-radius: 8px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .btn:hover {
+      background: #1d4ed8;
+    }
+    .btn.outline {
+      background: transparent;
+      border: 1px solid #2563eb;
+      color: #2563eb;
+    }
+    .btn.outline:hover {
+      background: #eaf3ff;
+    }
+    .event-placeholder {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 32px;
+      background: #f9fafb;
+      border: 2px dashed #d1d5db;
+      border-radius: 12px;
+      margin-top: 16px;
+      width: 100%;
+      color: #9ca3af;
+      text-align: center;
+    }
+    .event-placeholder .material-icons {
+      font-size: 48px;
+      margin-bottom: 16px;
+    }
+    .event-placeholder h3 {
+      margin: 0 0 8px 0;
+      font-size: 1.25rem;
+      font-weight: 500;
+      color: #4b5563;
+    }
+    .event-placeholder p {
+      margin: 0 0 16px 0;
+      max-width: 400px;
+      line-height: 1.5;
+    }
+    .tabs {
+      display: flex;
+      gap: 24px;
+      border-bottom: 1px solid #e5e7eb;
+      margin-bottom: 24px;
+    }
+    .tab {
+      padding: 12px 4px;
+      font-weight: 500;
+      color: #6b7280;
+      cursor: pointer;
+      position: relative;
+    }
+    .tab.active {
+      color: #2563eb;
+    }
+    .tab.active::after {
+      content: '';
+      position: absolute;
+      bottom: -1px;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: #2563eb;
+      border-radius: 2px 2px 0 0;
+    }
+    @media (max-width: 900px) {
+      .main { padding: 16px 8px; }
+      .sidebar { width: 100px; padding: 12px 0; }
+      .sidebar .logo { font-size: 1rem; padding: 0 8px 12px 8px; }
+      .sidebar nav a { padding: 8px 8px; font-size: 0.95rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <aside class="sidebar">
+      <div class="logo"><span style="background:#2563eb;color:#fff;border-radius:50%;padding:4px 10px;font-weight:700;">AU</span> Alumni Connect</div>
+      <nav>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="alumni-directory.html">Alumni Directory</a>
+        <a href="events.html" class="active">Events</a>
+        <a href="forums.html">Forums</a>
+        <a href="mentorship.html">Mentorship</a>
+        <a href="career-center.html">Career Center</a>
+        <a href="profile-settings.html">Profile Settings</a>
+        <a href="give-back.html">Give Back</a>
+      </nav>
+    </aside>
+    <main class="main">
+      <div class="header">
+        <div class="title">Events</div>
+        <div class="search">
+          <input type="text" placeholder="Search events...">
+        </div>
+        <div class="profile">
+          <span style="position:relative;">
+            <span style="position:absolute;top:-8px;right:-8px;background:#ef4444;color:#fff;font-size:0.8rem;border-radius:50%;padding:2px 6px;font-weight:700;">3</span>
+            <svg width="24" height="24" fill="none" stroke="#888" stroke-width="2" viewBox="0 0 24 24"><path d="M18 8a6 6 0 10-12 0c0 7-3 9-3 9h18s-3-2-3-9"/></svg>
+          </span>
+          <span class="avatar">SM</span>
+          <span style="font-weight:600;">Subhro Maitra</span>
+        </div>
+      </div>
+      
+      <div class="events-container">
+        <div class="events-header">
+          <div class="tabs">
+            <div class="tab active">All Events</div>
+            <div class="tab">Upcoming</div>
+            <div class="tab">Past Events</div>
+            <div class="tab">My Events</div>
+          </div>
+          <button class="btn">
+            <span class="material-icons" style="font-size: 18px;">add</span>
+            Create Event
+          </button>
+        </div>
+        
+        <div class="events-section">
+          <h2>Upcoming Events</h2>
+          <div class="events-row">
+            <div class="event-card">
+              <div class="event-image">
+                <span class="material-icons" style="font-size: 64px;">celebration</span>
+              </div>
+              <div class="event-content">
+                <div class="event-date">September 18, 2025 • 6:00 PM</div>
+                <div class="event-title">Annual Alumni Gala</div>
+                <div class="event-description">Join us for an evening of networking, celebration, and recognition of our outstanding alumni achievements.</div>
+                <div class="event-footer">
+                  <div class="event-attendees">
+                    <span class="material-icons" style="font-size: 16px;">people</span> 48 attending
+                  </div>
+                  <div class="event-action">RSVP</div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="event-card">
+              <div class="event-image" style="background: linear-gradient(135deg, #10b981, #047857);">
+                <span class="material-icons" style="font-size: 64px;">work</span>
+              </div>
+              <div class="event-content">
+                <div class="event-date">October 5, 2025 • 10:00 AM</div>
+                <div class="event-title">Career Fair 2025</div>
+                <div class="event-description">Connect with top employers and explore career opportunities exclusively available to our alumni network.</div>
+                <div class="event-footer">
+                  <div class="event-attendees">
+                    <span class="material-icons" style="font-size: 16px;">people</span> 32 attending
+                  </div>
+                  <div class="event-action">RSVP</div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="event-card">
+              <div class="event-image" style="background: linear-gradient(135deg, #8b5cf6, #6d28d9);">
+                <span class="material-icons" style="font-size: 64px;">school</span>
+              </div>
+              <div class="event-content">
+                <div class="event-date">November 12, 2025 • 2:00 PM</div>
+                <div class="event-title">Alumni Lecture Series</div>
+                <div class="event-description">Distinguished alumni share insights on industry trends, innovation, and professional growth.</div>
+                <div class="event-footer">
+                  <div class="event-attendees">
+                    <span class="material-icons" style="font-size: 16px;">people</span> 24 attending
+                  </div>
+                  <div class="event-action">RSVP</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="events-section">
+          <h2>Past Events</h2>
+          <div class="events-row">
+            <div class="event-card">
+              <div class="event-image" style="background: linear-gradient(135deg, #f59e0b, #d97706);">
+                <span class="material-icons" style="font-size: 64px;">diversity_3</span>
+              </div>
+              <div class="event-content">
+                <div class="event-date">August 14, 2025 • 5:30 PM</div>
+                <div class="event-title">Summer Networking Mixer</div>
+                <div class="event-description">Casual networking event for alumni to connect, share experiences, and build professional relationships.</div>
+                <div class="event-footer">
+                  <div class="event-attendees">
+                    <span class="material-icons" style="font-size: 16px;">people</span> 38 attended
+                  </div>
+                  <div class="event-action">View Photos</div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="event-card">
+              <div class="event-image" style="background: linear-gradient(135deg, #ec4899, #be185d);">
+                <span class="material-icons" style="font-size: 64px;">volunteer_activism</span>
+              </div>
+              <div class="event-content">
+                <div class="event-date">July 22, 2025 • 9:00 AM</div>
+                <div class="event-title">Community Service Day</div>
+                <div class="event-description">Alumni giving back to the community through coordinated volunteer efforts at local organizations.</div>
+                <div class="event-footer">
+                  <div class="event-attendees">
+                    <span class="material-icons" style="font-size: 16px;">people</span> 27 attended
+                  </div>
+                  <div class="event-action">View Photos</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="events-section">
+          <h2>Your Events</h2>
+          <div class="event-placeholder">
+            <span class="material-icons">event</span>
+            <h3>No events created yet</h3>
+            <p>You haven't created any events. Create your first event to engage with the alumni community.</p>
+            <button class="btn outline">Create Your First Event</button>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+</body>
+</html>

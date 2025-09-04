@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Announcements - Alumni Connect</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Analytics - Alumni Connect</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
         * {
@@ -214,6 +214,9 @@
             <div class="user-profile">
                 <i class="fas fa-user-circle" style="font-size: 1.5rem;"></i>
                 <span>Admin One</span>
+                <button class="logout-btn" onclick="loginManager.logout()" style="margin-left: 1rem; padding: 0.5rem 1rem; background: #ea4335; color: white; border: none; border-radius: 6px; cursor: pointer;">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </button>
             </div>
         </div>
     </div>
@@ -225,7 +228,7 @@
                     <i class="fas fa-tachometer-alt"></i>
                     Dashboard
                 </a>
-                <a href="alumni-dashboard.html" class="menu-item">
+                <a href="alumni_directory.html" class="menu-item">
                     <i class="fas fa-users"></i>
                     Alumni Directory
                 </a>
@@ -249,11 +252,11 @@
                     <i class="fas fa-cog"></i>
                     Profile Settings
                 </a>
-                <a href="analytics.html" class="menu-item">
+                <a href="analytics.html" class="menu-item active">
                     <i class="fas fa-chart-line"></i>
                     Analytics
                 </a>
-                <a href="announcements.html" class="menu-item active">
+                <a href="announcements.html" class="menu-item">
                     <i class="fas fa-bullhorn"></i>
                     Announcements
                 </a>
@@ -266,20 +269,20 @@
 
         <div class="main-content">
             <div class="page-header">
-                <h1>Announcements</h1>
-                <p class="page-subtitle">Share important news and updates with the alumni community</p>
+                <h1>Analytics</h1>
+                <p class="page-subtitle">Track engagement and monitor platform performance</p>
             </div>
 
             <div class="empty-state">
                 <div class="empty-state-icon">
-                    <i class="fas fa-bullhorn"></i>
+                    <i class="fas fa-chart-line"></i>
                 </div>
-                <h3>No Announcements</h3>
-                <p>Stay tuned for important updates, news, and announcements from the alumni association and university administration.</p>
+                <h3>No Analytics Data</h3>
+                <p>Analytics dashboard will provide insights into user engagement, event participation, and platform usage once there's sufficient data to analyze.</p>
             </div>
         </div>
     </div>
 
-    <script src="app.js"></script>
+    <script src="../assets/js/app.js"></script>
 </body>
 </html>

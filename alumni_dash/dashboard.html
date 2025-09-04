@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Alumni Connect Dashboard</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Inter', Arial, sans-serif;
+      background: #f7f8fa;
+      color: #222;
+    }
+    .container {
+      display: flex;
+      min-height: 100vh;
+    }
+    .sidebar {
+      width: 240px;
+      background: #fff;
+      border-right: 1px solid #e5e7eb;
+      padding: 24px 0;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .sidebar .logo {
+      font-weight: 700;
+      font-size: 1.3rem;
+      padding: 0 24px 24px 24px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .sidebar nav {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .sidebar nav a {
+      text-decoration: none;
+      color: #222;
+      padding: 10px 24px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 500;
+      transition: background 0.2s;
+    }
+    .sidebar nav a.active, .sidebar nav a:hover {
+      background: #eaf3ff;
+      color: #2563eb;
+    }
+    .main {
+      flex: 1;
+      padding: 32px 40px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .header .welcome {
+      font-size: 2rem;
+      font-weight: 700;
+    }
+    .header .search {
+      flex: 1;
+      margin: 0 32px;
+      max-width: 400px;
+    }
+    .header .search input {
+      width: 100%;
+      padding: 8px 16px;
+      border-radius: 8px;
+      border: 1px solid #e5e7eb;
+      font-size: 1rem;
+    }
+    .header .profile {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .header .profile .avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: #e5e7eb;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      color: #2563eb;
+    }
+    .summary {
+      display: flex;
+      gap: 24px;
+    }
+    .card {
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+      flex: 1;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 8px;
+      min-width: 180px;
+    }
+    .card .icon {
+      font-size: 1.7rem;
+      margin-bottom: 8px;
+      color: #2563eb;
+    }
+    .card.job .icon { color: #22c55e; }
+    .card.event .icon { color: #22c55e; }
+    .card.message .icon { color: #fbbf24; }
+    .card.job { border-left: 4px solid #22c55e; }
+    .card.event { border-left: 4px solid #22c55e; }
+    .card.message { border-left: 4px solid #fbbf24; }
+    .card .title {
+      font-size: 1rem;
+      font-weight: 600;
+      color: #555;
+    }
+    .card .value {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #222;
+    }
+    .card .desc {
+      font-size: 0.95rem;
+      color: #888;
+    }
+    .dashboard-content {
+      display: flex;
+      gap: 24px;
+    }
+    .activity, .quick-actions {
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+      flex: 1;
+      padding: 24px;
+      min-width: 320px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .activity .title, .quick-actions .title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+    .activity-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .activity-item {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      padding: 10px 0;
+      border-bottom: 1px solid #f1f1f1;
+    }
+    .activity-item:last-child {
+      border-bottom: none;
+    }
+    .activity-item .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      display: inline-block;
+      margin-right: 8px;
+    }
+    .activity-item .dot.blue { background: #2563eb; }
+    .activity-item .dot.green { background: #22c55e; }
+    .activity-item .dot.orange { background: #fbbf24; }
+    .activity-item .main {
+      font-weight: 500;
+      color: #222;
+    }
+    .activity-item .sub {
+      font-size: 0.95rem;
+      color: #888;
+    }
+    .quick-actions-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    .quick-action {
+      background: #eaf3ff;
+      border-radius: 12px;
+      padding: 18px;
+      text-align: center;
+      font-weight: 600;
+      color: #2563eb;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .quick-action:hover {
+      background: #dbeafe;
+    }
+    .quick-action.green {
+      background: #e7fbe7;
+      color: #22c55e;
+    }
+    .quick-action.yellow {
+      background: #fef9e7;
+      color: #fbbf24;
+    }
+    .quick-action.red {
+      background: #fde7ea;
+      color: #ef4444;
+    }
+    @media (max-width: 900px) {
+      .main { padding: 16px 8px; }
+      .summary, .dashboard-content { flex-direction: column; }
+      .sidebar { width: 100px; padding: 12px 0; }
+      .sidebar .logo { font-size: 1rem; padding: 0 8px 12px 8px; }
+      .sidebar nav a { padding: 8px 8px; font-size: 0.95rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <aside class="sidebar">
+      <div class="logo"><span style="background:#2563eb;color:#fff;border-radius:50%;padding:4px 10px;font-weight:700;">AU</span> Alumni Connect</div>
+      <nav>
+        <a href="dashboard.html" class="active">Dashboard</a>
+        <a href="alumni-directory.html">Alumni Directory</a>
+        <a href="events.html">Events</a>
+        <a href="forums.html">Forums</a>
+        <a href="mentorship.html">Mentorship</a>
+        <a href="career-center.html">Career Center</a>
+        <a href="profile-settings.html">Profile Settings</a>
+        <a href="give-back.html">Give Back</a>
+      </nav>
+    </aside>
+    <main class="main">
+      <div class="header">
+        <div class="welcome">Welcome back, Subhro!</div>
+        <div class="search">
+          <input type="text" placeholder="Search alumni, events...">
+        </div>
+        <div class="profile">
+          <span style="position:relative;">
+            <span style="position:absolute;top:-8px;right:-8px;background:#ef4444;color:#fff;font-size:0.8rem;border-radius:50%;padding:2px 6px;font-weight:700;">3</span>
+            <svg width="24" height="24" fill="none" stroke="#888" stroke-width="2" viewBox="0 0 24 24"><path d="M18 8a6 6 0 10-12 0c0 7-3 9-3 9h18s-3-2-3-9"/></svg>
+          </span>
+          <span class="avatar">SM</span>
+          <span style="font-weight:600;">Subhro Maitra</span>
+          <button class="logout-btn" onclick="loginManager.logout()" style="margin-left: 1rem; padding: 0.5rem 1rem; background: #ef4444; color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 0.9rem;">
+            <i class="fas fa-sign-out-alt"></i> Logout
+          </button>
+        </div>
+      </div>
+      <div class="summary">
+        <div class="card alumni">
+          <span class="icon material-icons">groups</span>
+          <span class="title">Total Alumni</span>
+          <span class="value">1</span>
+          <span class="desc">Registered in the platform</span>
+        </div>
+        <div class="card event">
+          <span class="icon material-icons">event</span>
+          <span class="title">Upcoming Events</span>
+          <span class="value">0</span>
+          <span class="desc">This month</span>
+        </div>
+        <div class="card message">
+          <span class="icon material-icons">chat</span>
+          <span class="title">New Messages</span>
+          <span class="value">0</span>
+          <span class="desc">Unread messages</span>
+        </div>
+        <div class="card job">
+          <span class="icon material-icons">work</span>
+          <span class="title">Job Opportunities</span>
+          <span class="value">0</span>
+          <span class="desc">Active postings</span>
+        </div>
+      </div>
+      <div class="dashboard-content">
+        <section class="activity">
+          <div class="title">Recent Activity</div>
+          <div class="activity-list">
+            <div class="activity-item">
+              <span><span class="dot blue"></span><span class="main">New alumni registration</span></span>
+              <span class="sub">Sarah Johnson (Class of 2020) joined</span>
+            </div>
+            <div class="activity-item">
+              <span><span class="dot green"></span><span class="main">Upcoming event reminder</span></span>
+              <span class="sub">Annual Alumni Gala - 2 weeks away</span>
+            </div>
+            <div class="activity-item">
+              <span><span class="dot orange"></span><span class="main">New mentorship match</span></span>
+              <span class="sub">You've been matched with a student</span>
+            </div>
+          </div>
+        </section>
+        <section class="quick-actions">
+          <div class="title">Quick Actions</div>
+          <div class="quick-actions-grid">
+            <div class="quick-action">Find Alumni</div>
+            <div class="quick-action green">View Events</div>
+            <div class="quick-action yellow">Messages</div>
+            <div class="quick-action red">Donate</div>
+          </div>
+        </section>
+      </div>
+    </main>
+  </div>
+  <script src="../assets/js/app.js"></script>
+  <script>
+    // Add JS here if you want to make sidebar links interactive, etc.
+  </script>
+</body>
+</html>

@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Forums - Alumni Connect</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Inter', Arial, sans-serif;
+      background: #f7f8fa;
+      color: #222;
+    }
+    .container {
+      display: flex;
+      min-height: 100vh;
+    }
+    .sidebar {
+      width: 240px;
+      background: #fff;
+      border-right: 1px solid #e5e7eb;
+      padding: 24px 0;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .sidebar .logo {
+      font-weight: 700;
+      font-size: 1.3rem;
+      padding: 0 24px 24px 24px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .sidebar nav {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .sidebar nav a {
+      text-decoration: none;
+      color: #222;
+      padding: 10px 24px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 500;
+      transition: background 0.2s;
+    }
+    .sidebar nav a.active, .sidebar nav a:hover {
+      background: #eaf3ff;
+      color: #2563eb;
+    }
+    .main {
+      flex: 1;
+      padding: 32px 40px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .header .title {
+      font-size: 2rem;
+      font-weight: 700;
+    }
+    .header .search {
+      flex: 1;
+      margin: 0 32px;
+      max-width: 400px;
+    }
+    .header .search input {
+      width: 100%;
+      padding: 8px 16px;
+      border-radius: 8px;
+      border: 1px solid #e5e7eb;
+      font-size: 1rem;
+    }
+    .header .profile {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .header .profile .avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: #e5e7eb;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      color: #2563eb;
+    }
+    .forums-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+    }
+    .forums-header h2 {
+      font-size: 1.5rem;
+      margin: 0;
+      color: #374151;
+    }
+    .empty-state {
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+      padding: 64px 24px;
+      text-align: center;
+      margin-top: 40px;
+    }
+    .empty-state .icon {
+      font-size: 64px;
+      color: #d1d5db;
+      margin-bottom: 24px;
+    }
+    .empty-state h2 {
+      font-size: 1.5rem;
+      margin-bottom: 16px;
+      color: #374151;
+    }
+    .empty-state p {
+      font-size: 1rem;
+      color: #6b7280;
+      margin-bottom: 24px;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .btn {
+      background: #2563eb;
+      color: white;
+      border: none;
+      padding: 10px 16px;
+      border-radius: 8px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .btn:hover {
+      background: #1d4ed8;
+    }
+    .tabs {
+      display: flex;
+      gap: 24px;
+      border-bottom: 1px solid #e5e7eb;
+      margin-bottom: 24px;
+    }
+    .tab {
+      padding: 12px 4px;
+      font-weight: 500;
+      color: #6b7280;
+      cursor: pointer;
+      position: relative;
+    }
+    .tab.active {
+      color: #2563eb;
+    }
+    .tab.active::after {
+      content: '';
+      position: absolute;
+      bottom: -1px;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: #2563eb;
+      border-radius: 2px 2px 0 0;
+    }
+    @media (max-width: 900px) {
+      .main { padding: 16px 8px; }
+      .sidebar { width: 100px; padding: 12px 0; }
+      .sidebar .logo { font-size: 1rem; padding: 0 8px 12px 8px; }
+      .sidebar nav a { padding: 8px 8px; font-size: 0.95rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <aside class="sidebar">
+      <div class="logo"><span style="background:#2563eb;color:#fff;border-radius:50%;padding:4px 10px;font-weight:700;">AU</span> Alumni Connect</div>
+      <nav>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="alumni-directory.html">Alumni Directory</a>
+        <a href="events.html">Events</a>
+        <a href="forums.html" class="active">Forums</a>
+        <a href="mentorship.html">Mentorship</a>
+        <a href="career-center.html">Career Center</a>
+        <a href="profile-settings.html">Profile Settings</a>
+        <a href="give-back.html">Give Back</a>
+      </nav>
+    </aside>
+    <main class="main">
+      <div class="header">
+        <div class="title">Forums</div>
+        <div class="search">
+          <input type="text" placeholder="Search discussions...">
+        </div>
+        <div class="profile">
+          <span style="position:relative;">
+            <span style="position:absolute;top:-8px;right:-8px;background:#ef4444;color:#fff;font-size:0.8rem;border-radius:50%;padding:2px 6px;font-weight:700;">3</span>
+            <svg width="24" height="24" fill="none" stroke="#888" stroke-width="2" viewBox="0 0 24 24"><path d="M18 8a6 6 0 10-12 0c0 7-3 9-3 9h18s-3-2-3-9"/></svg>
+          </span>
+          <span class="avatar">SM</span>
+          <span style="font-weight:600;">Subhro Maitra</span>
+        </div>
+      </div>
+      
+      <div class="forums-header">
+        <div class="tabs">
+          <div class="tab active">All Topics</div>
+          <div class="tab">Recent</div>
+          <div class="tab">Popular</div>
+          <div class="tab">My Discussions</div>
+        </div>
+        <button class="btn">
+          <span class="material-icons" style="font-size: 18px;">add</span>
+          Start Discussion
+        </button>
+      </div>
+      
+      <div class="empty-state">
+        <span class="material-icons icon">forum</span>
+        <h2>No Forum Topics Yet</h2>
+        <p>Be the first to start a discussion! Forums are a great way to connect with fellow alumni, ask questions, share experiences, and engage with the community.</p>
+        <button class="btn">
+          <span class="material-icons" style="font-size: 18px;">add</span>
+          Start the First Discussion
+        </button>
+      </div>
+    </main>
+  </div>
+</body>
+</html>

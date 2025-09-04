@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - Alumni Connect</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .login-container {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(rgba(44, 62, 80, 0.8), rgba(44, 62, 80, 0.8)),
+                        url('https://source.unsplash.com/random/1920x1080?university') center/cover;
+        }
+
+        .login-box {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .login-box h2 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 2rem;
+        }
+
+        .role-selection {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .role-btn {
+            padding: 1rem;
+            border: none;
+            border-radius: 5px;
+            background: #f8f9fa;
+            color: #2c3e50;
+            cursor: pointer;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            transition: all 0.3s;
+        }
+
+        .role-btn:hover {
+            background: #3498db;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .role-btn i {
+            margin-right: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .back-btn {
+            display: inline-block;
+            margin-top: 1rem;
+            color: #2c3e50;
+            text-decoration: none;
+        }
+
+        .back-btn:hover {
+            color: #3498db;
+        }
+
+        .login-form {
+            display: none;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .login-form.active {
+            display: flex;
+        }
+
+        .login-form input {
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        .login-form button {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 0.8rem;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background 0.3s;
+        }
+
+        .login-form button:hover {
+            background: #2980b9;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-box">
+            <h2>Join Alumni Connect</h2>
+            
+            <!-- Role Selection -->
+            <div class="role-selection" id="roleSelection">
+                <button class="role-btn" onclick="showLoginForm('student')">
+                    <i class="fas fa-user-graduate"></i>
+                    Student Sign Up
+                </button>
+                <button class="role-btn" onclick="showLoginForm('alumni')">
+                    <i class="fas fa-users"></i>
+                    Alumni Sign Up
+                </button>
+                <button class="role-btn" onclick="showLoginForm('admin')">
+                    <i class="fas fa-user-shield"></i>
+                    Admin Login
+                </button>
+            </div>
+
+            <!-- Student Login Form -->
+            <form id="studentLogin" class="login-form">
+                <h3><i class="fas fa-user-graduate"></i> Student Sign Up</h3>
+                <input type="text" placeholder="Name" required id="studentName" style="width: 100%; height: 2.6em; font-size: 1rem; border: 1px solid #ddd; border-radius: 5px; padding: 0.8rem; color: #2c3e50;">
+                <select id="studentDepartment" required style="width: 100%; height: 2.6em; font-size: 1rem; border: 1px solid #ddd; border-radius: 5px; padding: 0.8rem; color: #2c3e50;">
+                    <option value="">Select Department</option>
+                    <option>B. Tech. in Computer Science Engineering</option>
+                    <option>B. Tech. in Information Technology</option>
+                    <option>B. Tech. in Electronics and Communication Technology</option>
+                    <option>B. Tech. in Electrical Engineering</option>
+                    <option>M. Tech. in Data Science</option>
+                    <option>M. Tech. in Internet of Things</option>
+                    <option>Bachelor of Computer Applications</option>
+                    <option>Masters of Computer Applications</option>
+                    <option>Bachelor of Business Administration</option>
+                </select>
+                <select id="studentYear" required style="width: 100%; height: 2.6em; font-size: 1rem; border: 1px solid #ddd; border-radius: 5px; padding: 0.8rem; color: #2c3e50;">
+                    <option value="">Passing Year</option>
+                    <option>1999</option>
+                    <option>2000</option>
+                    <option>2001</option>
+                    <option>2002</option>
+                    <option>2003</option>
+                    <option>2004</option>
+                    <option>2005</option>
+                    <option>2006</option>
+                    <option>2007</option>
+                    <option>2008</option>
+                    <option>2009</option>
+                    <option>2010</option>
+                    <option>2011</option>
+                    <option>2012</option>
+                    <option>2013</option>
+                    <option>2014</option>
+                    <option>2015</option>
+                    <option>2016</option>
+                    <option>2017</option>
+                    <option>2018</option>
+                    <option>2019</option>
+                    <option>2020</option>
+                    <option>2021</option>
+                    <option>2022</option>
+                    <option>2023</option>
+                    <option>2024</option>
+                    <option>2025</option>
+                </select>
+                <input type="text" placeholder="Section" required id="studentSection" style="width: 100%; height: 2.6em; font-size: 1rem; border: 1px solid #ddd; border-radius: 5px; padding: 0.8rem; color: #2c3e50;">
+                <input type="password" placeholder="Enter Password" required id="studentPassword" style="width: 100%; height: 2.6em; font-size: 1rem; border: 1px solid #ddd; border-radius: 5px; padding: 0.8rem; color: #2c3e50;">
+                <span id="studentPasswordHint" style="display:none; color:#e74c3c; font-size:0.9em;">Password must contain 8 digits and a special character</span>
+                <input type="password" placeholder="Confirm Password" required id="studentConfirmPassword" style="width: 100%; height: 2.6em; font-size: 1rem; border: 1px solid #ddd; border-radius: 5px; padding: 0.8rem; color: #2c3e50;">
+                <button type="submit">Sign Up</button>
+                <button type="button" class="back-btn" onclick="showRoleSelection()">Back to Selection</button>
+            </form>
+
+            <!-- Alumni Login Form -->
+            <form id="alumniLogin" class="login-form">
+                <h3><i class="fas fa-users"></i> Alumni Sign Up</h3>
+                <input type="text" placeholder="Name" required id="alumniName" style="width: 100%; height: 2.6em; font-size: 1rem; border: 1px solid #ddd; border-radius: 5px; padding: 0.8rem; color: #2c3e50;">
+                <input type="email" placeholder="Email" required id="alumniEmail" style="width: 100%; height: 2.6em; font-size: 1rem; border: 1px solid #ddd; border-radius: 5px; padding: 0.8rem; color: #2c3e50;">
+                <select id="alumniDepartment" required style="width: 100%; height: 2.6em; font-size: 1rem; border: 1px solid #ddd; border-radius: 5px; padding: 0.8rem; color: #2c3e50;">
+                    <option value="">Select Department</option>
+                    <option>B. Tech. in Computer Science Engineering</option>
+                    <option>B. Tech. in Information Technology</option>
+                    <option>B. Tech. in Electronics and Communication Technology</option>
+                    <option>B. Tech. in Electrical Engineering</option>
+                    <option>M. Tech. in Data Science</option>
+                    <option>M. Tech. in Internet of Things</option>
+                    <option>Bachelor of Computer Applications</option>
+                    <option>Masters of Computer Applications</option>
+                    <option>Bachelor of Business Administration</option>
+                </select>
+
+                <select id="alumniYear" required style="width: 100%; height: 2.6em; font-size: 1rem; border: 1px solid #ddd; border-radius: 5px; padding: 0.8rem; color: #2c3e50;">
+                    <option value="">Select Year</option>
+                    <option>1999</option>
+                    <option>2000</option>
+                    <option>2001</option>
+                    <option>2002</option>
+                    <option>2003</option>
+                    <option>2004</option>
+                    <option>2005</option>
+                    <option>2006</option>
+                    <option>2007</option>
+                    <option>2008</option>
+                    <option>2009</option>
+                    <option>2010</option>
+                    <option>2011</option>
+                    <option>2012</option>
+                    <option>2013</option>
+                    <option>2014</option>
+                    <option>2015</option>
+                    <option>2016</option>
+                    <option>2017</option>
+                    <option>2018</option>
+                    <option>2019</option>
+                    <option>2020</option>
+                    <option>2021</option>
+                    <option>2022</option>
+                    <option>2023</option>
+                    <option>2024</option>
+                    <option>2025</option>
+                </select>
+                <input type="password" placeholder="Enter Password" required id="alumniPassword" style="width: 100%; height: 2.6em; font-size: 1rem; border: 1px solid #ddd; border-radius: 5px; padding: 0.8rem; color: #2c3e50;">
+                <span id="passwordHint" style="display:none; color:#e74c3c; font-size:0.9em;">Password must contain 8 digits and a special character</span>
+                <input type="password" placeholder="Confirm Password" required id="alumniConfirmPassword" style="width: 100%; height: 2.6em; font-size: 1rem; border: 1px solid #ddd; border-radius: 5px; padding: 0.8rem; color: #2c3e50;">
+                <button type="submit">Sign Up</button>
+                <button type="button" class="back-btn" onclick="showRoleSelection()">Back to Selection</button>
+            </form>
+
+            <!-- Admin Login Form -->
+            <form id="adminLogin" class="login-form">
+                <h3><i class="fas fa-user-shield"></i> Admin Login</h3>
+                <input type="text" placeholder="Admin ID" required>
+                <input type="password" placeholder="Password" required>
+                <button type="submit">Login</button>
+                <button type="button" class="back-btn" onclick="showRoleSelection()">Back to Selection</button>
+            </form>
+
+            <a href="index.html" class="back-btn">
+                <!-- Removed Back to Home for alumni login form, replaced with Back to Selection above -->
+            </a>
+        </div>
+    </div>
+
+    <script src="assets/js/app.js"></script>
+    <script>
+    // Get all the forms
+    const roleSelection = document.getElementById('roleSelection');
+    const studentLoginForm = document.getElementById('studentLogin');
+    const alumniLoginForm = document.getElementById('alumniLogin');
+    const adminLoginForm = document.getElementById('adminLogin');
+    const studentPassword = document.getElementById('studentPassword');
+    const studentPasswordHint = document.getElementById('studentPasswordHint');
+    const alumniPassword = document.getElementById('alumniPassword');
+    const passwordHint = document.getElementById('passwordHint');
+
+        // Function to show login form based on role
+        function showLoginForm(role) {
+            roleSelection.style.display = 'none';
+            
+            switch(role) {
+                case 'student':
+                    studentLoginForm.classList.add('active');
+                    break;
+                case 'alumni':
+                    alumniLoginForm.classList.add('active');
+                    break;
+                case 'admin':
+                    adminLoginForm.classList.add('active');
+                    break;
+            }
+        }
+
+        // Function to show role selection
+        function showRoleSelection() {
+            roleSelection.style.display = 'flex';
+            studentLoginForm.classList.remove('active');
+            alumniLoginForm.classList.remove('active');
+            adminLoginForm.classList.remove('active');
+        }
+
+        // Form submission handlers
+        studentPassword.addEventListener('focus', () => {
+            studentPasswordHint.style.display = 'block';
+        });
+        studentPassword.addEventListener('blur', () => {
+            studentPasswordHint.style.display = 'none';
+        });
+        studentLoginForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            // Validate password
+            const password = document.getElementById('studentPassword').value;
+            const confirmPassword = document.getElementById('studentConfirmPassword').value;
+
+            if (password !== confirmPassword) {
+                alert('Passwords do not match!');
+                return;
+            }
+
+            if (password.length < 8 || !/[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(password)) {
+                alert('Password must be at least 8 characters long and contain a special character!');
+                return;
+            }
+
+            // Create user session and redirect
+            if (window.loginManager) {
+                const userData = {
+                    type: 'student',
+                    name: document.getElementById('studentName').value,
+                    department: document.getElementById('studentDepartment').value,
+                    year: document.getElementById('studentYear').value,
+                    section: document.getElementById('studentSection').value,
+                    loginTime: new Date().toISOString()
+                };
+
+                // Store in session
+                localStorage.setItem('userSession', JSON.stringify(userData));
+                window.loginManager.currentUser = userData;
+
+                // Redirect to student dashboard
+                window.location.href = 'student_dash/student_dashboard.html';
+            } else {
+                // Fallback if loginManager not available
+                window.location.href = 'student_dash/student_dashboard.html';
+            }
+        });
+
+        alumniPassword.addEventListener('focus', () => {
+            passwordHint.style.display = 'block';
+        });
+        alumniPassword.addEventListener('blur', () => {
+            passwordHint.style.display = 'none';
+        });
+
+        alumniLoginForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            // Validate password
+            const password = document.getElementById('alumniPassword').value;
+            const confirmPassword = document.getElementById('alumniConfirmPassword').value;
+
+            if (password !== confirmPassword) {
+                alert('Passwords do not match!');
+                return;
+            }
+
+            if (password.length < 8 || !/[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(password)) {
+                alert('Password must be at least 8 characters long and contain a special character!');
+                return;
+            }
+
+            // Create user session and redirect
+            if (window.loginManager) {
+                const userData = {
+                    type: 'alumni',
+                    name: document.getElementById('alumniName').value,
+                    email: document.getElementById('alumniEmail').value,
+                    department: document.getElementById('alumniDepartment').value,
+                    year: document.getElementById('alumniYear').value,
+                    loginTime: new Date().toISOString()
+                };
+
+                // Store in session
+                localStorage.setItem('userSession', JSON.stringify(userData));
+                window.loginManager.currentUser = userData;
+
+                // Redirect to alumni dashboard
+                window.location.href = 'alumni_dash/dashboard.html';
+            } else {
+                // Fallback if loginManager not available
+                window.location.href = 'alumni_dash/dashboard.html';
+            }
+        });
+
+        adminLoginForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            // Add authentication logic here
+            window.location.href = 'admin_dash/admin-dashboard.html';
+        });
+    </script>
+</body>
+</html>

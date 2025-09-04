@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alumni Connect - Events</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="common.css">
+</head>
+<body>
+    <!-- Top Header -->
+    <div class="top-header">
+        <div class="logo-section">
+            <button class="close-btn">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="logo">
+                <div class="logo-icon">AU</div>
+                <span class="logo-text">Alumni Connect</span>
+            </div>
+        </div>
+        
+        <div class="header-right">
+            <div class="search-bar">
+                <input type="text" class="search-input" placeholder="Search alumni, events...">
+                <i class="fas fa-search search-icon"></i>
+            </div>
+            <button class="notification-icon">
+                <i class="fas fa-bell"></i>
+                <span class="notification-badge">1</span>
+            </button>
+            <div class="user-info">
+                <div class="user-avatar">🎓</div>
+                <span class="user-name">student demo</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <a href="student_dashboard.html" class="nav-item">
+                <i class="fas fa-th-large"></i>
+                Dashboard
+            </a>
+            <a href="student_directory.html" class="nav-item">
+                <i class="fas fa-users"></i>
+                Alumni Directory
+            </a>
+            <a href="student_events.html" class="nav-item active">
+                <i class="fas fa-calendar-alt"></i>
+                Events
+            </a>
+            <a href="students_forum.html" class="nav-item">
+                <i class="fas fa-comments"></i>
+                Forums
+            </a>
+            <a href="students_mentor.html" class="nav-item">
+                <i class="fas fa-user-graduate"></i>
+                Mentorship
+            </a>
+            <a href="students_career.html" class="nav-item">
+                <i class="fas fa-briefcase"></i>
+                Career Center
+            </a>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <div class="welcome-section">
+                <h1 class="welcome-title">Events</h1>
+                <p class="welcome-subtitle">Discover and manage alumni events and gatherings</p>
+            </div>
+
+            <!-- Events Overview Cards -->
+            <div class="events-overview">
+                <div class="events-card blue" onclick="filterEventsByType('upcoming')">
+                    <div class="card-header">
+                        <div class="card-icon">
+                            <i class="fas fa-calendar-plus"></i>
+                        </div>
+                        <div class="card-title">Upcoming Events</div>
+                    </div>
+                    <div class="card-count">5</div>
+                    <div class="card-subtitle">This month</div>
+                </div>
+
+                <div class="events-card green" onclick="filterEventsByType('ongoing')">
+                    <div class="card-header">
+                        <div class="card-icon">
+                            <i class="fas fa-calendar-check"></i>
+                        </div>
+                        <div class="card-title">Ongoing Events</div>
+                    </div>
+                    <div class="card-count">2</div>
+                    <div class="card-subtitle">Currently active</div>
+                </div>
+
+                <div class="events-card orange" onclick="filterEventsByType('past')">
+                    <div class="card-header">
+                        <div class="card-icon">
+                            <i class="fas fa-calendar-minus"></i>
+                        </div>
+                        <div class="card-title">Past Events</div>
+                    </div>
+                    <div class="card-count">24</div>
+                    <div class="card-subtitle">Last 6 months</div>
+                </div>
+            </div>
+
+            <!-- Calendar Section -->
+            <div class="calendar-section">
+                <div class="calendar-header">
+                    <div class="calendar-nav">
+                        <button class="nav-btn" onclick="previousMonth()">‹</button>
+                        <div class="month-year" id="monthYear">October 2025</div>
+                        <button class="nav-btn" onclick="nextMonth()">›</button>
+                    </div>
+                    
+                    <div class="events-tabs">
+                        <button class="tab active" onclick="switchEventTab(this, 'upcoming')">Upcoming</button>
+                        <button class="tab" onclick="switchEventTab(this, 'ongoing')">Ongoing</button>
+                        <button class="tab" onclick="switchEventTab(this, 'past')">Past</button>
+                    </div>
+                </div>
+                
+                <div class="calendar-grid">
+                    <div class="calendar-day-header">Su</div>
+                    <div class="calendar-day-header">Mo</div>
+                    <div class="calendar-day-header">Tu</div>
+                    <div class="calendar-day-header">We</div>
+                    <div class="calendar-day-header">Th</div>
+                    <div class="calendar-day-header">Fr</div>
+                    <div class="calendar-day-header">Sa</div>
+                    
+                    <!-- Calendar Days -->
+                    <div class="calendar-day other-month"><div class="day-number">29</div></div>
+                    <div class="calendar-day other-month"><div class="day-number">30</div></div>
+                    <div class="calendar-day other-month"><div class="day-number">31</div></div>
+                    <div class="calendar-day"><div class="day-number">1</div></div>
+                    <div class="calendar-day"><div class="day-number">2</div></div>
+                    <div class="calendar-day today"><div class="day-number">3</div><div class="event-dot blue"></div></div>
+                    <div class="calendar-day"><div class="day-number">4</div></div>
+                    
+                    <div class="calendar-day"><div class="day-number">5</div></div>
+                    <div class="calendar-day"><div class="day-number">6</div></div>
+                    <div class="calendar-day"><div class="day-number">7</div></div>
+                    <div class="calendar-day"><div class="day-number">8</div></div>
+                    <div class="calendar-day"><div class="day-number">9</div></div>
+                    <div class="calendar-day"><div class="day-number">10</div></div>
+                    <div class="calendar-day"><div class="day-number">11</div></div>
+                    
+                    <div class="calendar-day"><div class="day-number">12</div></div>
+                    <div class="calendar-day"><div class="day-number">13</div></div>
+                    <div class="calendar-day"><div class="day-number">14</div></div>
+                    <div class="calendar-day">
+                        <div class="day-number">15</div>
+                        <div class="event-dot green"></div>
+                    </div>
+                    <div class="calendar-day"><div class="day-number">16</div></div>
+                    <div class="calendar-day"><div class="day-number">17</div></div>
+                    <div class="calendar-day"><div class="day-number">18</div></div>
+                    
+                    <div class="calendar-day"><div class="day-number">19</div></div>
+                    <div class="calendar-day"><div class="day-number">20</div></div>
+                    <div class="calendar-day">
+                        <div class="day-number">21</div>
+                        <div class="event-dot purple"></div>
+                    </div>
+                    <div class="calendar-day"><div class="day-number">22</div></div>
+                    <div class="calendar-day"><div class="day-number">23</div></div>
+                    <div class="calendar-day"><div class="day-number">24</div></div>
+                    <div class="calendar-day">
+                        <div class="day-number">25</div>
+                        <div class="event-dot orange"></div>
+                    </div>
+                    
+                    <div class="calendar-day"><div class="day-number">26</div></div>
+                    <div class="calendar-day"><div class="day-number">27</div></div>
+                    <div class="calendar-day">
+                        <div class="day-number">28</div>
+                        <div class="event-dot blue"></div>
+                    </div>
+                    <div class="calendar-day"><div class="day-number">29</div></div>
+                    <div class="calendar-day"><div class="day-number">30</div></div>
+                    <div class="calendar-day other-month"><div class="day-number">1</div></div>
+                    <div class="calendar-day other-month"><div class="day-number">2</div></div>
+                </div>
+            </div>
+
+            <!-- Events List -->
+            <div class="content-section">
+                <div class="section-header">
+                    <h2 class="section-title">
+                        <i class="fas fa-list section-icon"></i>
+                        Event List
+                    </h2>
+                </div>
+                
+                <div class="events-list" id="eventsList">
+                    <div class="event-item">
+                        <div class="event-date">
+                            <div class="event-month">OCT</div>
+                            <div class="event-day">15</div>
+                        </div>
+                        <div class="event-details">
+                            <h3 class="event-title">Alumni Tech Meetup</h3>
+                            <div class="event-meta">
+                                <span><i class="fas fa-clock"></i> 6:00 PM - 8:00 PM</span>
+                                <span><i class="fas fa-map-marker-alt"></i> Tech Campus</span>
+                            </div>
+                        </div>
+                        <div class="event-status status-upcoming">Upcoming</div>
+                    </div>
+
+                    <div class="event-item">
+                        <div class="event-date">
+                            <div class="event-month">OCT</div>
+                            <div class="event-day">21</div>
+                        </div>
+                        <div class="event-details">
+                            <h3 class="event-title">Career Workshop</h3>
+                            <div class="event-meta">
+                                <span><i class="fas fa-clock"></i> 2:00 PM - 4:00 PM</span>
+                                <span><i class="fas fa-map-marker-alt"></i> Main Auditorium</span>
+                            </div>
+                        </div>
+                        <div class="event-status status-upcoming">Upcoming</div>
+                    </div>
+
+                    <div class="event-item">
+                        <div class="event-date">
+                            <div class="event-month">OCT</div>
+                            <div class="event-day">25</div>
+                        </div>
+                        <div class="event-details">
+                            <h3 class="event-title">Alumni Networking Night</h3>
+                            <div class="event-meta">
+                                <span><i class="fas fa-clock"></i> 7:00 PM - 10:00 PM</span>
+                                <span><i class="fas fa-map-marker-alt"></i> Hotel Grand Plaza</span>
+                            </div>
+                        </div>
+                        <div class="event-status status-upcoming">Upcoming</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+     <script src="common.js"></script>
+    <script src="student_event.js"></script>
+</body>
+</html>

@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alumni Connect - Mentorship</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="common.css">
+</head>
+<body>
+    <!-- Top Header -->
+    <div class="top-header">
+        <div class="logo-section">
+            <button class="close-btn">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="logo">
+                <div class="logo-icon">AU</div>
+                <span class="logo-text">Alumni Connect</span>
+            </div>
+        </div>
+        
+        <div class="header-right">
+            <div class="search-bar">
+                <input type="text" class="search-input" placeholder="Search alumni, events...">
+                <i class="fas fa-search search-icon"></i>
+            </div>
+            <button class="notification-icon">
+                <i class="fas fa-bell"></i>
+                <span class="notification-badge">1</span>
+            </button>
+            <div class="user-info">
+                <div class="user-avatar">🎓</div>
+                <span class="user-name">student demo</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <a href="student_dashboard.html" class="nav-item">
+                <i class="fas fa-th-large"></i>
+                Dashboard
+            </a>
+            <a href="student_directory.html" class="nav-item">
+                <i class="fas fa-users"></i>
+                Alumni Directory
+            </a>
+            <a href="student_events.html" class="nav-item">
+                <i class="fas fa-calendar-alt"></i>
+                Events
+            </a>
+            <a href="students_forum.html" class="nav-item">
+                <i class="fas fa-comments"></i>
+                Forums
+            </a>
+            <a href="students_mentor.html" class="nav-item active">
+                <i class="fas fa-user-graduate"></i>
+                Mentorship
+            </a>
+            <a href="students_career.html" class="nav-item">
+                <i class="fas fa-briefcase"></i>
+                Career Center
+            </a>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <div class="welcome-section">
+                <h1 class="welcome-title">Mentorship Program</h1>
+                <p class="welcome-subtitle">Connect with experienced alumni for guidance and career development</p>
+            </div>
+
+            <!-- Stats Cards -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-header">
+                        <span class="stat-title">Available Mentors</span>
+                        <i class="fas fa-users stat-icon blue"></i>
+                    </div>
+                    <div class="stat-number">45</div>
+                    <div class="stat-description">Ready to help students</div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-header">
+                        <span class="stat-title">Active Mentorships</span>
+                        <i class="fas fa-handshake stat-icon green"></i>
+                    </div>
+                    <div class="stat-number">128</div>
+                    <div class="stat-description">Currently ongoing</div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-header">
+                        <span class="stat-title">Your Applications</span>
+                        <i class="fas fa-paper-plane stat-icon orange"></i>
+                    </div>
+                    <div class="stat-number">3</div>
+                    <div class="stat-description">Pending responses</div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-header">
+                        <span class="stat-title">Success Rate</span>
+                        <i class="fas fa-chart-line stat-icon teal"></i>
+                    </div>
+                    <div class="stat-number">89%</div>
+                    <div class="stat-description">Successful matches</div>
+                </div>
+            </div>
+
+            <!-- Content Grid -->
+            <div class="content-grid">
+                <!-- Find Mentors Section -->
+                <div class="content-section">
+                    <div class="section-header">
+                        <h2 class="section-title">
+                            <i class="fas fa-search section-icon"></i>
+                            Find Mentors
+                        </h2>
+                    </div>
+
+                    <!-- Mentor Cards -->
+                    <div class="mentor-cards">
+                        <div class="card">
+                            <div class="mentor-avatar">
+                                <i class="fas fa-user-tie"></i>
+                            </div>
+                            <h3>Alumni-1</h3>
+                            <p class="alumni-title">Senior Software Engineer</p>
+                            <p class="alumni-company">Google</p>
+                            <p class="alumni-year">Class of 2015</p>
+                            <div class="alumni-skills">
+                                <span class="skill-tag">Machine Learning</span>
+                                <span class="skill-tag">Python</span>
+                                <span class="skill-tag">Cloud Computing</span>
+                            </div>
+                            <button class="connect-btn" onclick="requestMentorship('rajesh')">Request Mentorship</button>
+                        </div>
+
+                        <div class="card">
+                            <div class="mentor-avatar">
+                                <i class="fas fa-user-tie"></i>
+                            </div>
+                            <h3>Alumni-2</h3>
+                            <p class="alumni-title">Product Manager</p>
+                            <p class="alumni-company">Microsoft</p>
+                            <p class="alumni-year">Class of 2017</p>
+                            <div class="alumni-skills">
+                                <span class="skill-tag">Product Strategy</span>
+                                <span class="skill-tag">UX Design</span>
+                                <span class="skill-tag">Analytics</span>
+                            </div>
+                            <button class="connect-btn" onclick="requestMentorship('priya')">Request Mentorship</button>
+                        </div>
+
+                        <div class="card">
+                            <div class="mentor-avatar">
+                                <i class="fas fa-user-tie"></i>
+                            </div>
+                            <h3>Alumni-3</h3>
+                            <p class="alumni-title">Data Scientist</p>
+                            <p class="alumni-company">Amazon</p>
+                            <p class="alumni-year">Class of 2016</p>
+                            <div class="alumni-skills">
+                                <span class="skill-tag">Data Science</span>
+                                <span class="skill-tag">R</span>
+                                <span class="skill-tag">Statistics</span>
+                            </div>
+                            <button class="connect-btn" onclick="requestMentorship('arjun')">Request Mentorship</button>
+                        </div>
+
+                        <div class="card">
+                            <div class="mentor-avatar">
+                                <i class="fas fa-user-tie"></i>
+                            </div>
+                            <h3>Alumni-4</h3>
+                            <p class="alumni-title">Startup Founder</p>
+                            <p class="alumni-company">TechStart Inc.</p>
+                            <p class="alumni-year">Class of 2014</p>
+                            <div class="alumni-skills">
+                                <span class="skill-tag">Entrepreneurship</span>
+                                <span class="skill-tag">Leadership</span>
+                                <span class="skill-tag">Strategy</span>
+                            </div>
+                            <button class="connect-btn" onclick="requestMentorship('neha')">Request Mentorship</button>
+                        </div>
+                    </div>
+
+                    <div class="text-center mt-4">
+                        <a href="#" class="btn btn-outline">View All Mentors</a>
+                    </div>
+                </div>
+
+                <!-- Activity & Quick Actions -->
+                <div>
+                    <!-- Recent Activity -->
+                    <div class="content-section mb-4">
+                        <div class="section-header">
+                            <h2 class="section-title">
+                                <i class="fas fa-history section-icon"></i>
+                                Recent Activity
+                            </h2>
+                        </div>
+                        
+                        <div class="activity-list">
+                            <div class="activity-item">
+                                <div class="activity-dot green"></div>
+                                <div class="activity-content">
+                                    <h4>Mentorship Request Accepted</h4>
+                                    <p>Dr. Rajesh Kumar accepted your request for mentorship in Machine Learning</p>
+                                </div>
+                            </div>
+
+                            <div class="activity-item">
+                                <div class="activity-dot blue"></div>
+                                <div class="activity-content">
+                                    <h4>Session Scheduled</h4>
+                                    <p>Upcoming session with Ms. Priya Sharma on Oct 15, 2025 at 3:00 PM</p>
+                                </div>
+                            </div>
+
+                            <div class="activity-item">
+                                <div class="activity-dot orange"></div>
+                                <div class="activity-content">
+                                    <h4>New Mentor Available</h4>
+                                    <p>Mr. Vikash Singh joined as a mentor in Software Development</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Quick Actions -->
+                    <div class="content-section">
+                        <div class="section-header">
+                            <h2 class="section-title">
+                                <i class="fas fa-bolt section-icon"></i>
+                                Quick Actions
+                            </h2>
+                        </div>
+                        
+                        <div class="actions-list">
+                            <div class="actions-grid">
+                                <button class="action-card blue" onclick="findMentors()">
+                                    <i class="fas fa-search action-icon blue"></i>
+                                    <span class="action-text">Find Mentors</span>
+                                </button>
+
+                                <button class="action-card green" onclick="viewSessions()">
+                                    <i class="fas fa-calendar-check action-icon green"></i>
+                                    <span class="action-text">My Sessions</span>
+                                </button>
+
+                                <button class="action-card orange" onclick="becomeVisibleToMentors()">
+                                    <i class="fas fa-user-plus action-icon orange"></i>
+                                    <span class="action-text">Get Discovered</span>
+                                </button>
+
+                                <button class="action-card blue" onclick="viewApplications()">
+                                    <i class="fas fa-file-alt action-icon blue"></i>
+                                    <span class="action-text">My Applications</span>
+                                </button>
+
+                                <button class="action-card green" onclick="giveFeedback()">
+                                    <i class="fas fa-star action-icon green"></i>
+                                    <span class="action-text">Give Feedback</span>
+                                </button>
+
+                                <button class="action-card orange" onclick="viewResources()">
+                                    <i class="fas fa-book action-icon orange"></i>
+                                    <span class="action-text">Resources</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Upcoming Sessions -->
+            <div class="content-section">
+                <div class="section-header">
+                    <h2 class="section-title">
+                        <i class="fas fa-calendar section-icon"></i>
+                        Upcoming Mentorship Sessions
+                    </h2>
+                </div>
+                
+                <div class="events-list">
+                    <div class="event-item">
+                        <div class="event-date">
+                            <div class="event-month">OCT</div>
+                            <div class="event-day">15</div>
+                        </div>
+                        <div class="event-details">
+                            <h3 class="event-title">Career Guidance Session</h3>
+                            <div class="event-meta">
+                                <span><i class="fas fa-user"></i> With Ms. Priya Sharma</span>
+                                <span><i class="fas fa-clock"></i> 3:00 PM - 4:00 PM</span>
+                                <span><i class="fas fa-video"></i> Online</span>
+                            </div>
+                        </div>
+                        <div class="event-status status-upcoming">Upcoming</div>
+                    </div>
+
+                    <div class="event-item">
+                        <div class="event-date">
+                            <div class="event-month">OCT</div>
+                            <div class="event-day">18</div>
+                        </div>
+                        <div class="event-details">
+                            <h3 class="event-title">Technical Interview Prep</h3>
+                            <div class="event-meta">
+                                <span><i class="fas fa-user"></i> With Dr. Rajesh Kumar</span>
+                                <span><i class="fas fa-clock"></i> 5:30 PM - 6:30 PM</span>
+                                <span><i class="fas fa-video"></i> Online</span>
+                            </div>
+                        </div>
+                        <div class="event-status status-upcoming">Upcoming</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<script src="common.js"></script>
+    <script src="students_mentor.js"></script>
+
+</body>
+</html>

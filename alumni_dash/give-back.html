@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Give Back - Alumni Connect</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Inter', Arial, sans-serif;
+      background: #f7f8fa;
+      color: #222;
+    }
+    .container {
+      display: flex;
+      min-height: 100vh;
+    }
+    .sidebar {
+      width: 240px;
+      background: #fff;
+      border-right: 1px solid #e5e7eb;
+      padding: 24px 0;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .sidebar .logo {
+      font-weight: 700;
+      font-size: 1.3rem;
+      padding: 0 24px 24px 24px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .sidebar nav {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .sidebar nav a {
+      text-decoration: none;
+      color: #222;
+      padding: 10px 24px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 500;
+      transition: background 0.2s;
+    }
+    .sidebar nav a.active, .sidebar nav a:hover {
+      background: #eaf3ff;
+      color: #2563eb;
+    }
+    .main {
+      flex: 1;
+      padding: 32px 40px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .header .title {
+      font-size: 2rem;
+      font-weight: 700;
+    }
+    .header .search {
+      flex: 1;
+      margin: 0 32px;
+      max-width: 400px;
+    }
+    .header .search input {
+      width: 100%;
+      padding: 8px 16px;
+      border-radius: 8px;
+      border: 1px solid #e5e7eb;
+      font-size: 1rem;
+    }
+    .header .profile {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .header .profile .avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: #e5e7eb;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      color: #2563eb;
+    }
+    .giveback-content {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    .donation-header {
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+      padding: 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .donation-header::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 6px;
+      background: linear-gradient(90deg, #2563eb, #22c55e);
+    }
+    .donation-header .stats {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .donation-header .stats .amount {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: #1f2937;
+    }
+    .donation-header .stats .label {
+      font-size: 1rem;
+      color: #6b7280;
+    }
+    .btn {
+      background: #2563eb;
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 8px;
+      font-weight: 500;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .btn:hover {
+      background: #1d4ed8;
+    }
+    .section {
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+      padding: 32px;
+    }
+    .section h2 {
+      font-size: 1.3rem;
+      margin-top: 0;
+      margin-bottom: 24px;
+      color: #1f2937;
+      padding-bottom: 16px;
+      border-bottom: 1px solid #e5e7eb;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .section h2 .material-icons {
+      font-size: 1.5rem;
+      color: #2563eb;
+    }
+    .donation-form {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .form-row {
+      display: flex;
+      gap: 20px;
+    }
+    .form-group {
+      flex: 1;
+    }
+    .form-group label {
+      display: block;
+      margin-bottom: 10px;
+      font-weight: 500;
+      color: #4b5563;
+    }
+    .form-group input, 
+    .form-group select {
+      width: 100%;
+      padding: 12px 16px;
+      border: 1px solid #d1d5db;
+      border-radius: 6px;
+      font-size: 1rem;
+      font-family: inherit;
+      box-sizing: border-box;
+    }
+    .form-group input:focus, 
+    .form-group select:focus {
+      outline: none;
+      border-color: #2563eb;
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+    }
+    .amount-options {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+    .amount-option {
+      flex: 1;
+      padding: 16px 20px;
+      border: 1px solid #d1d5db;
+      border-radius: 8px;
+      text-align: center;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .amount-option:hover {
+      border-color: #2563eb;
+      background: #eaf3ff;
+    }
+    .amount-option.selected {
+      border-color: #2563eb;
+      background: #eaf3ff;
+      color: #2563eb;
+    }
+    .history-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 0;
+      border-bottom: 1px solid #f1f1f1;
+    }
+    .history-item:last-child {
+      border-bottom: none;
+    }
+    .history-item .left {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .history-item .title {
+      font-weight: 500;
+      color: #1f2937;
+    }
+    .history-item .date {
+      color: #6b7280;
+      font-size: 0.9rem;
+    }
+    .history-item .amount {
+      font-weight: 600;
+      color: #2563eb;
+    }
+    .receipt-link {
+      color: #2563eb;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 0.9rem;
+    }
+    .impact-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+      margin-top: 16px;
+    }
+    .impact-card {
+      background: #f9fafb;
+      border-radius: 8px;
+      padding: 20px;
+      text-align: center;
+    }
+    .impact-card .icon {
+      font-size: 32px;
+      margin-bottom: 12px;
+      color: #2563eb;
+    }
+    .impact-card .number {
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: #1f2937;
+    }
+    .impact-card .label {
+      color: #6b7280;
+      font-size: 0.95rem;
+    }
+    @media (max-width: 900px) {
+      .main { padding: 16px 8px; }
+      .sidebar { width: 100px; padding: 12px 0; }
+      .sidebar .logo { font-size: 1rem; padding: 0 8px 12px 8px; }
+      .sidebar nav a { padding: 8px 8px; font-size: 0.95rem; }
+      .form-row { flex-direction: column; gap: 16px; }
+      .amount-options { flex-wrap: wrap; }
+      .amount-option { min-width: 100px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <aside class="sidebar">
+      <div class="logo"><span style="background:#2563eb;color:#fff;border-radius:50%;padding:4px 10px;font-weight:700;">AU</span> Alumni Connect</div>
+      <nav>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="alumni-directory.html">Alumni Directory</a>
+        <a href="events.html">Events</a>
+        <a href="forums.html">Forums</a>
+        <a href="mentorship.html">Mentorship</a>
+        <a href="career-center.html">Career Center</a>
+        <a href="profile-settings.html">Profile Settings</a>
+        <a href="give-back.html" class="active">Give Back</a>
+      </nav>
+    </aside>
+    <main class="main">
+      <div class="header">
+        <div class="title">Give Back</div>
+        <div class="profile">
+          <span style="position:relative;">
+            <span style="position:absolute;top:-8px;right:-8px;background:#ef4444;color:#fff;font-size:0.8rem;border-radius:50%;padding:2px 6px;font-weight:700;">3</span>
+            <svg width="24" height="24" fill="none" stroke="#888" stroke-width="2" viewBox="0 0 24 24"><path d="M18 8a6 6 0 10-12 0c0 7-3 9-3 9h18s-3-2-3-9"/></svg>
+          </span>
+          <span class="avatar">SM</span>
+          <span style="font-weight:600;">Subhro Maitra</span>
+        </div>
+      </div>
+      
+      <div class="giveback-content">
+        <div class="donation-header">
+          <div class="stats">
+            <div class="amount">₹25,000</div>
+            <div class="label">Total Donated to Your Institute</div>
+          </div>
+          <button class="btn">
+            <span class="material-icons" style="font-size: 18px;">favorite</span>
+            Donate More
+          </button>
+        </div>
+        
+        <div class="section">
+          <h2><span class="material-icons">volunteer_activism</span> Donate to Your Institution</h2>
+          
+          <div class="donation-form">
+            <div class="form-group">
+              <label for="institution">Institution</label>
+              <select id="institution">
+                <option value="your-college" selected>Your College of Engineering</option>
+                <option value="other">Other Institution</option>
+              </select>
+            </div>
+            
+            <div class="form-group">
+              <label>Choose an Amount</label>
+              <div class="amount-options">
+                <div class="amount-option">₹1,000</div>
+                <div class="amount-option selected">₹5,000</div>
+                <div class="amount-option">₹10,000</div>
+                <div class="amount-option">₹25,000</div>
+                <div class="amount-option">Custom</div>
+              </div>
+            </div>
+            
+            <div class="form-row">
+              <div class="form-group">
+                <label for="fund">Select Fund</label>
+                <select id="fund">
+                  <option value="" selected disabled>Choose a Fund</option>
+                  <option value="scholarship">Scholarship Fund</option>
+                  <option value="infrastructure">Infrastructure Development</option>
+                  <option value="research">Research & Innovation</option>
+                  <option value="general">General Fund</option>
+                </select>
+              </div>
+              
+              <div class="form-group">
+                <label for="frequency">Frequency</label>
+                <select id="frequency">
+                  <option value="one-time" selected>One-time</option>
+                  <option value="monthly">Monthly</option>
+                  <option value="quarterly">Quarterly</option>
+                  <option value="annually">Annually</option>
+                </select>
+              </div>
+            </div>
+            
+            <div style="text-align: right; margin-top: 20px;">
+              <button class="btn">Proceed to Payment</button>
+            </div>
+          </div>
+        </div>
+        
+        <div class="section">
+          <h2><span class="material-icons">history</span> Your Donation History</h2>
+          
+          <div class="history-item">
+            <div class="left">
+              <div class="title">Scholarship Fund</div>
+              <div class="date">July 15, 2025</div>
+              <a href="#" class="receipt-link">
+                <span class="material-icons" style="font-size: 16px;">receipt</span> View Receipt
+              </a>
+            </div>
+            <div class="amount">₹15,000</div>
+          </div>
+          
+          <div class="history-item">
+            <div class="left">
+              <div class="title">Infrastructure Development</div>
+              <div class="date">March 22, 2025</div>
+              <a href="#" class="receipt-link">
+                <span class="material-icons" style="font-size: 16px;">receipt</span> View Receipt
+              </a>
+            </div>
+            <div class="amount">₹10,000</div>
+          </div>
+        </div>
+        
+        <div class="section">
+          <h2><span class="material-icons">emoji_events</span> Your Impact</h2>
+          
+          <p>Your generous contributions have made a significant difference to your institution and its students.</p>
+          
+          <div class="impact-cards">
+            <div class="impact-card">
+              <div class="icon">🎓</div>
+              <div class="number">3</div>
+              <div class="label">Scholarships Funded</div>
+            </div>
+            
+            <div class="impact-card">
+              <div class="icon">📚</div>
+              <div class="number">50+</div>
+              <div class="label">Books Added to Library</div>
+            </div>
+            
+            <div class="impact-card">
+              <div class="icon">💻</div>
+              <div class="number">1</div>
+              <div class="label">Computer Lab Equipment</div>
+            </div>
+            
+            <div class="impact-card">
+              <div class="icon">🏆</div>
+              <div class="number">2</div>
+              <div class="label">Student Projects Funded</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+  
+  <script>
+    // Simple interaction for amount selection
+    document.querySelectorAll('.amount-option').forEach(option => {
+      option.addEventListener('click', () => {
+        document.querySelectorAll('.amount-option').forEach(el => {
+          el.classList.remove('selected');
+        });
+        option.classList.add('selected');
+      });
+    });
+  </script>
+</body>
+</html>
