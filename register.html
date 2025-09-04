@@ -68,10 +68,6 @@
             text-decoration: none;
         }
 
-        .back-btn:hover {
-            color: #3498db;
-        }
-
         .login-form {
             display: none;
             flex-direction: column;
@@ -100,8 +96,29 @@
             transition: background 0.3s;
         }
 
-        .login-form button:hover {
-            background: #2980b9;
+        .login-link-container {
+            text-align: center;
+            margin: 1.5rem 0;
+            padding: 1rem 0;
+            border-top: 1px solid #eee;
+        }
+
+        .login-link-container p {
+            margin: 0;
+            color: #666;
+            font-size: 0.95rem;
+        }
+
+        .login-link {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .login-link:hover {
+            color: #2980b9;
+            text-decoration: underline;
         }
     </style>
 </head>
@@ -120,17 +137,18 @@
                     <i class="fas fa-users"></i>
                     Alumni Sign Up
                 </button>
-                <button class="role-btn" onclick="showLoginForm('admin')">
-                    <i class="fas fa-user-shield"></i>
-                    Admin Login
-                </button>
+            </div>
+
+            <!-- Login Link -->
+            <div class="login-link-container">
+                <p>Have an account? <a href="login.html" class="login-link">Login</a></p>
             </div>
 
             <!-- Student Login Form -->
             <form id="studentLogin" class="login-form">
                 <h3><i class="fas fa-user-graduate"></i> Student Sign Up</h3>
                 <input type="text" placeholder="Name" required id="studentName" style="width: 100%; height: 2.6em; font-size: 1rem; border: 1px solid #ddd; border-radius: 5px; padding: 0.8rem; color: #2c3e50;">
-                <select id="studentDepartment" required style="width: 100%; height: 2.6em; font-size: 1rem; border: 1px solid #ddd; border-radius: 5px; padding: 0.8rem; color: #2c3e50;">
+                <select id="studentDepartment" required style="width: 100%; height: 3em; font-size: 1rem; border: 1px solid #ddd; border-radius: 5px; padding: 0.8rem; color: #2c3e50;">
                     <option value="">Select Department</option>
                     <option>B. Tech. in Computer Science Engineering</option>
                     <option>B. Tech. in Information Technology</option>
@@ -142,7 +160,7 @@
                     <option>Masters of Computer Applications</option>
                     <option>Bachelor of Business Administration</option>
                 </select>
-                <select id="studentYear" required style="width: 100%; height: 2.6em; font-size: 1rem; border: 1px solid #ddd; border-radius: 5px; padding: 0.8rem; color: #2c3e50;">
+                <select id="studentYear" required style="width: 100%; height: 3em; font-size: 1rem; border: 1px solid #ddd; border-radius: 5px; padding: 0.8rem; color: #2c3e50;">
                     <option value="">Passing Year</option>
                     <option>1999</option>
                     <option>2000</option>
@@ -185,7 +203,7 @@
                 <h3><i class="fas fa-users"></i> Alumni Sign Up</h3>
                 <input type="text" placeholder="Name" required id="alumniName" style="width: 100%; height: 2.6em; font-size: 1rem; border: 1px solid #ddd; border-radius: 5px; padding: 0.8rem; color: #2c3e50;">
                 <input type="email" placeholder="Email" required id="alumniEmail" style="width: 100%; height: 2.6em; font-size: 1rem; border: 1px solid #ddd; border-radius: 5px; padding: 0.8rem; color: #2c3e50;">
-                <select id="alumniDepartment" required style="width: 100%; height: 2.6em; font-size: 1rem; border: 1px solid #ddd; border-radius: 5px; padding: 0.8rem; color: #2c3e50;">
+                <select id="alumniDepartment" required style="width: 100%; height: 3em; font-size: 1rem; border: 1px solid #ddd; border-radius: 5px; padding: 0.8rem; color: #2c3e50;">
                     <option value="">Select Department</option>
                     <option>B. Tech. in Computer Science Engineering</option>
                     <option>B. Tech. in Information Technology</option>
@@ -198,7 +216,7 @@
                     <option>Bachelor of Business Administration</option>
                 </select>
 
-                <select id="alumniYear" required style="width: 100%; height: 2.6em; font-size: 1rem; border: 1px solid #ddd; border-radius: 5px; padding: 0.8rem; color: #2c3e50;">
+                <select id="alumniYear" required style="width: 100%; height: 3em; font-size: 1rem; border: 1px solid #ddd; border-radius: 5px; padding: 0.8rem; color: #2c3e50;">
                     <option value="">Select Year</option>
                     <option>1999</option>
                     <option>2000</option>
@@ -235,15 +253,6 @@
                 <button type="button" class="back-btn" onclick="showRoleSelection()">Back to Selection</button>
             </form>
 
-            <!-- Admin Login Form -->
-            <form id="adminLogin" class="login-form">
-                <h3><i class="fas fa-user-shield"></i> Admin Login</h3>
-                <input type="text" placeholder="Admin ID" required>
-                <input type="password" placeholder="Password" required>
-                <button type="submit">Login</button>
-                <button type="button" class="back-btn" onclick="showRoleSelection()">Back to Selection</button>
-            </form>
-
             <a href="index.html" class="back-btn">
                 <!-- Removed Back to Home for alumni login form, replaced with Back to Selection above -->
             </a>
@@ -256,7 +265,6 @@
     const roleSelection = document.getElementById('roleSelection');
     const studentLoginForm = document.getElementById('studentLogin');
     const alumniLoginForm = document.getElementById('alumniLogin');
-    const adminLoginForm = document.getElementById('adminLogin');
     const studentPassword = document.getElementById('studentPassword');
     const studentPasswordHint = document.getElementById('studentPasswordHint');
     const alumniPassword = document.getElementById('alumniPassword');
@@ -273,9 +281,6 @@
                 case 'alumni':
                     alumniLoginForm.classList.add('active');
                     break;
-                case 'admin':
-                    adminLoginForm.classList.add('active');
-                    break;
             }
         }
 
@@ -284,7 +289,6 @@
             roleSelection.style.display = 'flex';
             studentLoginForm.classList.remove('active');
             alumniLoginForm.classList.remove('active');
-            adminLoginForm.classList.remove('active');
         }
 
         // Form submission handlers
@@ -377,12 +381,6 @@
                 // Fallback if loginManager not available
                 window.location.href = 'alumni_dash/dashboard.html';
             }
-        });
-
-        adminLoginForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            // Add authentication logic here
-            window.location.href = 'admin_dash/admin-dashboard.html';
         });
     </script>
 </body>

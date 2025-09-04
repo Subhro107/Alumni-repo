@@ -14,10 +14,10 @@
             <h1>Alumni Connect</h1>
         </div>
         <div class="nav-links">
-            <a href="#home">Home</a>
-            <a href="#features">Features</a>
-            <a href="#about">About</a>
-            <a href="#contact">Contact</a>
+            <a href="#home" class="nav-item">Home</a>
+            <a href="#features" class="nav-item">Features</a>
+            <a href="#about" class="nav-item">About</a>
+            <a href="#contact" class="nav-item">Contact</a>
             <a href="login.html" class="login-btn">Login</a>
         </div>
     </nav>
@@ -113,9 +113,73 @@
         <script>
         document.getElementById('mainContactForm').addEventListener('submit', function(e) {
             e.preventDefault();
-            this.reset();
-            document.getElementById('contact-confirmation').style.display = 'block';
+
+            const submitBtn = this.querySelector('.contact-btn');
+            const confirmationDiv = document.getElementById('contact-confirmation');
+
+            // Add loading state
+            submitBtn.classList.add('loading');
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Sending...';
+
+            // Simulate form submission (replace with actual submission logic)
+            setTimeout(() => {
+                // Reset form
+                this.reset();
+
+                // Remove loading state
+                submitBtn.classList.remove('loading');
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Send Message';
+
+                // Show success message
+                confirmationDiv.style.display = 'block';
+                confirmationDiv.textContent = 'Thank you for your message! We\'ll get back to you shortly.';
+
+                // Hide success message after 5 seconds
+                setTimeout(() => {
+                    confirmationDiv.style.display = 'none';
+                }, 5000);
+            }, 2000);
         });
+
+        // Real-time form validation
+        const formInputs = document.querySelectorAll('#mainContactForm input, #mainContactForm textarea');
+        formInputs.forEach(input => {
+            input.addEventListener('blur', function() {
+                validateField(this);
+            });
+
+            input.addEventListener('input', function() {
+                if (this.classList.contains('invalid')) {
+                    validateField(this);
+                }
+            });
+        });
+
+        function validateField(field) {
+            const value = field.value.trim();
+            const isRequired = field.hasAttribute('required');
+
+            if (isRequired && !value) {
+                field.classList.add('invalid');
+                field.classList.remove('valid');
+            } else if (field.type === 'email' && value) {
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailRegex.test(value)) {
+                    field.classList.add('invalid');
+                    field.classList.remove('valid');
+                } else {
+                    field.classList.remove('invalid');
+                    field.classList.add('valid');
+                }
+            } else if (value) {
+                field.classList.remove('invalid');
+                field.classList.add('valid');
+            } else {
+                field.classList.remove('invalid', 'valid');
+            }
+        }
         </script>
     </section>
 

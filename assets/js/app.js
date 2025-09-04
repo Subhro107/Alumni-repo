@@ -161,7 +161,7 @@ class LoginManager {
             adminForm.addEventListener('submit', (e) => {
                 e.preventDefault();
                 const identifier = adminForm.querySelector('input[type="text"]').value;
-                const password = adminForm.querySelector('input[type="password"]').value;
+                const password = adminForm.querySelector('#adminLoginPassword').value;
                 this.login(this.userTypes.ADMIN, identifier, password);
             });
         }
@@ -170,7 +170,7 @@ class LoginManager {
             alumniForm.addEventListener('submit', (e) => {
                 e.preventDefault();
                 const identifier = alumniForm.querySelector('input[type="email"]').value;
-                const password = alumniForm.querySelector('input[type="password"]').value;
+                const password = alumniForm.querySelector('#alumniLoginPassword').value;
                 this.login(this.userTypes.ALUMNI, identifier, password);
             });
         }
@@ -179,7 +179,7 @@ class LoginManager {
             studentForm.addEventListener('submit', (e) => {
                 e.preventDefault();
                 const identifier = studentForm.querySelector('input[type="email"]').value;
-                const password = studentForm.querySelector('input[type="password"]').value;
+                const password = studentForm.querySelector('#studentLoginPassword').value;
                 this.login(this.userTypes.STUDENT, identifier, password);
             });
         }

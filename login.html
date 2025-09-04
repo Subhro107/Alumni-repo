@@ -68,10 +68,6 @@
             text-decoration: none;
         }
 
-        .back-btn:hover {
-            color: #3498db;
-        }
-
         .login-form {
             display: none;
             flex-direction: column;
@@ -103,6 +99,36 @@
         .login-form button:hover {
             background: #2980b9;
         }
+
+        .password-container {
+            position: relative;
+        }
+
+        .password-container input {
+            padding-right: 40px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .password-toggle {
+            position: absolute;
+            right: 8px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: white;
+            border: none;
+            color: #666;
+            cursor: pointer;
+            font-size: 1rem;
+            padding: 5px;
+            border-radius: 3px;
+            transition: color 0.2s;
+        }
+
+        .password-toggle:hover {
+            color: #ffffff;
+            background: white;
+        }
     </style>
 </head>
 <body>
@@ -126,11 +152,21 @@
                 </button>
             </div>
 
+            <!-- Register Link -->
+            <p style="text-align: center; margin: 1rem 0; color: #2c3e50;">
+                Don't have an account? <a href="register.html" style="color: #3498db; text-decoration: none; font-weight: bold;">Register</a>
+            </p>
+
             <!-- Student Login Form -->
             <form id="studentLogin" class="login-form">
                 <h3><i class="fas fa-user-graduate"></i> Student Login</h3>
                 <input type="email" placeholder="College Email" required id="studentLoginEmail">
-                <input type="password" placeholder="Password" required id="studentLoginPassword">
+                <div class="password-container">
+                    <input type="password" placeholder="Password" required id="studentLoginPassword">
+                    <button type="button" class="password-toggle" onclick="togglePassword('studentLoginPassword')">
+                        <i class="fas fa-eye-slash"></i>
+                    </button>
+                </div>
                 <button type="submit">Login</button>
                 <button type="button" class="back-btn" onclick="showRoleSelection()">Back to Selection</button>
             </form>
@@ -139,7 +175,12 @@
             <form id="alumniLogin" class="login-form">
                 <h3><i class="fas fa-users"></i> Alumni Login</h3>
                 <input type="email" placeholder="Email" required>
-                <input type="password" placeholder="Password" required>
+                <div class="password-container">
+                    <input type="password" placeholder="Password" required id="alumniLoginPassword">
+                    <button type="button" class="password-toggle" onclick="togglePassword('alumniLoginPassword')">
+                        <i class="fas fa-eye-slash"></i>
+                    </button>
+                </div>
                 <button type="submit">Login</button>
                 <button type="button" class="back-btn" onclick="showRoleSelection()">Back to Selection</button>
             </form>
@@ -148,7 +189,12 @@
             <form id="adminLogin" class="login-form">
                 <h3><i class="fas fa-user-shield"></i> Admin Login</h3>
                 <input type="text" placeholder="Admin ID" required>
-                <input type="password" placeholder="Password" required>
+                <div class="password-container">
+                    <input type="password" placeholder="Password" required id="adminLoginPassword">
+                    <button type="button" class="password-toggle" onclick="togglePassword('adminLoginPassword')">
+                        <i class="fas fa-eye-slash"></i>
+                    </button>
+                </div>
                 <button type="submit">Login</button>
                 <button type="button" class="back-btn" onclick="showRoleSelection()">Back to Selection</button>
             </form>
@@ -203,6 +249,23 @@
         });
 
         // The form submission is now handled by the LoginManager in app.js
+
+        // Function to toggle password visibility
+        function togglePassword(inputId) {
+            const passwordInput = document.getElementById(inputId);
+            const toggleButton = passwordInput.nextElementSibling;
+            const icon = toggleButton.querySelector('i');
+
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                icon.classList.remove('fa-eye-slash');
+                icon.classList.add('fa-eye');
+            } else {
+                passwordInput.type = 'password';
+                icon.classList.remove('fa-eye');
+                icon.classList.add('fa-eye-slash');
+            }
+        }
     </script>
 </body>
 </html>
