@@ -16,12 +16,9 @@
 <body>
   <div class="container">
 
-     <!-- Top Header -->
+   <!-- Top Header -->
     <div class="top-header">
         <div class="logo-section">
-            <button class="close-btn">
-                <i class="fas fa-times"></i>
-            </button>
             <div class="logo">
                 <div class="logo-icon">AU</div>
                 <span class="logo-text">Alumni Connect</span>
@@ -38,11 +35,12 @@
                 <span class="notification-badge">1</span>
             </button>
             <div class="user-info">
-                <div class="user-avatar">🎓</div>
-                <span class="user-name">student demo</span>
+                <div class="user-avatar">👤</div>
+                <span class="user-name">Student-1</span>
             </div>
         </div>
     </div>
+
 
     <!-- Sidebar -->
     <div class="sidebar">
@@ -71,6 +69,10 @@
             <i class="fas fa-briefcase"></i>
             <span>Career Center</span>
         </a>
+        <a href="students_profile.html" class="nav-item active">
+                    <i class="fas fa-user-cog"></i>
+                    Profile Settings
+                </a>
     </nav>
     </div>
 
@@ -84,6 +86,7 @@
       </div>
       </header>
       <section class="cards-grid" aria-live="polite">
+
         <!-- Job Board card -->
         <article class="card card-job" tabindex="0">
           <div class="card-left">
@@ -99,7 +102,7 @@
                   <strong>Frontend Developer</strong>
                   <div class="muted small">ACME Tech • Remote • Posted 3 days ago</div>
                 </div>
-                <div><button class="btn-small apply-btn" data-role="Frontend Developer">View</button></div>
+                <div><button class="btn-small" data-role="Frontend Developer">View</button></div>
               </div>
 
               <div class="job-item">
@@ -107,12 +110,12 @@
                   <strong>Data Analyst</strong>
                   <div class="muted small">Vertex Analytics • Bangalore • Posted 1 week ago</div>
                 </div>
-                <div><button class="btn-small apply-btn" data-role="Data Analyst">View</button></div>
+                <div><button class="btn-small" data-role="Data Analyst">View</button></div>
               </div>
             </div>
 
             <div class="card-actions">
-              <button id="postJobBtn" class="btn-outline">Post a Job</button>
+              <button id="postJobBtn" class="btn-outline">Get a Job</button>
               <button id="viewAllJobs" class="btn-ghost">View All</button>
             </div>
           </div>
@@ -133,12 +136,12 @@
                   <strong>ML Intern</strong>
                   <div class="muted small">NeuraLabs • Remote • 6 weeks</div>
                 </div>
-                <div><button class="btn-small apply-btn" data-role="ML Intern">Apply</button></div>
+                <div><button class="apply-btn" data-role="ML Intern">Apply</button></div>
               </div>
             </div>
 
             <div class="card-actions">
-              <button id="postInternBtn" class="btn-outline">Post Internship</button>
+              <button id="postInternBtn" class="btn-outline">Get an Internship</button>
               <button id="viewAllInterns" class="btn-ghost">View All</button>
             </div>
           </div>
@@ -198,11 +201,11 @@
             <div class="talks-list">
               <div class="talk-item">
                 <strong>Landing your first SDE role</strong>
-                <div class="muted small">by Anjali Mehta (Alumnus, 2019)</div>
+                <div class="muted small">by Alumni-1 (Alumnus, 2019)</div>
               </div>
               <div class="talk-item">
                 <strong>Careers in Product Management</strong>
-                <div class="muted small">by Rohit Kapoor (Alumnus, 2017)</div>
+                <div class="muted small">by Alumni-2 (Alumnus, 2017)</div>
               </div>
             </div>
 
@@ -215,7 +218,67 @@
       </section>
     </main>
   </div>
+  <script src="../assets/js/app.js"></script>
+    <script>
+        // Ensure logout function is available
+        function handleLogout() {
+            if (window.loginManager && typeof window.loginManager.logout === 'function') {
+                window.loginManager.logout();
+            } else {
+                // Fallback: clear session and redirect manually
+                localStorage.removeItem('userSession');
+                window.location.href = '../index.html';
+            }
+        }
+
+        // Add hover and focus effects for logout button
+        document.addEventListener('DOMContentLoaded', function() {
+            const logoutBtn = document.querySelector('.logout-btn');
+            if (logoutBtn) {
+                logoutBtn.addEventListener('mouseenter', function() {
+                    this.style.backgroundColor = '#dc2626';
+                });
+                logoutBtn.addEventListener('mouseleave', function() {
+                    this.style.backgroundColor = '#ef4444';
+                });
+                logoutBtn.addEventListener('focus', function() {
+                    this.style.outline = '2px solid #007AFF';
+                    this.style.outlineOffset = '2px';
+                });
+                logoutBtn.addEventListener('blur', function() {
+                    this.style.outline = 'none';
+                });
+            }
+        });
+    </script>
    <script src="common.js"></script>
-    <script src="student_career.js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+            // Global search functionality
+            const globalSearch = document.getElementById('globalSearch');
+            globalSearch.addEventListener('input', function(e) {
+                console.log('Searching for:', e.target.value);
+                // Add search logic here
+            });
+
+            // Job application buttons
+            document.querySelectorAll('.btn-small-career').forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    console.log('Job action clicked');
+                    // Add job application logic here
+                });
+            });
+
+            // Upload resume functionality
+            document.querySelector('input[type="file"]').addEventListener('change', function(e) {
+                const file = e.target.files[0];
+                if (file) {
+                    console.log('File selected:', file.name);
+                    // Add file upload logic here
+                }
+            });
+        });
+    </script>
 </body>
 </html>

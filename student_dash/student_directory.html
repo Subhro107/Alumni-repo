@@ -8,12 +8,9 @@
     <link rel="stylesheet" href="common.css">
     </head>
 <body>
-    <!-- Top Header -->
+<!-- Top Header -->
     <div class="top-header">
         <div class="logo-section">
-            <button class="close-btn">
-                <i class="fas fa-times"></i>
-            </button>
             <div class="logo">
                 <div class="logo-icon">AU</div>
                 <span class="logo-text">Alumni Connect</span>
@@ -30,11 +27,12 @@
                 <span class="notification-badge">1</span>
             </button>
             <div class="user-info">
-                <div class="user-avatar">🎓</div>
-                <span class="user-name">student demo</span>
+                <div class="user-avatar">👤</div>
+                <span class="user-name">Student-1</span>
             </div>
         </div>
     </div>
+
     <!-- Sidebar -->
     <div class="container">
     <nav class="sidebar">
@@ -62,6 +60,10 @@
             <i class="fas fa-briefcase"></i>
             Career Center
         </a>
+        <a href="students_profile.html" class="nav-item active">
+                    <i class="fas fa-user-cog"></i>
+                    Profile Settings
+                </a>
     </nav>
 
     <!-- Main Content -->
@@ -70,51 +72,6 @@
             <h1 class="welcome-title">Alumni Directory</h1>
             <p class="welcome-subtitle">Connect with alumni from your university</p>
         </div>
-
-        <!-- Stats Grid -->
-        <div class="stats-grid">
-            <div class="stat-card">
-                <div class="stat-info">
-                    <h3 id="totalAlumni">4</h3>
-                    <p>Total Alumni</p>
-                    <small>Registered in the platform</small>
-                </div>
-                <div class="stat-icon">
-                    <i class="fas fa-users"></i>
-                </div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-info">
-                    <h3>2</h3>
-                    <p>Featured Alumni</p>
-                    <small>This month</small>
-                </div>
-                <div class="stat-icon">
-                    <i class="fas fa-star"></i>
-                </div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-info">
-                    <h3>0</h3>
-                    <p>New Connections</p>
-                    <small>Unread messages</small>
-                </div>
-                <div class="stat-icon">
-                    <i class="fas fa-envelope"></i>
-                </div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-info">
-                    <h3>4</h3>
-                    <p>Companies</p>
-                    <small>Active postings</small>
-                </div>
-                <div class="stat-icon">
-                    <i class="fas fa-building"></i>
-                </div>
-            </div>
-        </div>
-
         <!-- Content Grid -->
         <div class="content-grid">
             <!-- Left Section with Alumni List -->
@@ -140,100 +97,40 @@
                     <input type="text" id="filterLocation" placeholder="Filter by location...">
                     <button onclick="applyFilters()">Apply Filters</button>
                 </div>
-                
-                <div class="section-header">
-                    <h2 class="section-title">
-                        <i class="fas fa-users section-icon"></i>
-                        All Alumni
-                    </h2>
-                </div>
-                <div class="alumni-list" id="alumniList">
-                    <!-- Alumni cards will be added here via JavaScript -->
-                </div>
-            </div>
-
-            <!-- Right Section -->
-            <div style="display: flex; flex-direction: column; gap: 2rem;">
-                <!-- Featured Alumni -->
-                <div class="content-section">
-                    <div class="section-header">
-                        <h2 class="section-title">
-                            <i class="fas fa-star section-icon"></i>
-                            Featured Alumni
-                        </h2>
-                    </div>
-                    <div class="featured-alumni" id="featuredAlumni">
-                        <!-- Featured alumni will be added here via JavaScript -->
-                    </div>
-                </div>
-
-                <!-- Recent Activity -->
-                <div class="content-section">
-                    <div class="section-header">
-                        <h2 class="section-title">
-                            <i class="fas fa-bell section-icon"></i>
-                            Recent Activity
-                        </h2>
-                    </div>
-                    <div class="activity-list">
-                        <div class="activity-item">
-                            <div class="activity-dot blue"></div>
-                            <div class="activity-content">
-                                <h4>New alumni registration</h4>
-                                <p>Sarah Johnson (Class of 2020) joined</p>
-                            </div>
-                        </div>
-                        <div class="activity-item">
-                            <div class="activity-dot green"></div>
-                            <div class="activity-content">
-                                <h4>Upcoming event reminder</h4>
-                                <p>Annual Alumni Gala • 2 weeks away</p>
-                            </div>
-                        </div>
-                        <div class="activity-item">
-                            <div class="activity-dot orange"></div>
-                            <div class="activity-content">
-                                <h4>New mentorship match</h4>
-                                <p>You've been matched with a student</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Quick Actions -->
-                <div class="content-section">
-                    <div class="section-header">
-                        <h2 class="section-title">
-                            Quick Actions
-                        </h2>
-                    </div>
-                    <div class="quick-actions">
-                        <a href="#" class="quick-action">
-                            <div class="quick-action-icon">
-                                <i class="fas fa-search"></i>
-                            </div>
-                            Find Alumni
-                        </a>
-                        <a href="#" class="quick-action">
-                            <div class="quick-action-icon">
-                                <i class="fas fa-calendar"></i>
-                            </div>
-                            View Events
-                        </a>
-                        <a href="#" class="quick-action">
-                            <div class="quick-action-icon">
-                                <i class="fas fa-envelope"></i>
-                            </div>
-                            Connect
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
         <script src="common.js"></script>
-    <script src="student_directory.js"></script>
+    <script src="../assets/js/app.js"></script>
+    <script>
+        // Ensure logout function is available
+        function handleLogout() {
+            if (window.loginManager && typeof window.loginManager.logout === 'function') {
+                window.loginManager.logout();
+            } else {
+                // Fallback: clear session and redirect manually
+                localStorage.removeItem('userSession');
+                window.location.href = '../index.html';
+            }
+        }
 
-
+        // Add hover and focus effects for logout button
+        document.addEventListener('DOMContentLoaded', function() {
+            const logoutBtn = document.querySelector('.logout-btn');
+            if (logoutBtn) {
+                logoutBtn.addEventListener('mouseenter', function() {
+                    this.style.backgroundColor = '#dc2626';
+                });
+                logoutBtn.addEventListener('mouseleave', function() {
+                    this.style.backgroundColor = '#ef4444';
+                });
+                logoutBtn.addEventListener('focus', function() {
+                    this.style.outline = '2px solid #007AFF';
+                    this.style.outlineOffset = '2px';
+                });
+                logoutBtn.addEventListener('blur', function() {
+                    this.style.outline = 'none';
+                });
+            }
+        });
+    </script>
     </main>
     </body>
 </html>
