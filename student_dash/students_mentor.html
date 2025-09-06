@@ -8,12 +8,9 @@
     <link rel="stylesheet" href="common.css">
 </head>
 <body>
-    <!-- Top Header -->
+  <!-- Top Header -->
     <div class="top-header">
         <div class="logo-section">
-            <button class="close-btn">
-                <i class="fas fa-times"></i>
-            </button>
             <div class="logo">
                 <div class="logo-icon">AU</div>
                 <span class="logo-text">Alumni Connect</span>
@@ -30,11 +27,12 @@
                 <span class="notification-badge">1</span>
             </button>
             <div class="user-info">
-                <div class="user-avatar">🎓</div>
-                <span class="user-name">student demo</span>
+                <div class="user-avatar">👤</div>
+                <span class="user-name">Student-1</span>
             </div>
         </div>
     </div>
+
 
     <div class="container">
         <!-- Sidebar -->
@@ -63,6 +61,10 @@
                 <i class="fas fa-briefcase"></i>
                 Career Center
             </a>
+            <a href="students_profile.html" class="nav-item active">
+                    <i class="fas fa-user-cog"></i>
+                    Profile Settings
+                </a>
         </div>
 
         <!-- Main Content -->
@@ -323,8 +325,95 @@
             </div>
         </div>
     </div>
+    <script src="../assets/js/app.js"></script>
+    <script>
+        // Ensure logout function is available
+        function handleLogout() {
+            if (window.loginManager && typeof window.loginManager.logout === 'function') {
+                window.loginManager.logout();
+            } else {
+                // Fallback: clear session and redirect manually
+                localStorage.removeItem('userSession');
+                window.location.href = '../index.html';
+            }
+        }
+
+        // Add hover and focus effects for logout button
+        document.addEventListener('DOMContentLoaded', function() {
+            const logoutBtn = document.querySelector('.logout-btn');
+            if (logoutBtn) {
+                logoutBtn.addEventListener('mouseenter', function() {
+                    this.style.backgroundColor = '#dc2626';
+                });
+                logoutBtn.addEventListener('mouseleave', function() {
+                    this.style.backgroundColor = '#ef4444';
+                });
+                logoutBtn.addEventListener('focus', function() {
+                    this.style.outline = '2px solid #007AFF';
+                    this.style.outlineOffset = '2px';
+                });
+                logoutBtn.addEventListener('blur', function() {
+                    this.style.outline = 'none';
+                });
+            }
+        });
+    </script>
 <script src="common.js"></script>
-    <script src="students_mentor.js"></script>
+    <script>
+        
+        function requestMentorship(mentorId) {
+            console.log('Requesting mentorship from:', mentorId);
+            // Show modal or form for mentorship request
+            alert('Mentorship request sent successfully!');
+        }
+
+        function findMentors() {
+            console.log('Opening mentor search');
+            // Navigate to mentor search page or show search modal
+        }
+
+        function viewSessions() {
+            console.log('Viewing sessions');
+            // Navigate to sessions page
+        }
+
+        function becomeVisibleToMentors() {
+            console.log('Making profile visible to mentors');
+            // Open profile visibility settings
+        }
+
+        function viewApplications() {
+            console.log('Viewing applications');
+            // Navigate to applications page
+        }
+
+        function giveFeedback() {
+            console.log('Opening feedback form');
+            // Show feedback modal
+        }
+
+        function viewResources() {
+            console.log('Viewing mentorship resources');
+            // Navigate to resources page
+        }
+
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Mentorship page loaded');
+            
+            // Add hover effects to mentor cards
+            document.querySelectorAll('.mentor-cards .card').forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-5px)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0)';
+                });
+            });
+        });
+
+    </script>
 
 </body>
 </html>

@@ -422,12 +422,21 @@ function showUserMenu() {
         'User Menu',
         `
         <div class="user-menu-items">
-            <div class="menu-item-button" onclick="navigateTo('profile')">View Profile</div>
-            <div class="menu-item-button" onclick="navigateTo('settings')">Settings</div>
-            <div class="menu-item-button" onclick="showHelpModal()">Help & Support</div>
+            <div class="menu-item-button" onclick="navigateTo('students_profile.html')">
+                <i class="fas fa-user"></i>
+                View Profile
+            </div>
+            <div class="menu-item-button" onclick="showHelpModal()">
+                <i class="fas fa-question-circle"></i>
+                Help & Support
+            </div>
+            <div class="menu-item-button logout-item" onclick="handleLogout()">
+                <i class="fas fa-sign-out-alt"></i>
+                Logout
+            </div>
         </div>
         `,
-        [{ text: 'Close', action: 'closeCurrentModal', className: 'btn-primary' }]
+        [{ text: 'Close', action: 'closeCurrentModal', className: 'btn-ghost' }]
     );
 }
 
@@ -787,14 +796,10 @@ function handleResumeUpload() {
 
 function handleLogout() {
     if (confirm('Are you sure you want to logout?')) {
-        try {
-            localStorage.clear();
-        } catch (e) {
-            console.warn('Could not clear localStorage');
-        }
+        localStorage.removeItem('userSession');
         showNotification('Logged out successfully', 'success');
         setTimeout(() => {
-            window.location.href = 'login.html';
+            window.location.href = '../index.html';
         }, 1500);
     }
 }
@@ -938,4 +943,47 @@ function getNotificationIcon(type) {
         info: 'ℹ'
     };
     return icons[type] || icons.info;
+}
+
+// =================== COMMON JS FUNCTIONS ===================
+function initializeUserMenu() {
+    const userInfo = document.querySelector('.user-info');
+    if (userInfo) {
+        userInfo.addEventListener('click', function() {
+            showUserMenu();
+        });
+    }
+}
+
+function showUserMenu() {
+    showModal(
+        'User Menu',
+        `
+        <div class="user-menu-items">
+            <div class="menu-item-button" onclick="navigateTo('students_profile.html')">
+                <i class="fas fa-user"></i>
+                View Profile
+            </div>
+            <div class="menu-item-button" onclick="showHelpModal()">
+                <i class="fas fa-question-circle"></i>
+                Help & Support
+            </div>
+            <div class="menu-item-button logout-item" onclick="handleLogout()">
+                <i class="fas fa-sign-out-alt"></i>
+                Logout
+            </div>
+        </div>
+        `,
+        [{ text: 'Close', action: 'closeCurrentModal', className: 'btn-ghost' }]
+    );
+}
+
+function handleLogout() {
+    if (confirm('Are you sure you want to logout?')) {
+        localStorage.removeItem('userSession');
+        showNotification('Logged out successfully', 'success');
+        setTimeout(() => {
+            window.location.href = '../index.html';
+        }, 1500);
+    }
 }

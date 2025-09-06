@@ -8,12 +8,9 @@
     <link rel="stylesheet" href="common.css">
 </head>
 <body>
-    <!-- Top Header -->
+<!-- Top Header -->
     <div class="top-header">
         <div class="logo-section">
-            <button class="close-btn">
-                <i class="fas fa-times"></i>
-            </button>
             <div class="logo">
                 <div class="logo-icon">AU</div>
                 <span class="logo-text">Alumni Connect</span>
@@ -30,8 +27,8 @@
                 <span class="notification-badge">1</span>
             </button>
             <div class="user-info">
-                <div class="user-avatar">🎓</div>
-                <span class="user-name">student demo</span>
+                <div class="user-avatar">👤</div>
+                <span class="user-name">Student-1</span>
             </div>
         </div>
     </div>
@@ -63,6 +60,10 @@
                 <i class="fas fa-briefcase"></i>
                 Career Center
             </a>
+            <a href="students_profile.html" class="nav-item active">
+                    <i class="fas fa-user-cog"></i>
+                    Profile Settings
+                </a>
         </div>
 
         <!-- Main Content -->
@@ -200,11 +201,11 @@
                 <div class="events-list" id="eventsList">
                     <div class="event-item">
                         <div class="event-date">
-                            <div class="event-month">OCT</div>
-                            <div class="event-day">15</div>
+                            <div class="event-month">SEPT</div>
+                            <div class="event-day">18</div>
                         </div>
                         <div class="event-details">
-                            <h3 class="event-title">Alumni Tech Meetup</h3>
+                            <h3 class="event-title">Annual Alumni Gala</h3>
                             <div class="event-meta">
                                 <span><i class="fas fa-clock"></i> 6:00 PM - 8:00 PM</span>
                                 <span><i class="fas fa-map-marker-alt"></i> Tech Campus</span>
@@ -216,12 +217,12 @@
                     <div class="event-item">
                         <div class="event-date">
                             <div class="event-month">OCT</div>
-                            <div class="event-day">21</div>
+                            <div class="event-day">05</div>
                         </div>
                         <div class="event-details">
-                            <h3 class="event-title">Career Workshop</h3>
+                            <h3 class="event-title">Career Fair 2025</h3>
                             <div class="event-meta">
-                                <span><i class="fas fa-clock"></i> 2:00 PM - 4:00 PM</span>
+                                <span><i class="fas fa-clock"></i> 10:00 AM - 4:00 PM</span>
                                 <span><i class="fas fa-map-marker-alt"></i> Main Auditorium</span>
                             </div>
                         </div>
@@ -230,13 +231,13 @@
 
                     <div class="event-item">
                         <div class="event-date">
-                            <div class="event-month">OCT</div>
-                            <div class="event-day">25</div>
+                            <div class="event-month">NOV</div>
+                            <div class="event-day">12</div>
                         </div>
                         <div class="event-details">
-                            <h3 class="event-title">Alumni Networking Night</h3>
+                            <h3 class="event-title">Alumni Lecture Series</h3>
                             <div class="event-meta">
-                                <span><i class="fas fa-clock"></i> 7:00 PM - 10:00 PM</span>
+                                <span><i class="fas fa-clock"></i> 2:00 PM - 10:00 PM</span>
                                 <span><i class="fas fa-map-marker-alt"></i> Hotel Grand Plaza</span>
                             </div>
                         </div>
@@ -246,7 +247,65 @@
             </div>
         </div>
     </div>
+    <script src="../assets/js/app.js"></script>
+    <script>
+        // Ensure logout function is available
+        function handleLogout() {
+            if (window.loginManager && typeof window.loginManager.logout === 'function') {
+                window.loginManager.logout();
+            } else {
+                // Fallback: clear session and redirect manually
+                localStorage.removeItem('userSession');
+                window.location.href = '../index.html';
+            }
+        }
+
+        // Add hover and focus effects for logout button
+        document.addEventListener('DOMContentLoaded', function() {
+            const logoutBtn = document.querySelector('.logout-btn');
+            if (logoutBtn) {
+                logoutBtn.addEventListener('mouseenter', function() {
+                    this.style.backgroundColor = '#dc2626';
+                });
+                logoutBtn.addEventListener('mouseleave', function() {
+                    this.style.backgroundColor = '#ef4444';
+                });
+                logoutBtn.addEventListener('focus', function() {
+                    this.style.outline = '2px solid #007AFF';
+                    this.style.outlineOffset = '2px';
+                });
+                logoutBtn.addEventListener('blur', function() {
+                    this.style.outline = 'none';
+                });
+            }
+        });
+    </script>
      <script src="common.js"></script>
-    <script src="student_event.js"></script>
+    <script>
+        function switchEventTab(tab, type) {
+            // Remove active class from all tabs
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            // Add active class to clicked tab
+            tab.classList.add('active');
+            
+            // Filter events based on type
+            filterEventsByType(type);
+        }
+
+        function filterEventsByType(type) {
+            console.log('Filtering events by type:', type);
+            // Add your event filtering logic here
+        }
+
+        function previousMonth() {
+            console.log('Previous month');
+            // Add month navigation logic here
+        }
+
+        function nextMonth() {
+            console.log('Next month');
+            // Add month navigation logic here
+        }
+    </script>
 </body>
 </html>
