@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alumni Connect - Alumni Dashboard</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="common.css">
+</head>
+<body>
+    <!-- Top Header -->
+    <div class="top-header">
+        <div class="logo-section">
+            <div class="logo">
+                <div class="logo-icon">AU</div>
+                <span class="logo-text">Alumni Connect</span>
+            </div>
+        </div>
+        
+        <div class="header-right">
+            <div class="search-bar">
+                <input type="text" class="search-input" placeholder="Search alumni, events...">
+                <i class="fas fa-search search-icon"></i>
+            </div>
+            <button class="notification-icon">
+                <i class="fas fa-bell"></i>
+                <span class="notification-badge">3</span>
+            </button>
+            <div class="user-info">
+                <div class="user-avatar">👤</div>
+                <span class="user-name">Alumni User</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Sidebar -->
+        <nav class="sidebar">
+            <a href="alumni_dashboard.html" class="nav-item active">
+                <i class="fas fa-th-large"></i>
+                Dashboard
+            </a>
+            <a href="alumni_directory.html" class="nav-item">
+                <i class="fas fa-users"></i>
+                Alumni Directory
+            </a>
+            <a href="alumni_events.html" class="nav-item">
+                <i class="fas fa-calendar"></i>
+                Events
+            </a>
+            <a href="alumni_forum.html" class="nav-item">
+                <i class="fas fa-comments"></i>
+                Forums
+            </a>
+            <a href="alumni_mentorship.html" class="nav-item">
+                <i class="fas fa-handshake"></i>
+                Mentorship
+            </a>
+            <a href="alumni_career.html" class="nav-item">
+                <i class="fas fa-briefcase"></i>
+                Career Center
+            </a>
+            <a href="alumni_giveback.html" class="nav-item">
+                <i class="fas fa-gift"></i>
+                Give Back
+            </a>
+            <a href="alumni_profile.html" class="nav-item">
+                <i class="fas fa-user-cog"></i>
+                Profile Settings
+            </a>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="welcome-section">
+                <h1 class="welcome-title">Welcome back, Alumni!</h1>
+                <p class="welcome-subtitle">Here's what's happening in your alumni network</p>
+            </div>
+
+            <!-- Stats Cards -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-header">
+                        <span class="stat-title">Fellow Alumni</span>
+                        <div class="stat-icon blue">
+                            <i class="fas fa-users"></i>
+                        </div>
+                    </div>
+                    <div class="stat-number">1,245</div>
+                    <div class="stat-description">In your network</div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-header">
+                        <span class="stat-title">Upcoming Events</span>
+                        <div class="stat-icon green">
+                            <i class="fas fa-calendar"></i>
+                        </div>
+                    </div>
+                    <div class="stat-number">5</div>
+                    <div class="stat-description">This month</div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-header">
+                        <span class="stat-title">Mentees</span>
+                        <div class="stat-icon orange">
+                            <i class="fas fa-user-graduate"></i>
+                        </div>
+                    </div>
+                    <div class="stat-number">3</div>
+                    <div class="stat-description">Active mentorships</div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-header">
+                        <span class="stat-title">Contributions</span>
+                        <div class="stat-icon teal">
+                            <i class="fas fa-hand-holding-heart"></i>
+                        </div>
+                    </div>
+                    <div class="stat-number">$2,500</div>
+                    <div class="stat-description">Total donated</div>
+                </div>
+            </div>
+
+            <!-- Content Grid -->
+            <div class="content-grid">
+                <!-- Recent Activity -->
+                <div class="content-section">
+                    <div class="section-header">
+                        <h2 class="section-title">
+                            <i class="fas fa-bell section-icon"></i>
+                            Recent Activity
+                        </h2>
+                    </div>
+                    <div class="activity-list">
+                        <div class="activity-item">
+                            <div class="activity-dot blue"></div>
+                            <div class="activity-content">
+                                <h4>New mentorship request</h4>
+                                <p>John Smith (Class of 2023) requested mentorship</p>
+                            </div>
+                        </div>
+                        <div class="activity-item">
+                            <div class="activity-dot green"></div>
+                            <div class="activity-content">
+                                <h4>Upcoming event reminder</h4>
+                                <p>Annual Alumni Gala • 2 weeks away</p>
+                            </div>
+                        </div>
+                        <div class="activity-item">
+                            <div class="activity-dot orange"></div>
+                            <div class="activity-content">
+                                <h4>Job posting shared</h4>
+                                <p>Your company's job posting was shared 15 times</p>
+                            </div>
+                        </div>
+                        <div class="activity-item">
+                            <div class="activity-dot teal"></div>
+                            <div class="activity-content">
+                                <h4>Donation impact</h4>
+                                <p>Your donation helped fund 2 student scholarships</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Actions -->
+                <div class="content-section">
+                    <div class="section-header">
+                        <h2 class="section-title">Quick Actions</h2>
+                    </div>
+                    <div class="actions-list">
+                        <div class="actions-grid">
+                            <button class="action-card blue">
+                                <div class="action-icon blue">
+                                    <i class="fas fa-user-plus"></i>
+                                </div>
+                                <div class="action-text">Become a Mentor</div>
+                            </button>
+                            <button class="action-card green">
+                                <div class="action-icon green">
+                                    <i class="fas fa-briefcase"></i>
+                                </div>
+                                <div class="action-text">Post a Job</div>
+                            </button>
+                            <button class="action-card orange">
+                                <div class="action-icon orange">
+                                    <i class="fas fa-hand-holding-usd"></i>
+                                </div>
+                                <div class="action-text">Make a Donation</div>
+                            </button>
+                            <button class="action-card teal">
+                                <div class="action-icon teal">
+                                    <i class="fas fa-calendar-plus"></i>
+                                </div>
+                                <div class="action-text">Create Event</div>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Additional Alumni-specific Content -->
+            <div class="content-grid">
+                <!-- Impact Section -->
+                <div class="content-section full-width">
+                    <div class="section-header">
+                        <h2 class="section-title">
+                            <i class="fas fa-chart-line section-icon"></i>
+                            Your Alumni Impact
+                        </h2>
+                    </div>
+                    <div class="impact-stats">
+                        <div class="impact-item">
+                            <div class="impact-number">12</div>
+                            <div class="impact-label">Students Mentored</div>
+                        </div>
+                        <div class="impact-item">
+                            <div class="impact-number">5</div>
+                            <div class="impact-label">Events Organized</div>
+                        </div>
+                        <div class="impact-item">
+                            <div class="impact-number">8</div>
+                            <div class="impact-label">Jobs Shared</div>
+                        </div>
+                        <div class="impact-item">
+                            <div class="impact-number">$2,500</div>
+                            <div class="impact-label">Total Donated</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="common.js"></script>
+    <script>
+        // Ensure logout function is available
+        function handleLogout() {
+            if (window.loginManager && typeof window.loginManager.logout === 'function') {
+                window.loginManager.logout();
+            } else {
+                // Fallback: clear session and redirect manually
+                localStorage.removeItem('userSession');
+                window.location.href = '../index.html';
+            }
+        }
+    </script>
+</body>
+</html>

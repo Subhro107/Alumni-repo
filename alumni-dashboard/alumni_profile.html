@@ -1,0 +1,953 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alumni Connect - Profile Settings</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="common.css">
+    <style>
+        /* Profile specific styles */
+        .profile-container {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 30px;
+        }
+        
+        @media (max-width: 768px) {
+            .profile-container {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .profile-sidebar {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+        
+        .profile-picture {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background-color: #e0e0e0;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: #666;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .profile-picture img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .change-photo {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: rgba(0, 0, 0, 0.6);
+            color: white;
+            text-align: center;
+            padding: 5px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: opacity 0.2s;
+            opacity: 0;
+        }
+        
+        .profile-picture:hover .change-photo {
+            opacity: 1;
+        }
+        
+        .profile-name {
+            text-align: center;
+            margin-bottom: 5px;
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+        
+        .profile-title {
+            text-align: center;
+            color: var(--text-medium);
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+        }
+        
+        .profile-stats {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .stat-item {
+            text-align: center;
+        }
+        
+        .stat-value {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+        
+        .stat-label {
+            font-size: 0.8rem;
+            color: var(--text-medium);
+        }
+        
+        .profile-links {
+            margin-bottom: 20px;
+        }
+        
+        .profile-link {
+            display: flex;
+            align-items: center;
+            padding: 10px 0;
+            color: var(--text-dark);
+            text-decoration: none;
+        }
+        
+        .profile-link i {
+            margin-right: 10px;
+            width: 20px;
+            text-align: center;
+            color: var(--primary-color);
+        }
+        
+        .settings-tabs {
+            display: flex;
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 20px;
+            overflow-x: auto;
+        }
+        
+        .tab-item {
+            padding: 10px 20px;
+            cursor: pointer;
+            white-space: nowrap;
+            border-bottom: 2px solid transparent;
+            transition: all 0.2s;
+        }
+        
+        .tab-item.active {
+            border-bottom-color: var(--primary-color);
+            color: var(--primary-color);
+            font-weight: 500;
+        }
+        
+        .tab-content {
+            display: none;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .form-section {
+            margin-bottom: 30px;
+        }
+        
+        .form-section-title {
+            font-size: 1.1rem;
+            font-weight: 500;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+        
+        @media (max-width: 576px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+        
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 8px 12px;
+            border: 1px solid black;
+            border-radius: 4px;
+            font-size: 0.9rem;
+        }
+        
+        .form-group textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+        
+        .form-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        
+        .btn {
+            padding: 8px 16px;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            border: none;
+        }
+        
+        .btn-secondary {
+            background-color: #f0f0f0;
+            color: var(--text-dark);
+        }
+        
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .btn-danger {
+            background-color: #dc3545;
+            color: white;
+        }
+        
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 24px;
+        }
+        
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #cccccc;
+            transition: .4s;
+            border-radius: 24px;
+        }
+        
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 16px;
+            width: 16px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+        
+        input:checked + .slider {
+            background-color: rgb(56, 203, 56);
+        }
+        
+        input:checked + .slider:before {
+            transform: translateX(26px);
+        }
+        
+        .toggle-group {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .toggle-label {
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+        
+        .badge {
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+        
+        .badge-primary {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .badge-secondary {
+            background-color: #6c757d;
+            color: white;
+        }
+        
+        .badge-success {
+            background-color: #28a745;
+            color: white;
+        }
+        
+        .badge-danger {
+            background-color: #dc3545;
+            color: white;
+        }
+        
+        .badge-warning {
+            background-color: #ffc107;
+            color: #212529;
+        }
+        
+        .badge-info {
+            background-color: #17a2b8;
+            color: white;
+        }
+        
+        .social-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .social-link {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            padding: 5px 10px;
+            background-color: #f0f0f0;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            color: var(--text-dark);
+            text-decoration: none;
+        }
+        
+        .social-link i {
+            color: var(--primary-color);
+        }
+    </style>
+</head>
+ <!-- Top Header -->
+    <div class="top-header">
+        <div class="logo-section">
+            <div class="logo">
+                <div class="logo-icon">AU</div>
+                <span class="logo-text">Alumni Connect</span>
+            </div>
+        </div>
+        
+        <div class="header-right">
+            <div class="search-bar">
+                <input type="text" class="search-input" placeholder="Search alumni, events...">
+                <i class="fas fa-search search-icon"></i>
+            </div>
+            <button class="notification-icon">
+                <i class="fas fa-bell"></i>
+                <span class="notification-badge">3</span>
+            </button>
+            <div class="user-info">
+                <div class="user-avatar">👤</div>
+                <span class="user-name">Alumni User</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Sidebar -->
+        <nav class="sidebar">
+            <a href="alumni_dashboard.html" class="nav-item active">
+                <i class="fas fa-th-large"></i>
+                Dashboard
+            </a>
+            <a href="alumni_directory.html" class="nav-item">
+                <i class="fas fa-users"></i>
+                Alumni Directory
+            </a>
+            <a href="alumni_events.html" class="nav-item">
+                <i class="fas fa-calendar"></i>
+                Events
+            </a>
+            <a href="alumni_forum.html" class="nav-item">
+                <i class="fas fa-comments"></i>
+                Forums
+            </a>
+            <a href="alumni_mentorship.html" class="nav-item">
+                <i class="fas fa-handshake"></i>
+                Mentorship
+            </a>
+            <a href="alumni_career.html" class="nav-item">
+                <i class="fas fa-briefcase"></i>
+                Career Center
+            </a>
+            <a href="alumni_giveback.html" class="nav-item">
+                <i class="fas fa-gift"></i>
+                Give Back
+            </a>
+            <a href="alumni_profile.html" class="nav-item">
+                <i class="fas fa-user-cog"></i>
+                Profile Settings
+            </a>
+        </nav>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <div class="welcome-section">
+                <h1 class="welcome-title">Profile Settings</h1>
+                <p class="welcome-subtitle">Manage your profile information and account settings</p>
+            </div>
+
+            <div class="profile-container">
+                <!-- Profile Sidebar -->
+                <div class="profile-sidebar">
+                    <div class="profile-picture">
+                        <span>👤</span>
+                        <div class="change-photo" onclick="showUploadPhotoModal()">Change Photo</div>
+                    </div>
+                    <h2 class="profile-name">Alumni-1</h2>
+                    <p class="profile-title">Software Engineer at Tech Solutions</p>
+                    
+                    <div class="profile-stats">
+                        <div class="stat-item">
+                            <div class="stat-value">24</div>
+                            <div class="stat-label">Events</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">12</div>
+                            <div class="stat-label">Mentees</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">8</div>
+                            <div class="stat-label">Posts</div>
+                        </div>
+                    </div>
+                    
+                    <div class="profile-links">
+                        <a href="#" class="profile-link">
+                            <i class="fas fa-user"></i>
+                            View Public Profile
+                        </a>
+                        <a href="#" class="profile-link">
+                            <i class="fas fa-envelope"></i>
+                            Messages
+                        </a>
+                        <a href="#" class="profile-link">
+                            <i class="fas fa-calendar-check"></i>
+                            My Events
+                        </a>
+                        <a href="#" class="profile-link">
+                            <i class="fas fa-shield-alt"></i>
+                            Privacy Settings
+                        </a>
+                        <a href="#" class="profile-link">
+                            <i class="fas fa-sign-out-alt"></i>
+                            Logout
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Settings Content -->
+                <div class="settings-content">
+                    <div class="settings-tabs">
+                        <div class="tab-item active" data-tab="personal">Personal Information</div>
+                        <div class="tab-item" data-tab="education">Education & Career</div>
+                        <div class="tab-item" data-tab="privacy">Privacy & Notifications</div>
+                        <div class="tab-item" data-tab="account">Account Settings</div>
+                    </div>
+                    
+                    <!-- Personal Information Tab -->
+                    <div id="personal" class="tab-content active">
+                        <div class="form-section">
+                            <h3 class="form-section-title">Basic Information</h3>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="firstName">First Name</label>
+                                    <input type="text" id="firstName" placeholder="Enter your first name">
+                                </div>
+                                <div class="form-group">
+                                    <label for="lastName">Last Name</label>
+                                    <input type="text" id="lastName" placeholder="Enter your last name">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="email">Email Address</label>
+                                    <input type="email" id="email" placeholder="Enter your email address">
+                                </div>
+                                <div class="form-group">
+                                    <label for="phone">Phone Number</label>
+                                    <input type="tel" id="phone" placeholder="Enter your phone number">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="headline">Professional Headline</label>
+                                <input type="text" id="headline" placeholder="Enter your professional headline">
+                            </div>
+                        </div>
+                        
+                        <div class="form-section">
+                            <h3 class="form-section-title">About Me</h3>
+                            <div class="form-group">
+                                <label for="bio">Bio</label>
+                                <textarea id="bio" placeholder="Enter your bio..."></textarea>
+                            </div>
+                        </div>
+                        
+                        <div class="form-section">
+                            <h3 class="form-section-title">Location</h3>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="city">City</label>
+                                    <input type="text" id="city" placeholder="Enter your city">
+                                </div>
+                                <div class="form-group">
+                                    <label for="state">State</label>
+                                    <input type="text" id="state" placeholder="Enter your state">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="country">Country</label>
+                                    <input type="text" id="country" placeholder="Enter your country">
+                                </div>
+                                <div class="form-group">
+                                    <label for="zipcode">Postal/Zip Code</label>
+                                    <input type="text" id="zipcode" placeholder="Enter your postal/zip code">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-section">
+                            <h3 class="form-section-title">Social Media</h3>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="linkedin">LinkedIn</label>
+                                    <input type="url" id="linkedin" placeholder="Enter your LinkedIn profile URL">
+                                </div>
+                                <div class="form-group">
+                                    <label for="twitter">Twitter</label>
+                                    <input type="url" id="twitter" placeholder="Enter your Twitter profile URL(if any)">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="github">GitHub</label>
+                                    <input type="url" id="github" placeholder="Enter your GitHub profile URL">
+                                </div>
+                                <div class="form-group">
+                                    <label for="website">Personal Website</label>
+                                    <input type="url" id="website" placeholder="Enter your personal website URL(if any)">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-actions">
+                            <button class="btn btn-secondary">Cancel</button>
+                            <button class="btn btn-primary" onclick="savePersonalInfo()">Save Changes</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Education & Career Tab -->
+                    <div id="education" class="tab-content">
+                        <div class="form-section">
+                            <h3 class="form-section-title">Education</h3>
+                            <div class="form-group">
+                                <label for="degree">Degree</label>
+                                <input type="text" id="degree" placeholder="Enter your degree">
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="university">University/Institution</label>
+                                    <input type="text" id="university" placeholder="Enter your university/institution">
+                                </div>
+                                <div class="form-group">
+                                    <label for="graduationYear">Graduation Year</label>
+                                    <input type="number" id="graduationYear" placeholder="Enter your graduation year">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="achievements">Achievements & Activities</label>
+                                <textarea id="achievements" placeholder="List your achievements and activities"></textarea>
+                            </div>
+                            <button class="btn btn-secondary" style="margin-top: 10px;">Add Another Education</button>
+                        </div>
+                        
+                        <div class="form-section">
+                            <h3 class="form-section-title">Work Experience</h3>
+                            <div class="form-group">
+                                <label for="jobTitle">Job Title</label>
+                                <input type="text" id="jobTitle" placeholder="Enter your job title">
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="company">Company</label>
+                                    <input type="text" id="company" placeholder="Enter your company name">
+                                </div>
+                                <div class="form-group">
+                                    <label for="location">Location</label>
+                                    <input type="text" id="location" placeholder="Enter your job/current location">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="startDate">Start Date</label>
+                                    <input type="month" id="startDate" placeholder="Select start date">
+                                </div>
+                                <div class="form-group">
+                                    <label for="endDate">End Date</label>
+                                    <input type="month" id="endDate" placeholder="Select end date">
+                                    <div style="margin-top: 5px;">
+                                        <input type="checkbox" id="currentJob" checked>
+                                        <label for="currentJob" style="display: inline;">I currently work here</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="jobDescription">Description</label>
+                                <textarea id="jobDescription" placeholder="Enter job description"></textarea>
+                            </div>
+                            <button class="btn btn-secondary" style="margin-top: 10px;">Add Another Experience</button>
+                        </div>
+                        
+                        <div class="form-section">
+                            <h3 class="form-section-title">Skills</h3>
+                            <div class="form-group">
+                                <label for="skills">Skills (comma separated)</label>
+                                <input type="text" id="skills" placeholder="Enter your skills">
+                            </div>
+                            <div class="social-links">
+                                <span class="social-link"><i class="fab fa-js"></i> JavaScript</span>
+                                <span class="social-link"><i class="fab fa-react"></i> React</span>
+                                <span class="social-link"><i class="fab fa-node-js"></i> Node.js</span>
+                                <span class="social-link"><i class="fab fa-python"></i> Python</span>
+                                <span class="social-link"><i class="fab fa-aws"></i> AWS</span>
+                                <span class="social-link"><i class="fab fa-docker"></i> Docker</span>
+                                <span class="social-link"><i class="fab fa-git-alt"></i> Git</span>
+                                <span class="social-link"><i class="fas fa-tasks"></i> Agile</span>
+                            </div>
+                        </div>
+                        
+                        <div class="form-actions">
+                            <button class="btn btn-secondary">Cancel</button>
+                            <button class="btn btn-primary" onclick="saveEducationCareer()">Save Changes</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Privacy & Notifications Tab -->
+                    <div id="privacy" class="tab-content">
+                        <div class="form-section">
+                            <h3 class="form-section-title">Profile Visibility</h3>
+                            <div class="toggle-group">
+                                <span class="toggle-label">Show my profile in alumni directory</span>
+                                <label class="switch">
+                                    <input type="checkbox" checked>
+                                    <span class="slider"></span>
+                                </label>
+                            </div>
+                            <div class="toggle-group">
+                                <span class="toggle-label">Allow other alumni to contact me</span>
+                                <label class="switch">
+                                    <input type="checkbox" checked>
+                                    <span class="slider"></span>
+                                </label>
+                            </div>
+                            <div class="toggle-group">
+                                <span class="toggle-label">Show my email address</span>
+                                <label class="switch">
+                                    <input type="checkbox">
+                                    <span class="slider"></span>
+                                </label>
+                            </div>
+                            <div class="toggle-group">
+                                <span class="toggle-label">Show my phone number</span>
+                                <label class="switch">
+                                    <input type="checkbox">
+                                    <span class="slider"></span>
+                                </label>
+                            </div>
+                            <div class="toggle-group">
+                                <span class="toggle-label">Show my social media profiles</span>
+                                <label class="switch">
+                                    <input type="checkbox" checked>
+                                    <span class="slider"></span>
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <div class="form-section">
+                            <h3 class="form-section-title">Email Notifications</h3>
+                            <div class="toggle-group">
+                                <span class="toggle-label">Event invitations and updates</span>
+                                <label class="switch">
+                                    <input type="checkbox" checked>
+                                    <span class="slider"></span>
+                                </label>
+                            </div>
+                            <div class="toggle-group">
+                                <span class="toggle-label">Forum activity and mentions</span>
+                                <label class="switch">
+                                    <input type="checkbox" checked>
+                                    <span class="slider"></span>
+                                </label>
+                            </div>
+                            <div class="toggle-group">
+                                <span class="toggle-label">Mentorship requests and updates</span>
+                                <label class="switch">
+                                    <input type="checkbox" checked>
+                                    <span class="slider"></span>
+                                </label>
+                            </div>
+                            <div class="toggle-group">
+                                <span class="toggle-label">Job postings and career opportunities</span>
+                                <label class="switch">
+                                    <input type="checkbox" checked>
+                                    <span class="slider"></span>
+                                </label>
+                            </div>
+                            <div class="toggle-group">
+                                <span class="toggle-label">Alumni newsletter</span>
+                                <label class="switch">
+                                    <input type="checkbox" checked>
+                                    <span class="slider"></span>
+                                </label>
+                            </div>
+                            <div class="toggle-group">
+                                <span class="toggle-label">Fundraising campaigns</span>
+                                <label class="switch">
+                                    <input type="checkbox">
+                                    <span class="slider"></span>
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <div class="form-actions">
+                            <button class="btn btn-secondary">Cancel</button>
+                            <button class="btn btn-primary" onclick="savePrivacySettings()">Save Changes</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Account Settings Tab -->
+                    <div id="account" class="tab-content">
+                        <div class="form-section">
+                            <h3 class="form-section-title">Change Password</h3>
+                            <div class="form-group">
+                                <label for="currentPassword">Current Password</label>
+                                <input type="password" id="currentPassword">
+                            </div>
+                            <div class="form-group">
+                                <label for="newPassword">New Password</label>
+                                <input type="password" id="newPassword">
+                            </div>
+                            <div class="form-group">
+                                <label for="confirmPassword">Confirm New Password</label>
+                                <input type="password" id="confirmPassword">
+                            </div>
+                            <button class="btn btn-primary" style="margin-top: 10px;" onclick="changePassword()">Update Password</button>
+                        </div>
+                        
+                        <div class="form-section">
+                            <h3 class="form-section-title">Two-Factor Authentication</h3>
+                            <div class="toggle-group">
+                                <span class="toggle-label">Enable Two-Factor Authentication</span>
+                                <label class="switch">
+                                    <input type="checkbox">
+                                    <span class="slider"></span>
+                                </label>
+                            </div>
+                            <p style="color: var(--text-medium); font-size: 0.9rem; margin-top: 10px;">
+                                Two-factor authentication adds an extra layer of security to your account. When enabled, you'll need to enter a verification code sent to your phone in addition to your password when signing in.
+                            </p>
+                        </div>
+                        
+                        <div class="form-section">
+                            <h3 class="form-section-title">Account Management</h3>
+                            <div class="form-group">
+                                <label for="language">Language Preference</label>
+                                <select id="language">
+                                    <option value="en" selected>English</option>
+                                    <option value="hi">Hindi</option>
+                                    <option value="es">Spanish</option>
+                                    <option value="fr">French</option>
+                                    <option value="de">German</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="timezone">Timezone</label>
+                                <select id="timezone">
+                                    <option value="IST" selected>Indian Standard Time (IST)</option>
+                                    <option value="UTC">Coordinated Universal Time (UTC)</option>
+                                    <option value="EST">Eastern Standard Time (EST)</option>
+                                    <option value="PST">Pacific Standard Time (PST)</option>
+                                </select>
+                            </div>
+                            <div style="margin-top: 20px;">
+                                <button class="btn btn-danger" onclick="showDeactivateModal()">Deactivate Account</button>
+                            </div>
+                        </div>
+                        
+                        <div class="form-actions">
+                            <button class="btn btn-secondary">Cancel</button>
+                            <button class="btn btn-primary" onclick="saveAccountSettings()">Save Changes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="common.js"></script>
+    <script>
+        // Show notifications
+        function showNotification(message, type = 'info') {
+            const notification = document.createElement('div');
+            notification.className = `notification ${type}`;
+            notification.innerHTML = `
+                <div class="notification-content">
+                    <span>${message}</span>
+                    <button class="close-notification" onclick="this.parentElement.parentElement.remove()">&times;</button>
+                </div>
+            `;
+            document.body.appendChild(notification);
+            
+            // Auto remove after 5 seconds
+            setTimeout(() => {
+                notification.remove();
+            }, 5000);
+        }
+        
+        // Tab switching
+        function initTabs() {
+            const tabItems = document.querySelectorAll('.tab-item');
+            const tabContents = document.querySelectorAll('.tab-content');
+            
+            tabItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    const tabId = this.getAttribute('data-tab');
+                    
+                    // Remove active class from all tabs and contents
+                    tabItems.forEach(tab => tab.classList.remove('active'));
+                    tabContents.forEach(content => content.classList.remove('active'));
+                    
+                    // Add active class to current tab and content
+                    this.classList.add('active');
+                    document.getElementById(tabId).classList.add('active');
+                });
+            });
+        }
+        
+        // Save functions
+        function savePersonalInfo() {
+            // In a real application, this would save the form data
+            console.log('Saving personal information...');
+            showNotification('Personal information updated successfully!', 'success');
+        }
+        
+        function saveEducationCareer() {
+            // In a real application, this would save the form data
+            console.log('Saving education and career information...');
+            showNotification('Education and career information updated successfully!', 'success');
+        }
+        
+        function savePrivacySettings() {
+            // In a real application, this would save the form data
+            console.log('Saving privacy settings...');
+            showNotification('Privacy settings updated successfully!', 'success');
+        }
+        
+        function saveAccountSettings() {
+            // In a real application, this would save the form data
+            console.log('Saving account settings...');
+            showNotification('Account settings updated successfully!', 'success');
+        }
+        
+        function changePassword() {
+            const currentPassword = document.getElementById('currentPassword').value;
+            const newPassword = document.getElementById('newPassword').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            
+            if (!currentPassword || !newPassword || !confirmPassword) {
+                showNotification('Please fill in all password fields', 'error');
+                return;
+            }
+            
+            if (newPassword !== confirmPassword) {
+                showNotification('New passwords do not match', 'error');
+                return;
+            }
+            
+            // In a real application, this would verify the current password and update to the new one
+            console.log('Changing password...');
+            showNotification('Password changed successfully!', 'success');
+            
+            // Clear password fields
+            document.getElementById('currentPassword').value = '';
+            document.getElementById('newPassword').value = '';
+            document.getElementById('confirmPassword').value = '';
+        }
+        
+        function showUploadPhotoModal() {
+            showNotification('Photo upload feature will be available soon!', 'info');
+        }
+        
+        function showDeactivateModal() {
+            if (confirm('Are you sure you want to deactivate your account? This action cannot be undone.')) {
+                showNotification('Account deactivation request submitted. Our team will contact you shortly.', 'warning');
+            }
+        }
+        
+        // Initialize sidebar toggle
+        function initSidebarToggle() {
+            const sidebarToggle = document.createElement('button');
+            sidebarToggle.className = 'sidebar-toggle';
+            sidebarToggle.innerHTML = '<i class="fas fa-bars"></i>';
+            document.querySelector('.container').prepend(sidebarToggle);
+            
+            sidebarToggle.addEventListener('click', function() {
+                document.querySelector('.sidebar').classList.toggle('collapsed');
+                document.querySelector('.main-content').classList.toggle('expanded');
+            });
+        }
+        
+        // Initialize notifications
+        function initNotifications() {
+            const notificationIcon = document.querySelector('.notification-icon');
+            notificationIcon.addEventListener('click', function() {
+                showNotification('You have 3 unread notifications', 'info');
+            });
+        }
+        
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            initTabs();
+            initSidebarToggle();
+            initNotifications();
+        });
+    </script>
+</body>
+</html>

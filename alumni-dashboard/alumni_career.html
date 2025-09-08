@@ -1,0 +1,1710 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Career | Alumni Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="common.css">
+    <style>
+        /* Base Styles */
+         *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8fafc;
+           /*  line-height: 1.6; */
+            color: #333;
+        }
+        
+        .container {
+            display: flex;
+            min-height: 100vh;
+            padding-top: 70px;
+        } 
+        
+        /* Top Header */
+        /* .top-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 70px;
+            background-color: white;
+            border-bottom: 1px solid #e2e8f0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+            z-index: 1000;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        
+        .logo-section {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #4a6fdc, #6366f1);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 16px;
+        }
+        
+        .logo-text {
+            font-size: 20px;
+            font-weight: 700;
+            color: #333;
+        }
+        
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .search-bar {
+            position: relative;
+        }
+        
+        .search-input {
+            width: 300px;
+            height: 40px;
+            padding: 0 40px 0 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 14px;
+            background-color: #f8fafc;
+        }
+        
+        .search-icon {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #666;
+        }
+        
+        .notification-icon {
+            position: relative;
+            background: none;
+            border: none;
+            font-size: 20px;
+            color: #666;
+            cursor: pointer;
+        }
+        
+        .notification-badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background-color: #ef4444;
+            color: white;
+            font-size: 11px;
+            padding: 2px 6px;
+            border-radius: 10px;
+            min-width: 18px;
+            text-align: center;
+        }
+        
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .user-avatar {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            background-color: #4a6fdc;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 14px;
+        }
+        
+        .user-name {
+            font-weight: 500;
+            color: #333;
+        } */
+        
+        /* Sidebar */
+        /* .sidebar {
+            width: 250px;
+            background-color: white;
+            border-right: 1px solid #e2e8f0;
+            height: calc(100vh - 70px);
+            position: fixed;
+            left: 0;
+            top: 70px;
+            padding: 20px 0;
+            overflow-y: auto;
+        }
+        
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 20px;
+            color: #64748b;
+            text-decoration: none;
+            transition: all 0.2s;
+            border-left: 3px solid transparent;
+        }
+        
+        .nav-item:hover {
+            background-color: #f1f5f9;
+            color: #4a6fdc;
+        }
+        
+        .nav-item.active {
+            background-color: #f0f4ff;
+            color: #4a6fdc;
+            border-left-color: #4a6fdc;
+            font-weight: 500;
+        }
+        
+        .nav-item i {
+            font-size: 18px;
+            width: 20px;
+        } */
+        
+        /* Main Content */
+        .main-content {
+            margin-left: 250px;
+            flex: 1;
+            padding: 30px;
+            max-width: calc(100vw - 250px);
+        }
+        
+        .page-header {
+            margin-bottom: 30px;
+        }
+        
+        .page-header h1 {
+            font-size: 28px;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 10px;
+        }
+        
+        .page-header p {
+            color: #64748b;
+            font-size: 16px;
+        }
+        
+        /* Button Styles */
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .btn-primary {
+            background-color: #4a6fdc;
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background-color: #3a5fcc;
+        }
+        
+        .btn-secondary {
+            background-color: #f1f5f9;
+            color: #64748b;
+        }
+        
+        .btn-secondary:hover {
+            background-color: #e2e8f0;
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            color: #4a6fdc;
+            border: 1px solid #4a6fdc;
+        }
+        
+        .btn-outline:hover {
+            background-color: #4a6fdc;
+            color: white;
+        }
+
+        /* Form Styles */
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+            color: #333;
+        }
+        
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 14px;
+            font-family: inherit;
+        }
+        
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        /* Career Page Specific Styles */
+        .career-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .career-stat-card {
+            background-color: white;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            border: 1px solid #f1f5f9;
+        }
+        
+        .career-stat-icon {
+            width: 55px;
+            height: 55px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: white;
+        }
+        
+        .career-stat-icon.blue { background: linear-gradient(135deg, #4a6fdc, #6366f1); }
+        .career-stat-icon.green { background: linear-gradient(135deg, #10b981, #059669); }
+        .career-stat-icon.orange { background: linear-gradient(135deg, #f59e0b, #d97706); }
+        .career-stat-icon.purple { background: linear-gradient(135deg, #8b5cf6, #7c3aed); }
+        
+        .career-stat-content {
+            flex: 1;
+        }
+        
+        .career-stat-value {
+            font-size: 28px;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 5px;
+        }
+        
+        .career-stat-label {
+            color: #64748b;
+            font-size: 14px;
+            font-weight: 500;
+        }
+        
+        .career-tabs {
+            display: flex;
+            border-bottom: 2px solid #f1f5f9;
+            margin-bottom: 30px;
+        }
+        
+        .career-tab {
+            padding: 15px 25px;
+            cursor: pointer;
+            font-weight: 600;
+            color: #64748b;
+            border-bottom: 3px solid transparent;
+            transition: all 0.2s;
+            font-size: 15px;
+        }
+        
+        .career-tab.active {
+            color: #4a6fdc;
+            border-bottom-color: #4a6fdc;
+        }
+        
+        .career-tab:hover:not(.active) {
+            color: #1e293b;
+            border-bottom-color: #e2e8f0;
+        }
+        
+        .career-section {
+            background-color: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            margin-bottom: 20px;
+            border: 1px solid #f1f5f9;
+        }
+        
+        .career-section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+        
+        .career-section-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: #1e293b;
+        }
+        
+        .mentorship-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 25px;
+        }
+        
+        .mentorship-card {
+            background-color: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            transition: all 0.3s;
+            border: 1px solid #f1f5f9;
+        }
+        
+        .mentorship-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+        }
+        
+        .mentorship-header {
+            padding: 20px;
+            border-bottom: 1px solid #f1f5f9;
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+        }
+        
+        .mentorship-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 8px;
+        }
+        
+        .mentorship-subtitle {
+            color: #64748b;
+            font-size: 14px;
+            font-weight: 500;
+        }
+        
+        .mentorship-content {
+            padding: 20px;
+        }
+        
+        .mentorship-description {
+            color: #475569;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+        
+        .mentorship-stats {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .mentorship-stat {
+            text-align: center;
+        }
+        
+        .mentorship-stat-value {
+            font-size: 20px;
+            font-weight: 700;
+            color: #4a6fdc;
+        }
+        
+        .mentorship-stat-label {
+            font-size: 12px;
+            color: #64748b;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .mentorship-actions {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+        }
+        
+        .resource-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+        }
+        
+        .resource-card {
+            background-color: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            transition: all 0.3s;
+            border: 1px solid #f1f5f9;
+        }
+        
+        .resource-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+        }
+        
+        .resource-image {
+            height: 160px;
+            background: linear-gradient(135deg, #4a6fdc 0%, #6366f1 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 48px;
+        }
+        
+        .resource-content {
+            padding: 20px;
+        }
+        
+        .resource-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 10px;
+        }
+        
+        .resource-description {
+            color: #64748b;
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+        
+        .resource-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            font-size: 13px;
+            color: #64748b;
+        }
+        
+        .resource-actions {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .job-posting-form {
+            max-width: 600px;
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        
+        .webinar-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .webinar-item {
+            background-color: white;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            border: 1px solid #f1f5f9;
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+        
+        .webinar-date {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #4a6fdc, #6366f1);
+            color: white;
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+        }
+        
+        .webinar-date-day {
+            font-size: 24px;
+            line-height: 1;
+        }
+        
+        .webinar-date-month {
+            font-size: 12px;
+            text-transform: uppercase;
+            margin-top: 2px;
+        }
+        
+        .webinar-info {
+            flex: 1;
+        }
+        
+        .webinar-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 8px;
+        }
+        
+        .webinar-details {
+            color: #64748b;
+            margin-bottom: 10px;
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+        
+        .webinar-detail {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 14px;
+        }
+        
+        .webinar-description {
+            color: #475569;
+            line-height: 1.6;
+        }
+        
+        .webinar-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            z-index: 2000;
+        }
+        
+        .modal-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+            max-width: 90vw;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+        
+        .modal-header {
+            padding: 25px 30px;
+            border-bottom: 1px solid #f1f5f9;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .modal-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: #1e293b;
+        }
+        
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 24px;
+            color: #64748b;
+            cursor: pointer;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .modal-close:hover {
+            background-color: #f1f5f9;
+        }
+        
+        .modal-body {
+            padding: 30px;
+        }
+        
+        .modal-footer {
+            padding: 20px 30px;
+            border-top: 1px solid #f1f5f9;
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+        }
+
+        /* Notification Styles */
+        .notification {
+            position: fixed;
+            top: 90px;
+            right: 20px;
+            padding: 15px 20px;
+            border-radius: 8px;
+            color: white;
+            font-weight: 500;
+            z-index: 3000;
+            transform: translateX(400px);
+            transition: transform 0.3s;
+        }
+        
+        .notification.show {
+            transform: translateX(0);
+        }
+        
+        .notification.success {
+            background-color: #10b981;
+        }
+        
+        .notification.error {
+            background-color: #ef4444;
+        }
+        
+        .notification.info {
+            background-color: #3b82f6;
+        }
+        
+        @media (max-width: 768px) {
+            .sidebar {
+                transform: translateX(-100%);
+                transition: transform 0.3s;
+            }
+            
+            .sidebar.open {
+                transform: translateX(0);
+            }
+            
+            .main-content {
+                margin-left: 0;
+                max-width: 100vw;
+                padding: 20px;
+            }
+            
+            .career-stats {
+                grid-template-columns: 1fr;
+            }
+            
+            .mentorship-grid,
+            .resource-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .webinar-item {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .webinar-details {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Top Header -->
+    <div class="top-header">
+        <div class="logo-section">
+            <div class="logo">
+                <div class="logo-icon">AU</div>
+                <span class="logo-text">Alumni Connect</span>
+            </div>
+        </div>
+        
+        <div class="header-right">
+            <div class="search-bar">
+                <input type="text" class="search-input" placeholder="Search alumni, events...">
+                <i class="fas fa-search search-icon"></i>
+            </div>
+            <button class="notification-icon">
+                <i class="fas fa-bell"></i>
+                <span class="notification-badge">3</span>
+            </button>
+            <div class="user-info">
+                <div class="user-avatar">👤</div>
+                <span class="user-name">Alumni User</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+  <!-- Sidebar -->
+        <nav class="sidebar">
+            <a href="alumni_dashboard.html" class="nav-item active">
+                <i class="fas fa-th-large"></i>
+                Dashboard
+            </a>
+            <a href="alumni_directory.html" class="nav-item">
+                <i class="fas fa-users"></i>
+                Alumni Directory
+            </a>
+            <a href="alumni_events.html" class="nav-item">
+                <i class="fas fa-calendar"></i>
+                Events
+            </a>
+            <a href="alumni_forum.html" class="nav-item">
+                <i class="fas fa-comments"></i>
+                Forums
+            </a>
+            <a href="alumni_mentorship.html" class="nav-item">
+                <i class="fas fa-handshake"></i>
+                Mentorship
+            </a>
+            <a href="alumni_career.html" class="nav-item">
+                <i class="fas fa-briefcase"></i>
+                Career Center
+            </a>
+            <a href="alumni_giveback.html" class="nav-item">
+                <i class="fas fa-gift"></i>
+                Give Back
+            </a>
+            <a href="alumni_profile.html" class="nav-item">
+                <i class="fas fa-user-cog"></i>
+                Profile Settings
+            </a>
+        </nav>
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="page-header">
+                <h1>Career Center</h1>
+                <p>Support students and recent graduates with career guidance and opportunities</p>
+            </div>
+            
+            <!-- Career Impact Stats -->
+            <div class="career-stats">
+                <!-- <div class="career-stat-card">
+                    <div class="career-stat-icon blue">
+                        <i class="fas fa-user-graduate"></i>
+                    </div>
+                    <div class="career-stat-content">
+                        <div class="career-stat-value">234</div>
+                        <div class="career-stat-label">Students Mentored</div>
+                    </div>
+                </div> -->
+                
+                <div class="career-stat-card">
+                    <div class="career-stat-icon green">
+                        <i class="fas fa-briefcase"></i>
+                    </div>
+                    <div class="career-stat-content">
+                        <div class="career-stat-value">67</div>
+                        <div class="career-stat-label">Jobs Posted</div>
+                    </div>
+                </div>
+                
+                <div class="career-stat-card">
+                    <div class="career-stat-icon orange">
+                        <i class="fas fa-chalkboard-teacher"></i>
+                    </div>
+                    <div class="career-stat-content">
+                        <div class="career-stat-value">15</div>
+                        <div class="career-stat-label">Webinars Hosted</div>
+                    </div>
+                </div>
+                
+                <div class="career-stat-card">
+                    <div class="career-stat-icon purple">
+                        <i class="fas fa-download"></i>
+                    </div>
+                    <div class="career-stat-content">
+                        <div class="career-stat-value">1,247</div>
+                        <div class="career-stat-label">Resource Downloads</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Career Tabs -->
+            <div class="career-tabs">
+                <!-- <div class="career-tab active" data-tab="mentoring">Student Mentoring</div> -->
+                <div class="career-tab" data-tab="job-posting">Post Jobs</div>
+                <div class="career-tab" data-tab="resources">Share Resources</div>
+                <div class="career-tab" data-tab="webinars">Host Webinars</div>
+            </div>
+            
+            <!-- Student Mentoring Section -->
+            <!-- <div class="career-section" id="mentoring-section">
+                <div class="career-section-header">
+                    <h2 class="career-section-title">Student Career Mentoring</h2>
+                    <button class="btn btn-primary" onclick="showMentorSignupForm()">
+                        <i class="fas fa-plus"></i>
+                        Become a Mentor
+                    </button>
+                </div>
+                 -->
+                <!-- <div class="mentorship-grid"> -->
+                    <!-- Current Mentoring Commitments -->
+                    <!-- <div class="mentorship-card">
+                        <div class="mentorship-header">
+                            <h3 class="mentorship-title">Resume & Interview Coaching</h3>
+                            <div class="mentorship-subtitle">Weekly 1-on-1 Sessions</div>
+                        </div>
+                        <div class="mentorship-content">
+                            <p class="mentorship-description">
+                                Help students craft compelling resumes and prepare for interviews through personalized coaching sessions and mock interviews.
+                            </p>
+                            <div class="mentorship-stats">
+                                <div class="mentorship-stat">
+                                    <div class="mentorship-stat-value">8</div>
+                                    <div class="mentorship-stat-label">Students</div>
+                                </div>
+                                <div class="mentorship-stat">
+                                    <div class="mentorship-stat-value">2</div>
+                                    <div class="mentorship-stat-label">Hours/Week</div>
+                                </div>
+                            </div>
+                            <div class="mentorship-actions">
+                                <button class="btn btn-primary" onclick="viewMentees('resume-coaching')">View Mentees</button>
+                                <button class="btn btn-outline" onclick="updateAvailability('resume-coaching')">Update Availability</button>
+                            </div>
+                        </div>
+                    </div> -->
+                    
+                    <!-- Industry-Specific Guidance -->
+                    <!-- <div class="mentorship-card">
+                        <div class="mentorship-header">
+                            <h3 class="mentorship-title">Tech Industry Guidance</h3>
+                            <div class="mentorship-subtitle">Group Sessions & Q&A</div>
+                        </div>
+                        <div class="mentorship-content">
+                            <p class="mentorship-description">
+                                Guide students interested in technology careers through industry insights, skill development, and job search strategies.
+                            </p>
+                            <div class="mentorship-stats">
+                                <div class="mentorship-stat">
+                                    <div class="mentorship-stat-value">12</div>
+                                    <div class="mentorship-stat-label">Students</div>
+                                </div>
+                                <div class="mentorship-stat">
+                                    <div class="mentorship-stat-value">3</div>
+                                    <div class="mentorship-stat-label">Hours/Week</div>
+                                </div>
+                            </div>
+                            <div class="mentorship-actions">
+                                <button class="btn btn-primary" onclick="viewMentees('tech-guidance')">View Group</button>
+                                <button class="btn btn-outline" onclick="scheduleGroupSession()">Schedule Session</button>
+                            </div>
+                        </div>
+                    </div> -->
+                    
+                    <!-- Career Transition Support -->
+                   <!--  <div class="mentorship-card">
+                        <div class="mentorship-header">
+                            <h3 class="mentorship-title">Career Transition Support</h3>
+                            <div class="mentorship-subtitle">Available for New Students</div>
+                        </div>
+                        <div class="mentorship-content">
+                            <p class="mentorship-description">
+                                Support students making career transitions or exploring new industries with practical advice and networking opportunities.
+                            </p>
+                            <div class="mentorship-stats">
+                                <div class="mentorship-stat">
+                                    <div class="mentorship-stat-value">0</div>
+                                    <div class="mentorship-stat-label">Students</div>
+                                </div>
+                                <div class="mentorship-stat">
+                                    <div class="mentorship-stat-value">2</div>
+                                    <div class="mentorship-stat-label">Slots Available</div>
+                                </div>
+                            </div>
+                            <div class="mentorship-actions">
+                                <button class="btn btn-secondary">Waiting for Matches</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> -->
+            
+            <!-- Job Posting Section (Hidden by default) -->
+            <div class="career-section" id="job-posting-section" style="display: none;">
+                <div class="career-section-header">
+                    <h2 class="career-section-title">Post Job & Internship Opportunities</h2>
+                    <button class="btn btn-primary" onclick="showJobPostingForm()">
+                        <i class="fas fa-plus"></i>
+                        Post New Job
+                    </button>
+                </div>
+                
+                <div class="job-posting-form">
+                    <div class="mentorship-grid">
+                        <!-- Job Posting Guidelines -->
+                        <div class="mentorship-card">
+                            <div class="mentorship-header">
+                                <h3 class="mentorship-title">Why Post Here?</h3>
+                                <div class="mentorship-subtitle">Reach Quality Candidates</div>
+                            </div>
+                            <div class="mentorship-content">
+                                <p class="mentorship-description">
+                                    Connect with motivated students and recent graduates who share your educational background and values. Our alumni network spans diverse industries and skill levels.
+                                </p>
+                                <div class="mentorship-stats">
+                                    <div class="mentorship-stat">
+                                        <div class="mentorship-stat-value">2.4K</div>
+                                        <div class="mentorship-stat-label">Students</div>
+                                    </div>
+                                    <div class="mentorship-stat">
+                                        <div class="mentorship-stat-value">89%</div>
+                                        <div class="mentorship-stat-label">Response Rate</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Posting Process -->
+                        <div class="mentorship-card">
+                            <div class="mentorship-header">
+                                <h3 class="mentorship-title">How It Works</h3>
+                                <div class="mentorship-subtitle">Simple 3-Step Process</div>
+                            </div>
+                            <div class="mentorship-content">
+                                <p class="mentorship-description">
+                                    1. Fill out our comprehensive job posting form<br>
+                                    2. Our team reviews and approves within 24 hours<br>
+                                    3. Job goes live to our student portal and weekly newsletter
+                                </p>
+                                <div class="mentorship-stats">
+                                    <div class="mentorship-stat">
+                                        <div class="mentorship-stat-value">24</div>
+                                        <div class="mentorship-stat-label">Hour Review</div>
+                                    </div>
+                                    <div class="mentorship-stat">
+                                        <div class="mentorship-stat-value">30</div>
+                                        <div class="mentorship-stat-label">Days Active</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Your Posted Jobs -->
+                        <div class="mentorship-card">
+                            <div class="mentorship-header">
+                                <h3 class="mentorship-title">Your Active Postings</h3>
+                                <div class="mentorship-subtitle">Currently Live</div>
+                            </div>
+                            <div class="mentorship-content">
+                                <p class="mentorship-description">
+                                    <strong>Senior Software Engineer</strong><br>
+                                    TechCorp • Posted 5 days ago<br>
+                                    12 applications received
+                                </p>
+                                <div class="mentorship-actions">
+                                    <button class="btn btn-primary" onclick="viewApplications('job1')">View Applications</button>
+                                    <button class="btn btn-outline" onclick="editJobPosting('job1')">Edit Post</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Resources Section (Hidden by default) -->
+            <div class="career-section" id="resources-section" style="display: none;">
+                <div class="career-section-header">
+                    <h2 class="career-section-title">Share Career Resources</h2>
+                    <button class="btn btn-primary" onclick="showResourceForm()">
+                        <i class="fas fa-plus"></i>
+                        Share Resource
+                    </button>
+                </div>
+                
+                <div class="resource-grid">
+                    <!-- Resume Templates -->
+                    <div class="resource-card">
+                        <div class="resource-image">
+                            <i class="fas fa-file-alt"></i>
+                        </div>
+                        <div class="resource-content">
+                            <h3 class="resource-title">Resume Templates Collection</h3>
+                            <p class="resource-description">
+                                Professional resume templates for different industries and experience levels, with examples and formatting guidelines.
+                            </p>
+                            <div class="resource-meta">
+                                <span>Contributed by you</span>
+                                <span>347 downloads</span>
+                            </div>
+                            <div class="resource-actions">
+                                <button class="btn btn-primary" onclick="editResource('resume-templates')">Edit</button>
+                                <button class="btn btn-outline" onclick="viewDownloads('resume-templates')">View Stats</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Interview Guide -->
+                    <div class="resource-card">
+                        <div class="resource-image">
+                            <i class="fas fa-comments"></i>
+                        </div>
+                        <div class="resource-content">
+                            <h3 class="resource-title">Tech Interview Preparation</h3>
+                            <p class="resource-description">
+                                Comprehensive guide covering behavioral questions, technical challenges, and salary negotiation for technology roles.
+                            </p>
+                            <div class="resource-meta">
+                                <span>Contributed by you</span>
+                                <span>189 downloads</span>
+                            </div>
+                            <div class="resource-actions">
+                                <button class="btn btn-primary" onclick="editResource('interview-guide')">Edit</button>
+                                <button class="btn btn-outline" onclick="viewDownloads('interview-guide')">View Stats</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Networking Guide -->
+                    <div class="resource-card">
+                        <div class="resource-image">
+                            <i class="fas fa-network-wired"></i>
+                        </div>
+                        <div class="resource-content">
+                            <h3 class="resource-title">Professional Networking Strategies</h3>
+                            <p class="resource-description">
+                                Learn how to build meaningful professional relationships, leverage LinkedIn, and expand your network effectively.
+                            </p>
+                            <div class="resource-meta">
+                                <span>Draft - Pending Review</span>
+                                <span>0 downloads</span>
+                            </div>
+                            <div class="resource-actions">
+                                <button class="btn btn-primary" onclick="editResource('networking-guide')">Continue Editing</button>
+                                <button class="btn btn-outline" onclick="previewResource('networking-guide')">Preview</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Career Change Guide -->
+                    <div class="resource-card">
+                        <div class="resource-image">
+                            <i class="fas fa-route"></i>
+                        </div>
+                        <div class="resource-content">
+                            <h3 class="resource-title">Career Transition Roadmap</h3>
+                            <p class="resource-description">
+                                Step-by-step guide for students considering career pivots, including skills assessment and transition strategies.
+                            </p>
+                            <div class="resource-meta">
+                                <span>Contributed by you</span>
+                                <span>276 downloads</span>
+                            </div>
+                            <div class="resource-actions">
+                                <button class="btn btn-primary" onclick="editResource('career-change')">Edit</button>
+                                <button class="btn btn-outline" onclick="viewDownloads('career-change')">View Stats</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Resource Categories -->
+                <div class="career-section-header" style="margin-top: 40px;">
+                    <h2 class="career-section-title">Popular Resource Categories</h2>
+                </div>
+                
+                <div class="mentorship-grid">
+                    <div class="mentorship-card">
+                        <div class="mentorship-header">
+                            <h3 class="mentorship-title">Resume & Cover Letters</h3>
+                            <div class="mentorship-subtitle">Templates & Guides</div>
+                        </div>
+                        <div class="mentorship-content">
+                            <div class="mentorship-stats">
+                                <div class="mentorship-stat">
+                                    <div class="mentorship-stat-value">15</div>
+                                    <div class="mentorship-stat-label">Resources</div>
+                                </div>
+                                <div class="mentorship-stat">
+                                    <div class="mentorship-stat-value">1.2K</div>
+                                    <div class="mentorship-stat-label">Downloads</div>
+                                </div>
+                            </div>
+                            <div class="mentorship-actions">
+                                <button class="btn btn-outline" onclick="browseCategory('resume')">Browse All</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mentorship-card">
+                        <div class="mentorship-header">
+                            <h3 class="mentorship-title">Interview Preparation</h3>
+                            <div class="mentorship-subtitle">Questions & Strategies</div>
+                        </div>
+                        <div class="mentorship-content">
+                            <div class="mentorship-stats">
+                                <div class="mentorship-stat">
+                                    <div class="mentorship-stat-value">8</div>
+                                    <div class="mentorship-stat-label">Resources</div>
+                                </div>
+                                <div class="mentorship-stat">
+                                    <div class="mentorship-stat-value">856</div>
+                                    <div class="mentorship-stat-label">Downloads</div>
+                                </div>
+                            </div>
+                            <div class="mentorship-actions">
+                                <button class="btn btn-outline" onclick="browseCategory('interview')">Browse All</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mentorship-card">
+                        <div class="mentorship-header">
+                            <h3 class="mentorship-title">Industry Insights</h3>
+                            <div class="mentorship-subtitle">Market Trends & Tips</div>
+                        </div>
+                        <div class="mentorship-content">
+                            <div class="mentorship-stats">
+                                <div class="mentorship-stat">
+                                    <div class="mentorship-stat-value">12</div>
+                                    <div class="mentorship-stat-label">Resources</div>
+                                </div>
+                                <div class="mentorship-stat">
+                                    <div class="mentorship-stat-value">643</div>
+                                    <div class="mentorship-stat-label">Downloads</div>
+                                </div>
+                            </div>
+                            <div class="mentorship-actions">
+                                <button class="btn btn-outline" onclick="browseCategory('industry')">Browse All</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Webinars Section (Hidden by default) -->
+            <div class="career-section" id="webinars-section" style="display: none;">
+                <div class="career-section-header">
+                    <h2 class="career-section-title">Host Career Webinars & Workshops</h2>
+                    <button class="btn btn-primary" onclick="showWebinarForm()">
+                        <i class="fas fa-plus"></i>
+                        Schedule Webinar
+                    </button>
+                </div>
+                
+                <div class="webinar-list">
+                    <!-- Upcoming Webinar -->
+                    <div class="webinar-item">
+                        <div class="webinar-date">
+                            <div class="webinar-date-day">22</div>
+                            <div class="webinar-date-month">Oct</div>
+                        </div>
+                        <div class="webinar-info">
+                            <h3 class="webinar-title">Breaking into Tech: A Practical Guide</h3>
+                            <div class="webinar-details">
+                                <div class="webinar-detail">
+                                    <i class="fas fa-clock"></i>
+                                    <span>6:00 PM - 7:30 PM EST</span>
+                                </div>
+                                <div class="webinar-detail">
+                                    <i class="fas fa-users"></i>
+                                    <span>47 registered</span>
+                                </div>
+                                <div class="webinar-detail">
+                                    <i class="fas fa-video"></i>
+                                    <span>Zoom Webinar</span>
+                                </div>
+                            </div>
+                            <p class="webinar-description">
+                                Share your journey into the tech industry, discuss current market trends, and provide actionable advice for students looking to start their tech careers.
+                            </p>
+                        </div>
+                        <div class="webinar-actions">
+                            <button class="btn btn-primary" onclick="manageWebinar('webinar1')">Manage</button>
+                            <button class="btn btn-outline" onclick="editWebinar('webinar1')">Edit</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Past Webinar -->
+                    <div class="webinar-item" style="opacity: 0.8;">
+                        <div class="webinar-date" style="background: linear-gradient(135deg, #64748b, #475569);">
+                            <div class="webinar-date-day">15</div>
+                            <div class="webinar-date-month">Sep</div>
+                        </div>
+                        <div class="webinar-info">
+                            <h3 class="webinar-title">Resume Writing Workshop</h3>
+                            <div class="webinar-details">
+                                <div class="webinar-detail">
+                                    <i class="fas fa-clock"></i>
+                                    <span>Completed</span>
+                                </div>
+                                <div class="webinar-detail">
+                                    <i class="fas fa-users"></i>
+                                    <span>89 attendees</span>
+                                </div>
+                                <div class="webinar-detail">
+                                    <i class="fas fa-star"></i>
+                                    <span>4.8/5 rating</span>
+                                </div>
+                            </div>
+                            <p class="webinar-description">
+                                Interactive workshop on crafting compelling resumes, with live resume reviews and personalized feedback for attendees.
+                            </p>
+                        </div>
+                        <div class="webinar-actions">
+                            <button class="btn btn-outline" onclick="viewFeedback('webinar2')">View Feedback</button>
+                            <button class="btn btn-outline" onclick="scheduleRepeat('webinar2')">Schedule Again</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Scheduled Webinar -->
+                    <div class="webinar-item">
+                        <div class="webinar-date">
+                            <div class="webinar-date-day">8</div>
+                            <div class="webinar-date-month">Nov</div>
+                        </div>
+                        <div class="webinar-info">
+                            <h3 class="webinar-title">Networking in the Digital Age</h3>
+                            <div class="webinar-details">
+                                <div class="webinar-detail">
+                                    <i class="fas fa-clock"></i>
+                                    <span>3:00 PM - 4:00 PM EST</span>
+                                </div>
+                                <div class="webinar-detail">
+                                    <i class="fas fa-users"></i>
+                                    <span>Registration opens Oct 20</span>
+                                </div>
+                                <div class="webinar-detail">
+                                    <i class="fas fa-video"></i>
+                                    <span>Hybrid Event</span>
+                                </div>
+                            </div>
+                            <p class="webinar-description">
+                                Learn how to build professional networks online and offline, with practical tips for LinkedIn, virtual networking events, and maintaining relationships.
+                            </p>
+                        </div>
+                        <div class="webinar-actions">
+                            <button class="btn btn-secondary">Registration Not Open</button>
+                            <button class="btn btn-outline" onclick="editWebinar('webinar3')">Edit</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Webinar Topics -->
+                <div class="career-section-header" style="margin-top: 40px;">
+                    <h2 class="career-section-title">Popular Webinar Topics</h2>
+                </div>
+                
+                <div class="mentorship-grid">
+                    <div class="mentorship-card">
+                        <div class="mentorship-header">
+                            <h3 class="mentorship-title">Industry Trends</h3>
+                            <div class="mentorship-subtitle">Market Insights</div>
+                        </div>
+                        <div class="mentorship-content">
+                            <p class="mentorship-description">
+                                Share your perspective on current market trends, emerging technologies, and future career opportunities in your field.
+                            </p>
+                            <div class="mentorship-actions">
+                                <button class="btn btn-outline" onclick="proposeWebinar('industry-trends')">Propose Topic</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mentorship-card">
+                        <div class="mentorship-header">
+                            <h3 class="mentorship-title">Skill Development</h3>
+                            <div class="mentorship-subtitle">Practical Training</div>
+                        </div>
+                        <div class="mentorship-content">
+                            <p class="mentorship-description">
+                                Conduct hands-on workshops teaching specific skills, tools, or methodologies that are valuable in today's job market.
+                            </p>
+                            <div class="mentorship-actions">
+                                <button class="btn btn-outline" onclick="proposeWebinar('skill-building')">Propose Topic</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mentorship-card">
+                        <div class="mentorship-header">
+                            <h3 class="mentorship-title">Company Culture</h3>
+                            <div class="mentorship-subtitle">Hiring Practices</div>
+                        </div>
+                        <div class="mentorship-content">
+                            <p class="mentorship-description">
+                                Give students insights into what employers look for, company culture, and how to stand out in the application process.
+                            </p>
+                            <div class="mentorship-actions">
+                                <button class="btn btn-outline" onclick="proposeWebinar('company-culture')">Propose Topic</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    
+    <!-- Modal -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="modal-title">Modal Title</h3>
+                <button class="modal-close" onclick="closeModal()">&times;</button>
+            </div>
+            <div class="modal-body" id="modal-body">
+                Modal content goes here
+            </div>
+            <div class="modal-footer" id="modal-footer">
+                <button class="btn btn-secondary" onclick="closeModal()">Close</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- JavaScript -->
+     <script src="common.js"></script>
+    <script>
+        // Tab switching functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const tabs = document.querySelectorAll('.career-tab');
+            const sections = {
+                'mentoring': document.getElementById('mentoring-section'),
+                'job-posting': document.getElementById('job-posting-section'),
+                'resources': document.getElementById('resources-section'),
+                'webinars': document.getElementById('webinars-section')
+            };
+            
+            tabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    // Remove active class from all tabs
+                    tabs.forEach(t => t.classList.remove('active'));
+                    
+                    // Add active class to clicked tab
+                    this.classList.add('active');
+                    
+                    // Hide all sections
+                    Object.values(sections).forEach(section => {
+                        if (section) section.style.display = 'none';
+                    });
+                    
+                    // Show the corresponding section
+                    const tabName = this.getAttribute('data-tab');
+                    if (sections[tabName]) {
+                        sections[tabName].style.display = 'block';
+                    }
+                });
+            });
+        });
+        
+        // Modal functions
+        function showModal(title, content, buttons = []) {
+            document.getElementById('modal-title').textContent = title;
+            document.getElementById('modal-body').innerHTML = content;
+            
+            const footer = document.getElementById('modal-footer');
+            if (buttons.length > 0) {
+                footer.innerHTML = buttons.map(btn => 
+                    `<button class="btn ${btn.className || 'btn-secondary'}" onclick="${btn.action}">${btn.text}</button>`
+                ).join('');
+            } else {
+                footer.innerHTML = '<button class="btn btn-secondary" onclick="closeModal()">Close</button>';
+            }
+            
+            document.getElementById('modal').style.display = 'block';
+        }
+        
+        function closeModal() {
+            document.getElementById('modal').style.display = 'none';
+        }
+        
+        // Notification function
+        function showNotification(message, type = 'info') {
+            const notification = document.createElement('div');
+            notification.className = `notification ${type}`;
+            notification.textContent = message;
+            document.body.appendChild(notification);
+            
+            setTimeout(() => notification.classList.add('show'), 100);
+            setTimeout(() => {
+                notification.classList.remove('show');
+                setTimeout(() => document.body.removeChild(notification), 300);
+            }, 3000);
+        }
+        
+        // Mentoring functions
+        function showMentorSignupForm() {
+            showModal(
+                'Become a Career Mentor',
+                `
+                <form id="mentorForm">
+                    <div class="form-group">
+                        <label for="mentorAreas">Areas of Expertise</label>
+                        <select id="mentorAreas" multiple style="height: 120px;">
+                            <option value="resume-review">Resume Review</option>
+                            <option value="interview-prep">Interview Preparation</option>
+                            <option value="industry-guidance">Industry-Specific Guidance</option>
+                            <option value="career-transition">Career Transition</option>
+                            <option value="networking">Networking Strategies</option>
+                            <option value="salary-negotiation">Salary Negotiation</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="availability">Weekly Time Commitment</label>
+                        <select id="availability">
+                            <option value="1-2">1-2 hours per week</option>
+                            <option value="3-4">3-4 hours per week</option>
+                            <option value="5+">5+ hours per week</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="mentorBio">Mentor Bio</label>
+                        <textarea id="mentorBio" placeholder="Tell students about your background and how you can help them..."></textarea>
+                    </div>
+                </form>
+                `,
+                [
+                    { text: 'Cancel', action: 'closeModal()', className: 'btn-secondary' },
+                    { text: 'Sign Up as Mentor', action: 'submitMentorForm()', className: 'btn-primary' }
+                ]
+            );
+        }
+        
+        function submitMentorForm() {
+            showNotification('Thank you for signing up as a mentor! We\'ll match you with students soon.', 'success');
+            closeModal();
+        }
+        
+        function viewMentees(type) {
+            showModal(
+                'Your Current Mentees',
+                `
+                <div class="mentee-list">
+                    <div class="mentee-item">
+                        <strong>Sarah Johnson</strong> - Computer Science Senior<br>
+                        <em>Focus: Technical interview preparation</em><br>
+                        Next session: Tomorrow 3:00 PM
+                    </div>
+                    <div class="mentee-item" style="margin-top: 15px;">
+                        <strong>Michael Chen</strong> - Business Graduate<br>
+                        <em>Focus: Resume optimization</em><br>
+                        Next session: Friday 2:00 PM
+                    </div>
+                </div>
+                `
+            );
+        }
+        
+        function previewResource(resourceId) {
+            showNotification('Resource preview opened', 'info');
+        }
+        
+        function browseCategory(category) {
+            showNotification(`Browsing ${category} resources...`, 'info');
+        }
+        
+        // Webinar functions
+        function showWebinarForm() {
+            showModal(
+                'Schedule a Career Webinar',
+                `
+                <form id="webinarForm">
+                    <div class="form-group">
+                        <label for="webinarTitle">Webinar Title</label>
+                        <input type="text" id="webinarTitle" required>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="webinarDate">Date</label>
+                            <input type="date" id="webinarDate" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="webinarTime">Time</label>
+                            <input type="time" id="webinarTime" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="webinarDuration">Duration (minutes)</label>
+                        <select id="webinarDuration" required>
+                            <option value="">Select duration</option>
+                            <option value="30">30 minutes</option>
+                            <option value="60">60 minutes</option>
+                            <option value="90">90 minutes</option>
+                            <option value="120">120 minutes</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="webinarFormat">Format</label>
+                        <select id="webinarFormat" required>
+                            <option value="">Select format</option>
+                            <option value="presentation">Presentation</option>
+                            <option value="workshop">Interactive Workshop</option>
+                            <option value="panel">Panel Discussion</option>
+                            <option value="qa">Q&A Session</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="webinarDescription">Description</label>
+                        <textarea id="webinarDescription" placeholder="What will students learn? What topics will you cover?" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="maxAttendees">Maximum Attendees</label>
+                        <input type="number" id="maxAttendees" min="10" max="500" value="100">
+                    </div>
+                    <div class="form-group">
+                        <label for="targetAudience">Target Audience</label>
+                        <select id="targetAudience" multiple style="height: 100px;">
+                            <option value="freshmen">Freshmen</option>
+                            <option value="sophomores">Sophomores</option>
+                            <option value="juniors">Juniors</option>
+                            <option value="seniors">Seniors</option>
+                            <option value="graduates">Recent Graduates</option>
+                        </select>
+                    </div>
+                </form>
+                `,
+                [
+                    { text: 'Cancel', action: 'closeModal()', className: 'btn-secondary' },
+                    { text: 'Schedule Webinar', action: 'submitWebinarForm()', className: 'btn-primary' }
+                ]
+            );
+        }
+        
+        function submitWebinarForm() {
+            showNotification('Webinar scheduled successfully! Students will be notified via email.', 'success');
+            closeModal();
+        }
+        
+        function manageWebinar(webinarId) {
+            showModal(
+                'Manage Webinar',
+                `
+                <div class="webinar-management">
+                    <h4>Breaking into Tech: A Practical Guide</h4>
+                    <p><strong>Date:</strong> October 22, 2023 at 6:00 PM EST</p>
+                    <p><strong>Registered:</strong> 47 students</p>
+                    <p><strong>Status:</strong> Confirmed</p>
+                    
+                    <div style="margin: 20px 0; padding: 15px; background: #f0f4ff; border-radius: 8px;">
+                        <h5>Pre-webinar Checklist:</h5>
+                        <div style="margin-top: 10px;">
+                            ✅ Zoom meeting created<br>
+                            ✅ Email reminders scheduled<br>
+                            ✅ Presentation slides prepared<br>
+                            ⏳ Test audio/video setup<br>
+                            ⏳ Prepare Q&A session
+                        </div>
+                    </div>
+                    
+                    <div style="margin-top: 20px;">
+                        <button class="btn btn-primary" onclick="joinWebinarRoom()">Join Meeting Room</button>
+                        <button class="btn btn-outline" onclick="sendReminder()">Send Reminder</button>
+                    </div>
+                </div>
+                `
+            );
+        }
+        
+        function editWebinar(webinarId) {
+            showNotification('Webinar editor opened', 'info');
+        }
+        
+        function viewFeedback(webinarId) {
+            showModal(
+                'Webinar Feedback',
+                `
+                <div class="feedback-summary">
+                    <h4>Resume Writing Workshop - Feedback Summary</h4>
+                    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin: 20px 0;">
+                        <div style="text-align: center;">
+                            <div style="font-size: 24px; font-weight: bold; color: #4a6fdc;">89</div>
+                            <div style="font-size: 12px; color: #64748b;">Attendees</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div style="font-size: 24px; font-weight: bold; color: #10b981;">4.8/5</div>
+                            <div style="font-size: 12px; color: #64748b;">Overall Rating</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div style="font-size: 24px; font-weight: bold; color: #f59e0b;">96%</div>
+                            <div style="font-size: 12px; color: #64748b;">Would Recommend</div>
+                        </div>
+                    </div>
+                    
+                    <h5>Sample Comments:</h5>
+                    <div style="background: #f8fafc; padding: 15px; border-radius: 8px; margin-top: 10px;">
+                        "Incredibly helpful! The live resume review was exactly what I needed."<br><br>
+                        "Great practical tips. I've already updated my resume with the suggestions."<br><br>
+                        "Would love to see more workshops like this. Thank you!"
+                    </div>
+                </div>
+                `
+            );
+        }
+        
+        function scheduleRepeat(webinarId) {
+            showNotification('Repeat webinar scheduled for next month', 'success');
+        }
+        
+        function proposeWebinar(topic) {
+            showNotification(`Great idea! We'll help you develop a webinar on ${topic}.`, 'success');
+        }
+        
+        function joinWebinarRoom() {
+            showNotification('Opening Zoom meeting room...', 'info');
+            closeModal();
+        }
+        
+        function sendReminder() {
+            showNotification('Reminder email sent to all registered attendees', 'success');
+        }
+        
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('modal');
+            if (event.target === modal) {
+                closeModal();
+            }
+        }
+        
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set default tab
+            document.querySelector('.career-tab[data-tab="mentoring"]').click();
+        });
+    </script>
+
+</body>
+</html>
+        
+        

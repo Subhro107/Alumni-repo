@@ -1,0 +1,1213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mentorship | Alumni Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="common.css">
+    <style>
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8fafc;
+            /* line-height: 1.6; */
+            color: #333;
+        }
+        
+        .container {
+            display: flex;
+            min-height: 100vh;
+            padding-top: 70px;
+        }
+        
+        /* Top Header */
+        /* .top-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 70px;
+            background-color: white;
+            border-bottom: 1px solid #e2e8f0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+            z-index: 1000;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        
+        .logo-section {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #4a6fdc, #6366f1);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 16px;
+        }
+        
+        .logo-text {
+            font-size: 20px;
+            font-weight: 700;
+            color: #333;
+        }
+        
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .search-bar {
+            position: relative;
+        }
+        
+        .search-input {
+            width: 300px;
+            height: 40px;
+            padding: 0 40px 0 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 14px;
+            background-color: #f8fafc;
+        }
+        
+        .search-icon {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #666;
+        }
+        
+        .notification-icon {
+            position: relative;
+            background: none;
+            border: none;
+            font-size: 20px;
+            color: #666;
+            cursor: pointer;
+        }
+        
+        .notification-badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background-color: #ef4444;
+            color: white;
+            font-size: 11px;
+            padding: 2px 6px;
+            border-radius: 10px;
+            min-width: 18px;
+            text-align: center;
+        }
+        
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .user-avatar {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            background-color: #4a6fdc;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 14px;
+        }
+        
+        .user-name {
+            font-weight: 500;
+            color: #333;
+        } */
+
+        /* Sidebar */
+        /* .sidebar {
+            width: 250px;
+            background-color: white;
+            border-right: 1px solid #e2e8f0;
+            padding: 20px 0;
+            position: fixed;
+            height: calc(100vh - 70px);
+            overflow-y: auto;
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 20px;
+            color: #64748b;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.2s;
+            border-left: 3px solid transparent;
+        }
+
+        .nav-item:hover {
+            background-color: #f1f5f9;
+            color: #334155;
+        }
+
+        .nav-item.active {
+            background-color: #eff6ff;
+            color: #2563eb;
+            border-left-color: #2563eb;
+        } */
+
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            margin-left: 250px;
+            padding: 30px;
+            background-color: #f8fafc;
+            max-width: calc(100vw - 250px)
+        }
+
+        .page-header {
+            margin-bottom: 30px;
+        }
+
+        .page-header h1 {
+            font-size: 28px;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 8px;
+        }
+
+        .page-header p {
+            color: #64748b;
+            font-size: 16px;
+        } 
+
+        /* Button Styles */
+        .btn {
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 500;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: none;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background-color: #4a6fdc;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: #3b5bbd;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(74, 111, 220, 0.3);
+        }
+
+        .btn-secondary {
+            background-color: #6b7280;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background-color: #4b5563;
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid #4a6fdc;
+            color: #4a6fdc;
+        }
+
+        .btn-outline:hover {
+            background-color: #4a6fdc;
+            color: white;
+        }
+
+        /* Stats Grid */
+        .mentorship-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .mentorship-stat-card {
+            background-color: white;
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            border: 1px solid #f1f5f9;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .mentorship-stat-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+        }
+
+        .mentorship-stat-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: white;
+        }
+
+        .mentorship-stat-icon.blue {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .mentorship-stat-icon.green {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+
+        .mentorship-stat-icon.orange {
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+        }
+
+        .mentorship-stat-icon.purple {
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+        }
+
+        .mentorship-stat-content {
+            flex: 1;
+        }
+
+        .mentorship-stat-value {
+            font-size: 28px;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 4px;
+        }
+
+        .mentorship-stat-label {
+            color: #64748b;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        /* Tab System */
+        .mentorship-tabs {
+            display: flex;
+            background-color: white;
+            border-radius: 12px;
+            padding: 6px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            border: 1px solid #f1f5f9;
+        }
+
+        .mentorship-tab,
+        .career-tab {
+            padding: 12px 24px;
+            cursor: pointer;
+            font-weight: 500;
+            color: #64748b;
+            border-radius: 8px;
+            transition: all 0.2s;
+            flex: 1;
+            text-align: center;
+        }
+
+        .mentorship-tab.active,
+        .career-tab.active {
+            background-color: #4a6fdc;
+            color: white;
+            box-shadow: 0 2px 8px rgba(74, 111, 220, 0.3);
+        }
+
+        .mentorship-tab:hover:not(.active),
+        .career-tab:hover:not(.active) {
+            background-color: #f8fafc;
+            color: #1e293b;
+        }
+
+        /* Section Styles */
+        .career-section,
+        .mentorship-section {
+            background-color: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+            margin-bottom: 30px;
+            border: 1px solid #f1f5f9;
+        }
+
+        .career-section-header,
+        .mentorship-section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #f1f5f9;
+        }
+
+        .career-section-title,
+        .mentorship-section-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: #1e293b;
+        }
+
+        /* Mentorship Grid */
+        .mentorship-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 24px;
+        }
+
+        .mentorship-card {
+            background-color: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            transition: all 0.3s;
+            border: 1px solid #f1f5f9;
+        }
+
+        .mentorship-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+        }
+
+        .mentorship-header {
+            padding: 24px;
+            border-bottom: 1px solid #f1f5f9;
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+        }
+
+        .mentorship-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 8px;
+        }
+
+        .mentorship-subtitle {
+            color: #64748b;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .mentorship-content {
+            padding: 24px;
+        }
+
+        .mentorship-description {
+            color: #475569;
+            margin-bottom: 24px;
+            line-height: 1.6;
+        }
+
+        .mentorship-stats-inner {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 24px;
+            padding: 16px;
+            background-color: #f8fafc;
+            border-radius: 8px;
+        }
+
+        .mentorship-stat {
+            text-align: center;
+        }
+
+        .mentorship-stat-value {
+            font-size: 24px;
+            font-weight: 700;
+            color: #4a6fdc;
+            margin-bottom: 4px;
+        }
+
+        .mentorship-stat-label {
+            font-size: 12px;
+            color: #64748b;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 500;
+        }
+
+        .mentorship-actions {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+        }
+
+        /* Progress Items for My Mentorships section */
+        .mentorship-progress {
+            margin-top: 20px;
+        }
+
+        .progress-item {
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            margin-bottom: 20px;
+            border: 1px solid #f1f5f9;
+        }
+
+        .progress-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .progress-title {
+            font-weight: 600;
+            color: #1e293b;
+            font-size: 18px;
+        }
+
+        .progress-date {
+            color: #64748b;
+            font-size: 14px;
+        }
+
+        .progress-bar-container {
+            height: 8px;
+            background-color: #f1f5f9;
+            border-radius: 4px;
+            margin-bottom: 15px;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background-color: #4a6fdc;
+            border-radius: 4px;
+            transition: width 0.3s ease;
+        }
+
+        .progress-stats {
+            display: flex;
+            justify-content: space-between;
+            color: #64748b;
+            font-size: 14px;
+        }
+
+        /* Become Mentor Section */
+        .become-mentor-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 16px;
+            padding: 40px;
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .become-mentor-title {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+
+        .become-mentor-description {
+            font-size: 16px;
+            margin-bottom: 24px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            opacity: 0.9;
+        }
+
+        .become-mentor-section .btn {
+            background-color: white;
+            color: #4a6fdc;
+            font-weight: 600;
+        }
+
+        .become-mentor-section .btn:hover {
+            background-color: #f8fafc;
+            transform: translateY(-2px);
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 5% auto;
+            padding: 30px;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 600px;
+            max-height: 80vh;
+            overflow-y: auto;
+            position: relative;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #f1f5f9;
+        }
+
+        .modal-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: #1e293b;
+        }
+
+        .close {
+            color: #64748b;
+            font-size: 24px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+
+        .close:hover {
+            color: #1e293b;
+        }
+
+        .modal-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 12px;
+            margin-top: 24px;
+            padding-top: 20px;
+            border-top: 1px solid #f1f5f9;
+        }
+
+        /* Form Styles */
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #1e293b;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: border-color 0.2s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #4a6fdc;
+            box-shadow: 0 0 0 3px rgba(74, 111, 220, 0.1);
+        }
+
+        .form-group textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        /* Notification */
+        .notification {
+            position: fixed;
+            top: 100px;
+            right: 20px;
+            padding: 16px 24px;
+            border-radius: 8px;
+            color: white;
+            font-weight: 500;
+            z-index: 3000;
+            transform: translateX(400px);
+            transition: transform 0.3s;
+        }
+
+        .notification.show {
+            transform: translateX(0);
+        }
+
+        .notification.success {
+            background-color: #10b981;
+        }
+
+        .notification.error {
+            background-color: #ef4444;
+        }
+
+        .notification.info {
+            background-color: #3b82f6;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .sidebar {
+                width: 200px;
+            }
+            
+            .main-content {
+                margin-left: 200px;
+            }
+            
+            .mentorship-grid {
+                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            }
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                transform: translateX(-100%);
+                transition: transform 0.3s;
+            }
+            
+            .main-content {
+                margin-left: 0;
+                padding: 20px;
+            }
+            
+            .mentorship-stats {
+                grid-template-columns: 1fr;
+            }
+            
+            .mentorship-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .mentorship-tabs {
+                flex-direction: column;
+            }
+            
+            .search-input {
+                width: 200px;
+            }
+            
+            .header-right {
+                gap: 10px;
+            }
+            
+            .user-name {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Top Header -->
+    <div class="top-header">
+        <div class="logo-section">
+            <div class="logo">
+                <div class="logo-icon">AU</div>
+                <span class="logo-text">Alumni Connect</span>
+            </div>
+        </div>
+        
+        <div class="header-right">
+            <div class="search-bar">
+                <input type="text" class="search-input" placeholder="Search alumni, events...">
+                <i class="fas fa-search search-icon"></i>
+            </div>
+            <button class="notification-icon">
+                <i class="fas fa-bell"></i>
+                <span class="notification-badge">3</span>
+            </button>
+            <div class="user-info">
+                <div class="user-avatar">👤</div>
+                <span class="user-name">Alumni User</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Sidebar -->
+        <nav class="sidebar">
+            <a href="alumni_dashboard.html" class="nav-item">
+                <i class="fas fa-th-large"></i>
+                Dashboard
+            </a>
+            <a href="alumni_directory.html" class="nav-item">
+                <i class="fas fa-users"></i>
+                Alumni Directory
+            </a>
+            <a href="alumni_events.html" class="nav-item">
+                <i class="fas fa-calendar"></i>
+                Events
+            </a>
+            <a href="alumni_forum.html" class="nav-item">
+                <i class="fas fa-comments"></i>
+                Forums
+            </a>
+            <a href="alumni_mentorship.html" class="nav-item active">
+                <i class="fas fa-handshake"></i>
+                Mentorship
+            </a>
+            <a href="alumni_career.html" class="nav-item">
+                <i class="fas fa-briefcase"></i>
+                Career Center
+            </a>
+            <a href="alumni_giveback.html" class="nav-item">
+                <i class="fas fa-gift"></i>
+                Give Back
+            </a>
+            <a href="alumni_profile.html" class="nav-item">
+                <i class="fas fa-user-cog"></i>
+                Profile Settings
+            </a>
+        </nav>
+        
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="page-header">
+                <h1>Mentorship Program</h1>
+                <p>Connect with mentors or become one to help fellow alumni</p>
+            </div>
+            
+            <!-- Mentorship Stats -->
+            <div class="mentorship-stats">
+                <div class="mentorship-stat-card">
+                    <div class="mentorship-stat-icon blue">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="mentorship-stat-content">
+                        <div class="mentorship-stat-value">124</div>
+                        <div class="mentorship-stat-label">Active Mentors</div>
+                    </div>
+                </div>
+                
+                <div class="mentorship-stat-card">
+                    <div class="mentorship-stat-icon green">
+                        <i class="fas fa-handshake"></i>
+                    </div>
+                    <div class="mentorship-stat-content">
+                        <div class="mentorship-stat-value">287</div>
+                        <div class="mentorship-stat-label">Mentorship Connections</div>
+                    </div>
+                </div>
+                
+                <div class="mentorship-stat-card">
+                    <div class="mentorship-stat-icon orange">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div class="mentorship-stat-content">
+                        <div class="mentorship-stat-value">1,450</div>
+                        <div class="mentorship-stat-label">Hours Contributed</div>
+                    </div>
+                </div>
+                
+                <div class="mentorship-stat-card">
+                    <div class="mentorship-stat-icon purple">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <div class="mentorship-stat-content">
+                        <div class="mentorship-stat-value">4.8</div>
+                        <div class="mentorship-stat-label">Average Rating</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Mentorship Tabs -->
+            <div class="mentorship-tabs">
+                <div class="career-tab active" data-tab="mentoring">Student Mentoring</div>
+                <div class="mentorship-tab" data-tab="my-mentorships">My Mentorships</div>
+                <div class="mentorship-tab" data-tab="become-mentor">Become a Mentor</div>
+            </div>
+
+            <!-- Student Mentoring Section -->
+            <div class="career-section" id="mentoring-section">
+                <div class="career-section-header">
+                    <h2 class="career-section-title">Student Career Mentoring</h2>
+                </div>
+
+                <div class="mentorship-grid">
+                    <!-- Interview Coaching Card -->
+                    <div class="mentorship-card">
+                        <div class="mentorship-header">
+                            <h3 class="mentorship-title">Interview Coaching</h3>
+                            <div class="mentorship-subtitle">Weekly 1-on-1 Sessions</div>
+                        </div>
+                        <div class="mentorship-content">
+                            <p class="mentorship-description">
+                                Technical skill development and coding mentorship with focus on modern development practices and career growth.
+                            </p>
+                            <div class="mentorship-stats-inner">
+                                <div class="mentorship-stat">
+                                    <div class="mentorship-stat-value">50%</div>
+                                    <div class="mentorship-stat-label">Progress</div>
+                                </div>
+                                <div class="mentorship-stat">
+                                    <div class="mentorship-stat-value">2/4</div>
+                                    <div class="mentorship-stat-label">Sessions</div>
+                                </div>
+                            </div>
+                            <div class="mentorship-actions">
+                                <button class="btn btn-primary" onclick="scheduleSession('interview-coaching')">Schedule Next Session</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Resume Review Workshop Card -->
+                    <div class="mentorship-card">
+                        <div class="mentorship-header">
+                            <h3 class="mentorship-title">Resume Review Workshop</h3>
+                            <div class="mentorship-subtitle">Weekly 1-on-1 Sessions</div>
+                        </div>
+                        <div class="mentorship-content">
+                            <p class="mentorship-description">
+                               Get personalized feedback on your resume from career counselors and industry professionals. Submit your resume in advance and receive a 15-minute one-on-one consultation during the event.
+                            </p>
+                            <div class="mentorship-stats-inner">
+                                <div class="mentorship-stat">
+                                    <div class="mentorship-stat-value">20%</div>
+                                    <div class="mentorship-stat-label">Progress</div>
+                                </div>
+                                <div class="mentorship-stat">
+                                    <div class="mentorship-stat-value">4/20</div>
+                                    <div class="mentorship-stat-label">Sessions</div>
+                                </div>
+                            </div>
+                            <div class="mentorship-actions">
+                                <button class="btn btn-primary" onclick="scheduleSession('resume-workshop')">Schedule Next Session</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- My Mentorships Section -->
+            <div class="mentorship-section" id="my-mentorships-section" style="display: none;">
+                <div class="mentorship-section-header">
+                    <h2 class="mentorship-section-title">My Active Mentorships</h2>
+                </div>
+                
+                <div class="mentorship-progress">
+                    <!-- Progress Item 1 -->
+                    <div class="progress-item">
+                        <div class="progress-header">
+                            <div class="progress-title">Resume Review</div>
+                            <div class="progress-date">Started: Sept 15, 2025</div>
+                        </div>
+                        <div class="progress-bar-container">
+                            <div class="progress-bar" style="width: 20%;"></div>
+                        </div>
+                        <div class="progress-stats">
+                            <div>4 of 20 sessions completed</div>
+                            <div>Next session: Oct 05, 2025</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Progress Item 2 -->
+                    <div class="progress-item">
+                        <div class="progress-header">
+                            <div class="progress-title">Interview Coaching</div>
+                            <div class="progress-date">Started: Aug 03, 2025</div>
+                        </div>
+                        <div class="progress-bar-container">
+                            <div class="progress-bar" style="width: 50%;"></div>
+                        </div>
+                        <div class="progress-stats">
+                            <div>2 of 4 sessions completed</div>
+                            <div>Next session: Sept 25, 2025</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Become a Mentor Section -->
+            <div class="mentorship-section" id="become-mentor-section" style="display: none;">
+                <div class="mentorship-section-header">
+                    <h2 class="mentorship-section-title">Become a Mentor</h2>
+                </div>
+                
+                <div class="become-mentor-section">
+                    <h3 class="become-mentor-title">Share Your Experience and Knowledge</h3>
+                    <p class="become-mentor-description">As an alumni mentor, you can make a significant impact on the professional development of fellow graduates. Share your expertise, provide guidance, and help others navigate their career paths.</p>
+                    <button class="btn btn-primary" onclick="showBecomeMentorForm()">Apply to Become a Mentor</button>
+                </div>
+                
+                <div class="mentorship-grid" style="margin-top: 30px;">
+                    <div class="mentorship-card">
+                        <div class="mentorship-content" style="padding: 30px;">
+                            <h3 style="margin-top: 0; color: #1e293b; font-size: 20px; margin-bottom: 16px;">Time Commitment</h3>
+                            <p>Mentors typically commit to 1-2 hours per month for a minimum of 3 months. You can set your own availability and mentoring schedule.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="mentorship-card">
+                        <div class="mentorship-content" style="padding: 30px;">
+                            <h3 style="margin-top: 0; color: #1e293b; font-size: 20px; margin-bottom: 16px;">Mentorship Areas</h3>
+                            <p>You can offer mentorship in your professional field, career development, leadership skills, or specific technical expertise.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="mentorship-card">
+                        <div class="mentorship-content" style="padding: 30px;">
+                            <h3 style="margin-top: 0; color: #1e293b; font-size: 20px; margin-bottom: 16px;">Support Provided</h3>
+                            <p>We provide resources, guidelines, and regular check-ins to ensure a successful mentoring experience for both mentors and mentees.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    
+    <!-- Modal Structure -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title" id="modalTitle">Modal Title</h2>
+                <span class="close" onclick="closeCurrentModal()">&times;</span>
+            </div>
+            <div id="modalBody">Modal content goes here</div>
+            <div class="modal-actions" id="modalActions"></div>
+        </div>
+    </div>
+    
+    <!-- Notification -->
+    <div id="notification" class="notification"></div>
+    
+    <!-- JavaScript -->
+     <script src="common.js"></script>
+    <script>
+        // Tab switching functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const tabs = document.querySelectorAll('.mentorship-tab, .career-tab');
+            const sections = {
+                'mentoring': document.getElementById('mentoring-section'),
+                'my-mentorships': document.getElementById('my-mentorships-section'),
+                'become-mentor': document.getElementById('become-mentor-section')
+            };
+            
+            tabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    const targetTab = this.getAttribute('data-tab');
+                    
+                    // Remove active class from all tabs
+                    tabs.forEach(t => t.classList.remove('active'));
+                    
+                    // Add active class to clicked tab
+                    this.classList.add('active');
+                    
+                    // Hide all sections
+                    Object.values(sections).forEach(section => {
+                        if (section) section.style.display = 'none';
+                    });
+                    
+                    // Show the corresponding section
+                    if (sections[targetTab]) {
+                        sections[targetTab].style.display = 'block';
+                    }
+                });
+            });
+        });
+        
+        // Modal functionality
+        function showModal(title, content, actions = []) {
+            const modal = document.getElementById('modal');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalBody = document.getElementById('modalBody');
+            const modalActions = document.getElementById('modalActions');
+            
+            modalTitle.textContent = title;
+            modalBody.innerHTML = content;
+            
+            // Clear and populate actions
+            modalActions.innerHTML = '';
+            actions.forEach(action => {
+                const button = document.createElement('button');
+                button.className = `btn ${action.className || 'btn-primary'}`;
+                button.textContent = action.text;
+                button.onclick = typeof action.action === 'string' && action.action === 'closeCurrentModal' 
+                    ? closeCurrentModal 
+                    : action.action;
+                modalActions.appendChild(button);
+            });
+            
+            modal.style.display = 'block';
+        }
+        
+        function closeCurrentModal() {
+            const modal = document.getElementById('modal');
+            modal.style.display = 'none';
+        }
+        
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('modal');
+            if (event.target === modal) {
+                closeCurrentModal();
+            }
+        }
+        
+        // Notification system
+        function showNotification(message, type = 'info') {
+            const notification = document.getElementById('notification');
+            notification.textContent = message;
+            notification.className = `notification ${type}`;
+            notification.classList.add('show');
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 4000);
+        }
+        
+        // Mentorship functions
+        function scheduleSession(sessionType) {
+            showModal(
+                'Schedule Session',
+                `
+                <div class="mentorship-request-form">
+                    <form id="sessionForm">
+                        <div class="form-group">
+                            <label for="sessionDate">Session Date</label>
+                            <input type="date" id="sessionDate" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="sessionTime">Session Time</label>
+                            <input type="time" id="sessionTime" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="sessionDuration">Duration</label>
+                            <select id="sessionDuration" required>
+                                <option value="">Select duration</option>
+                                <option value="30">30 minutes</option>
+                                <option value="60">60 minutes</option>
+                                <option value="90">90 minutes</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="sessionAgenda">Session Agenda</label>
+                            <textarea id="sessionAgenda" required placeholder="What will you cover in this session?"></textarea>
+                        </div>
+                    </form>
+                </div>
+                `,
+                [
+                    { text: 'Cancel', action: 'closeCurrentModal', className: 'btn-secondary' },
+                    { text: 'Schedule Session', action: () => submitSession(sessionType), className: 'btn-primary' }
+                ]
+            );
+        }
+        
+        function showBecomeMentorForm() {
+            showModal(
+                'Become a Mentor',
+                `
+                <div class="mentorship-request-form">
+                    <form id="mentorSignupForm">
+                        <div class="form-group">
+                            <label for="mentorAreas">Areas of Expertise</label>
+                            <textarea id="mentorAreas" required placeholder="List your areas of expertise (e.g., Software Development, Career Coaching, Leadership...)"></textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="mentorExperience">Years of Experience</label>
+                            <select id="mentorExperience" required>
+                                <option value="">Select experience</option>
+                                <option value="2-5">2-5 years</option>
+                                <option value="5-10">5-10 years</option>
+                                <option value="10+">10+ years</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="mentorBio">Mentor Bio</label>
+                            <textarea id="mentorBio" required placeholder="Tell us about your background and what you can offer as a mentor..."></textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="mentorCommitment">Time Commitment</label>
+                            <select id="mentorCommitment" required>
+                                <option value="">Select commitment</option>
+                                <option value="1-2">1-2 hours per month</option>
+                                <option value="2-4">2-4 hours per month</option>
+                                <option value="4+">4+ hours per month</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="mentorAvailability">Your Availability</label>
+                            <textarea id="mentorAvailability" required placeholder="When are you typically available for mentoring sessions?"></textarea>
+                        </div>
+                    </form>
+                </div>
+                `,
+                [
+                    { text: 'Cancel', action: 'closeCurrentModal', className: 'btn-secondary' },
+                    { text: 'Submit Application', action: submitMentorSignup, className: 'btn-primary' }
+                ]
+            );
+        }
+        
+        // Form submission functions
+        function submitSession(sessionType) {
+            const form = document.getElementById('sessionForm');
+            if (form && form.checkValidity()) {
+                showNotification('Session scheduled successfully!', 'success');
+                closeCurrentModal();
+            } else if (form) {
+                form.reportValidity();
+            }
+        }
+        
+        function submitMentorSignup() {
+            const form = document.getElementById('mentorSignupForm');
+            if (form && form.checkValidity()) {
+                showNotification('Mentor application submitted successfully!', 'success');
+                closeCurrentModal();
+            } else if (form) {
+                form.reportValidity();
+            }
+        }
+    </script>
+</body>
+</html>

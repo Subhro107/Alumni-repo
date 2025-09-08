@@ -1,0 +1,887 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alumni Events | Alumni Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="common.css">
+    <style>
+        /* Events Page Specific Styles */
+        /* Base button */
+.btn {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+/* Secondary (Reset) */
+.btn-secondary {
+  background-color: #f1f1f1;
+  color: #333;
+}
+
+.btn-secondary:hover {
+  background-color: #e2e2e2;
+}
+
+/* Primary (Apply) */
+.btn-primary {
+  background-color: #007bff;
+  color: #fff;
+}
+
+.btn-primary:hover {
+  background-color: #0069d9;
+}
+
+/* Optional: slight hover "lift" */
+.btn:hover {
+  transform: translateY(-1px);
+}
+
+/* Keep them aligned */
+.filter-actions {
+  display: flex;
+  gap: 10px;   /* space between buttons */
+  margin-top: 10px;
+}
+
+        .events-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .event-filters {
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        .filter-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .filter-group {
+            flex: 1;
+            min-width: 200px;
+        }
+        
+        .filter-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+            color: #333;
+        }
+        
+        .filter-group select,
+        .filter-group input {
+            width: 100%;
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+        
+        .filter-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+        }
+        
+        .events-tabs {
+            display: flex;
+            border-bottom: 1px solid #ddd;
+            margin-bottom: 20px;
+        }
+        
+        .events-tab {
+            padding: 10px 20px;
+            cursor: pointer;
+            font-weight: 500;
+            color: #666;
+            border-bottom: 2px solid transparent;
+            transition: all 0.2s;
+        }
+        
+        .events-tab.active {
+            color: #4a6fdc;
+            border-bottom-color: #4a6fdc;
+        }
+        
+        .events-tab:hover:not(.active) {
+            color: #333;
+            border-bottom-color: #ddd;
+        }
+        
+        .event-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .event-item {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            display: flex;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        
+        .event-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .event-date {
+            width: 100px;
+            background-color: #4a6fdc;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 15px;
+            text-align: center;
+        }
+        
+        .event-date .month {
+            font-size: 14px;
+            text-transform: uppercase;
+            font-weight: 500;
+        }
+        
+        .event-date .day {
+            font-size: 28px;
+            font-weight: 700;
+            line-height: 1;
+            margin: 5px 0;
+        }
+        
+        .event-date .year {
+            font-size: 14px;
+        }
+        
+        .event-content {
+            flex: 1;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .event-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 10px;
+        }
+        
+        .event-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 5px;
+        }
+        
+        .event-type {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 15px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+        
+        .event-type.networking {
+            background-color: #e3f2fd;
+            color: #1976d2;
+        }
+        
+        .event-type.workshop {
+            background-color: #e8f5e9;
+            color: #388e3c;
+        }
+        
+        .event-type.reunion {
+            background-color: #fff8e1;
+            color: #ffa000;
+        }
+        
+        .event-type.fundraising {
+            background-color: #fce4ec;
+            color: #d81b60;
+        }
+        
+        .event-details {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .event-detail {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            color: #666;
+            font-size: 14px;
+        }
+        
+        .event-detail i {
+            color: #4a6fdc;
+            font-size: 16px;
+            width: 20px;
+            text-align: center;
+        }
+        
+        .event-description {
+            color: #555;
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+        
+        .event-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: auto;
+        }
+        
+        .event-attendees {
+            display: flex;
+            align-items: center;
+        }
+        
+        .attendee-avatars {
+            display: flex;
+            margin-right: 10px;
+        }
+        
+        .attendee-avatar {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            border: 2px solid white;
+            overflow: hidden;
+            margin-left: -10px;
+        }
+        
+        .attendee-avatar:first-child {
+            margin-left: 0;
+        }
+        
+        .attendee-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .attendee-count {
+            font-size: 14px;
+            color: #666;
+        }
+        
+        .event-actions {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .create-event-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: #4a6fdc;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            cursor: pointer;
+            transition: all 0.2s;
+            z-index: 100;
+        }
+        
+        .create-event-btn i {
+            font-size: 24px;
+        }
+        
+        .create-event-btn:hover {
+            transform: scale(1.1);
+            background-color: #3a5fcc;
+        }
+        
+        .event-modal {
+            max-width: 600px;
+        }
+        
+        .event-form-group {
+            margin-bottom: 15px;
+        }
+        
+        .event-form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+        
+        .event-form-group input,
+        .event-form-group select,
+        .event-form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+        
+        .event-form-group textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+        
+        .event-form-row {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .event-form-row .event-form-group {
+            flex: 1;
+        }
+        
+        @media (max-width: 768px) {
+            .event-item {
+                flex-direction: column;
+            }
+            
+            .event-date {
+                width: 100%;
+                padding: 10px;
+                flex-direction: row;
+                justify-content: center;
+                gap: 5px;
+            }
+            
+            .event-date .month,
+            .event-date .day,
+            .event-date .year {
+                font-size: 16px;
+                margin: 0;
+            }
+            
+            .filter-row {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .event-form-row {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+ <!-- Top Header -->
+    <div class="top-header">
+        <div class="logo-section">
+            <div class="logo">
+                <div class="logo-icon">AU</div>
+                <span class="logo-text">Alumni Connect</span>
+            </div>
+        </div>
+        
+        <div class="header-right">
+            <div class="search-bar">
+                <input type="text" class="search-input" placeholder="Search alumni, events...">
+                <i class="fas fa-search search-icon"></i>
+            </div>
+            <button class="notification-icon">
+                <i class="fas fa-bell"></i>
+                <span class="notification-badge">3</span>
+            </button>
+            <div class="user-info">
+                <div class="user-avatar">👤</div>
+                <span class="user-name">Alumni User</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Sidebar -->
+        <nav class="sidebar">
+            <a href="alumni_dashboard.html" class="nav-item active">
+                <i class="fas fa-th-large"></i>
+                Dashboard
+            </a>
+            <a href="alumni_directory.html" class="nav-item">
+                <i class="fas fa-users"></i>
+                Alumni Directory
+            </a>
+            <a href="alumni_events.html" class="nav-item">
+                <i class="fas fa-calendar"></i>
+                Events
+            </a>
+            <a href="alumni_forum.html" class="nav-item">
+                <i class="fas fa-comments"></i>
+                Forums
+            </a>
+            <a href="alumni_mentorship.html" class="nav-item">
+                <i class="fas fa-handshake"></i>
+                Mentorship
+            </a>
+            <a href="alumni_career.html" class="nav-item">
+                <i class="fas fa-briefcase"></i>
+                Career Center
+            </a>
+            <a href="alumni_giveback.html" class="nav-item">
+                <i class="fas fa-gift"></i>
+                Give Back
+            </a>
+            <a href="alumni_profile.html" class="nav-item">
+                <i class="fas fa-user-cog"></i>
+                Profile Settings
+            </a>
+        </nav>
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="welcome-section">
+                <h1 class="welcome-title">Alumni Events</h1>
+                <p class="welcome-subtitle">Stay connected with upcoming events and reunions</p>
+            </div>
+            <!-- Event Filters -->
+            <section class="event-filters">
+                <div class="filter-row">
+                    <div class="filter-group">
+                        <label for="eventType">Event Type</label>
+                        <select id="eventType">
+                            <option value="">All Types</option>
+                            <option value="networking">Networking</option>
+                            <option value="workshop">Workshop</option>
+                            <option value="reunion">Reunion</option>
+                            <option value="fundraising">Fundraising</option>
+                            <option value="career">Career Fair</option>
+                            <option value="social">Social Gathering</option>
+                        </select>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <label for="eventLocation">Location</label>
+                        <select id="eventLocation">
+                            <option value="">All Locations</option>
+                            <option value="campus">On Campus</option>
+                            <option value="online">Virtual/Online</option>
+                            <option value="local">Local Area</option>
+                            <option value="regional">Regional</option>
+                            <option value="international">International</option>
+                        </select>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <label for="eventDate">Date Range</label>
+                        <select id="eventDate">
+                            <option value="">All Dates</option>
+                            <option value="today">Today</option>
+                            <option value="week">This Week</option>
+                            <option value="month">This Month</option>
+                            <option value="quarter">Next 3 Months</option>
+                            <option value="year">This Year</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="filter-actions">
+                    <button class="btn btn-secondary" onclick="resetFilters()">Reset Filters</button>
+                    <button class="btn btn-primary" onclick="applyFilters()">Apply Filters</button>
+                </div>
+            </section>
+            
+            <!-- Events Tabs -->
+            <div class="events-tabs">
+                <div class="events-tab active" data-tab="upcoming">Upcoming Events</div>
+                <div class="events-tab" data-tab="past">Past Events</div>
+                <div class="events-tab" data-tab="my">Ongoing Events</div>
+                <div class="events-tab" data-tab="hosting">My Events</div>
+            </div>
+            
+            <!-- Events List -->
+            <div class="events-container">
+                <div class="event-list">
+                    <!-- Event Item 1 -->
+                    <div class="event-item">
+                        <div class="event-date">
+                            <span class="month">Oct</span>
+                            <span class="day">15</span>
+                            <span class="year">2025</span>
+                        </div>
+                        <div class="event-content">
+                            <div class="event-header">
+                                <div>
+                                    <h3 class="event-title">Annual Alumni Networking Gala</h3>
+                                    <span class="event-type networking">Networking</span>
+                                </div>
+                            </div>
+                            <div class="event-details">
+                                <div class="event-detail">
+                                    <i class="fas fa-clock"></i>
+                                    <span>6:00 PM - 9:00 PM</span>
+                                </div>
+                                <div class="event-detail">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <span>Grand Alumni Hall, Main Campus</span>
+                                </div>
+                                <div class="event-detail">
+                                    <i class="fas fa-user"></i>
+                                    <span>Hosted by Alumni Association</span>
+                                </div>
+                            </div>
+                            <p class="event-description">Join us for our annual networking gala where alumni from all years gather to connect, share experiences, and build professional relationships. The event includes dinner, keynote speakers, and structured networking activities.</p>
+                            <div class="event-footer">
+                                <!-- <div class="event-attendees">
+                                    <div class="attendee-avatars">
+                                        <div class="attendee-avatar">
+                                            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Attendee">
+                                        </div>
+                                        <div class="attendee-avatar">
+                                            <img src="https://randomuser.me/api/portraits/women/28.jpg" alt="Attendee">
+                                        </div>
+                                        <div class="attendee-avatar">
+                                            <img src="https://randomuser.me/api/portraits/men/45.jpg" alt="Attendee">
+                                        </div>
+                                    </div> 
+                                    <span class="attendee-count">68 attending</span>
+                                </div> -->
+                                <div class="event-actions">
+                                    <button class="btn btn-outline">More Info</button>
+                                    <button class="btn btn-primary">RSVP</button>
+                                </div>
+                            </div> 
+                        </div>
+                    </div>
+                    
+                    <!-- Event Item 2 -->
+                    <div class="event-item">
+                        <div class="event-date">
+                            <span class="month">Nov</span>
+                            <span class="day">5</span>
+                            <span class="year">2025</span>
+                        </div>
+                        <div class="event-content">
+                            <div class="event-header">
+                                <div>
+                                    <h3 class="event-title">Career Development Workshop</h3>
+                                    <span class="event-type workshop">Workshop</span>
+                                </div>
+                            </div>
+                            <div class="event-details">
+                                <div class="event-detail">
+                                    <i class="fas fa-clock"></i>
+                                    <span>2:00 PM - 4:30 PM</span>
+                                </div>
+                                <div class="event-detail">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <span>Virtual Event (Zoom)</span>
+                                </div>
+                                <div class="event-detail">
+                                    <i class="fas fa-user"></i>
+                                    <span>Hosted by Career Services</span>
+                                </div>
+                            </div>
+                            <p class="event-description">This virtual workshop focuses on advanced career development strategies for mid-career professionals. Topics include personal branding, negotiation skills, and leadership development. Interactive sessions with industry experts.</p>
+                            <div class="event-footer">
+                                <!-- <div class="event-attendees">
+                                     <div class="attendee-avatars">
+                                        <div class="attendee-avatar">
+                                            <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="Attendee">
+                                        </div>
+                                        <div class="attendee-avatar">
+                                            <img src="https://randomuser.me/api/portraits/men/22.jpg" alt="Attendee">
+                                        </div>
+                                        <div class="attendee-avatar">
+                                            <img src="https://randomuser.me/api/portraits/women/33.jpg" alt="Attendee">
+                                        </div>
+                                    </div> 
+                                    <span class="attendee-count">42 attending</span>
+                                </div> -->
+                                <div class="event-actions">
+                                    <button class="btn btn-outline">More Info</button>
+                                    <button class="btn btn-primary">RSVP</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Event Item 3 -->
+                    <div class="event-item">
+                        <div class="event-date">
+                            <span class="month">Dec</span>
+                            <span class="day">12</span>
+                            <span class="year">2025</span>
+                        </div>
+                        <div class="event-content">
+                            <div class="event-header">
+                                <div>
+                                    <h3 class="event-title">Class of 2015 Ten-Year Reunion</h3>
+                                    <span class="event-type reunion">Reunion</span>
+                                </div>
+                            </div>
+                            <div class="event-details">
+                                <div class="event-detail">
+                                    <i class="fas fa-clock"></i>
+                                    <span>All Day Event</span>
+                                </div>
+                                <div class="event-detail">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <span>University Campus & Downtown Venues</span>
+                                </div>
+                                <div class="event-detail">
+                                    <i class="fas fa-user"></i>
+                                    <span>Hosted by Class of 2015 Committee</span>
+                                </div>
+                            </div>
+                            <p class="event-description">Celebrate a decade since graduation with your classmates! This special reunion includes campus tours, a formal dinner, and various social activities throughout the weekend. Reconnect with old friends and make new memories.</p>
+                            <div class="event-footer">
+                                <!-- <div class="event-attendees">
+                                    <div class="attendee-avatars">
+                                        <div class="attendee-avatar">
+                                            <img src="https://randomuser.me/api/portraits/men/67.jpg" alt="Attendee">
+                                        </div>
+                                        <div class="attendee-avatar">
+                                            <img src="https://randomuser.me/api/portraits/women/54.jpg" alt="Attendee">
+                                        </div>
+                                        <div class="attendee-avatar">
+                                            <img src="https://randomuser.me/api/portraits/men/12.jpg" alt="Attendee">
+                                        </div>
+                                    </div>
+                                    <span class="attendee-count">124 attending</span>
+                                </div> -->
+                                <div class="event-actions">
+                                    <button class="btn btn-outline">More Info</button>
+                                    <button class="btn btn-primary">RSVP</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Event Item 4 -->
+                    <div class="event-item">
+                        <div class="event-date">
+                            <span class="month">Dec</span>
+                            <span class="day">20</span>
+                            <span class="year">2025</span>
+                        </div>
+                        <div class="event-content">
+                            <div class="event-header">
+                                <div>
+                                    <h3 class="event-title">Scholarship Fundraising Dinner</h3>
+                                    <span class="event-type fundraising">Fundraising</span>
+                                </div>
+                            </div>
+                            <div class="event-details">
+                                <div class="event-detail">
+                                    <i class="fas fa-clock"></i>
+                                    <span>7:00 PM - 10:00 PM</span>
+                                </div>
+                                <div class="event-detail">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <span>Metropolitan Hotel, Downtown</span>
+                                </div>
+                                <div class="event-detail">
+                                    <i class="fas fa-user"></i>
+                                    <span>Hosted by Alumni Foundation</span>
+                                </div>
+                            </div>
+                            <p class="event-description">Support the next generation of students through this elegant fundraising dinner. All proceeds go directly to the Alumni Scholarship Fund, which provides financial assistance to deserving students. The evening includes a gourmet dinner, silent auction, and inspiring speeches from scholarship recipients.</p>
+                            <div class="event-footer">
+                               <!--  <div class="event-attendees">
+                                     <div class="attendee-avatars">
+                                         <div class="attendee-avatar">
+                                            <img src="https://randomuser.me/api/portraits/women/22.jpg" alt="Attendee">
+                                        </div> 
+                                        <div class="attendee-avatar">
+                                            <img src="https://randomuser.me/api/portraits/men/55.jpg" alt="Attendee">
+                                        </div>
+                                        <div class="attendee-avatar">
+                                            <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Attendee">
+                                        </div>
+                                    </div> 
+                                    <span class="attendee-count">86 attending</span>
+                                </div> -->
+                                <div class="event-actions">
+                                    <button class="btn btn-outline">More Info</button>
+                                    <button class="btn btn-primary">RSVP</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Create Event Button -->
+            <div class="create-event-btn" onclick="showCreateEventModal()">
+                <i class="fas fa-plus"></i>
+            </div>
+        </main>
+    </div>
+    
+    <!-- JavaScript -->
+     <script src="common.js"></script>
+    <script>
+        // Sample events data for demonstration
+        const eventsData = {
+            upcoming: [
+                {
+                    id: 'event1',
+                    title: 'Annual Alumni Networking Gala',
+                    type: 'networking',
+                    date: '2025-10-15',
+                    time: '6:00 PM - 9:00 PM',
+                    location: 'Grand Alumni Hall, Main Campus',
+                    host: 'Alumni Association',
+                    description: 'Join us for our annual networking gala where alumni from all years gather to connect, share experiences, and build professional relationships. The event includes dinner, keynote speakers, and structured networking activities.',
+                    attendees: 68
+                },
+                // More events would be here in a real application
+            ],
+            past: [],
+            my: [],
+            hosting: []
+        };
+        
+        // Filter functions
+        function applyFilters() {
+            const type = document.getElementById('eventType').value;
+            const location = document.getElementById('eventLocation').value;
+            const date = document.getElementById('eventDate').value;
+            
+            console.log(`Applying filters: Type=${type}, Location=${location}, Date=${date}`);
+            showNotification('Filters applied successfully', 'success');
+            
+            // In a real application, this would filter the events
+            // For demo purposes, we'll just show a notification
+        }
+        
+        function resetFilters() {
+            document.getElementById('eventType').value = '';
+            document.getElementById('eventLocation').value = '';
+            document.getElementById('eventDate').value = '';
+            
+            console.log('Filters reset');
+            showNotification('Filters have been reset', 'info');
+        }
+        
+        // Tab switching
+        document.addEventListener('DOMContentLoaded', function() {
+            const tabs = document.querySelectorAll('.events-tab');
+            
+            tabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    // Remove active class from all tabs
+                    tabs.forEach(t => t.classList.remove('active'));
+                    
+                    // Add active class to clicked tab
+                    this.classList.add('active');
+                    
+                    // In a real application, this would switch the events displayed
+                    const tabType = this.getAttribute('data-tab');
+                    console.log(`Switched to ${tabType} events tab`);
+                });
+            });
+        });
+        
+        // Create event modal
+        function showCreateEventModal() {
+            showModal(
+                'Create New Event',
+                `
+                <div class="event-modal">
+                    <form id="createEventForm">
+                        <div class="event-form-group">
+                            <label for="eventTitle">Event Title</label>
+                            <input type="text" id="eventTitle" required>
+                        </div>
+                        
+                        <div class="event-form-row">
+                            <div class="event-form-group">
+                                <label for="eventTypeSelect">Event Type</label>
+                                <select id="eventTypeSelect" required>
+                                    <option value="">Select Type</option>
+                                    <option value="networking">Networking</option>
+                                    <option value="workshop">Workshop</option>
+                                    <option value="reunion">Reunion</option>
+                                    <option value="fundraising">Fundraising</option>
+                                    <option value="career">Career Fair</option>
+                                    <option value="social">Social Gathering</option>
+                                </select>
+                            </div>
+                            
+                            <div class="event-form-group">
+                                <label for="eventLocationSelect">Location Type</label>
+                                <select id="eventLocationSelect" required>
+                                    <option value="">Select Location Type</option>
+                                    <option value="campus">On Campus</option>
+                                    <option value="online">Virtual/Online</option>
+                                    <option value="local">Local Area</option>
+                                    <option value="regional">Regional</option>
+                                    <option value="international">International</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="event-form-row">
+                            <div class="event-form-group">
+                                <label for="eventDate">Event Date</label>
+                                <input type="date" id="eventDate" required>
+                            </div>
+                            
+                            <div class="event-form-group">
+                                <label for="eventTime">Event Time</label>
+                                <input type="time" id="eventTime" required>
+                            </div>
+                        </div>
+                        
+                        <div class="event-form-group">
+                            <label for="eventVenue">Venue/Address</label>
+                            <input type="text" id="eventVenue" required>
+                        </div>
+                        
+                        <div class="event-form-group">
+                            <label for="eventDescription">Event Description</label>
+                            <textarea id="eventDescription" required></textarea>
+                        </div>
+                    </form>
+                </div>
+                `,
+                [
+                    { text: 'Cancel', action: 'closeCurrentModal', className: 'btn-secondary' },
+                    { text: 'Create Event', action: 'submitEventForm', className: 'btn-primary' }
+                ]
+            );
+        }
+        
+        function submitEventForm() {
+            const form = document.getElementById('createEventForm');
+            if (form.checkValidity()) {
+                // In a real application, this would submit the form data to create an event
+                console.log('Creating new event...');
+                showNotification('Event created successfully!', 'success');
+                closeCurrentModal();
+            } else {
+                form.reportValidity();
+            }
+        }
+    </script>
+    <script src="common.js"></script>
+</body>
+</html>

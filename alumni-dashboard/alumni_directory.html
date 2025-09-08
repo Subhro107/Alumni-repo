@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alumni Directory | Alumni Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="common.css">
+    <style>
+        /* Alumni Directory Specific Styles */
+        .directory-filters {
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        .filter-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .filter-group {
+            flex: 1;
+            min-width: 200px;
+        }
+        
+        .filter-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+            color: #333;
+        }
+        
+        .filter-group select,
+        .filter-group input {
+            width: 100%;
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+        
+        .filter-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+        }
+        /* Base button */
+.btn {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+/* Secondary (Reset) */
+.btn-secondary {
+  background-color: #f1f1f1;
+  color: #333;
+}
+
+.btn-secondary:hover {
+  background-color: #e2e2e2;
+}
+
+/* Primary (Apply) */
+.btn-primary {
+  background-color: #007bff;
+  color: #fff;
+}
+
+.btn-primary:hover {
+  background-color: #0069d9;
+}
+
+/* Optional: slight hover "lift" */
+.btn:hover {
+  transform: translateY(-1px);
+}
+
+/* Keep them aligned */
+.filter-actions {
+  display: flex;
+  gap: 10px;   /* space between buttons */
+  margin-top: 10px;
+}
+
+         /*.alumni-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .alumni-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        
+        .alumni-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .alumni-header {
+            position: relative;
+            height: 80px;
+            background: linear-gradient(135deg, #4a6fdc, #6c8ff8);
+            color: white;
+            padding: 15px;
+        }
+        
+        .alumni-avatar {
+            position: absolute;
+            bottom: -30px;
+            left: 15px;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: #f0f0f0;
+            border: 3px solid white;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .alumni-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .alumni-avatar .initials {
+            font-size: 24px;
+            font-weight: bold;
+            color: #4a6fdc;
+        }
+        
+        .alumni-content {
+            padding: 20px 15px 15px;
+        }
+        
+        .alumni-name {
+            margin-top: 15px;
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        
+        .alumni-title {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+        
+        .alumni-company {
+            font-weight: 500;
+            margin-bottom: 15px;
+        }
+        
+        .alumni-class {
+            display: inline-block;
+            background-color: #f0f4ff;
+            color: #4a6fdc;
+            padding: 3px 10px;
+            border-radius: 15px;
+            font-size: 12px;
+            margin-bottom: 15px;
+        }
+        
+        .alumni-skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+            margin-bottom: 15px;
+        }
+        
+        .skill-tag {
+            background-color: #f5f5f7;
+            padding: 3px 8px;
+            border-radius: 3px;
+            font-size: 12px;
+            color: #555;
+        }
+        
+        .alumni-actions {
+            display: flex;
+            justify-content: space-between;
+            border-top: 1px solid #eee;
+            padding-top: 15px;
+            margin-top: 10px;
+        }
+        
+        .alumni-action-btn {
+            background: none;
+            border: none;
+            color: #4a6fdc;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 13px;
+            padding: 5px;
+        }
+        
+        .alumni-action-btn:hover {
+            color: #2a4fbc;
+        }
+        
+        .pagination {
+            display: flex;
+            justify-content: center;
+            margin-top: 30px;
+            gap: 5px;
+        }
+        
+        .pagination-btn {
+            width: 35px;
+            height: 35px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: white;
+            cursor: pointer;
+        }
+        
+        .pagination-btn.active {
+            background-color: #4a6fdc;
+            color: white;
+            border-color: #4a6fdc;
+        }
+        
+        .pagination-btn:hover:not(.active) {
+            background-color: #f5f5f7;
+        }
+        
+        @media (max-width: 768px) {
+            .filter-row {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .alumni-grid {
+                grid-template-columns: 1fr;
+            }
+        } */
+    </style>
+</head>
+<body>
+    <!-- Top Header -->
+    <div class="top-header">
+        <div class="logo-section">
+            <div class="logo">
+                <div class="logo-icon">AU</div>
+                <span class="logo-text">Alumni Connect</span>
+            </div>
+        </div>
+        
+        <div class="header-right">
+            <div class="search-bar">
+                <input type="text" class="search-input" placeholder="Search alumni, events...">
+                <i class="fas fa-search search-icon"></i>
+            </div>
+            <button class="notification-icon">
+                <i class="fas fa-bell"></i>
+                <span class="notification-badge">3</span>
+            </button>
+            <div class="user-info">
+                <div class="user-avatar">👤</div>
+                <span class="user-name">Alumni User</span>
+            </div>
+        </div>
+    </div>
+    
+    <div class="container">
+        <!-- Sidebar -->
+        <nav class="sidebar">
+            <a href="alumni_dashboard.html" class="nav-item">
+                <i class="fas fa-th-large"></i>
+                Dashboard
+            </a>
+            <a href="alumni_directory.html" class="nav-item active">
+                <i class="fas fa-users"></i>
+                Alumni Directory
+            </a>
+            <a href="alumni_events.html" class="nav-item">
+                <i class="fas fa-calendar"></i>
+                Events
+            </a>
+            <a href="alumni_forum.html" class="nav-item">
+                <i class="fas fa-comments"></i>
+                Forums
+            </a>
+            <a href="alumni_mentorship.html" class="nav-item">
+                <i class="fas fa-user-graduate"></i>
+                Mentorship
+            </a>
+            <a href="alumni_career.html" class="nav-item">
+                <i class="fas fa-briefcase"></i>
+                Career
+            </a>
+            <a href="alumni_giveback.html" class="nav-item">
+                <i class="fas fa-hand-holding-heart"></i>
+                Give Back
+            </a>
+            <a href="alumni_profile.html" class="nav-item">
+                <i class="fas fa-cog"></i>
+                Settings
+            </a>
+        </nav>
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="welcome-section">
+                <h1 class="welcome-title">Alumni Directory</h1>
+                <p class="welcome-subtitle">Connect with fellow alumni from around the world</p>
+            </div>
+            <!-- Directory Filters -->
+            <section class="directory-filters">
+                <div class="filter-row">
+                    <div class="filter-group">
+                        <label for="graduationYear">Graduation Year</label>
+                        <select id="graduationYear">
+                            <option value="">All Years</option>
+                            <option value="2023">2023</option>
+                            <option value="2022">2022</option>
+                            <option value="2021">2021</option>
+                            <option value="2020">2020</option>
+                            <option value="2019">2019</option>
+                            <option value="2018">2018</option>
+                            <option value="2017">2017</option>
+                            <option value="2016">2016</option>
+                            <option value="2015">2015</option>
+                            <option value="older">Before 2015</option>
+                        </select>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <label for="industry">Industry</label>
+                        <select id="industry">
+                            <option value="">All Industries</option>
+                            <option value="technology">Technology</option>
+                            <option value="finance">Finance</option>
+                            <option value="healthcare">Healthcare</option>
+                            <option value="education">Education</option>
+                            <option value="manufacturing">Manufacturing</option>
+                            <option value="retail">Retail</option>
+                            <option value="consulting">Consulting</option>
+                            <option value="nonprofit">Non-profit</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <label for="location">Location</label>
+                        <select id="location">
+                            <option value="">All Locations</option>
+                            <option value="usa">United States</option>
+                            <option value="canada">Canada</option>
+                            <option value="uk">United Kingdom</option>
+                            <option value="europe">Europe</option>
+                            <option value="asia">Asia</option>
+                            <option value="australia">Australia</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="filter-row">
+                    <div class="filter-group">
+                        <label for="skills">Skills</label>
+                        <input type="text" id="skills" placeholder="e.g. Leadership, Marketing, Data Analysis">
+                    </div>
+                    
+                    <div class="filter-group">
+                        <label for="company">Company</label>
+                        <input type="text" id="company" placeholder="e.g. Google, Microsoft, Amazon">
+                    </div>
+                </div>
+                
+                <div class="filter-actions">
+                    <button class="btn btn-secondary" onclick="resetFilters()">Reset Filters</button>
+                    <button class="btn btn-primary" onclick="applyFilters()">Apply Filters</button>
+                </div>
+            </section>
+            
+            <!-- Alumni Grid -->
+            <!-- <section class="alumni-grid"> -->
+                <!-- Alumni Card 1 -->
+                <!-- <div class="alumni-card">
+                    <div class="alumni-header">
+                        <div class="alumni-avatar">
+                            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Michael Chen">
+                        </div>
+                    </div>
+                    <div class="alumni-content">
+                        <h3 class="alumni-name">Michael Chen</h3>
+                        <p class="alumni-title">Senior Software Engineer</p>
+                        <p class="alumni-company">Google</p>
+                        <span class="alumni-class">Class of 2018</span>
+                        <div class="alumni-skills">
+                            <span class="skill-tag">Machine Learning</span>
+                            <span class="skill-tag">Python</span>
+                            <span class="skill-tag">Cloud Computing</span>
+                        </div>
+                        <div class="alumni-actions">
+                            <button class="alumni-action-btn">
+                                <i class="fas fa-envelope"></i>
+                                <span>Message</span>
+                            </button>
+                            <button class="alumni-action-btn">
+                                <i class="fas fa-user-plus"></i>
+                                <span>Connect</span>
+                            </button>
+                        </div>
+                    </div>
+                </div> -->
+                
+                <!-- Alumni Card 2 -->
+                <!-- <div class="alumni-card">
+                    <div class="alumni-header">
+                        <div class="alumni-avatar">
+                            <img src="https://randomuser.me/api/portraits/women/28.jpg" alt="Jessica Williams">
+                        </div>
+                    </div>
+                    <div class="alumni-content">
+                        <h3 class="alumni-name">Jessica Williams</h3>
+                        <p class="alumni-title">Marketing Director</p>
+                        <p class="alumni-company">Adobe</p>
+                        <span class="alumni-class">Class of 2015</span>
+                        <div class="alumni-skills">
+                            <span class="skill-tag">Digital Marketing</span>
+                            <span class="skill-tag">Brand Strategy</span>
+                            <span class="skill-tag">Analytics</span>
+                        </div>
+                        <div class="alumni-actions">
+                            <button class="alumni-action-btn">
+                                <i class="fas fa-envelope"></i>
+                                <span>Message</span>
+                            </button>
+                            <button class="alumni-action-btn">
+                                <i class="fas fa-user-plus"></i>
+                                <span>Connect</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                 -->
+                <!-- Alumni Card 3 -->
+                <!-- <div class="alumni-card">
+                    <div class="alumni-header">
+                        <div class="alumni-avatar">
+                            <img src="https://randomuser.me/api/portraits/men/45.jpg" alt="David Rodriguez">
+                        </div>
+                    </div>
+                    <div class="alumni-content">
+                        <h3 class="alumni-name">David Rodriguez</h3>
+                        <p class="alumni-title">Financial Analyst</p>
+                        <p class="alumni-company">JP Morgan Chase</p>
+                        <span class="alumni-class">Class of 2020</span>
+                        <div class="alumni-skills">
+                            <span class="skill-tag">Financial Modeling</span>
+                            <span class="skill-tag">Investment</span>
+                            <span class="skill-tag">Excel</span>
+                        </div>
+                        <div class="alumni-actions">
+                            <button class="alumni-action-btn">
+                                <i class="fas fa-envelope"></i>
+                                <span>Message</span>
+                            </button>
+                            <button class="alumni-action-btn">
+                                <i class="fas fa-user-plus"></i>
+                                <span>Connect</span>
+                            </button>
+                        </div>
+                    </div>
+                </div> -->
+                
+                <!-- Alumni Card 4 -->
+                <!-- <div class="alumni-card">
+                    <div class="alumni-header">
+                        <div class="alumni-avatar">
+                            <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="Priya Patel">
+                        </div>
+                    </div>
+                    <div class="alumni-content">
+                        <h3 class="alumni-name">Priya Patel</h3>
+                        <p class="alumni-title">Product Manager</p>
+                        <p class="alumni-company">Microsoft</p>
+                        <span class="alumni-class">Class of 2019</span>
+                        <div class="alumni-skills">
+                            <span class="skill-tag">Product Strategy</span>
+                            <span class="skill-tag">UX Design</span>
+                            <span class="skill-tag">Agile</span>
+                        </div>
+                        <div class="alumni-actions">
+                            <button class="alumni-action-btn">
+                                <i class="fas fa-envelope"></i>
+                                <span>Message</span>
+                            </button>
+                            <button class="alumni-action-btn">
+                                <i class="fas fa-user-plus"></i>
+                                <span>Connect</span>
+                            </button>
+                        </div>
+                    </div>
+                </div> -->
+                
+                <!-- Alumni Card 5 -->
+                <!-- <div class="alumni-card">
+                    <div class="alumni-header">
+                        <div class="alumni-avatar">
+                            <img src="https://randomuser.me/api/portraits/men/22.jpg" alt="James Wilson">
+                        </div>
+                    </div>
+                    <div class="alumni-content">
+                        <h3 class="alumni-name">James Wilson</h3>
+                        <p class="alumni-title">Healthcare Consultant</p>
+                        <p class="alumni-company">Deloitte</p>
+                        <span class="alumni-class">Class of 2017</span>
+                        <div class="alumni-skills">
+                            <span class="skill-tag">Healthcare</span>
+                            <span class="skill-tag">Consulting</span>
+                            <span class="skill-tag">Data Analysis</span>
+                        </div>
+                        <div class="alumni-actions">
+                            <button class="alumni-action-btn">
+                                <i class="fas fa-envelope"></i>
+                                <span>Message</span>
+                            </button>
+                            <button class="alumni-action-btn">
+                                <i class="fas fa-user-plus"></i>
+                                <span>Connect</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                 -->
+                <!-- Alumni Card 6 -->
+                <!-- <div class="alumni-card">
+                    <div class="alumni-header">
+                        <div class="alumni-avatar">
+                            <img src="https://randomuser.me/api/portraits/women/33.jpg" alt="Emma Thompson">
+                        </div>
+                    </div>
+                    <div class="alumni-content">
+                        <h3 class="alumni-name">Emma Thompson</h3>
+                        <p class="alumni-title">UX Designer</p>
+                        <p class="alumni-company">Apple</p>
+                        <span class="alumni-class">Class of 2021</span>
+                        <div class="alumni-skills">
+                            <span class="skill-tag">UI/UX</span>
+                            <span class="skill-tag">Figma</span>
+                            <span class="skill-tag">User Research</span>
+                        </div>
+                        <div class="alumni-actions">
+                            <button class="alumni-action-btn">
+                                <i class="fas fa-envelope"></i>
+                                <span>Message</span>
+                            </button>
+                            <button class="alumni-action-btn">
+                                <i class="fas fa-user-plus"></i>
+                                <span>Connect</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section> -->
+            
+            <!-- Pagination -->
+            <!-- <div class="pagination">
+                <button class="pagination-btn"><i class="fas fa-chevron-left"></i></button>
+                <button class="pagination-btn active">1</button>
+                <button class="pagination-btn">2</button>
+                <button class="pagination-btn">3</button>
+                <button class="pagination-btn">4</button>
+                <button class="pagination-btn">5</button>
+                <button class="pagination-btn"><i class="fas fa-chevron-right"></i></button>
+            </div> -->
+        </main>
+    </div>
+    
+    <!-- JavaScript -->
+    <script>
+        // Sample alumni data for demonstration
+        const alumniData = [
+            {
+                id: 'alumni1',
+                name: 'Michael Chen',
+                title: 'Senior Software Engineer',
+                company: 'Google',
+                class: '2018',
+                skills: ['Machine Learning', 'Python', 'Cloud Computing'],
+                industry: 'technology',
+                location: 'usa',
+                avatar: 'https://randomuser.me/api/portraits/men/32.jpg'
+            },
+            {
+                id: 'alumni2',
+                name: 'Jessica Williams',
+                title: 'Marketing Director',
+                company: 'Adobe',
+                class: '2015',
+                skills: ['Digital Marketing', 'Brand Strategy', 'Analytics'],
+                industry: 'technology',
+                location: 'usa',
+                avatar: 'https://randomuser.me/api/portraits/women/28.jpg'
+            },
+            // More alumni data would be here in a real application
+        ];
+        
+        // Filter functions
+        function applyFilters() {
+            const year = document.getElementById('graduationYear').value;
+            const industry = document.getElementById('industry').value;
+            const location = document.getElementById('location').value;
+            const skills = document.getElementById('skills').value.toLowerCase();
+            const company = document.getElementById('company').value.toLowerCase();
+            
+            console.log(`Applying filters: Year=${year}, Industry=${industry}, Location=${location}, Skills=${skills}, Company=${company}`);
+            showNotification('Filters applied successfully', 'success');
+            
+            // In a real application, this would filter the alumni cards
+            // For demo purposes, we'll just show a notification
+        }
+        
+        function resetFilters() {
+            document.getElementById('graduationYear').value = '';
+            document.getElementById('industry').value = '';
+            document.getElementById('location').value = '';
+            document.getElementById('skills').value = '';
+            document.getElementById('company').value = '';
+            
+            console.log('Filters reset');
+            showNotification('Filters have been reset', 'info');
+        }
+    </script>
+    <script src="common.js"></script>
+</body>
+</html>
