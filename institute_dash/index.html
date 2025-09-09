@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BP Poddar Institute of Management and Technology Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    
+    <div class="container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="logo">
+                <div class="logo-circle">AC</div>
+                <div class="logo-text">
+                    <h2>Alumni Connect</h2>
+                </div>
+            </div>
+            <nav>
+                <ul>
+                    <li class="active"><a href="#"><i class="fas fa-th-large"></i> Dashboard</a></li>
+                    <li><a href="alumni.html"><i class="fas fa-graduation-cap"></i> Alumni</a></li>
+                    <li><a href="faculty.html"><i class="fas fa-users"></i> Faculty</a></li>
+                    <li><a href="students.html"><i class="fas fa-user-graduate"></i> Students</a></li>
+                    <li><a href="calendar.html"><i class="fas fa-calendar-alt"></i> Calendar</a></li>
+                    <li><a href="performance.html"><i class="fas fa-chart-line"></i> Performance</a></li>
+                    <li><a href="announcements.html"><i class="fas fa-bullhorn"></i> Announcements</a></li>
+                    <li><a href="departments.html"><i class="fas fa-building"></i> Departments</a></li>
+                    <li><a href="settings.html"><i class="fas fa-cog"></i> Settings</a></li>
+                </ul>
+            </nav>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Header -->
+            <div class="header">
+                <div class="header-left">
+                    <div class="logo-circle">BPPIMT</div>
+                    <div class="logo-text">
+                    <h2>BP Poddar Institute</h2>
+                    <p class="institute-motto">Management and Technology (BPPIMT), Kolkata</p>
+                </div>
+                </div>
+                <div class="header-right">
+                    <div class="search-container">
+                        <form>
+                            <input type="text" placeholder="Search resources..." class="search-input">
+                            <button type="submit" class="search-btn"><i class="fas fa-search"></i></button>
+                        </form>
+                    </div>
+                    <div class="notifications">
+                        <i class="fas fa-bell"></i>
+                        <span class="badge">3</span>
+                    </div>
+                    <div class="user-profile" id="userProfileBtn">
+                        <span class="name">Institution</span>
+                        <i class="fas fa-chevron-down dropdown-arrow"></i>
+                    </div>
+                    <div class="user-dropdown" id="userDropdown">
+                        <div class="user-info">
+                            <div class="user-avatar">I</div>
+                            <div class="user-details">
+                                <div class="user-name">Institution Admin</div>
+                                <div class="user-email">admin@bppimt.edu.in</div>
+                            </div>
+                        </div>
+                        <div class="dropdown-divider"></div>
+                        <a href="#" class="dropdown-item">
+                            <i class="fas fa-user"></i>
+                            <span>Profile Info</span>
+                        </a>
+                        <a href="#" class="dropdown-item">
+                            <i class="fas fa-cog"></i>
+                            <span>Account Settings</span>
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a href="#" class="dropdown-item logout-item">
+                            <i class="fas fa-sign-out-alt"></i>
+                            <span>Logout</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Welcome Section -->
+            <div class="welcome-section">
+                <h1>Welcome to BPPIMT Dashboard</h1>
+                <p>Here's what's happening at our institution</p>
+            </div>
+
+            <!-- Stats Cards -->
+            <div class="stats-container">
+                <div class="stat-card">
+                    <div class="stat-info">
+                        <h3>Students</h3>
+                        <div class="stat-number">3,850</div>
+                        <div class="stat-description">Currently enrolled</div>
+                    </div>
+                    <div class="stat-icon"><i class="fas fa-user-graduate"></i></div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-info">
+                        <h3>Alumni</h3>
+                        <div class="stat-number">1457</div>
+                        <div class="stat-description">Total alumni</div>
+                    </div>
+                    <div class="stat-icon"><i class="fas fa-graduation-cap"></i></div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-info">
+                        <h3>Courses</h3>
+                        <div class="stat-number">42</div>
+                        <div class="stat-description">Active programs</div>
+                    </div>
+                    <div class="stat-icon"><i class="fas fa-book"></i></div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-info">
+                        <h3>Faculty</h3>
+                        <div class="stat-number">175</div>
+                        <div class="stat-description">Teaching staff</div>
+                    </div>
+                    <div class="stat-icon"><i class="fas fa-chalkboard-teacher"></i></div>
+                </div>
+            </div>
+
+            <!-- Content Sections -->
+            <div class="content-sections">
+                <!-- Institutional Announcements -->
+                <div class="section recent-activity">
+                    <h2>Institutional Announcements</h2>
+                    <div class="activity-timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-marker blue"></div>
+                            <div class="timeline-content">
+                                <h4>NAAC Accreditation Achievement</h4>
+                            <p>BPPIMT has been awarded A+ grade by NAAC in the latest assessment cycle</p>
+                                <span class="time">2 days ago</span>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-marker green"></div>
+                            <div class="timeline-content">
+                                <h4>Faculty Development Program</h4>
+                                <p>Three-day workshop on AI in Education starting next Monday</p>
+                                <span class="time">1 week ago</span>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-marker yellow"></div>
+                            <div class="timeline-content">
+                                <h4>Research Grant Approved</h4>
+                                <p>₹25 Lakhs sanctioned for Smart Campus Initiative by Ministry of Education</p>
+                                <span class="time">2 weeks ago</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Actions -->
+                <div class="section quick-actions">
+                    <h2>Quick Actions</h2>
+                    <div class="action-buttons">
+                        <button class="action-btn blue-light">
+                            <i class="fas fa-bullhorn"></i>
+                            <span>Publish Notice</span>
+                        </button>
+                        <button class="action-btn green-light">
+                            <i class="fas fa-calendar-alt"></i>
+                            <span>Update Timetable</span>
+                        </button>
+                        <button class="action-btn yellow-light">
+                            <i class="fas fa-user-check"></i>
+                            <span>Manage Attendance</span>
+                        </button>
+                        <button class="action-btn pink-light">
+                            <i class="fas fa-chart-bar"></i>
+                            <span>Academic Reports</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+              
+              <!-- Academic Calendar Section -->
+              <div class="section calendar-section">
+                  <h2>Academic Calendar</h2>
+                  <div class="calendar-events">
+                      <div class="calendar-event">
+                          <div class="event-date">
+                              <span class="event-month">JUN</span>
+                              <span class="event-day">15</span>
+                          </div>
+                          <div class="event-details">
+                              <h4>End Semester Examinations</h4>
+                              <p>Final examinations for all departments</p>
+                          </div>
+                      </div>
+                      <div class="calendar-event">
+                          <div class="event-date">
+                              <span class="event-month">JUL</span>
+                              <span class="event-day">05</span>
+                          </div>
+                          <div class="event-details">
+                              <h4>Summer Break Begins</h4>
+                              <p>Campus closed for summer vacation</p>
+                          </div>
+                      </div>
+                      <div class="calendar-event">
+                          <div class="event-date">
+                              <span class="event-month">AUG</span>
+                              <span class="event-day">10</span>
+                          </div>
+                          <div class="event-details">
+                              <h4>New Academic Year</h4>
+                              <p>Classes begin for all students</p>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              
+              <!-- Faculty Directory Section -->
+              <div class="section faculty-section">
+                  <h2>Faculty Directory</h2>
+                  <div class="faculty-grid">
+                      <div class="faculty-card">
+                          <div class="faculty-avatar">DR</div>
+                          <div class="faculty-info">
+                              <h4>Dr. Rajesh Kumar</h4>
+                              <p class="faculty-title">Professor & HOD</p>
+                              <p class="faculty-dept">Computer Science</p>
+                          </div>
+                      </div>
+                      <div class="faculty-card">
+                          <div class="faculty-avatar">SP</div>
+                          <div class="faculty-info">
+                              <h4>Dr. Sunita Patel</h4>
+                              <p class="faculty-title">Associate Professor</p>
+                              <p class="faculty-dept">Electronics & Communication</p>
+                          </div>
+                      </div>
+                      <div class="faculty-card">
+                          <div class="faculty-avatar">AM</div>
+                          <div class="faculty-info">
+                              <h4>Dr. Arun Mehta</h4>
+                              <p class="faculty-title">Assistant Professor</p>
+                              <p class="faculty-dept">Mechanical Engineering</p>
+                          </div>
+                      </div>
+                      <div class="faculty-card">
+                          <div class="faculty-avatar">PG</div>
+                          <div class="faculty-info">
+                              <h4>Dr. Priya Gupta</h4>
+                              <p class="faculty-title">Professor</p>
+                              <p class="faculty-dept">Civil Engineering</p>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

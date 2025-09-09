@@ -463,6 +463,24 @@ body {
         transform: scale(1.07);
 }
 
+.institution-btn {
+    display: inline-block;
+    padding: 1rem 2rem;
+    background: linear-gradient(135deg, #8e44ad, #9b59b6);
+    color: white;
+    text-decoration: none;
+    border-radius: 25px;
+    transition: all 0.3s ease;
+    font-weight: 500;
+    margin-left: 0.5rem;
+}
+
+.institution-btn:hover {
+    background: linear-gradient(135deg, #9b59b6, #8e44ad);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(142, 68, 173, 0.4);
+}
+
 /* Hero Section */
 .hero {
     height: 100vh;

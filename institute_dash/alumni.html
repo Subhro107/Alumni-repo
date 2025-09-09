@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alumni - BP Poddar Institute of Management and Technology</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="logo">
+                <div class="logo-circle">AC</div>
+                <div class="logo-text">
+                    <h2>Alumni Connect</h2>
+                </div>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html"><i class="fas fa-th-large"></i> Dashboard</a></li>
+                    <li class="active"><a href="alumni.html"><i class="fas fa-graduation-cap"></i> Alumni</a></li>
+                    <li><a href="faculty.html"><i class="fas fa-users"></i> Faculty</a></li>
+                    <li><a href="students.html"><i class="fas fa-user-graduate"></i> Students</a></li>
+                    <li><a href="calendar.html"><i class="fas fa-calendar-alt"></i> Calendar</a></li>
+                    <li><a href="performance.html"><i class="fas fa-chart-line"></i> Performance</a></li>
+                    <li><a href="announcements.html"><i class="fas fa-bullhorn"></i> Announcements</a></li>
+                    <li><a href="departments.html"><i class="fas fa-building"></i> Departments</a></li>
+                    <li><a href="settings.html"><i class="fas fa-cog"></i> Settings</a></li>
+                </ul>
+            </nav>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Header -->
+            <div class="header">
+                <div class="header-left">
+                    <div class="logo-circle">BPPIMT</div>
+                    <div class="logo-text">
+                        <h2>BP Poddar Institute</h2>
+                        <p class="institute-motto">Management and Technology (BPPIMT), Kolkata</p>
+                    </div>
+                </div>
+                <div class="header-right">
+                    <div class="search-container">
+                        <form>
+                            <input type="text" placeholder="Search alumni..." class="search-input">
+                            <button type="submit" class="search-btn"><i class="fas fa-search"></i></button>
+                        </form>
+                    </div>
+                    <div class="notifications">
+                        <i class="fas fa-bell"></i>
+                        <span class="badge">3</span>
+                    </div>
+                    <div class="user-profile" id="userProfileBtn">
+                        <span class="name">Institution</span>
+                        <i class="fas fa-chevron-down dropdown-arrow"></i>
+                    </div>
+                    <div class="user-dropdown" id="userDropdown">
+                        <div class="user-info">
+                            <div class="user-avatar">I</div>
+                            <div class="user-details">
+                                <div class="user-name">Institution Admin</div>
+                                <div class="user-email">admin@bppimt.edu.in</div>
+                            </div>
+                        </div>
+                        <div class="dropdown-divider"></div>
+                        <a href="#" class="dropdown-item">
+                            <i class="fas fa-user"></i>
+                            <span>Profile Settings</span>
+                        </a>
+                        <a href="#" class="dropdown-item">
+                            <i class="fas fa-cog"></i>
+                            <span>Account Settings</span>
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a href="#" class="dropdown-item logout-item">
+                            <i class="fas fa-sign-out-alt"></i>
+                            <span>Logout</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Page Content -->
+            <div class="page-content">
+                <h1>Alumni</h1>
+                <p>Welcome to the Alumni section. Here you can find information about alumni events, networking opportunities, and resources for former students.</p>
+                <!-- Add more content as needed -->
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

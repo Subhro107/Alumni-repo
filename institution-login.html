@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Institution Login - Alumni Connect</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .institution-container {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(rgba(44, 62, 80, 0.9), rgba(44, 62, 80, 0.9)),
+                        url('https://source.unsplash.com/random/1920x1080?university-building') center/cover;
+        }
+
+        .institution-box {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+            width: 100%;
+            max-width: 500px;
+            margin: 1rem;
+        }
+
+        .institution-box h2 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 1rem;
+            font-size: 1.8rem;
+        }
+
+        .institution-box .subtitle {
+            text-align: center;
+            color: #7f8c8d;
+            margin-bottom: 2rem;
+            font-size: 0.9rem;
+        }
+
+        .auth-toggle {
+            display: flex;
+            background: #f8f9fa;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+            padding: 4px;
+        }
+
+        .auth-toggle button {
+            flex: 1;
+            padding: 0.8rem;
+            border: none;
+            background: transparent;
+            color: #666;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .auth-toggle button.active {
+            background: #3498db;
+            color: white;
+            box-shadow: 0 2px 4px rgba(52, 152, 219, 0.3);
+        }
+
+        .form-section {
+            display: none;
+        }
+
+        .form-section.active {
+            display: block;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #2c3e50;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+
+        .form-group.required label::after {
+            content: "*";
+            color: #e74c3c;
+            margin-left: 4px;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .form-row .form-group {
+            flex: 1;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.9rem;
+            border: 2px solid #ecf0f1;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+            box-sizing: border-box;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #3498db;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        .password-container {
+            position: relative;
+        }
+
+        .password-container input {
+            padding-right: 45px;
+        }
+
+        .password-toggle {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: #666;
+            cursor: pointer;
+            font-size: 1rem;
+            padding: 8px;
+            border-radius: 4px;
+        }
+
+        .institution-type {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 0.8rem;
+            margin-top: 0.5rem;
+        }
+
+        .type-option {
+            display: flex;
+            align-items: center;
+            padding: 0.7rem;
+            border: 2px solid #ecf0f1;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .type-option:hover {
+            border-color: #3498db;
+            background: #f8fbff;
+        }
+
+        .type-option input[type="radio"] {
+            margin-right: 0.5rem;
+        }
+
+        .type-option.selected {
+            border-color: #3498db;
+            background: #f8fbff;
+        }
+
+        .submit-btn {
+            width: 100%;
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            border: none;
+            padding: 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(52, 152, 219, 0.4);
+        }
+
+        .submit-btn:disabled {
+            background: #bdc3c7;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 1.5rem;
+            color: #2c3e50;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+        }
+
+        .back-link:hover {
+            color: #3498db;
+        }
+
+        .terms-checkbox {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.5rem;
+            margin: 1rem 0;
+            font-size: 0.9rem;
+            color: #555;
+        }
+
+        .terms-checkbox input[type="checkbox"] {
+            margin-top: 2px;
+        }
+
+        .terms-checkbox a {
+            color: #3498db;
+            text-decoration: none;
+        }
+
+        .terms-checkbox a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .institution-box {
+                padding: 1.5rem;
+                margin: 0.5rem;
+            }
+
+            .form-row {
+                flex-direction: column;
+                gap: 0;
+            }
+
+            .institution-type {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .institution-type {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="institution-container">
+        <div class="institution-box">
+            <h2><i class="fas fa-university"></i> Institution Portal</h2>
+            <p class="subtitle">Manage your educational institution on Alumni Connect</p>
+            
+            <!-- Auth Toggle -->
+            <div class="auth-toggle">
+                <button type="button" class="active" onclick="showForm('login')">Login</button>
+                <button type="button" onclick="showForm('signup')">Register Institution</button>
+            </div>
+
+            <!-- Login Form -->
+            <div id="loginForm" class="form-section active">
+                <form id="institutionLoginForm">
+                    <div class="form-group required">
+                        <label for="loginEmail">Institution Email</label>
+                        <input type="email" id="loginEmail" name="email" placeholder="admin@yourinstitution.edu" required>
+                    </div>
+                    
+                    <div class="form-group required">
+                        <label for="loginPassword">Password</label>
+                        <div class="password-container">
+                            <input type="password" id="loginPassword" name="password" placeholder="Enter your password" required>
+                            <button type="button" class="password-toggle" onclick="togglePassword('loginPassword')">
+                                <i class="fas fa-eye-slash"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="submit-btn">
+                        <i class="fas fa-sign-in-alt"></i> Login to Dashboard
+                    </button>
+                </form>
+            </div>
+
+            <!-- Signup Form -->
+            <div id="signupForm" class="form-section">
+                <form id="institutionSignupForm">
+                    <!-- Institution Basic Info -->
+                    <div class="form-group required">
+                        <label for="institutionName">Institution Name</label>
+                        <input type="text" id="institutionName" name="institutionName" placeholder="University of Example" required>
+                    </div>
+
+                    <div class="form-group required">
+                        <label>Institution Type</label>
+                        <div class="institution-type">
+                            <div class="type-option" onclick="selectInstitutionType('university')">
+                                <input type="radio" name="institutionType" value="university" id="typeUniversity">
+                                <label for="typeUniversity">University</label>
+                            </div>
+                            <div class="type-option" onclick="selectInstitutionType('college')">
+                                <input type="radio" name="institutionType" value="college" id="typeCollege">
+                                <label for="typeCollege">College</label>
+                            </div>
+                            <div class="type-option" onclick="selectInstitutionType('institute')">
+                                <input type="radio" name="institutionType" value="institute" id="typeInstitute">
+                                <label for="typeInstitute">Institute</label>
+                            </div>
+                            <div class="type-option" onclick="selectInstitutionType('school')">
+                                <input type="radio" name="institutionType" value="school" id="typeSchool">
+                                <label for="typeSchool">School</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group required">
+                            <label for="establishedYear">Established Year</label>
+                            <input type="number" id="establishedYear" name="establishedYear" min="1800" max="2025" placeholder="1950" required>
+                        </div>
+                        <div class="form-group required">
+                            <label for="studentCount">Total Students</label>
+                            <select id="studentCount" name="studentCount" required>
+                                <option value="">Select Range</option>
+                                <option value="0-500">0 - 500</option>
+                                <option value="501-1000">501 - 1,000</option>
+                                <option value="1001-5000">1,001 - 5,000</option>
+                                <option value="5001-10000">5,001 - 10,000</option>
+                                <option value="10000+">10,000+</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Contact Information -->
+                    <div class="form-group required">
+                        <label for="institutionEmail">Official Email</label>
+                        <input type="email" id="institutionEmail" name="email" placeholder="admin@yourinstitution.edu" required>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group required">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone" name="phone" placeholder="+1 (555) 123-4567" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="website">Website</label>
+                            <input type="url" id="website" name="website" placeholder="https://www.yourinstitution.edu">
+                        </div>
+                    </div>
+
+                    <!-- Address -->
+                    <div class="form-group required">
+                        <label for="address">Address</label>
+                        <textarea id="address" name="address" placeholder="123 University Ave, City, State, Country" required></textarea>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group required">
+                            <label for="city">City</label>
+                            <input type="text" id="city" name="city" placeholder="New York" required>
+                        </div>
+                        <div class="form-group required">
+                            <label for="country">Country</label>
+                            <select id="country" name="country" required>
+                                <option value="">Select Country</option>
+                                <option value="US">United States</option>
+                                <option value="CA">Canada</option>
+                                <option value="UK">United Kingdom</option>
+                                <option value="AU">Australia</option>
+                                <option value="IN">India</option>
+                                <option value="DE">Germany</option>
+                                <option value="FR">France</option>
+                                <option value="JP">Japan</option>
+                                <option value="CN">China</option>
+                                <option value="BR">Brazil</option>
+                                <option value="OTHER">Other</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Admin Account -->
+                    <div class="form-group required">
+                        <label for="adminName">Administrator Name</label>
+                        <input type="text" id="adminName" name="adminName" placeholder="John Doe" required>
+                    </div>
+
+                    <div class="form-group required">
+                        <label for="adminTitle">Administrator Title</label>
+                        <input type="text" id="adminTitle" name="adminTitle" placeholder="Dean of Students, IT Director, etc." required>
+                    </div>
+
+                    <div class="form-group required">
+                        <label for="signupPassword">Password</label>
+                        <div class="password-container">
+                            <input type="password" id="signupPassword" name="password" placeholder="Create a strong password" required>
+                            <button type="button" class="password-toggle" onclick="togglePassword('signupPassword')">
+                                <i class="fas fa-eye-slash"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="form-group required">
+                        <label for="confirmPassword">Confirm Password</label>
+                        <div class="password-container">
+                            <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm your password" required>
+                            <button type="button" class="password-toggle" onclick="togglePassword('confirmPassword')">
+                                <i class="fas fa-eye-slash"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Terms and Conditions -->
+                    <div class="terms-checkbox">
+                        <input type="checkbox" id="agreeTerms" name="agreeTerms" required>
+                        <label for="agreeTerms">
+                            I agree to the <a href="#" target="_blank">Terms of Service</a> and 
+                            <a href="#" target="_blank">Privacy Policy</a> for institutional use of Alumni Connect.
+                        </label>
+                    </div>
+
+                    <button type="submit" class="submit-btn">
+                        <i class="fas fa-university"></i> Register Institution
+                    </button>
+                </form>
+            </div>
+
+            <a href="index.html" class="back-link">
+                <i class="fas fa-arrow-left"></i> Back to Home
+            </a>
+        </div>
+    </div>
+
+    <script src="assets/js/app.js"></script>
+    <script>
+        // Form switching functionality
+        function showForm(formType) {
+            const loginForm = document.getElementById('loginForm');
+            const signupForm = document.getElementById('signupForm');
+            const buttons = document.querySelectorAll('.auth-toggle button');
+
+            // Remove active class from all buttons
+            buttons.forEach(btn => btn.classList.remove('active'));
+
+            if (formType === 'login') {
+                loginForm.classList.add('active');
+                signupForm.classList.remove('active');
+                buttons[0].classList.add('active');
+            } else {
+                signupForm.classList.add('active');
+                loginForm.classList.remove('active');
+                buttons[1].classList.add('active');
+            }
+        }
+
+        // Institution type selection
+        function selectInstitutionType(type) {
+            // Remove selected class from all options
+            document.querySelectorAll('.type-option').forEach(option => {
+                option.classList.remove('selected');
+            });
+
+            // Add selected class to clicked option
+            event.currentTarget.classList.add('selected');
+
+            // Check the radio button
+            document.getElementById(`type${type.charAt(0).toUpperCase() + type.slice(1)}`).checked = true;
+        }
+
+        // Password toggle functionality
+        function togglePassword(inputId) {
+            const passwordInput = document.getElementById(inputId);
+            const toggleButton = passwordInput.nextElementSibling;
+            const icon = toggleButton.querySelector('i');
+
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                icon.classList.remove('fa-eye-slash');
+                icon.classList.add('fa-eye');
+            } else {
+                passwordInput.type = 'password';
+                icon.classList.remove('fa-eye');
+                icon.classList.add('fa-eye-slash');
+            }
+        }
+
+        // Form validation and submission
+        document.addEventListener('DOMContentLoaded', function() {
+            const loginForm = document.getElementById('institutionLoginForm');
+            const signupForm = document.getElementById('institutionSignupForm');
+
+            // Login form submission
+            loginForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const email = document.getElementById('loginEmail').value;
+                const password = document.getElementById('loginPassword').value;
+
+                // Demo credentials for testing
+                if (email === 'admin@demo.edu' && password === 'institution123') {
+                    // Store session data
+                    localStorage.setItem('institutionSession', JSON.stringify({
+                        type: 'institution',
+                        email: email,
+                        loginTime: new Date().toISOString()
+                    }));
+                    // Redirect to institution dashboard
+                    window.location.href = 'institute_dash/index.html';
+                } else {
+                    alert('Invalid credentials. Demo login: admin@demo.edu / institution123');
+                }
+            });
+
+            // Signup form submission
+            signupForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Password validation
+                const password = document.getElementById('signupPassword').value;
+                const confirmPassword = document.getElementById('confirmPassword').value;
+                
+                if (password !== confirmPassword) {
+                    alert('Passwords do not match!');
+                    return;
+                }
+
+                if (password.length < 8) {
+                    alert('Password must be at least 8 characters long!');
+                    return;
+                }
+
+                // Check if terms are agreed
+                if (!document.getElementById('agreeTerms').checked) {
+                    alert('Please agree to the Terms of Service and Privacy Policy!');
+                    return;
+                }
+
+                // Simulate successful registration
+                alert('Institution registration submitted successfully! You will receive a confirmation email within 24 hours for verification.');
+                
+                // Switch to login form
+                showForm('login');
+                
+                // Clear form
+                signupForm.reset();
+                document.querySelectorAll('.type-option').forEach(option => {
+                    option.classList.remove('selected');
+                });
+            });
+        });
+    </script>
+</body>
+</html>

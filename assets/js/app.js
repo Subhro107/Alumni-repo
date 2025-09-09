@@ -43,7 +43,8 @@ class LoginManager {
         this.userTypes = {
             ADMIN: 'admin',
             ALUMNI: 'alumni',
-            STUDENT: 'student'
+            STUDENT: 'student',
+            INSTITUTION: 'institution'
         };
         this.init();
     }
@@ -59,7 +60,8 @@ class LoginManager {
         const demoCredentials = {
             admin: { id: 'admin123', password: 'admin123' },
             alumni: { email: 'alumni@example.com', password: 'alumni123' },
-            student: { email: 'student@college.edu', password: 'student123' }
+            student: { email: 'student@college.edu', password: 'student123' },
+            institution: { email: 'admin@demo.edu', password: 'institution123' }
         };
 
         switch(userType) {
@@ -72,6 +74,9 @@ class LoginManager {
             case this.userTypes.STUDENT:
                 return identifier === demoCredentials.student.email &&
                        password === demoCredentials.student.password;
+            case this.userTypes.INSTITUTION:
+                return identifier === demoCredentials.institution.email &&
+                       password === demoCredentials.institution.password;
             default:
                 return false;
         }
@@ -100,7 +105,8 @@ class LoginManager {
         const dashboards = {
             [this.userTypes.ADMIN]: 'admin_dash/admin-dashboard.html',
             [this.userTypes.ALUMNI]: 'alumni_dash/dashboard.html',
-            [this.userTypes.STUDENT]: 'student_dash/student_dashboard.html'
+            [this.userTypes.STUDENT]: 'student_dash/student_dashboard.html',
+            [this.userTypes.INSTITUTION]: 'institute_dash/index.html'
         };
 
         const targetDashboard = dashboards[userType];
