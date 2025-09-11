@@ -6,322 +6,10 @@
     <title>Admin Dashboard - Alumni Connect</title>
     <link rel="stylesheet" href="../assets/css/style.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: #f8f9fa;
-        }
-
-        .top-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem 2rem;
-            background: white;
-            border-bottom: 1px solid #e0e0e0;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-
-        .header-left {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .logo {
-            width: 40px;
-            height: 40px;
-            background: #4285f4;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: bold;
-            font-size: 1.2rem;
-        }
-
-        .brand-name {
-            font-size: 1.3rem;
-            font-weight: 600;
-            color: #333;
-        }
-
-        .header-right {
-            display: flex;
-            align-items: center;
-            gap: 1.5rem;
-        }
-
-        .search-container {
-            position: relative;
-        }
-
-        .search-input {
-            padding: 8px 40px 8px 16px;
-            border: 1px solid #ddd;
-            border-radius: 20px;
-            width: 300px;
-            outline: none;
-            font-size: 14px;
-        }
-
-        .search-icon {
-            position: absolute;
-            right: 12px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: #666;
-        }
-
-        .notification-bell {
-            position: relative;
-            background: none;
-            border: none;
-            font-size: 1.2rem;
-            color: #666;
-            cursor: pointer;
-        }
-
-        .notification-count {
-            position: absolute;
-            top: -8px;
-            right: -8px;
-            background: #e74c3c;
-            color: white;
-            border-radius: 50%;
-            width: 18px;
-            height: 18px;
-            font-size: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .user-profile {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            color: #666;
-        }
-
-        .dashboard-container {
-            display: flex;
-            min-height: calc(100vh - 80px);
-        }
-
-        .sidebar {
-            width: 250px;
-            background: white;
-            border-right: 1px solid #e0e0e0;
-            padding: 2rem 0;
-        }
-
-        .main-content {
-            flex: 1;
-            padding: 2rem;
-            background: #f8f9fa;
-            }
-
-        .menu-item {
-            display: flex;
-            align-items: center;
-            padding: 1rem 2rem;
-            color: #666;
-            text-decoration: none;
-            transition: all 0.3s;
-            border-left: 3px solid transparent;
-        }
-
-        .menu-item:hover, .menu-item.active {
-            background: #f8f9fa;
-            color: #4285f4;
-            border-left-color: #4285f4;
-        }
-
-        .menu-item i {
-            margin-right: 1rem;
-            width: 20px;
-        }
-
-        .welcome-header {
-            margin-bottom: 1rem;
-        }
-
-        .welcome-header h1 {
-            color: #333;
-            font-size: 2rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .welcome-subtitle {
-            color: #666;
-            font-size: 1rem;
-        }
-
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 1.5rem;
-            margin: 2rem 0;
-        }
-
-        .stat-card {
-            background: white;
-            padding: 1.5rem;
-            border-radius: 12px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .stat-content h3 {
-            color: #666;
-            font-size: 0.9rem;
-            font-weight: 500;
-            margin-bottom: 0.5rem;
-        }
-
-        .stat-content .number {
-            font-size: 2rem;
-            font-weight: 700;
-            color: #333;
-        }
-
-        .stat-content .subtitle {
-            color: #999;
-            font-size: 0.8rem;
-        }
-
-        .stat-icon {
-            width: 50px;
-            height: 50px;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            color: white;
-        }
-
-        .stat-icon.blue { background: #4285f4; }
-        .stat-icon.green { background: #34a853; }
-        .stat-icon.orange { background: #fbbc04; }
-        .stat-icon.purple { background: #9c27b0; }
-        .stat-icon.red { background: #ea4335; }
-
-        .bottom-section {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-
-        .activity-section, .quick-actions {
-            background: white;
-            border-radius: 12px;
-            padding: 1.5rem;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-        }
-
-        .section-title {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            margin-bottom: 1.5rem;
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: #333;
-        }
-
-        .activity-item {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            padding: 1rem 0;
-            border-bottom: 1px solid #f0f0f0;
-        }
-
-        .activity-item:last-child {
-            border-bottom: none;
-        }
-
-        .activity-dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            flex-shrink: 0;
-        }
-
-        .activity-dot.blue { background: #4285f4; }
-        .activity-dot.green { background: #34a853; }
-        .activity-dot.orange { background: #fbbc04; }
-
-        .activity-content h4 {
-            color: #333;
-            font-size: 0.9rem;
-            margin-bottom: 0.2rem;
-        }
-
-        .activity-content p {
-            color: #666;
-            font-size: 0.8rem;
-        }
-
-        .quick-actions-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1rem;
-        }
-
-        .action-button {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 1.5rem;
-            background: #f8f9fa;
-            border: none;
-            border-radius: 12px;
-            cursor: pointer;
-            text-decoration: none;
-            color: #333;
-            transition: all 0.3s;
-        }
-
-        .action-button:hover {
-            background: #e3f2fd;
-            transform: translateY(-2px);
-        }
-
-        .action-button i {
-            font-size: 1.5rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .action-button.blue i { color: #4285f4; }
-        .action-button.green i { color: #34a853; }
-        .action-button.orange i { color: #fbbc04; }
-        .action-button.red i { color: #ea4335; }
-
-        .action-button span {
-            font-size: 0.9rem;
-            font-weight: 500;
-        }
-    </style>
 </head>
 <body>
     <!-- Top Header -->
-    <div class="top-header">
+    <header class="top-header">
         <div class="header-left">
             <div class="logo">AU</div>
             <span class="brand-name">Alumni Connect</span>
@@ -336,175 +24,214 @@
                 <span class="notification-count">3</span>
             </button>
             <div class="user-profile">
-                <i class="fas fa-user-circle" style="font-size: 1.5rem;"></i>
+                <i class="fas fa-user-circle user-avatar"></i>
                 <span>Admin One</span>
-                <button class="logout-btn" onclick="loginManager.logout()" style="margin-left: 1rem; padding: 0.5rem 1rem; background: #ea4335; color: white; border: none; border-radius: 6px; cursor: pointer;">
-                    <i class="fas fa-sign-out-alt"></i> Logout
+                <button class="logout-btn" onclick="handleLogout()">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Logout</span>
                 </button>
             </div>
-            </div>
         </div>
-    </div>
+    </header>
 
     <div class="dashboard-container">
-            <div class="sidebar">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
             <nav>
                 <a href="#" class="menu-item active">
                     <i class="fas fa-tachometer-alt"></i>
-                    Dashboard
+                    <span>Dashboard</span>
                 </a>
                 <a href="alumni_directory.html" class="menu-item">
                     <i class="fas fa-users"></i>
-                    Alumni Directory
+                    <span>Alumni Directory</span>
                 </a>
                 <a href="events.html" class="menu-item">
                     <i class="fas fa-calendar-alt"></i>
-                    Events
+                    <span>Events</span>
                 </a>
                 <a href="forums.html" class="menu-item">
                     <i class="fas fa-comments"></i>
-                    Forums
+                    <span>Forums</span>
                 </a>
                 <a href="mentorship.html" class="menu-item">
                     <i class="fas fa-handshake"></i>
-                    Mentorship
+                    <span>Mentorship</span>
                 </a>
                 <a href="career-center.html" class="menu-item">
                     <i class="fas fa-briefcase"></i>
-                    Career Center
+                    <span>Career Center</span>
                 </a>
                 <a href="profile-settings.html" class="menu-item">
                     <i class="fas fa-cog"></i>
-                    Profile Settings
+                    <span>Profile Settings</span>
                 </a>
                 <a href="analytics.html" class="menu-item">
                     <i class="fas fa-chart-line"></i>
-                    Analytics
+                    <span>Analytics</span>
                 </a>
                 <a href="announcements.html" class="menu-item">
                     <i class="fas fa-bullhorn"></i>
-                    Announcements
+                    <span>Announcements</span>
                 </a>
                 <a href="admin-panel.html" class="menu-item">
                     <i class="fas fa-user-shield"></i>
-                    Admin Panel
+                    <span>Admin Panel</span>
                 </a>
             </nav>
-        </div>
+        </aside>
 
-        <div class="main-content">
-            <div class="welcome-header">
+        <!-- Main Content -->
+        <main class="main-content">
+            <section class="welcome-header">
                 <h1>Welcome back, Admin!</h1>
                 <p class="welcome-subtitle">Here's what's happening in your alumni network</p>
-            </div>
+            </section>
 
-            <div class="stats-grid">
-                <div class="stat-card">
+            <!-- Statistics Grid -->
+            <section class="stats-grid">
+                <article class="stat-card">
                     <div class="stat-content">
                         <h3>Total Alumni</h3>
                         <div class="number">1</div>
                         <div class="subtitle">Registered in the platform</div>
                     </div>
-                    <div class="stat-icon blue">
+                    <div class="stat-icon stat-icon-blue">
                         <i class="fas fa-users"></i>
                     </div>
-                </div>
+                </article>
 
-                <div class="stat-card">
+                <article class="stat-card">
                     <div class="stat-content">
                         <h3>Upcoming Events</h3>
                         <div class="number">0</div>
                         <div class="subtitle">This month</div>
                     </div>
-                    <div class="stat-icon green">
+                    <div class="stat-icon stat-icon-green">
                         <i class="fas fa-calendar-alt"></i>
                     </div>
-                </div>
+                </article>
 
-                <div class="stat-card">
+                <article class="stat-card">
                     <div class="stat-content">
                         <h3>Job Opportunities</h3>
                         <div class="number">0</div>
                         <div class="subtitle">Active postings</div>
                     </div>
-                    <div class="stat-icon purple">
+                    <div class="stat-icon stat-icon-purple">
                         <i class="fas fa-briefcase"></i>
                     </div>
-                </div>
+                </article>
 
-                <div class="stat-card">
+                <article class="stat-card">
                     <div class="stat-content">
                         <h3>Total Donations</h3>
                         <div class="number">$0</div>
                         <div class="subtitle">This year</div>
                     </div>
-                    <div class="stat-icon red">
+                    <div class="stat-icon stat-icon-red">
                         <i class="fas fa-heart"></i>
                     </div>
-                </div>
+                </article>
 
-                <div class="stat-card">
+                <article class="stat-card">
                     <div class="stat-content">
                         <h3>Active Mentorships</h3>
                         <div class="number">0</div>
                         <div class="subtitle">Current matches</div>
                     </div>
-                    <div class="stat-icon blue">
+                    <div class="stat-icon stat-icon-blue">
                         <i class="fas fa-user-friends"></i>
                     </div>
-                </div>
-            </div>
+                </article>
+            </section>
 
-            <div class="bottom-section">
-                <div class="activity-section">
+            <!-- Bottom Section -->
+            <section class="bottom-section">
+                <!-- Recent Activity -->
+                <article class="activity-section">
                     <h2 class="section-title">
                         <i class="fas fa-bell"></i>
-                        Recent Activity
+                        <span>Recent Activity</span>
                     </h2>
                     <div class="activity-item">
-                        <div class="activity-dot blue"></div>
+                        <div class="activity-dot activity-dot-blue"></div>
                         <div class="activity-content">
                             <h4>New alumni registration</h4>
                             <p>Sarah Johnson (Class of 2020) joined</p>
                         </div>
                     </div>
                     <div class="activity-item">
-                        <div class="activity-dot green"></div>
+                        <div class="activity-dot activity-dot-green"></div>
                         <div class="activity-content">
                             <h4>Upcoming event reminder</h4>
                             <p>Annual Alumni Gala - 2 weeks away</p>
                         </div>
                     </div>
                     <div class="activity-item">
-                        <div class="activity-dot orange"></div>
+                        <div class="activity-dot activity-dot-orange"></div>
                         <div class="activity-content">
                             <h4>New mentorship match</h4>
                             <p>You've been matched with a student</p>
                         </div>
                     </div>
-                </div>
+                </article>
 
-                <div class="quick-actions">
-                    <h2 class="section-title">Quick Actions</h2>
+                <!-- Quick Actions -->
+                <article class="quick-actions">
+                    <h2 class="section-title">
+                        <i class="fas fa-bolt"></i>
+                        <span>Quick Actions</span>
+                    </h2>
                     <div class="quick-actions-grid">
-                        <a href="#" class="action-button blue">
+                        <a href="#" class="action-button action-button-blue">
                             <i class="fas fa-user-plus"></i>
                             <span>Find Alumni</span>
                         </a>
-                        <a href="#" class="action-button green">
+                        <a href="#" class="action-button action-button-green">
                             <i class="fas fa-calendar-plus"></i>
                             <span>View Events</span>
                         </a>
-                        <a href="#" class="action-button red">
+                        <a href="#" class="action-button action-button-red">
                             <i class="fas fa-heart"></i>
                             <span>Donate</span>
                         </a>
                     </div>
-                </div>
-            </div>
-        </div>
+                </article>
+            </section>
+        </main>
     </div>
 
     <script src="../assets/js/app.js"></script>
+    <script>
+        // Logout functionality
+        function handleLogout() {
+            if (confirm('Are you sure you want to logout?')) {
+                // Clear any stored session data
+                localStorage.removeItem('currentUser');
+                // Redirect to login page
+                window.location.href = '../login.html';
+            }
+        }
+
+        // Search functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const searchInput = document.querySelector('.search-input');
+
+            searchInput.addEventListener('input', function(e) {
+                const query = e.target.value.toLowerCase();
+                // Add search functionality here if needed
+                console.log('Search query:', query);
+            });
+
+            // Add keyboard shortcuts
+            document.addEventListener('keydown', function(e) {
+                if (e.ctrlKey && e.key === 'k') {
+                    e.preventDefault();
+                    searchInput.focus();
+                }
+            });
+        });
+    </script>
 </body>
 </html>
