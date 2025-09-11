@@ -7,424 +7,356 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="common.css">
     <style>
-        /* Profile page specific styles */
-        .profile-form {
-            max-width: 800px;
-            margin: 0 auto;
-            background: white;
-            border-radius: 12px;
-            padding: 30px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        /* Profile specific styles */
+         .profile-container {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 30px;
         }
-
-        .form-section {
-            margin-bottom: 40px;
+        
+        @media (max-width: 768px) {
+            .profile-container {
+                grid-template-columns: 1fr;
+            }
         }
-
-        .section-title {
-            font-size: 24px;
-            font-weight: 600;
-            color: #1f2937;
-            margin-bottom: 20px;
-            padding-bottom: 10px;
-            border-bottom: 2px solid #e5e7eb;
-        }
-
-        .photo-upload-section {
-            display: flex;
-            align-items: flex-start;
-            gap: 20px;
-            margin-bottom: 30px;
-        }
-
-        .profile-photo {
-            width: 120px;
-            height: 120px;
+        
+        /*.profile-sidebar {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        } */
+        
+        .profile-picture {
+            width: 150px;
+            height: 150px;
             border-radius: 50%;
-            background: #e5e7eb;
+            background-color: #e0e0e0;
+            margin: 0 auto 20px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 48px;
-            font-weight: 600;
-            color: #6b7280;
+            font-size: 3rem;
+            color: #666;
             position: relative;
             overflow: hidden;
         }
-
-        .profile-photo img {
+        
+        .profile-picture img {
             width: 100%;
             height: 100%;
             object-fit: cover;
         }
-
-        .photo-buttons {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        .upload-btn, .remove-btn {
-            padding: 10px 20px;
-            border: none;
-            border-radius: 8px;
+        
+        .change-photo {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: rgba(0, 0, 0, 0.6);
+            color: white;
+            text-align: center;
+            padding: 5px;
+            font-size: 0.8rem;
             cursor: pointer;
-            font-size: 14px;
-            font-weight: 500;
+            transition: opacity 0.2s;
+            opacity: 0;
+        }
+        
+        .profile-picture:hover .change-photo {
+            opacity: 1;
+        }
+        
+        .profile-name {
+            text-align: center;
+            margin-bottom: 5px;
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+        
+        .profile-title {
+            text-align: center;
+            color: var(--text-medium);
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+        }
+        
+        .profile-stats {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .stat-item {
+            text-align: center;
+        }
+        
+        .stat-value {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+        
+        .stat-label {
+            font-size: 0.8rem;
+            color: var(--text-medium);
+        }
+        
+        .profile-links {
+            margin-bottom: 20px;
+        }
+        
+        .profile-link {
+            display: flex;
+            align-items: center;
+            padding: 10px 0;
+            color: var(--text-dark);
+            text-decoration: none;
+        }
+        
+        .profile-link i {
+            margin-right: 10px;
+            width: 20px;
+            text-align: center;
+            color: var(--primary-color);
+        }
+        
+        .settings-tabs {
+            display: flex;
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 20px;
+            overflow-x: auto;
+        }
+        
+        .tab-item {
+            padding: 10px 20px;
+            cursor: pointer;
+            white-space: nowrap;
+            border-bottom: 2px solid transparent;
             transition: all 0.2s;
         }
-
-        .upload-btn {
-            background: #007AFF;
-            color: white;
+        
+        .tab-item.active {
+            border-bottom-color: var(--primary-color);
+            color: var(--primary-color);
+            font-weight: 500;
         }
-
-        .upload-btn:hover {
-            background: #0056b3;
+        
+        .tab-content {
+            display: none;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
         }
-
-        .remove-btn {
-            background: #f8f9fa;
-            color: #6b7280;
-            border: 1px solid #e5e7eb;
+        
+        .tab-content.active {
+            display: block;
         }
-
-        .remove-btn:hover {
-            background: #e5e7eb;
+        
+        .form-section {
+            margin-bottom: 30px;
         }
-
-        .photo-hint {
-            font-size: 12px;
-            color: #6b7280;
-            margin-top: 5px;
+        
+        .form-section-title {
+            font-size: 1.1rem;
+            font-weight: 500;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--border-color);
         }
-
+        
         .form-row {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 20px;
-            margin-bottom: 20px;
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        .form-label {
-            display: block;
-            margin-bottom: 6px;
-            font-size: 14px;
-            font-weight: 500;
-            color: #374151;
-        }
-
-        .required {
-            color: #ef4444;
-        }
-
-        .form-input, .form-select, .form-textarea {
-            width: 100%;
-            padding: 12px 16px;
-            border: 1px solid #d1d5db;
-            border-radius: 8px;
-            font-size: 14px;
-            transition: all 0.2s;
-            background: white;
-        }
-
-        .form-input:focus, .form-select:focus, .form-textarea:focus {
-            outline: none;
-            border-color: #007AFF;
-            box-shadow: 0 0 0 3px rgba(0,122,255,0.1);
-        }
-
-        .form-textarea {
-            min-height: 100px;
-            resize: vertical;
-            font-family: inherit;
-        }
-
-        .bio-hint {
-            font-size: 12px;
-            color: #6b7280;
-            margin-top: 5px;
-        }
-
-        .form-actions {
-            display: flex;
             gap: 15px;
-            justify-content: flex-end;
-            margin-top: 40px;
-            padding-top: 20px;
-            border-top: 1px solid #e5e7eb;
+            margin-bottom: 15px;
         }
-
-        .btn-cancel {
-            background: #f8f9fa;
-            color: #6b7280;
-            border: 1px solid #e5e7eb;
-            padding: 12px 24px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 14px;
-            font-weight: 500;
-            transition: all 0.2s;
-        }
-
-        .btn-cancel:hover {
-            background: #e5e7eb;
-        }
-
-        .btn-save {
-            background: #007AFF;
-            color: white;
-            border: none;
-            padding: 12px 24px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 14px;
-            font-weight: 500;
-            transition: all 0.2s;
-        }
-
-        .btn-save:hover {
-            background: #0056b3;
-        }
-
-        /* Mobile responsiveness */
-        @media (max-width: 768px) {
+        
+        @media (max-width: 576px) {
             .form-row {
                 grid-template-columns: 1fr;
-                gap: 15px;
-            }
-
-            .photo-upload-section {
-                flex-direction: column;
-                align-items: center;
-                text-align: center;
-            }
-
-            .profile-form {
-                padding: 20px;
-                margin: 0 10px;
             }
         }
-
-        /* Updated navbar and sidebar styles from previous artifact */
-        .top-header {
-            position: fixed;
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+        
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 8px 12px;
+            border: 1px solid black;
+            border-radius: 4px;
+            font-size: 0.9rem;
+        }
+        
+        .form-group textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+        
+        .form-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        
+        .btn {
+            padding: 8px 16px;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            border: none;
+        }
+        
+        .btn-secondary {
+            background-color: #f0f0f0;
+            color: var(--text-dark);
+        }
+        
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .btn-danger {
+            background-color: #dc3545;
+            color: white;
+        }
+        
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 24px;
+        }
+        
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        
+        .slider {
+            position: absolute;
+            cursor: pointer;
             top: 0;
             left: 0;
             right: 0;
-            height: 70px;
-            background: white;
-            border-bottom: 1px solid #e5e5e7;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0 30px;
-            z-index: 1000;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-        }
-
-        .logo-section {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .logo-icon {
-            width: 40px;
-            height: 40px;
-            background: #007AFF;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: bold;
-            font-size: 16px;
-        }
-
-        .logo-text {
-            font-size: 18px;
-            font-weight: 600;
-            color: #333;
-        }
-
-        .header-right {
-            display: flex;
-            align-items: center;
-            gap: 25px;
-        }
-
-        .search-bar {
-            position: relative;
-        }
-
-        .search-input {
-            padding: 10px 45px 10px 16px;
-            border: 1px solid #e5e5e7;
-            border-radius: 25px;
-            background: #f8f9fa;
-            width: 320px;
-            font-size: 14px;
-            transition: all 0.2s;
-        }
-
-        .search-input:focus {
-            outline: none;
-            border-color: #007AFF;
-            background: white;
-            box-shadow: 0 2px 8px rgba(0,122,255,0.1);
-        }
-
-        .search-icon {
-            position: absolute;
-            right: 15px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: #666;
-            cursor: pointer;
-            padding: 5px;
-            border-radius: 4px;
-            transition: background-color 0.2s;
-        }
-
-        .notification-icon {
-            position: relative;
-            background: none;
-            border: none;
-            font-size: 18px;
-            cursor: pointer;
-            color: #666;
-            padding: 10px;
-            border-radius: 50%;
-            transition: background-color 0.2s;
-        }
-
-        .notification-badge {
-            position: absolute;
-            top: 5px;
-            right: 5px;
-            background: #ff3b30;
-            color: white;
-            border-radius: 50%;
-            width: 18px;
-            height: 18px;
-            font-size: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 600;
-        }
-
-        .user-info {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            cursor: pointer;
-            padding: 6px 12px;
-            border-radius: 25px;
-            transition: background-color 0.2s;
-        }
-
-        .user-avatar {
-            width: 35px;
-            height: 35px;
-            border-radius: 50%;
-            background: #007AFF;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 14px;
-            font-weight: 600;
-        }
-
-        .user-name {
-            font-size: 14px;
-            color: #333;
-            font-weight: 500;
-        }
-
-        .logout-btn {
-            background: #ff4444;
-            color: white;
-            border: none;
-            padding: 8px 16px;
-            border-radius: 20px;
-            cursor: pointer;
-            font-size: 13px;
-            font-weight: 500;
-            transition: all 0.2s;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        /*.sidebar {
-            position: fixed;
-            left: 0;
-            top: 70px;
             bottom: 0;
-            width: 250px;
-            background: #fff;
-            border-right: 1px solid #e5e7eb;
-            padding: 20px 0;
-            z-index: 99;
+            background-color: #cccccc;
+            transition: .4s;
+            border-radius: 24px;
         }
-        .nav-links {
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
-            padding: 0 15px;
+        
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 16px;
+            width: 16px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
         }
-
-        .nav-item {
+        
+        input:checked + .slider {
+            background-color: rgb(56, 203, 56);
+        }
+        
+        input:checked + .slider:before {
+            transform: translateX(26px);
+        }
+        
+        .toggle-group {
             display: flex;
+            justify-content: space-between;
             align-items: center;
-            padding: 12px 16px;
-            color: #6b7280;
-            text-decoration: none;
-            border-radius: 8px;
-            transition: all 0.2s;
-            font-size: 14px;
+            margin-bottom: 15px;
+        }
+        
+        .toggle-label {
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+        
+        .badge {
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 0.8rem;
             font-weight: 500;
         }
-
-        .nav-item:hover {
-            background: #f3f4f6;
-            color: #2563eb;
+        
+        .badge-primary {
+            background-color: var(--primary-color);
+            color: white;
         }
-
-        .nav-item.active {
-            background: #e5edff;
-            color: #2563eb;
+        
+        .badge-secondary {
+            background-color: #6c757d;
+            color: white;
         }
-
-        .nav-item i {
-            width: 20px;
-            margin-right: 12px;
-            font-size: 16px;
-            text-align: center;
-        } */
-
-        .main-content {
-            margin-left: 250px;
-            padding: 90px 40px 40px 40px;
-            flex: 1;
+        
+        .badge-success {
+            background-color: #28a745;
+            color: white;
+        }
+        
+        .badge-danger {
+            background-color: #dc3545;
+            color: white;
+        }
+        
+        .badge-warning {
+            background-color: #ffc107;
+            color: #212529;
+        }
+        
+        .badge-info {
+            background-color: #17a2b8;
+            color: white;
+        }
+        
+        .social-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .social-link {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            padding: 5px 10px;
+            background-color: #f0f0f0;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            color: var(--text-dark);
+            text-decoration: none;
+        }
+        
+        .social-link i {
+            color: var(--primary-color);
         }
     </style>
 </head>
 <body>
-    <!-- Top Header -->
+ <!-- Top Header -->
     <div class="top-header">
         <div class="logo-section">
             <div class="logo">
@@ -452,354 +384,526 @@
     <div class="container">
         <!-- Sidebar -->
         <nav class="sidebar">
-            <div class="nav-links">
-                <a href="student_dashboard.html" class="nav-item">
-                    <i class="fas fa-th-large"></i>
-                    Dashboard
-                </a>
-                <a href="student_directory.html" class="nav-item">
-                    <i class="fas fa-users"></i>
-                    Alumni Directory
-                </a>
-                <a href="student_events.html" class="nav-item">
-                    <i class="fas fa-calendar"></i>
-                    Events
-                </a>
-                <a href="students_forum.html" class="nav-item">
-                    <i class="fas fa-comments"></i>
-                    Forums
-                </a>
-                <a href="students_mentor.html" class="nav-item">
-                    <i class="fas fa-handshake"></i>
-                    Mentorship
-                </a>
-                <a href="students_career.html" class="nav-item">
-                    <i class="fas fa-briefcase"></i>
-                    Career Center
-                </a>
-                <a href="student_profile.html" class="nav-item active">
+            <a href="student_dashboard.html" class="nav-item active">
+                <i class="fas fa-th-large"></i>
+                Dashboard
+            </a>
+            <a href="student_directory.html" class="nav-item">
+                <i class="fas fa-users"></i>
+                Alumni Directory
+            </a>
+            <a href="student_events.html" class="nav-item">
+                <i class="fas fa-calendar"></i>
+                Events
+            </a>
+            <a href="students_forum.html" class="nav-item">
+                <i class="fas fa-comments"></i>
+                Forums
+            </a>
+            <a href="students_mentor.html" class="nav-item">
+                <i class="fas fa-handshake"></i>
+                Mentorship
+            </a>
+            <a href="students_career.html" class="nav-item">
+                <i class="fas fa-briefcase"></i>
+                Career Center
+            </a>
+            <a href="students_profile.html" class="nav-item active">
                     <i class="fas fa-user-cog"></i>
                     Profile Settings
                 </a>
-            </div>
         </nav>
 
         <!-- Main Content -->
-        <main class="main-content">
-            <form class="profile-form" id="profileForm">
-                <!-- Personal Information Section -->
-                <div class="form-section">
-                    <h2 class="section-title">Personal Information</h2>
+        <div class="main-content">
+            <div class="welcome-section">
+                <h1 class="welcome-title">Profile Settings</h1>
+                <p class="welcome-subtitle">Manage your profile information and account settings</p>
+            </div>
+
+            <div class="profile-container">
+                <!-- Profile Sidebar -->
+                <div class="profile-sidebar">
+                    <div class="profile-picture">
+                        <span>👤</span>
+                        <div class="change-photo" onclick="showUploadPhotoModal()">Change Photo</div>
+                    </div>
+                    <h2 class="profile-name">Student-1</h2>
+                    <!-- <p class="profile-title">Software Engineer at Tech Solutions</p> -->
                     
-                    <div class="photo-upload-section">
-                        <div class="profile-photo" id="profilePhoto">
-                            👤
+                    <div class="profile-stats">
+                        <div class="stat-item">
+                            <div class="stat-value">24</div>
+                            <div class="stat-label">Events</div>
                         </div>
-                        <div class="photo-buttons">
-                            <button type="button" class="upload-btn" onclick="uploadPhoto()">Upload Photo</button>
-                            <button type="button" class="remove-btn" onclick="removePhoto()">Remove</button>
-                            <div class="photo-hint">JPEG or PNG, max 2MB</div>
+                        <div class="stat-item">
+                            <div class="stat-value">12</div>
+                            <div class="stat-label">Mentees</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">8</div>
+                            <div class="stat-label">Posts</div>
                         </div>
                     </div>
-                </div>
-
-                <!-- Basic Details Section -->
-                <div class="form-section">
-                    <h3 style="font-size: 20px; margin-bottom: 20px; color: #4b5563;">Basic Details</h3>
                     
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label class="form-label">First Name<span class="required">*</span></label>
-                            <input type="text" class="form-input" id="firstName" placeholder="Your first name" required>
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">Last Name<span class="required">*</span></label>
-                            <input type="text" class="form-input" id="lastName" placeholder="Your last name" required>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="form-label">Email Address<span class="required">*</span></label>
-                        <input type="email" class="form-input" id="email" placeholder="Your email address" required>
-                    </div>
-
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label class="form-label">Phone Number <span class="required">*</span></label>
-                            <input type="tel" class="form-input" id="phone" placeholder="Your Phone number" required>
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">Date of Birth<span class="required">*</span></label>
-                            <input type="date" class="form-input" id="dob" required>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="form-label">Gender<span class="required">*</span></label>
-                        <select class="form-select" id="gender" required>
-                            <option value="">Select</option>
-                            <option value="male">Male</option>
-                            <option value="female">Female</option>
-                            <option value="other">Other</option>
-                            <option value="prefer-not-to-say">Prefer not to say</option>
-                        </select>
-                    </div>
+                    <!-- <div class="profile-links">
+                        <a href="#" class="profile-link">
+                            <i class="fas fa-user"></i>
+                            View Public Profile
+                        </a>
+                        <a href="#" class="profile-link">
+                            <i class="fas fa-envelope"></i>
+                            Messages
+                        </a>
+                        <a href="#" class="profile-link">
+                            <i class="fas fa-calendar-check"></i>
+                            My Events
+                        </a>
+                        <a href="#" class="profile-link">
+                            <i class="fas fa-shield-alt"></i>
+                            Privacy Settings
+                        </a>
+                    </div> -->
                 </div>
-
-                <!-- Contact Information Section -->
-                <div class="form-section">
-                    <h3 style="font-size: 20px; margin-bottom: 20px; color: #4b5563;">Contact Information</h3>
+                
+                <!-- Settings Content -->
+                <div class="settings-content">
+                    <div class="settings-tabs">
+                        <div class="tab-item active" data-tab="personal">Personal Information</div>
+                        <div class="tab-item" data-tab="education">Education & Career</div>
+                        <div class="tab-item" data-tab="privacy">Privacy & Notifications</div>
+                        <div class="tab-item" data-tab="account">Account Settings</div>
+                    </div>
                     
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label class="form-label">Country<span class="required">*</span></label>
-                            <select class="form-select" id="country" placeholder="Select your country" required>
-                                <option value="India">India</option>
-                                <option value="USA">United States</option>
-                                <option value="UK">United Kingdom</option>
-                                <option value="Canada">Canada</option>
-                                <option value="Australia">Australia</option>
-                                <option value="Germany">Germany</option>
-                                <option value="Other">Other</option>
-                            </select>
+                    <!-- Personal Information Tab -->
+                    <div id="personal" class="tab-content active">
+                        <div class="form-section">
+                            <h3 class="form-section-title">Basic Information</h3>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="firstName">First Name</label>
+                                    <input type="text" id="firstName" placeholder="Enter your first name">
+                                </div>
+                                <div class="form-group">
+                                    <label for="lastName">Last Name</label>
+                                    <input type="text" id="lastName" placeholder="Enter your last name">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="email">Email Address</label>
+                                    <input type="email" id="email" placeholder="Enter your email address">
+                                </div>
+                                <div class="form-group">
+                                    <label for="phone">Phone Number</label>
+                                    <input type="tel" id="phone" placeholder="Enter your phone number">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="headline">Professional Headline</label>
+                                <input type="text" id="headline" placeholder="Enter your professional headline">
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label class="form-label">City<span class="required">*</span></label>
-                            <input type="text" class="form-input" id="city" placeholder="Your current city" required>
+                        
+                        <div class="form-section">
+                            <h3 class="form-section-title">About Me</h3>
+                            <div class="form-group">
+                                <label for="bio">Bio</label>
+                                <textarea id="bio" placeholder="Enter your bio..."></textarea>
+                            </div>
+                        </div>
+                        
+                        <div class="form-section">
+                            <h3 class="form-section-title">Location</h3>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="city">City</label>
+                                    <input type="text" id="city" placeholder="Enter your city">
+                                </div>
+                                <div class="form-group">
+                                    <label for="state">State</label>
+                                    <input type="text" id="state" placeholder="Enter your state">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="country">Country</label>
+                                    <input type="text" id="country" placeholder="Enter your country">
+                                </div>
+                                <div class="form-group">
+                                    <label for="zipcode">Postal/Zip Code</label>
+                                    <input type="text" id="zipcode" placeholder="Enter your postal/zip code">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-section">
+                            <h3 class="form-section-title">Social Media</h3>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="linkedin">LinkedIn</label>
+                                    <input type="url" id="linkedin" placeholder="Enter your LinkedIn profile URL">
+                                </div>
+                                <div class="form-group">
+                                    <label for="twitter">Twitter</label>
+                                    <input type="url" id="twitter" placeholder="Enter your Twitter profile URL(if any)">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="github">GitHub</label>
+                                    <input type="url" id="github" placeholder="Enter your GitHub profile URL">
+                                </div>
+                                <div class="form-group">
+                                    <label for="website">Personal Website</label>
+                                    <input type="url" id="website" placeholder="Enter your personal website URL(if any)">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-actions">
+                            <!-- <button class="btn btn-secondary">Cancel</button> -->
+                            <button class="btn btn-primary" onclick="savePersonalInfo()">Save Changes</button>
                         </div>
                     </div>
-
-                    <div class="form-group">
-                        <label class="form-label">Address <span class="required">*</span></label>
-                        <textarea class="form-textarea" id="address" placeholder="Your current address" required></textarea>
-                    </div>
-                </div>
-
-                <!-- Education Details Section -->
-                <div class="form-section">
-                    <h3 style="font-size: 20px; margin-bottom: 20px; color: #4b5563;">Education Details</h3>
                     
-                    <div class="form-group">
-                        <label class="form-label">College/University Name<span class="required">*</span></label>
-                        <input type="text" class="form-input" id="university" placeholder="Your Institution Name" required>
-                    </div>
-
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label class="form-label">Degree<span class="required">*</span></label>
-                            <select class="form-select" id="degree" required>
-                                <option value="">Select Degree</option>
-                                <option value="B.Tech">B.Tech</option>
-                                <option value="M.Tech">M.Tech</option>
-                                <option value="BCA">BCA</option>
-                                <option value="MCA">MCA</option>
-                                <option value="B.Sc">B.Sc</option>
-                                <option value="M.Sc">M.Sc</option>
-                        </select>
+                    <!-- Education & Career Tab -->
+                    <div id="education" class="tab-content">
+                        <div class="form-section">
+                            <h3 class="form-section-title">Education</h3>
+                            <div class="form-group">
+                                <label for="degree">Degree pursuing</label>
+                                <input type="text" id="degree" placeholder="Enter your degree">
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="university">University/Institution</label>
+                                    <input type="text" id="university" placeholder="Enter your university/institution">
+                                </div>
+                                <div class="form-group">
+                                    <label for="graduationYear">Graduating Year</label>
+                                    <input type="number" id="graduationYear" placeholder="Enter your graduating year">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="achievements">Achievements & Activities</label>
+                                <textarea id="achievements" placeholder="List your achievements and activities"></textarea>
+                            </div>
+                            
                         </div>
-                        <div class="form-group">
-                            <label class="form-label">Major/Field of Study<span class="required">*</span></label>
-                            <select class="form-select" id="major" required>
-                                <option value="">Select Major</option>
-                                <option value="Computer Science">Computer Science</option>
-                                <option value="Information Technology">Information Technology</option>
-                                <option value="Electrical Engineering">Electrical Engineering</option>
-                                <option value="Electronic and Communication Engineering">Electronic and Communication Engineering</option>
-                                <option value="Computer Applications">Computer Applications</option>
-                        </select>
+                        
+                        <div class="form-section">
+                            <h3 class="form-section-title">Skills</h3>
+                            <div class="form-group">
+                                <label for="skills">Skills (comma separated)</label>
+                                <input type="text" id="skills" placeholder="Enter your skills">
+                            </div>
+                            <div class="social-links">
+                                <span class="social-link"><i class="fab fa-js"></i> JavaScript</span>
+                                <span class="social-link"><i class="fab fa-react"></i> React</span>
+                                <span class="social-link"><i class="fab fa-node-js"></i> Node.js</span>
+                                <span class="social-link"><i class="fab fa-python"></i> Python</span>
+                                <span class="social-link"><i class="fab fa-aws"></i> AWS</span>
+                                <span class="social-link"><i class="fab fa-docker"></i> Docker</span>
+                                <span class="social-link"><i class="fab fa-git-alt"></i> Git</span>
+                                <span class="social-link"><i class="fas fa-tasks"></i> Agile</span>
+                            </div>
+                        </div>
+                        
+                        <div class="form-actions">
+                            <!-- <button class="btn btn-secondary">Cancel</button> -->
+                            <button class="btn btn-primary" onclick="saveEducationCareer()">Save Changes</button>
                         </div>
                     </div>
-
-                    <div class="form-group">
-                        <label class="form-label">Graduation Year<span class="required">*</span></label>
-                        <select class="form-select" id="graduationYear" required>
-                            <option value="">Select Year</option>
-                            <option value="2025">2025</option>
-                            <option value="2026">2026</option>
-                            <option value="2027">2027</option>
-                            <option value="2028">2028</option>
-                            <option value="2024">2029</option>
-                            <option value="2030">2030</option>
-                        </select>
-                    </div>
-                </div>
-
-                <!-- Additional Information Section -->
-                <div class="form-section">
-                    <h3 style="font-size: 20px; margin-bottom: 20px; color: #4b5563;">Additional Information</h3>
                     
-                    <div class="form-group">
-                        <label class="form-label">Bio/About Me</label>
-                        <textarea class="form-textarea" id="bio" placeholder="Tell us about yourself, your achievements, interests, etc." style="min-height: 120px;"></textarea>
-                        <div class="bio-hint">This information will be visible to other alumni in the network</div>
+                    <!-- Privacy & Notifications Tab -->
+                    <div id="privacy" class="tab-content">
+                        <div class="form-section">
+                            <h3 class="form-section-title">Profile Visibility</h3>
+                            <!-- <div class="toggle-group">
+                                <span class="toggle-label">Show my profile in alumni directory</span>
+                                <label class="switch">
+                                    <input type="checkbox" checked>
+                                    <span class="slider"></span>
+                                </label>
+                            </div> -->
+                            <div class="toggle-group">
+                                <span class="toggle-label">Allow other student to contact me</span>
+                                <label class="switch">
+                                    <input type="checkbox" checked>
+                                    <span class="slider"></span>
+                                </label>
+                            </div>
+                            <div class="toggle-group">
+                                <span class="toggle-label">Show my email address</span>
+                                <label class="switch">
+                                    <input type="checkbox">
+                                    <span class="slider"></span>
+                                </label>
+                            </div>
+                            <div class="toggle-group">
+                                <span class="toggle-label">Show my phone number</span>
+                                <label class="switch">
+                                    <input type="checkbox">
+                                    <span class="slider"></span>
+                                </label>
+                            </div>
+                            <div class="toggle-group">
+                                <span class="toggle-label">Show my social media profiles</span>
+                                <label class="switch">
+                                    <input type="checkbox" checked>
+                                    <span class="slider"></span>
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <div class="form-section">
+                            <h3 class="form-section-title">Email Notifications</h3>
+                            <div class="toggle-group">
+                                <span class="toggle-label">Event updates</span>
+                                <label class="switch">
+                                    <input type="checkbox" checked>
+                                    <span class="slider"></span>
+                                </label>
+                            </div>
+                            <div class="toggle-group">
+                                <span class="toggle-label">Forum activity and mentions</span>
+                                <label class="switch">
+                                    <input type="checkbox" checked>
+                                    <span class="slider"></span>
+                                </label>
+                            </div>
+                            <!-- <div class="toggle-group">
+                                <span class="toggle-label">Mentorship requests and updates</span>
+                                <label class="switch">
+                                    <input type="checkbox" checked>
+                                    <span class="slider"></span>
+                                </label>
+                            </div>
+                            <div class="toggle-group">
+                                <span class="toggle-label">Job postings and career opportunities</span>
+                                <label class="switch">
+                                    <input type="checkbox" checked>
+                                    <span class="slider"></span>
+                                </label>
+                            </div>
+                            <div class="toggle-group">
+                                <span class="toggle-label">Alumni newsletter</span>
+                                <label class="switch">
+                                    <input type="checkbox" checked>
+                                    <span class="slider"></span>
+                                </label>
+                            </div>
+                            <div class="toggle-group">
+                                <span class="toggle-label">Fundraising campaigns</span>
+                                <label class="switch">
+                                    <input type="checkbox">
+                                    <span class="slider"></span>
+                                </label>
+                            </div> -->
+                        </div>
+                        
+                        <div class="form-actions">
+                            <!-- <button class="btn btn-secondary">Cancel</button> -->
+                            <button class="btn btn-primary" onclick="savePrivacySettings()">Save Changes</button>
+                        </div>
                     </div>
-
-                    <div class="form-group">
-                        <label class="form-label">LinkedIn Profile</label>
-                        <input type="url" class="form-input" id="linkedin" placeholder="https://linkedin.com/in/yourprofile">
-                    </div>
-
-                    <div class="form-group">
-                        <label class="form-label">Personal Website/Portfolio</label>
-                        <input type="url" class="form-input" id="website" placeholder="https://yourwebsite.com">
+                    
+                    <!-- Account Settings Tab -->
+                    <div id="account" class="tab-content">
+                        <div class="form-section">
+                            <h3 class="form-section-title">Change Password</h3>
+                            <div class="form-group">
+                                <label for="currentPassword">Current Password</label>
+                                <input type="password" id="currentPassword">
+                            </div>
+                            <div class="form-group">
+                                <label for="newPassword">New Password</label>
+                                <input type="password" id="newPassword">
+                            </div>
+                            <div class="form-group">
+                                <label for="confirmPassword">Confirm New Password</label>
+                                <input type="password" id="confirmPassword">
+                            </div>
+                            <button class="btn btn-primary" style="margin-top: 10px;" onclick="changePassword()">Update Password</button>
+                        </div>
+                        
+                        <div class="form-section">
+                            <h3 class="form-section-title">Two-Factor Authentication</h3>
+                            <div class="toggle-group">
+                                <span class="toggle-label">Enable Two-Factor Authentication</span>
+                                <label class="switch">
+                                    <input type="checkbox">
+                                    <span class="slider"></span>
+                                </label>
+                            </div>
+                            <p style="color: var(--text-medium); font-size: 0.9rem; margin-top: 10px;">
+                                Two-factor authentication adds an extra layer of security to your account. When enabled, you'll need to enter a verification code sent to your phone in addition to your password when signing in.
+                            </p>
+                        </div>
+                        
+                        <div class="form-section">
+                            <h3 class="form-section-title">Account Management</h3>
+                            <div class="form-group">
+                                <label for="language">Language Preference</label>
+                                <select id="language">
+                                    <option value="en" selected>English</option>
+                                    <option value="hi">Hindi</option>
+                                    <option value="es">Spanish</option>
+                                    <option value="fr">French</option>
+                                    <option value="de">German</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="timezone">Timezone</label>
+                                <select id="timezone">
+                                    <option value="IST" selected>Indian Standard Time (IST)</option>
+                                    <option value="UTC">Coordinated Universal Time (UTC)</option>
+                                    <option value="EST">Eastern Standard Time (EST)</option>
+                                    <option value="PST">Pacific Standard Time (PST)</option>
+                                </select>
+                            </div>
+                            <div style="margin-top: 20px;">
+                                <button class="btn btn-danger" onclick="showDeactivateModal()">Deactivate Account</button>
+                            </div>
+                        </div>
+                        
+                        <div class="form-actions">
+                            <!-- <button class="btn btn-secondary">Cancel</button> -->
+                            <button class="btn btn-primary" onclick="saveAccountSettings()">Save Changes</button>
+                        </div>
                     </div>
                 </div>
-
-                <!-- Form Actions -->
-                <div class="form-actions">
-                    <button type="button" class="btn-cancel" onclick="cancelChanges()">Cancel</button>
-                    <button type="submit" class="btn-save">Save Changes</button>
-                </div>
-            </form>
-        </main>
+            </div>
+        </div>
     </div>
-
-    <!-- Hidden file input for photo upload -->
-    <input type="file" id="photoInput" accept="image/jpeg,image/png" style="display: none;" onchange="handlePhotoUpload(event)">
-
+    <script src="common.js"></script>
     <script>
-        function handleLogout() {
-            if (confirm('Are you sure you want to logout?')) {
-                localStorage.removeItem('userSession');
-                window.location.href = '../index.html';
-            }
-        }
-
-        function uploadPhoto() {
-            document.getElementById('photoInput').click();
-        }
-
-        function handlePhotoUpload(event) {
-            const file = event.target.files[0];
-            if (file) {
-                if (file.size > 2 * 1024 * 1024) { // 2MB limit
-                    alert('File size must be less than 2MB');
-                    return;
-                }
-
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    const profilePhoto = document.getElementById('profilePhoto');
-                    profilePhoto.innerHTML = `<img src="${e.target.result}" alt="Profile Photo">`;
-                };
-                reader.readAsDataURL(file);
-            }
-        }
-
-        function removePhoto() {
-            const profilePhoto = document.getElementById('profilePhoto');
-            profilePhoto.innerHTML = 'SM';
-            document.getElementById('photoInput').value = '';
-        }
-
-        function cancelChanges() {
-            if (confirm('Are you sure you want to cancel? All unsaved changes will be lost.')) {
-                window.location.href = 'student_dashboard.html';
-            }
-        }
-
-        // Form submission
-        document.getElementById('profileForm').addEventListener('submit', function(e) {
-            e.preventDefault();
+        // Show notifications
+        function showNotification(message, type = 'info') {
+            const notification = document.createElement('div');
+            notification.className = `notification ${type}`;
+            notification.innerHTML = `
+                <div class="notification-content">
+                    <span>${message}</span>
+                    <button class="close-notification" onclick="this.parentElement.parentElement.remove()">&times;</button>
+                </div>
+            `;
+            document.body.appendChild(notification);
             
-            // Collect form data
-            const formData = {
-                firstName: document.getElementById('firstName').value,
-                lastName: document.getElementById('lastName').value,
-                email: document.getElementById('email').value,
-                phone: document.getElementById('phone').value,
-                dob: document.getElementById('dob').value,
-                gender: document.getElementById('gender').value,
-                country: document.getElementById('country').value,
-                city: document.getElementById('city').value,
-                address: document.getElementById('address').value,
-                university: document.getElementById('university').value,
-                degree: document.getElementById('degree').value,
-                major: document.getElementById('major').value,
-                graduationYear: document.getElementById('graduationYear').value,
-                bio: document.getElementById('bio').value,
-                linkedin: document.getElementById('linkedin').value,
-                website: document.getElementById('website').value
-            };
-
-            // Validate required fields
-            const requiredFields = ['firstName', 'lastName', 'email', 'university', 'degree', 'major', 'graduationYear'];
-            let isValid = true;
-
-            requiredFields.forEach(field => {
-                const input = document.getElementById(field);
-                if (!input.value.trim()) {
-                    input.style.borderColor = '#ef4444';
-                    isValid = false;
-                } else {
-                    input.style.borderColor = '#d1d5db';
-                }
+            // Auto remove after 5 seconds
+            setTimeout(() => {
+                notification.remove();
+            }, 5000);
+        }
+        
+        // Tab switching
+        function initTabs() {
+            const tabItems = document.querySelectorAll('.tab-item');
+            const tabContents = document.querySelectorAll('.tab-content');
+            
+            tabItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    const tabId = this.getAttribute('data-tab');
+                    
+                    // Remove active class from all tabs and contents
+                    tabItems.forEach(tab => tab.classList.remove('active'));
+                    tabContents.forEach(content => content.classList.remove('active'));
+                    
+                    // Add active class to current tab and content
+                    this.classList.add('active');
+                    document.getElementById(tabId).classList.add('active');
+                });
             });
-
-            if (!isValid) {
-                alert('Please fill in all required fields');
+        }
+        
+        // Save functions
+        function savePersonalInfo() {
+            // In a real application, this would save the form data
+            console.log('Saving personal information...');
+            showNotification('Personal information updated successfully!', 'success');
+        }
+        
+        function saveEducationCareer() {
+            // In a real application, this would save the form data
+            console.log('Saving education and career information...');
+            showNotification('Education and career information updated successfully!', 'success');
+        }
+        
+        function savePrivacySettings() {
+            // In a real application, this would save the form data
+            console.log('Saving privacy settings...');
+            showNotification('Privacy settings updated successfully!', 'success');
+        }
+        
+        function saveAccountSettings() {
+            // In a real application, this would save the form data
+            console.log('Saving account settings...');
+            showNotification('Account settings updated successfully!', 'success');
+        }
+        
+        function changePassword() {
+            const currentPassword = document.getElementById('currentPassword').value;
+            const newPassword = document.getElementById('newPassword').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            
+            if (!currentPassword || !newPassword || !confirmPassword) {
+                showNotification('Please fill in all password fields', 'error');
                 return;
             }
-
-            // Save to localStorage (in a real app, this would be sent to a server)
-            localStorage.setItem('studentProfile', JSON.stringify(formData));
             
-            // Show success message
-            alert('Profile updated successfully!');
-            
-            // Optional: redirect back to dashboard
-            // window.location.href = 'student_dashboard.html';
-        });
-
-        // Load saved profile data on page load
-        document.addEventListener('DOMContentLoaded', function() {
-            const savedProfile = localStorage.getItem('studentProfile');
-            if (savedProfile) {
-                const profileData = JSON.parse(savedProfile);
-                
-                // Populate form fields with saved data
-                Object.keys(profileData).forEach(key => {
-                    const element = document.getElementById(key);
-                    if (element) {
-                        element.value = profileData[key];
-                    }
-                });
+            if (newPassword !== confirmPassword) {
+                showNotification('New passwords do not match', 'error');
+                return;
             }
-        });
-    </script>
-    <script src="../assets/js/app.js"></script>
-    <script>
-        // Ensure logout function is available
-        function handleLogout() {
-            if (window.loginManager && typeof window.loginManager.logout === 'function') {
-                window.loginManager.logout();
-            } else {
-                // Fallback: clear session and redirect manually
-                localStorage.removeItem('userSession');
-                window.location.href = '../index.html';
+            
+            // In a real application, this would verify the current password and update to the new one
+            console.log('Changing password...');
+            showNotification('Password changed successfully!', 'success');
+            
+            // Clear password fields
+            document.getElementById('currentPassword').value = '';
+            document.getElementById('newPassword').value = '';
+            document.getElementById('confirmPassword').value = '';
+        }
+        
+        function showUploadPhotoModal() {
+            showNotification('Photo upload feature will be available soon!', 'info');
+        }
+        
+        function showDeactivateModal() {
+            if (confirm('Are you sure you want to deactivate your account? This action cannot be undone.')) {
+                showNotification('Account deactivation request submitted. Our team will contact you shortly.', 'warning');
             }
         }
-
-        // Add hover and focus effects for logout button
+        
+        // Initialize sidebar toggle
+        function initSidebarToggle() {
+            const sidebarToggle = document.createElement('button');
+            sidebarToggle.className = 'sidebar-toggle';
+            sidebarToggle.innerHTML = '<i class="fas fa-bars"></i>';
+            document.querySelector('.container').prepend(sidebarToggle);
+            
+            sidebarToggle.addEventListener('click', function() {
+                document.querySelector('.sidebar').classList.toggle('collapsed');
+                document.querySelector('.main-content').classList.toggle('expanded');
+            });
+        }
+        
+        // Initialize notifications
+        function initNotifications() {
+            const notificationIcon = document.querySelector('.notification-icon');
+            notificationIcon.addEventListener('click', function() {
+                showNotification('You have 3 unread notifications', 'info');
+            });
+        }
+        
+        // Initialize on page load
         document.addEventListener('DOMContentLoaded', function() {
-            const logoutBtn = document.querySelector('.logout-btn');
-            if (logoutBtn) {
-                logoutBtn.addEventListener('mouseenter', function() {
-                    this.style.backgroundColor = '#dc2626';
-                });
-                logoutBtn.addEventListener('mouseleave', function() {
-                    this.style.backgroundColor = '#ef4444';
-                });
-                logoutBtn.addEventListener('focus', function() {
-                    this.style.outline = '2px solid #007AFF';
-                    this.style.outlineOffset = '2px';
-                });
-                logoutBtn.addEventListener('blur', function() {
-                    this.style.outline = 'none';
-                });
-            }
+            initTabs();
+            initSidebarToggle();
+            initNotifications();
         });
     </script>
-    <script src="common.js"></script>
 </body>
 </html>
