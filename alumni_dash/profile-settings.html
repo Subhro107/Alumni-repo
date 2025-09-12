@@ -6,249 +6,35 @@
   <title>Profile Settings - Alumni Connect</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Inter', Arial, sans-serif;
-      background: #f7f8fa;
-      color: #222;
-    }
-    .container {
-      display: flex;
-      min-height: 100vh;
-    }
-    .sidebar {
-      width: 240px;
-      background: #fff;
-      border-right: 1px solid #e5e7eb;
-      padding: 24px 0;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-    .sidebar .logo {
-      font-weight: 700;
-      font-size: 1.3rem;
-      padding: 0 24px 24px 24px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-    .sidebar nav {
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-    }
-    .sidebar nav a {
-      text-decoration: none;
-      color: #222;
-      padding: 10px 24px;
-      border-radius: 8px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-weight: 500;
-      transition: background 0.2s;
-    }
-    .sidebar nav a.active, .sidebar nav a:hover {
-      background: #eaf3ff;
-      color: #2563eb;
-    }
-    .main {
-      flex: 1;
-      padding: 32px 40px;
-      display: flex;
-      flex-direction: column;
-      gap: 24px;
-    }
-    .header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-    }
-    .header .title {
-      font-size: 2rem;
-      font-weight: 700;
-    }
-    .header .profile {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-    }
-    .header .profile .avatar {
-      width: 36px;
-      height: 36px;
-      border-radius: 50%;
-      background: #e5e7eb;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 600;
-      color: #2563eb;
-    }
-    .profile-content {
-      display: flex;
-      flex-direction: column;
-      gap: 24px;
-      max-width: 900px;
-      margin: 0 auto;
-    }
-    .profile-form {
-      background: #fff;
-      border-radius: 16px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.03);
-      padding: 24px;
-    }
-    .profile-form h2 {
-      margin-top: 0;
-      margin-bottom: 24px;
-      font-size: 1.5rem;
-      color: #1f2937;
-    }
-    .form-section {
-      margin-bottom: 32px;
-    }
-    .form-section h3 {
-      font-size: 1.2rem;
-      margin-bottom: 16px;
-      color: #374151;
-      padding-bottom: 8px;
-      border-bottom: 1px solid #e5e7eb;
-    }
-    .form-row {
-      display: flex;
-      gap: 24px;
-      margin-bottom: 24px;
-    }
-    .form-group {
-      flex: 1;
-      margin-bottom: 24px;
-    }
-    .form-group label {
-      display: block;
-      margin-bottom: 10px;
-      font-weight: 500;
-      color: #4b5563;
-    }
-    .form-group input, 
-    .form-group select, 
-    .form-group textarea {
-      width: 100%;
-      padding: 12px 16px;
-      border: 1px solid #d1d5db;
-      border-radius: 6px;
-      font-size: 1rem;
-      font-family: inherit;
-      box-sizing: border-box;
-    }
-    .form-group textarea {
-      resize: vertical;
-      min-height: 100px;
-    }
-    .form-group input:focus, 
-    .form-group select:focus, 
-    .form-group textarea:focus {
-      outline: none;
-      border-color: #2563eb;
-      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
-    }
-    .form-group .helper {
-      font-size: 0.85rem;
-      color: #6b7280;
-      margin-top: 4px;
-    }
-    .profile-photo {
-      display: flex;
-      align-items: center;
-      gap: 24px;
-      margin-bottom: 24px;
-    }
-    .avatar-preview {
-      width: 100px;
-      height: 100px;
-      border-radius: 50%;
-      background: #e5e7eb;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 2.5rem;
-      font-weight: 600;
-      color: #2563eb;
-    }
-    .avatar-controls {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-    .avatar-controls .btn {
-      padding: 8px 12px;
-    }
-    .btn {
-      background: #2563eb;
-      color: white;
-      border: none;
-      padding: 10px 16px;
-      border-radius: 8px;
-      font-weight: 500;
-      cursor: pointer;
-      transition: background 0.2s;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-    }
-    .btn:hover {
-      background: #1d4ed8;
-    }
-    .btn.secondary {
-      background: #f3f4f6;
-      color: #4b5563;
-    }
-    .btn.secondary:hover {
-      background: #e5e7eb;
-    }
-    .form-actions {
-      display: flex;
-      justify-content: flex-end;
-      gap: 16px;
-      margin-top: 32px;
-      padding-top: 16px;
-      border-top: 1px solid #e5e7eb;
-    }
-    @media (max-width: 900px) {
-      .main { padding: 16px 8px; }
-      .sidebar { width: 100px; padding: 12px 0; }
-      .sidebar .logo { font-size: 1rem; padding: 0 8px 12px 8px; }
-      .sidebar nav a { padding: 8px 8px; font-size: 0.95rem; }
-      .form-row { flex-direction: column; gap: 16px; margin-bottom: 16px; }
-    }
-  </style>
+  <link href="../assets/css/alumni-dash-style.css" rel="stylesheet">
 </head>
 <body>
   <div class="container">
     <aside class="sidebar">
-      <div class="logo"><span style="background:#2563eb;color:#fff;border-radius:50%;padding:4px 10px;font-weight:700;">AU</span> Alumni Connect</div>
-      <nav>
-        <a href="dashboard.html">Dashboard</a>
-        <a href="alumni-directory.html">Alumni Directory</a>
-        <a href="events.html">Events</a>
-        <a href="forums.html">Forums</a>
-        <a href="mentorship.html">Mentorship</a>
-        <a href="career-center.html">Career Center</a>
-        <a href="profile-settings.html" class="active">Profile Settings</a>
-        <a href="give-back.html">Give Back</a>
+      <div class="logo"><span>AU</span> Alumni Connect</div>
+      <nav class="nav-menu">
+        <a href="dashboard.html" class="nav-item"><i class="material-icons">dashboard</i>Dashboard</a>
+        <a href="alumni-directory.html" class="nav-item"><i class="material-icons">groups</i>Alumni Directory</a>
+        <a href="events.html" class="nav-item"><i class="material-icons">event</i>Events</a>
+        <a href="forums.html" class="nav-item"><i class="material-icons">forum</i>Forums</a>
+        <a href="mentorship.html" class="nav-item"><i class="material-icons">school</i>Mentorship</a>
+        <a href="career-center.html" class="nav-item"><i class="material-icons">work</i>Career Center</a>
+        <a href="profile-settings.html" class="nav-item active"><i class="material-icons">settings</i>Profile Settings</a>
+        <a href="give-back.html" class="nav-item"><i class="material-icons">volunteer_activism</i>Give Back</a>
       </nav>
     </aside>
     <main class="main">
       <div class="header">
-        <div class="title">Profile Settings</div>
+        <div class="welcome">Profile Settings</div>
         <div class="profile">
-          <span style="position:relative;">
-            <span style="position:absolute;top:-8px;right:-8px;background:#ef4444;color:#fff;font-size:0.8rem;border-radius:50%;padding:2px 6px;font-weight:700;">3</span>
+          <div class="notification-badge">
+            <span>3</span>
             <svg width="24" height="24" fill="none" stroke="#888" stroke-width="2" viewBox="0 0 24 24"><path d="M18 8a6 6 0 10-12 0c0 7-3 9-3 9h18s-3-2-3-9"/></svg>
-          </span>
-          <span class="avatar">SM</span>
-          <span style="font-weight:600;">Subhro Maitra</span>
+          </div>
+          <div class="user-info" onclick="showUserMenu()">
+            <span class="avatar">SM</span>
+            <span>Subhro Maitra</span>
+          </div>
         </div>
       </div>
       
@@ -423,5 +209,7 @@
       </div>
     </main>
   </div>
+  <script src="../assets/js/app.js"></script>
+  <script src="../assets/js/alumni-dash.js"></script>
 </body>
 </html>

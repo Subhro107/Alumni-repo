@@ -7,193 +7,43 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Inter', Arial, sans-serif;
-      background: #f7f8fa;
-      color: #222;
-    }
-    .container {
-      display: flex;
-      min-height: 100vh;
-    }
-    .sidebar {
-      width: 240px;
-      background: #fff;
-      border-right: 1px solid #e5e7eb;
-      padding: 24px 0;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-    .sidebar .logo {
-      font-weight: 700;
-      font-size: 1.3rem;
-      padding: 0 24px 24px 24px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-    .sidebar nav {
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-    }
-    .sidebar nav a {
-      text-decoration: none;
-      color: #222;
-      padding: 10px 24px;
-      border-radius: 8px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-weight: 500;
-      transition: background 0.2s;
-    }
-    .sidebar nav a.active, .sidebar nav a:hover {
-      background: #eaf3ff;
-      color: #2563eb;
-    }
-    .main {
-      flex: 1;
-      padding: 32px 40px;
-      display: flex;
-      flex-direction: column;
-      gap: 24px;
-    }
-    .header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-    }
-    .header .title {
-      font-size: 2rem;
-      font-weight: 700;
-    }
-    .header .search {
-      flex: 1;
-      margin: 0 32px;
-      max-width: 400px;
-    }
-    .header .search input {
-      width: 100%;
-      padding: 8px 16px;
-      border-radius: 8px;
-      border: 1px solid #e5e7eb;
-      font-size: 1rem;
-    }
-    .header .profile {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-    }
-    .header .profile .avatar {
-      width: 36px;
-      height: 36px;
-      border-radius: 50%;
-      background: #e5e7eb;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 600;
-      color: #2563eb;
-    }
-    .user-info {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      cursor: pointer;
-      padding: 6px 10px;
-      border-radius: 8px;
-      transition: background-color 0.2s;
-    }
-    .user-info:hover {
-      background: #f3f4f6;
-    }
-    .empty-state {
-      background: #fff;
-      border-radius: 16px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.03);
-      padding: 64px 24px;
-      text-align: center;
-      margin-top: 40px;
-    }
-    .empty-state .icon {
-      font-size: 64px;
-      color: #d1d5db;
-      margin-bottom: 24px;
-    }
-    .empty-state h2 {
-      font-size: 1.5rem;
-      margin-bottom: 16px;
-      color: #374151;
-    }
-    .empty-state p {
-      font-size: 1rem;
-      color: #6b7280;
-      margin-bottom: 24px;
-      max-width: 500px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-    .btn {
-      background: #2563eb;
-      color: white;
-      border: none;
-      padding: 10px 16px;
-      border-radius: 8px;
-      font-weight: 500;
-      cursor: pointer;
-      transition: background 0.2s;
-    }
-    .btn:hover {
-      background: #1d4ed8;
-    }
-    @media (max-width: 900px) {
-      .main { padding: 16px 8px; }
-      .sidebar { width: 100px; padding: 12px 0; }
-      .sidebar .logo { font-size: 1rem; padding: 0 8px 12px 8px; }
-      .sidebar nav a { padding: 8px 8px; font-size: 0.95rem; }
-    }
-  </style>
+  <link rel="stylesheet" href="../assets/css/alumni-dash-style.css">
 </head>
 <body>
   <div class="container">
     <aside class="sidebar">
-      <div class="logo"><span style="background:#2563eb;color:#fff;border-radius:50%;padding:4px 10px;font-weight:700;">AU</span> Alumni Connect</div>
-      <nav>
-        <a href="dashboard.html">Dashboard</a>
-        <a href="alumni-directory.html" class="active">Alumni Directory</a>
-        <a href="events.html">Events</a>
-        <a href="forums.html">Forums</a>
-        <a href="mentorship.html">Mentorship</a>
-        <a href="career-center.html">Career Center</a>
-        <a href="profile-settings.html">Profile Settings</a>
-        <a href="give-back.html">Give Back</a>
+      <div class="logo"><span>AU</span> Alumni Connect</div>
+      <nav class="nav-menu">
+        <a href="dashboard.html" class="nav-item"><i class="material-icons">dashboard</i>Dashboard</a>
+        <a href="alumni-directory.html" class="nav-item active"><i class="material-icons">groups</i>Alumni Directory</a>
+        <a href="events.html" class="nav-item"><i class="material-icons">event</i>Events</a>
+        <a href="forums.html" class="nav-item"><i class="material-icons">forum</i>Forums</a>
+        <a href="mentorship.html" class="nav-item"><i class="material-icons">school</i>Mentorship</a>
+        <a href="career-center.html" class="nav-item"><i class="material-icons">work</i>Career Center</a>
+        <a href="profile-settings.html" class="nav-item"><i class="material-icons">settings</i>Profile Settings</a>
+        <a href="give-back.html" class="nav-item"><i class="material-icons">volunteer_activism</i>Give Back</a>
       </nav>
     </aside>
     <main class="main">
       <div class="header">
-        <div class="title">Alumni Directory</div>
+        <div class="welcome">Alumni Directory</div>
         <div class="search">
           <input type="text" placeholder="Search alumni by name, class, location...">
         </div>
         <div class="profile">
-          <span style="position:relative;">
-            <span style="position:absolute;top:-8px;right:-8px;background:#ef4444;color:#fff;font-size:0.8rem;border-radius:50%;padding:2px 6px;font-weight:700;">3</span>
+          <div class="notification-badge">
+            <span>3</span>
             <svg width="24" height="24" fill="none" stroke="#888" stroke-width="2" viewBox="0 0 24 24"><path d="M18 8a6 6 0 10-12 0c0 7-3 9-3 9h18s-3-2-3-9"/></svg>
-          </span>
+          </div>
           <div class="user-info" onclick="showUserMenu()">
             <span class="avatar">SM</span>
-            <span style="font-weight:600;">Subhro Maitra</span>
+            <span>Subhro Maitra</span>
           </div>
         </div>
       </div>
       
       <div class="empty-state">
-        <span class="material-icons icon">people_outline</span>
+        <span class="material-icons icon-64">people_outline</span>
         <h2>No Alumni Records Found</h2>
         <p>The alumni directory is currently empty. As alumni register on the platform, they will appear here. You can browse, filter, and connect with other alumni once records are available.</p>
         <button class="btn">Invite Alumni</button>
@@ -201,160 +51,6 @@
     </main>
   </div>
   <script src="../assets/js/app.js"></script>
-  <script>
-    // User menu functionality
-    function showUserMenu() {
-      showModal(
-        'User Menu',
-        `
-        <a href="profile-settings.html" style="display: flex; align-items: center; padding: 12px 16px; text-decoration: none; color: #333; transition: background-color 0.2s;" onmouseover="this.style.backgroundColor='#f5f5f5'" onmouseout="this.style.backgroundColor='transparent'">
-          <i class="fas fa-user" style="margin-right: 12px; color: #2563eb; width: 16px;"></i>
-          <span>View Profile</span>
-        </a>
-        <a href="#" onclick="showHelpModal()" style="display: flex; align-items: center; padding: 12px 16px; text-decoration: none; color: #333; transition: background-color 0.2s;" onmouseover="this.style.backgroundColor='#f5f5f5'" onmouseout="this.style.backgroundColor='transparent'">
-          <i class="fas fa-question-circle" style="margin-right: 12px; color: #6b7280; width: 16px;"></i>
-          <span>Help & Support</span>
-        </a>
-        <div style="border-top: 1px solid #eee; margin: 8px 0;"></div>
-        <a href="#" onclick="handleLogout()" style="display: flex; align-items: center; padding: 12px 16px; text-decoration: none; color: #dc3545; transition: background-color 0.2s;" onmouseover="this.style.backgroundColor='#f5f5f5'" onmouseout="this.style.backgroundColor='transparent'">
-          <i class="fas fa-sign-out-alt" style="margin-right: 12px; color: #dc3545; width: 16px;"></i>
-          <span>Logout</span>
-        </a>
-        `,
-        []
-      );
-    }
-
-    function showModal(title, content, buttons = []) {
-      // Create modal overlay
-      const overlay = document.createElement('div');
-      overlay.style.cssText = `
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: transparent;
-        z-index: 10000;
-      `;
-
-      // Create modal content
-      const modal = document.createElement('div');
-      modal.style.cssText = `
-        position: absolute;
-        top: 70px;
-        right: 20px;
-        background: white;
-        border-radius: 12px;
-        padding: 0;
-        width: 250px;
-        box-shadow: 0 8px 32px rgba(0,0,0,0.15);
-        border: 1px solid #e5e7eb;
-      `;
-
-      // For User Menu, use dropdown styling
-      if (title === 'User Menu') {
-        const userHeader = document.createElement('div');
-        userHeader.style.cssText = `
-          display: flex;
-          align-items: center;
-          padding: 15px;
-          border-bottom: 1px solid #eee;
-        `;
-        userHeader.innerHTML = `
-          <span class="avatar" style="margin-right: 12px; width: 40px; height: 40px; line-height: 40px; font-size: 16px; border-radius: 50%; background: #e5e7eb; display: flex; align-items: center; justify-content: center; font-weight: 600; color: #2563eb;">SM</span>
-          <div>
-            <div style="font-weight: 600; color: #333;">Subhro Maitra</div>
-            <div style="font-size: 0.85rem; color: #666;">subhro@example.com</div>
-          </div>
-        `;
-        modal.appendChild(userHeader);
-
-        const menuContent = document.createElement('div');
-        menuContent.style.cssText = `padding: 8px 0;`;
-        menuContent.innerHTML = content;
-        modal.appendChild(menuContent);
-      } else {
-        // For other modals (Help), use centered styling
-        overlay.style.cssText = `
-          position: fixed;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          background: rgba(0, 0, 0, 0.5);
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          z-index: 10000;
-        `;
-        
-        modal.style.cssText = `
-          background: white;
-          border-radius: 12px;
-          padding: 24px;
-          max-width: 400px;
-          width: 90%;
-          max-height: 80vh;
-          overflow-y: auto;
-          box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
-        `;
-
-        const titleEl = document.createElement('h3');
-        titleEl.textContent = title;
-        titleEl.style.cssText = `
-          margin: 0 0 16px 0;
-          font-size: 18px;
-          font-weight: 600;
-          color: #1f2937;
-        `;
-
-        const contentEl = document.createElement('div');
-        contentEl.innerHTML = content;
-
-        const buttonContainer = document.createElement('div');
-        buttonContainer.style.cssText = `
-          display: flex;
-          gap: 12px;
-          justify-content: flex-end;
-          margin-top: 20px;
-        `;
-
-        buttons.forEach(btn => {
-          const button = document.createElement('button');
-          button.textContent = btn.text;
-          button.style.cssText = `
-            padding: 8px 16px;
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 14px;
-            background: #e5e7eb;
-            color: #374151;
-            transition: background 0.2s;
-          `;
-          button.onclick = () => {
-            if (btn.action === 'closeCurrentModal') {
-              overlay.remove();
-            }
-          };
-          buttonContainer.appendChild(button);
-        });
-
-        modal.appendChild(titleEl);
-        modal.appendChild(contentEl);
-        modal.appendChild(buttonContainer);
-      }
-
-      overlay.appendChild(modal);
-      document.body.appendChild(overlay);
-
-      overlay.addEventListener('click', (e) => { if (e.target === overlay) { overlay.remove(); } });
-    }
-
-    function navigateTo(page) { window.location.href = page; }
-    function showHelpModal() { showModal('Help & Support', `<div style="text-align: center;"><p style="margin-bottom: 16px; color: #6b7280;">Need help with the alumni platform?</p><p style="margin-bottom: 8px;"><strong>Email:</strong> support@alumniconnect.com</p><p style="margin-bottom: 8px;"><strong>Phone:</strong> +1-234-567-8900</p><p><strong>Hours:</strong> Mon-Fri 9AM-5PM</p></div>`, [{ text: 'Close', action: 'closeCurrentModal', className: 'btn-ghost' }]); }
-    function handleLogout() { if (confirm('Are you sure you want to logout?')) { loginManager.logout(); } }
-  </script>
+  <script src="../assets/js/alumni-dash.js"></script>
 </body>
 </html>
