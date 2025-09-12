@@ -97,30 +97,6 @@
     </div>
 
     <script src="../assets/js/app.js"></script>
-    <script>
-        // Logout functionality
-        function handleLogout() {
-            if (confirm('Are you sure you want to logout?')) {
-                // Clear any stored session data
-                localStorage.removeItem('currentUser');
-                // Redirect to login page
-                window.location.href = '../login.html';
-            }
-        }
-
-        // Analytics functionality
-        document.addEventListener('DOMContentLoaded', function() {
-            // Add any analytics-specific JavaScript here
-            console.log('Analytics page loaded');
-
-            // Example: Add click handlers for analytics cards
-            const analyticsCards = document.querySelectorAll('.analytics-card');
-            analyticsCards.forEach(card => {
-                card.addEventListener('click', function() {
-                    console.log('Analytics card clicked:', this.querySelector('h3').textContent);
-                });
-            });
-        });
-    </script>
+    <script src="../assets/js/admin-functions.js"></script>
 </body>
 </html>
