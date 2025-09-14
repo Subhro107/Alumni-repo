@@ -95,42 +95,10 @@
                     <input type="text" id="filterCompany" placeholder="Filter by company...">
                     <input type="text" id="filterSkills" placeholder="Filter by skills...">
                     <input type="text" id="filterLocation" placeholder="Filter by location...">
-                    <button onclick="applyFilters()">Apply Filters</button>
+                    <button id="applyFiltersBtn">Apply Filters</button>
                 </div>
-        <script src="../assets/js/student.js"></script>
     <script src="../assets/js/app.js"></script>
-    <script>
-        // Ensure logout function is available
-        function handleLogout() {
-            if (window.loginManager && typeof window.loginManager.logout === 'function') {
-                window.loginManager.logout();
-            } else {
-                // Fallback: clear session and redirect manually
-                localStorage.removeItem('userSession');
-                window.location.href = '../index.html';
-            }
-        }
-
-        // Add hover and focus effects for logout button
-        document.addEventListener('DOMContentLoaded', function() {
-            const logoutBtn = document.querySelector('.logout-btn');
-            if (logoutBtn) {
-                logoutBtn.addEventListener('mouseenter', function() {
-                    this.style.backgroundColor = '#dc2626';
-                });
-                logoutBtn.addEventListener('mouseleave', function() {
-                    this.style.backgroundColor = '#ef4444';
-                });
-                logoutBtn.addEventListener('focus', function() {
-                    this.style.outline = '2px solid #007AFF';
-                    this.style.outlineOffset = '2px';
-                });
-                logoutBtn.addEventListener('blur', function() {
-                    this.style.outline = 'none';
-                });
-            }
-        });
-    </script>
+    <script src="../assets/js/student.js"></script>
     </main>
     </body>
 </html>

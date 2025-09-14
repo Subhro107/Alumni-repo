@@ -631,7 +631,7 @@ function showModal(title, content, actions = []) {
         .modal-overlay .result-title { font-weight: 600; margin: 4px 0; }
         .modal-overlay .result-description { font-size: 14px; color: #666; }
         .modal-overlay .notification-item { 
-            padding: 12px; margin: 8px 0; border: 1px solid #e5e7eb; border-radius: 6px; 
+            padding: 12px; margin: 8px 0; border: 1px solid #e7e7eb; border-radius: 6px; 
             cursor: pointer; transition: all 0.2s; 
         }
         .modal-overlay .notification-item.unread { border-left: 3px solid #007AFF; background: #f0f9ff; }
@@ -985,5 +985,827 @@ function handleLogout() {
         setTimeout(() => {
             window.location.href = '../index.html';
         }, 1500);
+    }
+}
+
+// =================== DASHBOARD SPECIFIC FUNCTIONALITY ===================
+// This file extends the common utilities with dashboard-specific features
+
+// Dashboard-specific initialization
+document.addEventListener('DOMContentLoaded', function() {
+    // Only initialize dashboard features if we're on the dashboard page
+    if (window.location.pathname.includes('student_dashboard.html')) {
+        initializeDashboardFeatures();
+        updateDashboardStats();
+        initializeDashboardAnimations();
+    }
+});
+
+function initializeDashboardFeatures() {
+    // Dashboard-specific quick actions
+    document.querySelectorAll('.action-card').forEach(card => {
+        card.addEventListener('click', function() {
+            const text = this.querySelector('.action-text').textContent;
+            handleDashboardAction(text);
+        });
+    });
+
+    // Enhanced activity items for dashboard
+    document.querySelectorAll('.activity-item').forEach(item => {
+        item.addEventListener('click', function() {
+            const title = this.querySelector('h4').textContent;
+            showActivityDetails(title);
+        });
+    });
+
+    // Simulated data updates (for demo purposes)
+    setInterval(updateDashboardStats, 30000); // Update every 30 seconds
+
+    // Real-time notifications badge animation
+    setTimeout(() => {
+        simulateDashboardActivity();
+    }, 10000);
+}
+
+function handleDashboardAction(actionText) {
+    console.log(`Dashboard action: ${actionText}`);
+
+    const dashboardActions = {
+        'Find Alumni': () => {
+            showNotification('Redirecting to Alumni Directory...', 'info');
+            setTimeout(() => navigateTo('student_directory.html'), 1000);
+        },
+        'View Events': () => {
+            showNotification('Loading Events...', 'info');
+            setTimeout(() => navigateTo('student_events.html'), 1000);
+        },
+        'Connect': () => {
+            showConnectModal();
+        }
+    };
+
+    const action = dashboardActions[actionText];
+    if (action) {
+        action();
+    } else {
+        showNotification(`${actionText} - Feature coming soon!`, 'info');
+    }
+}
+
+function showActivityDetails(activityTitle) {
+    const activityDetails = {
+        'New alumni registration': {
+            title: 'New Alumni Registration',
+            content: 'Sarah Johnson (Class of 2020) has joined the platform. She is currently working as a Software Engineer at Google.',
+            action: () => navigateTo('student_directory.html#sarah-johnson')
+        },
+        'Upcoming event reminder': {
+            title: 'Annual Alumni Gala',
+            content: 'The Annual Alumni Gala is scheduled for two weeks from now. This is a great opportunity to network with successful alumni.',
+            action: () => navigateTo('student_events.html#alumni-gala')
+        },
+        'New mentorship match': {
+            title: 'Mentorship Opportunity',
+            content: 'You have been matched with a mentor based on your career interests. Check your mentorship dashboard for details.',
+            action: () => navigateTo('students_mentor.html')
+        }
+    };
+
+    const details = activityDetails[activityTitle];
+    if (details) {
+        showModal(
+            details.title,
+            `<p>${details.content}</p>`,
+            [
+                { text: 'View Details', action: () => { closeCurrentModal(); details.action(); }, className: 'btn-primary' },
+                { text: 'Close', action: 'closeCurrentModal', className: 'btn-ghost' }
+            ]
+        );
+    } else {
+        showNotification(`Viewing: ${activityTitle}`, 'info');
+    }
+}
+
+function updateDashboardStats() {
+    // Only update if we're on the dashboard page
+    if (!window.location.pathname.includes('student_dashboard.html')) return;
+
+    // Simulate real-time stats updates
+    const stats = {
+        totalAlumni: Math.floor(Math.random() * 10) + 1,
+        upcomingEvents: Math.floor(Math.random() * 3),
+        newMessages: Math.floor(Math.random() * 5),
+        jobOpportunities: Math.floor(Math.random() * 8)
+    };
+
+    // Update stat numbers with animation
+    updateStatCard('.stat-card:nth-child(1) .stat-number', stats.totalAlumni);
+    updateStatCard('.stat-card:nth-child(2) .stat-number', stats.upcomingEvents);
+    updateStatCard('.stat-card:nth-child(3) .stat-number', stats.newMessages);
+    updateStatCard('.stat-card:nth-child(4) .stat-number', stats.jobOpportunities);
+}
+
+function updateStatCard(selector, newValue) {
+    const element = document.querySelector(selector);
+    if (element && element.textContent !== newValue.toString()) {
+        element.classList.add('updating');
+
+        setTimeout(() => {
+            element.textContent = newValue;
+            element.classList.remove('updating');
+        }, 200);
+    }
+}
+
+function simulateDashboardActivity() {
+    // Only simulate if we're on the dashboard page
+    if (!window.location.pathname.includes('student_dashboard.html')) return;
+
+    // Add new activity to the activity list
+    const activityList = document.querySelector('.activity-list');
+    if (activityList) {
+        const activities = [
+            {
+                title: 'New job posting',
+                description: 'Software Developer position at Tech Corp',
+                dot: 'blue'
+            },
+            {
+                title: 'Event registration opened',
+                description: 'Career Fair 2024 • Registration now open',
+                dot: 'green'
+            },
+            {
+                title: 'New forum post',
+                description: 'Discussion started in Career Advice',
+                dot: 'orange'
+            }
+        ];
+
+        const randomActivity = activities[Math.floor(Math.random() * activities.length)];
+
+        const newActivityItem = document.createElement('div');
+        newActivityItem.className = 'activity-item new';
+        newActivityItem.innerHTML = `
+            <div class="activity-dot ${randomActivity.dot}"></div>
+            <div class="activity-content">
+                <h4>${randomActivity.title}</h4>
+                <p>${randomActivity.description}</p>
+            </div>
+        `;
+
+        // Add click handler
+        newActivityItem.addEventListener('click', function() {
+            showActivityDetails(randomActivity.title);
+        });
+
+        // Insert at the beginning
+        activityList.insertBefore(newActivityItem, activityList.firstChild);
+
+        // Remove last item if more than 3
+        const items = activityList.querySelectorAll('.activity-item');
+        if (items.length > 3) {
+            activityList.removeChild(items[items.length - 1]);
+        }
+
+        // Animate new item using CSS
+        setTimeout(() => {
+            newActivityItem.classList.remove('new');
+            newActivityItem.classList.add('show');
+        }, 100);
+
+        // Add notification
+        addNotification('New Activity', randomActivity.description);
+    }
+
+    // Schedule next activity
+    if (Math.random() > 0.3) {
+        setTimeout(simulateDashboardActivity, Math.random() * 60000 + 30000);
+    }
+}
+
+function initializeDashboardAnimations() {
+    // Only animate if we're on the dashboard page
+    if (!window.location.pathname.includes('student_dashboard.html')) return;
+
+    // Stagger animation for stat cards using CSS classes
+    const statCards = document.querySelectorAll('.stat-card');
+    statCards.forEach((card, index) => {
+        card.classList.add('hidden');
+
+        setTimeout(() => {
+            card.classList.remove('hidden');
+            card.classList.add('show');
+        }, index * 100);
+    });
+
+    // Animate content sections using CSS classes
+    const contentSections = document.querySelectorAll('.content-section');
+    contentSections.forEach((section, index) => {
+        section.classList.add('hidden');
+
+        setTimeout(() => {
+            section.classList.remove('hidden');
+            section.classList.add('show');
+        }, 500 + (index * 200));
+    });
+}
+
+// Dashboard-specific welcome message
+function showWelcomeMessage() {
+    // Only show welcome message if we're on the dashboard page
+    if (!window.location.pathname.includes('student_dashboard.html')) return;
+
+    const hour = new Date().getHours();
+    let greeting = 'Good evening';
+
+    if (hour < 12) {
+        greeting = 'Good morning';
+    } else if (hour < 18) {
+        greeting = 'Good afternoon';
+    }
+
+    const welcomeTitle = document.querySelector('.welcome-title');
+    if (welcomeTitle) {
+        welcomeTitle.textContent = `${greeting}, student!`;
+    }
+
+    // Show welcome notification on first visit
+    if (!localStorage.getItem('hasVisited')) {
+        setTimeout(() => {
+            showNotification('Welcome to Alumni Connect! Explore the features to get started.', 'success');
+            localStorage.setItem('hasVisited', 'true');
+        }, 2000);
+    }
+}
+
+// Initialize welcome message for dashboard
+if (window.location.pathname.includes('student_dashboard.html')) {
+    document.addEventListener('DOMContentLoaded', showWelcomeMessage);
+}
+
+// =================== DIRECTORY SPECIFIC FUNCTIONALITY ===================
+
+// Directory-specific initialization
+document.addEventListener('DOMContentLoaded', function() {
+    // Only initialize directory features if we're on the directory page
+    if (window.location.pathname.includes('student_directory.html')) {
+        initializeDirectoryFeatures();
+    }
+});
+
+function initializeDirectoryFeatures() {
+    // Initialize filter functionality
+    const applyFiltersBtn = document.getElementById('applyFiltersBtn');
+    if (applyFiltersBtn) {
+        applyFiltersBtn.addEventListener('click', applyFilters);
+    }
+
+    // Initialize real-time search
+    const searchNameInput = document.getElementById('searchName');
+    if (searchNameInput) {
+        searchNameInput.addEventListener('input', function() {
+            const query = this.value.trim().toLowerCase();
+            filterAlumniByName(query);
+        });
+    }
+}
+
+function applyFilters() {
+    const filters = {
+        year: document.getElementById('filterYear').value,
+        company: document.getElementById('filterCompany').value.trim().toLowerCase(),
+        skills: document.getElementById('filterSkills').value.trim().toLowerCase(),
+        location: document.getElementById('filterLocation').value.trim().toLowerCase()
+    };
+
+    // Get all alumni cards (assuming they exist in the DOM)
+    const alumniCards = document.querySelectorAll('.alumni-card, .card');
+
+    alumniCards.forEach(card => {
+        let isVisible = true;
+
+        // Filter by graduation year
+        if (filters.year && card.dataset.year !== filters.year) {
+            isVisible = false;
+        }
+
+        // Filter by company
+        if (filters.company && !card.textContent.toLowerCase().includes(filters.company)) {
+            isVisible = false;
+        }
+
+        // Filter by skills
+        if (filters.skills && !card.textContent.toLowerCase().includes(filters.skills)) {
+            isVisible = false;
+        }
+
+        // Filter by location
+        if (filters.location && !card.textContent.toLowerCase().includes(filters.location)) {
+            isVisible = false;
+        }
+
+        card.style.display = isVisible ? '' : 'none';
+
+        if (isVisible) {
+            card.classList.add('fade-in');
+        } else {
+            card.classList.remove('fade-in');
+        }
+    });
+
+    // Show notification about filter results
+    const visibleCards = Array.from(alumniCards).filter(card => card.style.display !== 'none');
+    showNotification(`Showing ${visibleCards.length} alumni matching your filters`, 'info');
+}
+
+function filterAlumniByName(query) {
+    const alumniCards = document.querySelectorAll('.alumni-card, .card');
+
+    alumniCards.forEach(card => {
+        const nameElement = card.querySelector('h3, .alumni-name');
+        const name = nameElement ? nameElement.textContent.toLowerCase() : card.textContent.toLowerCase();
+        const isVisible = query === '' || name.includes(query);
+
+        card.style.display = isVisible ? '' : 'none';
+
+        if (isVisible && query !== '') {
+            card.classList.add('fade-in');
+        } else {
+            card.classList.remove('fade-in');
+        }
+    });
+}
+
+// =================== PROFILE SPECIFIC FUNCTIONALITY ===================
+
+// Profile-specific initialization
+document.addEventListener('DOMContentLoaded', function() {
+    // Only initialize profile features if we're on the profile page
+    if (window.location.pathname.includes('students_profile.html')) {
+        initializeProfileFeatures();
+    }
+});
+
+// =================== MENTOR SPECIFIC FUNCTIONALITY ===================
+
+// Mentor-specific initialization
+document.addEventListener('DOMContentLoaded', function() {
+    // Only initialize mentor features if we're on the mentor page
+    if (window.location.pathname.includes('students_mentor.html')) {
+        initializeMentorFeatures();
+    }
+});
+
+// =================== FORUM SPECIFIC FUNCTIONALITY ===================
+
+// Forum-specific initialization
+document.addEventListener('DOMContentLoaded', function() {
+    // Only initialize forum features if we're on the forum page
+    if (window.location.pathname.includes('students_forum.html')) {
+        initializeForumFeatures();
+    }
+});
+
+// =================== CAREER SPECIFIC FUNCTIONALITY ===================
+
+// Career-specific initialization
+document.addEventListener('DOMContentLoaded', function() {
+    // Only initialize career features if we're on the career page
+    if (window.location.pathname.includes('students_career.html')) {
+        initializeCareerFeatures();
+    }
+});
+
+// =================== EVENTS SPECIFIC FUNCTIONALITY ===================
+
+// Events-specific initialization
+document.addEventListener('DOMContentLoaded', function() {
+    // Only initialize events features if we're on the events page
+    if (window.location.pathname.includes('student_events.html')) {
+        initializeEventsFeatures();
+    }
+});
+
+function initializeEventsFeatures() {
+    // Initialize event card clicks
+    const eventCards = document.querySelectorAll('.events-card');
+    eventCards.forEach(card => {
+        card.addEventListener('click', function() {
+            const type = this.classList.contains('blue') ? 'upcoming' :
+                        this.classList.contains('green') ? 'ongoing' : 'past';
+            filterEventsByType(type);
+        });
+    });
+
+    // Initialize tab clicks
+    const tabs = document.querySelectorAll('.tab');
+    tabs.forEach(tab => {
+        tab.addEventListener('click', function() {
+            const type = this.getAttribute('data-type') || this.textContent.toLowerCase();
+            switchEventTab(this, type);
+        });
+    });
+
+    // Initialize navigation buttons
+    const prevBtn = document.querySelector('.prev-month');
+    const nextBtn = document.querySelector('.next-month');
+
+    if (prevBtn) {
+        prevBtn.addEventListener('click', previousMonth);
+    }
+    if (nextBtn) {
+        nextBtn.addEventListener('click', nextMonth);
+    }
+
+    // Initialize calendar
+    initializeCalendar();
+}
+
+function switchEventTab(tab, type) {
+    // Remove active class from all tabs
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    // Add active class to clicked tab
+    tab.classList.add('active');
+
+    // Filter events based on type
+    filterEventsByType(type);
+}
+
+function filterEventsByType(type) {
+    console.log('Filtering events by type:', type);
+
+    // Get all event items
+    const eventItems = document.querySelectorAll('.event-item');
+
+    eventItems.forEach(item => {
+        const statusElement = item.querySelector('.event-status');
+        if (statusElement) {
+            const statusText = statusElement.textContent.toLowerCase();
+            const isVisible = type === 'all' ||
+                             (type === 'upcoming' && statusText.includes('upcoming')) ||
+                             (type === 'ongoing' && statusText.includes('ongoing')) ||
+                             (type === 'past' && statusText.includes('past'));
+
+            item.style.display = isVisible ? '' : 'none';
+
+            if (isVisible) {
+                item.classList.add('fade-in');
+            } else {
+                item.classList.remove('fade-in');
+            }
+        }
+    });
+
+    // Update the active tab visual state
+    const tabs = document.querySelectorAll('.tab');
+    tabs.forEach(tab => {
+        const tabType = tab.textContent.toLowerCase();
+        if (tabType === type) {
+            tab.classList.add('active');
+        } else {
+            tab.classList.remove('active');
+        }
+    });
+
+    // Show notification about filter results
+    const visibleEvents = Array.from(eventItems).filter(item => item.style.display !== 'none');
+    showNotification(`Showing ${visibleEvents.length} ${type} events`, 'info');
+}
+
+function previousMonth() {
+    console.log('Previous month');
+    // Add month navigation logic here
+    const monthYearElement = document.getElementById('monthYear');
+    if (monthYearElement) {
+        const currentText = monthYearElement.textContent;
+        const [month, year] = currentText.split(' ');
+
+        // Simple month navigation (you can enhance this with proper date logic)
+        const months = ['January', 'February', 'March', 'April', 'May', 'June',
+                       'July', 'August', 'September', 'October', 'November', 'December'];
+        const currentMonthIndex = months.indexOf(month);
+        const currentYear = parseInt(year);
+
+        let newMonthIndex = currentMonthIndex - 1;
+        let newYear = currentYear;
+
+        if (newMonthIndex < 0) {
+            newMonthIndex = 11;
+            newYear = currentYear - 1;
+        }
+
+        monthYearElement.textContent = `${months[newMonthIndex]} ${newYear}`;
+        showNotification(`Switched to ${months[newMonthIndex]} ${newYear}`, 'info');
+        
+        // Re-initialize calendar to update today highlighting
+        initializeCalendar();
+    }
+}
+
+function nextMonth() {
+    console.log('Next month');
+    // Add month navigation logic here
+    const monthYearElement = document.getElementById('monthYear');
+    if (monthYearElement) {
+        const currentText = monthYearElement.textContent;
+        const [month, year] = currentText.split(' ');
+
+        // Simple month navigation (you can enhance this with proper date logic)
+        const months = ['January', 'February', 'March', 'April', 'May', 'June',
+                       'July', 'August', 'September', 'October', 'November', 'December'];
+        const currentMonthIndex = months.indexOf(month);
+        const currentYear = parseInt(year);
+
+        let newMonthIndex = currentMonthIndex + 1;
+        let newYear = currentYear;
+
+        if (newMonthIndex > 11) {
+            newMonthIndex = 0;
+            newYear = currentYear + 1;
+        }
+
+        monthYearElement.textContent = `${months[newMonthIndex]} ${newYear}`;
+        showNotification(`Switched to ${months[newMonthIndex]} ${newYear}`, 'info');
+        
+        // Re-initialize calendar to update today highlighting
+        initializeCalendar();
+    }
+}
+
+function initializeCalendar() {
+    // Get current date
+    const today = new Date();
+    const currentDay = today.getDate();
+    const currentMonth = today.getMonth(); // 0-based
+    const currentYear = today.getFullYear();
+
+    // Get displayed month
+    const monthYearElement = document.getElementById('monthYear');
+    if (monthYearElement) {
+        const [monthName, yearStr] = monthYearElement.textContent.split(' ');
+        const months = ['January', 'February', 'March', 'April', 'May', 'June',
+                       'July', 'August', 'September', 'October', 'November', 'December'];
+        const displayedMonth = months.indexOf(monthName);
+        const displayedYear = parseInt(yearStr);
+
+        // If displayed month is current month and year, mark today's date
+        if (displayedMonth === currentMonth && displayedYear === currentYear) {
+            const calendarDays = document.querySelectorAll('.calendar-day');
+            calendarDays.forEach(day => {
+                const dayNumber = parseInt(day.querySelector('.day-number').textContent);
+                if (dayNumber === currentDay && !day.classList.contains('other-month')) {
+                    day.classList.add('today');
+                } else {
+                    day.classList.remove('today');
+                }
+            });
+        } else {
+            // Remove today class if not current month
+            const calendarDays = document.querySelectorAll('.calendar-day');
+            calendarDays.forEach(day => day.classList.remove('today'));
+        }
+    }
+
+    // Add click handlers for calendar days
+    const calendarDays = document.querySelectorAll('.calendar-day');
+    calendarDays.forEach(day => {
+        if (!day.classList.contains('other-month')) {
+            day.addEventListener('click', function() {
+                // Remove selected class from all calendar days
+                calendarDays.forEach(d => d.classList.remove('selected'));
+
+                // Add selected class to clicked day
+                this.classList.add('selected');
+
+                // Optional: You can add more functionality here like showing events for the selected date
+            });
+        }
+    });
+}
+
+function initializeCareerFeatures() {
+    // Job application buttons
+    document.querySelectorAll('.btn-small, .apply-btn').forEach(btn => {
+        btn.addEventListener('click', function(e) {
+            e.preventDefault();
+            console.log('Job action clicked');
+            // Add job application logic here
+        });
+    });
+
+    // Upload resume functionality
+    const fileInput = document.getElementById('resumeInput');
+    if (fileInput) {
+        fileInput.addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                console.log('File selected:', file.name);
+                // Add file upload logic here
+            }
+        });
+    }
+}
+
+function initializeForumFeatures() {
+    // Forum card interactions
+    document.querySelectorAll('.forum-card').forEach(card => {
+        card.addEventListener('click', function(e) {
+            e.preventDefault();
+            const category = this.getAttribute('href').substring(1);
+            console.log('Opening forum category:', category);
+            // Add forum navigation logic here
+        });
+    });
+
+    // Quick action buttons
+    document.querySelectorAll('.action-card').forEach(button => {
+        button.addEventListener('click', function() {
+            const action = this.querySelector('.action-text').textContent;
+            console.log('Quick action:', action);
+            
+            switch(action) {
+                case 'Create New Topic':
+                    // Open create topic modal
+                    break;
+                case 'Search Discussions':
+                    // Focus on search bar or open search modal
+                    document.querySelector('.search-input').focus();
+                    break;
+                case 'My Bookmarks':
+                    // Navigate to bookmarks
+                    break;
+                case 'Notification Settings':
+                    // Open notification settings
+                    break;
+                case 'Find Alumni':
+                    // Navigate to alumni directory
+                    window.location.href = 'student_directory.html';
+                    break;
+                case 'Trending Topics':
+                    // Show trending topics
+                    break;
+            }
+        });
+    });
+
+    // Activity item interactions
+    document.querySelectorAll('.activity-item').forEach(item => {
+        item.addEventListener('click', function() {
+            console.log('Activity item clicked');
+            // Navigate to specific discussion
+        });
+    });
+}
+
+function initializeMentorFeatures() {
+    console.log('Mentorship page loaded');
+
+    // Add hover effects to mentor cards (now handled by CSS)
+    // No need for inline style changes; CSS handles hover effects
+}
+
+// Global functions for mentorship page
+function requestMentorship(mentorId) {
+    console.log('Requesting mentorship from:', mentorId);
+    // Show modal or form for mentorship request
+    alert('Mentorship request sent successfully!');
+}
+
+function findMentors() {
+    console.log('Opening mentor search');
+    // Navigate to mentor search page or show search modal
+}
+
+function viewSessions() {
+    console.log('Viewing sessions');
+    // Navigate to sessions page
+}
+
+function becomeVisibleToMentors() {
+    console.log('Making profile visible to mentors');
+    // Open profile visibility settings
+}
+
+function viewApplications() {
+    console.log('Viewing applications');
+    // Navigate to applications page
+}
+
+function giveFeedback() {
+    console.log('Opening feedback form');
+    // Show feedback modal
+}
+
+function viewResources() {
+    console.log('Viewing mentorship resources');
+    // Navigate to resources page
+}
+
+function initializeProfileFeatures() {
+    // Profile form submission
+    const profileForm = document.getElementById('profileForm');
+    if (profileForm) {
+        profileForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Collect form data
+            const formData = {
+                firstName: document.getElementById('firstName').value,
+                lastName: document.getElementById('lastName').value,
+                email: document.getElementById('email').value,
+                phone: document.getElementById('phone').value,
+                dob: document.getElementById('dob').value,
+                gender: document.getElementById('gender').value,
+                country: document.getElementById('country').value,
+                city: document.getElementById('city').value,
+                address: document.getElementById('address').value,
+                university: document.getElementById('university').value,
+                degree: document.getElementById('degree').value,
+                major: document.getElementById('major').value,
+                graduationYear: document.getElementById('graduationYear').value,
+                bio: document.getElementById('bio').value,
+                linkedin: document.getElementById('linkedin').value,
+                website: document.getElementById('website').value
+            };
+
+            // Validate required fields
+            const requiredFields = ['firstName', 'lastName', 'email', 'university', 'degree', 'major', 'graduationYear'];
+            let isValid = true;
+
+            requiredFields.forEach(field => {
+                const input = document.getElementById(field);
+                if (!input.value.trim()) {
+                    input.classList.add('error');
+                    input.classList.remove('valid');
+                    isValid = false;
+                } else {
+                    input.classList.add('valid');
+                    input.classList.remove('error');
+                }
+            });
+
+            if (!isValid) {
+                alert('Please fill in all required fields');
+                return;
+            }
+
+            // Save to localStorage (in a real app, this would be sent to a server)
+            localStorage.setItem('studentProfile', JSON.stringify(formData));
+            
+            // Show success message
+            alert('Profile updated successfully!');
+            
+            // Optional: redirect back to dashboard
+            // window.location.href = 'student_dashboard.html';
+        });
+    }
+
+    // Load saved profile data on page load
+    const savedProfile = localStorage.getItem('studentProfile');
+    if (savedProfile) {
+        const profileData = JSON.parse(savedProfile);
+        
+        // Populate form fields with saved data
+        Object.keys(profileData).forEach(key => {
+            const element = document.getElementById(key);
+            if (element) {
+                element.value = profileData[key];
+            }
+        });
+    }
+}
+
+// Global functions for profile page
+function uploadPhoto() {
+    document.getElementById('photoInput').click();
+}
+
+function handlePhotoUpload(event) {
+    const file = event.target.files[0];
+    if (file) {
+        if (file.size > 2 * 1024 * 1024) { // 2MB limit
+            alert('File size must be less than 2MB');
+            return;
+        }
+
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            const profilePhoto = document.getElementById('profilePhoto');
+            profilePhoto.innerHTML = `<img src="${e.target.result}" alt="Profile Photo">`;
+        };
+        reader.readAsDataURL(file);
+    }
+}
+
+function removePhoto() {
+    const profilePhoto = document.getElementById('profilePhoto');
+    profilePhoto.innerHTML = 'SM';
+    document.getElementById('photoInput').value = '';
+}
+
+function cancelChanges() {
+    if (confirm('Are you sure you want to cancel? All unsaved changes will be lost.')) {
+        window.location.href = 'student_dashboard.html';
     }
 }

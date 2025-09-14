@@ -75,7 +75,7 @@
 
             <!-- Events Overview Cards -->
             <div class="events-overview">
-                <div class="events-card blue" onclick="filterEventsByType('upcoming')">
+                <div class="events-card blue">
                     <div class="card-header">
                         <div class="card-icon">
                             <i class="fas fa-calendar-plus"></i>
@@ -86,7 +86,7 @@
                     <div class="card-subtitle">This month</div>
                 </div>
 
-                <div class="events-card green" onclick="filterEventsByType('ongoing')">
+                <div class="events-card green">
                     <div class="card-header">
                         <div class="card-icon">
                             <i class="fas fa-calendar-check"></i>
@@ -97,7 +97,7 @@
                     <div class="card-subtitle">Currently active</div>
                 </div>
 
-                <div class="events-card orange" onclick="filterEventsByType('past')">
+                <div class="events-card orange">
                     <div class="card-header">
                         <div class="card-icon">
                             <i class="fas fa-calendar-minus"></i>
@@ -113,15 +113,15 @@
             <div class="calendar-section">
                 <div class="calendar-header">
                     <div class="calendar-nav">
-                        <button class="nav-btn" onclick="previousMonth()">‹</button>
-                        <div class="month-year" id="monthYear">October 2025</div>
-                        <button class="nav-btn" onclick="nextMonth()">›</button>
+                        <button class="nav-btn prev-month">‹</button>
+                        <div class="month-year" id="monthYear">September 2025</div>
+                        <button class="nav-btn next-month">›</button>
                     </div>
                     
                     <div class="events-tabs">
-                        <button class="tab active" onclick="switchEventTab(this, 'upcoming')">Upcoming</button>
-                        <button class="tab" onclick="switchEventTab(this, 'ongoing')">Ongoing</button>
-                        <button class="tab" onclick="switchEventTab(this, 'past')">Past</button>
+                        <button class="tab active" data-type="upcoming">Upcoming</button>
+                        <button class="tab" data-type="ongoing">Ongoing</button>
+                        <button class="tab" data-type="past">Past</button>
                     </div>
                 </div>
                 
@@ -140,7 +140,7 @@
                     <div class="calendar-day other-month"><div class="day-number">31</div></div>
                     <div class="calendar-day"><div class="day-number">1</div></div>
                     <div class="calendar-day"><div class="day-number">2</div></div>
-                    <div class="calendar-day today"><div class="day-number">3</div><div class="event-dot blue"></div></div>
+                    <div class="calendar-day"><div class="day-number">3</div><div class="event-dot blue"></div></div>
                     <div class="calendar-day"><div class="day-number">4</div></div>
                     
                     <div class="calendar-day"><div class="day-number">5</div></div>
@@ -248,64 +248,6 @@
         </div>
     </div>
     <script src="../assets/js/app.js"></script>
-    <script>
-        // Ensure logout function is available
-        function handleLogout() {
-            if (window.loginManager && typeof window.loginManager.logout === 'function') {
-                window.loginManager.logout();
-            } else {
-                // Fallback: clear session and redirect manually
-                localStorage.removeItem('userSession');
-                window.location.href = '../index.html';
-            }
-        }
-
-        // Add hover and focus effects for logout button
-        document.addEventListener('DOMContentLoaded', function() {
-            const logoutBtn = document.querySelector('.logout-btn');
-            if (logoutBtn) {
-                logoutBtn.addEventListener('mouseenter', function() {
-                    this.style.backgroundColor = '#dc2626';
-                });
-                logoutBtn.addEventListener('mouseleave', function() {
-                    this.style.backgroundColor = '#ef4444';
-                });
-                logoutBtn.addEventListener('focus', function() {
-                    this.style.outline = '2px solid #007AFF';
-                    this.style.outlineOffset = '2px';
-                });
-                logoutBtn.addEventListener('blur', function() {
-                    this.style.outline = 'none';
-                });
-            }
-        });
-    </script>
-     <script src="../assets/js/student.js"></script>
-    <script>
-        function switchEventTab(tab, type) {
-            // Remove active class from all tabs
-            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-            // Add active class to clicked tab
-            tab.classList.add('active');
-            
-            // Filter events based on type
-            filterEventsByType(type);
-        }
-
-        function filterEventsByType(type) {
-            console.log('Filtering events by type:', type);
-            // Add your event filtering logic here
-        }
-
-        function previousMonth() {
-            console.log('Previous month');
-            // Add month navigation logic here
-        }
-
-        function nextMonth() {
-            console.log('Next month');
-            // Add month navigation logic here
-        }
-    </script>
+    <script src="../assets/js/student.js"></script>
 </body>
 </html>

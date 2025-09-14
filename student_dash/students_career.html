@@ -10,8 +10,7 @@
 
   <!-- Font Awesome icons -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-   <script src="students_career.js"></script>
-  <script defer src="../assets/js/student.js"></script>
+   <script defer src="../assets/js/student.js"></script>
 </head>
 <body>
   <div class="container">
@@ -219,66 +218,5 @@
     </main>
   </div>
   <script src="../assets/js/app.js"></script>
-    <script>
-        // Ensure logout function is available
-        function handleLogout() {
-            if (window.loginManager && typeof window.loginManager.logout === 'function') {
-                window.loginManager.logout();
-            } else {
-                // Fallback: clear session and redirect manually
-                localStorage.removeItem('userSession');
-                window.location.href = '../index.html';
-            }
-        }
-
-        // Add hover and focus effects for logout button
-        document.addEventListener('DOMContentLoaded', function() {
-            const logoutBtn = document.querySelector('.logout-btn');
-            if (logoutBtn) {
-                logoutBtn.addEventListener('mouseenter', function() {
-                    this.style.backgroundColor = '#dc2626';
-                });
-                logoutBtn.addEventListener('mouseleave', function() {
-                    this.style.backgroundColor = '#ef4444';
-                });
-                logoutBtn.addEventListener('focus', function() {
-                    this.style.outline = '2px solid #007AFF';
-                    this.style.outlineOffset = '2px';
-                });
-                logoutBtn.addEventListener('blur', function() {
-                    this.style.outline = 'none';
-                });
-            }
-        });
-    </script>
-   <script src="../assets/js/student.js"></script>
-    <script>
-      document.addEventListener('DOMContentLoaded', function() {
-            // Global search functionality
-            const globalSearch = document.getElementById('globalSearch');
-            globalSearch.addEventListener('input', function(e) {
-                console.log('Searching for:', e.target.value);
-                // Add search logic here
-            });
-
-            // Job application buttons
-            document.querySelectorAll('.btn-small-career').forEach(btn => {
-                btn.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    console.log('Job action clicked');
-                    // Add job application logic here
-                });
-            });
-
-            // Upload resume functionality
-            document.querySelector('input[type="file"]').addEventListener('change', function(e) {
-                const file = e.target.files[0];
-                if (file) {
-                    console.log('File selected:', file.name);
-                    // Add file upload logic here
-                }
-            });
-        });
-    </script>
 </body>
 </html>
