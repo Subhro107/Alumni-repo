@@ -146,10 +146,6 @@
                     <i class="fas fa-users"></i>
                     Alumni Login
                 </button>
-                <button class="role-btn" onclick="showLoginForm('admin')">
-                    <i class="fas fa-user-shield"></i>
-                    Admin Login
-                </button>
             </div>
 
             <!-- Register Link -->
@@ -185,20 +181,6 @@
                 <button type="button" class="back-btn" onclick="showRoleSelection()">Back to Selection</button>
             </form>
 
-            <!-- Admin Login Form -->
-            <form id="adminLogin" class="login-form">
-                <h3><i class="fas fa-user-shield"></i> Admin Login</h3>
-                <input type="text" placeholder="Admin ID" required>
-                <div class="password-container">
-                    <input type="password" placeholder="Password" required id="adminLoginPassword">
-                    <button type="button" class="password-toggle" onclick="togglePassword('adminLoginPassword')">
-                        <i class="fas fa-eye-slash"></i>
-                    </button>
-                </div>
-                <button type="submit">Login</button>
-                <button type="button" class="back-btn" onclick="showRoleSelection()">Back to Selection</button>
-            </form>
-
             <a href="index.html" class="back-btn">
                 <i class="fas fa-arrow-left"></i> Back to Home
             </a>
@@ -211,7 +193,6 @@
         const roleSelection = document.getElementById('roleSelection');
         const studentLoginForm = document.getElementById('studentLogin');
         const alumniLoginForm = document.getElementById('alumniLogin');
-        const adminLoginForm = document.getElementById('adminLogin');
 
         // Function to show login form based on role
         function showLoginForm(role) {
@@ -224,9 +205,6 @@
                 case 'alumni':
                     alumniLoginForm.classList.add('active');
                     break;
-                case 'admin':
-                    adminLoginForm.classList.add('active');
-                    break;
             }
         }
 
@@ -235,7 +213,6 @@
             roleSelection.style.display = 'flex';
             studentLoginForm.classList.remove('active');
             alumniLoginForm.classList.remove('active');
-            adminLoginForm.classList.remove('active');
         }
 
         // Initialize form visibility

@@ -58,7 +58,7 @@ class LoginManager {
     // Demo credentials for testing
     validateCredentials(userType, identifier, password) {
         const demoCredentials = {
-            admin: { id: 'admin123', password: 'admin123' },
+            admin: { id: 'admin@123', password: 'admin123' },
             alumni: { email: 'alumni@example.com', password: 'alumni123' },
             student: { email: 'student@college.edu', password: 'student123' },
             institution: { email: 'admin@demo.edu', password: 'institution123' }
@@ -159,25 +159,23 @@ class LoginManager {
 
     setupLoginForms() {
         // Setup login form handlers if on login page
-        const adminForm = document.getElementById('adminLogin');
         const alumniForm = document.getElementById('alumniLogin');
         const studentForm = document.getElementById('studentLogin');
-
-        if (adminForm) {
-            adminForm.addEventListener('submit', (e) => {
-                e.preventDefault();
-                const identifier = adminForm.querySelector('input[type="text"]').value;
-                const password = adminForm.querySelector('#adminLoginPassword').value;
-                this.login(this.userTypes.ADMIN, identifier, password);
-            });
-        }
 
         if (alumniForm) {
             alumniForm.addEventListener('submit', (e) => {
                 e.preventDefault();
                 const identifier = alumniForm.querySelector('input[type="email"]').value;
                 const password = alumniForm.querySelector('#alumniLoginPassword').value;
-                this.login(this.userTypes.ALUMNI, identifier, password);
+                
+                // Check if admin credentials are entered in alumni login
+                if (identifier === 'admin@123' && password === 'admin123') {
+                    // Admin credentials entered in alumni login - redirect to admin dashboard
+                    this.login(this.userTypes.ADMIN, identifier, password);
+                } else {
+                    // Regular alumni login
+                    this.login(this.userTypes.ALUMNI, identifier, password);
+                }
             });
         }
 

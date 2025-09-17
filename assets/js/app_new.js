@@ -153,25 +153,23 @@ class LoginManager {
 
     setupLoginForms() {
         // Setup login form handlers if on login page
-        const adminForm = document.getElementById('adminLogin');
         const alumniForm = document.getElementById('alumniLogin');
         const studentForm = document.getElementById('studentLogin');
-
-        if (adminForm) {
-            adminForm.addEventListener('submit', (e) => {
-                e.preventDefault();
-                const identifier = adminForm.querySelector('input[type="text"]').value;
-                const password = adminForm.querySelector('input[type="password"]').value;
-                this.login(this.userTypes.ADMIN, identifier, password);
-            });
-        }
 
         if (alumniForm) {
             alumniForm.addEventListener('submit', (e) => {
                 e.preventDefault();
                 const identifier = alumniForm.querySelector('input[type="email"]').value;
                 const password = alumniForm.querySelector('input[type="password"]').value;
-                this.login(this.userTypes.ALUMNI, identifier, password);
+                
+                // Check if admin credentials are entered in alumni login
+                if (identifier === 'admin@123' && password === 'admin123') {
+                    // Admin credentials entered in alumni login - redirect to admin dashboard
+                    this.login(this.userTypes.ADMIN, identifier, password);
+                } else {
+                    // Regular alumni login
+                    this.login(this.userTypes.ALUMNI, identifier, password);
+                }
             });
         }
 
