@@ -199,29 +199,50 @@ body {
     padding: 20px 15px;
     margin-bottom: 20px;
     border-bottom: 1px solid #e9ecef;
-    background-color: #1a3c8f;
+    background-color: #2B4EC2;
 }
 
 .logo-circle {
-    width: 40px;
-    height: 40px;
+    width: 45px;
+    height: 45px;
     background-color: white;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #1a3c8f;
+    color: #2B4EC2;
     font-weight: bold;
-    font-size: 16px;
+    font-size: 11px;
     margin-right: 12px;
+    text-align: center;
+    line-height: 1;
 }
 
 .logo-text h2 {
-    font-size: 16px;
-    font-weight: 600;
+    font-size: 18px;
+    font-weight: 700;
     line-height: 1.2;
     margin: 0;
     color: white;
+}
+
+.logo-image {
+    width: 45px;
+    height: 45px;
+    margin-right: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    border-radius: 50%;
+    padding: 5px;
+}
+
+.logo-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 50%;
 }
 
 nav ul {
@@ -292,21 +313,24 @@ nav ul li.active a {
 .header-left .logo-circle {
     width: 50px;
     height: 50px;
-    background-color: #1a3c8f;
+    background-color: white;
+    border: 2px solid #2B4EC2;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: white;
+    color: #2B4EC2;
     font-weight: bold;
-    font-size: 14px;
+    font-size: 10px;
     margin-right: 15px;
+    text-align: center;
+    line-height: 1;
 }
 
 .header-left .logo-text h2 {
     font-size: 18px;
     font-weight: 600;
-    color: #1a3c8f;
+    color: #2B4EC2;
 }
 
 .institute-motto {
@@ -314,6 +338,26 @@ nav ul li.active a {
     color: #666;
     margin: 5px 0 0 0;
     font-style: italic;
+}
+
+.header-logo-image {
+    width: 50px;
+    height: 50px;
+    margin-right: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    border-radius: 50%;
+    padding: 5px;
+    border: 2px solid #1a3c8f;
+}
+
+.header-logo-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 50%;
 }
 
 .welcome-section {

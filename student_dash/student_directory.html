@@ -12,7 +12,9 @@
     <div class="top-header">
         <div class="logo-section">
             <div class="logo">
-                <div class="logo-icon">AU</div>
+                <div class="logo-image">
+                    <img src="../assets/logo.jpg" alt="Alumni Connect Logo">
+                </div>
                 <span class="logo-text">Alumni Connect</span>
             </div>
         </div>
@@ -34,37 +36,38 @@
     </div>
 
     <!-- Sidebar -->
-    <div class="container">
-    <nav class="sidebar">
+    <div class="sidebar">
+      <nav class="nav-links">
         <a href="student_dashboard.html" class="nav-item">
             <i class="fas fa-th-large"></i>
-            Dashboard
+            <span>Dashboard</span>
         </a>
         <a href="student_directory.html" class="nav-item active">
             <i class="fas fa-users"></i>
-            Alumni Directory
+            <span>Alumni Directory</span>
         </a>
         <a href="student_events.html" class="nav-item">
             <i class="fas fa-calendar-alt"></i>
-            Events
+            <span>Events</span>
         </a>
-        <a href="students_forums.html" class="nav-item">
+        <a href="students_forum.html" class="nav-item">
             <i class="fas fa-comments"></i>
-            Forums
+            <span>Forums</span>
         </a>
         <a href="students_mentor.html" class="nav-item">
             <i class="fas fa-user-graduate"></i>
-            Mentorship
+            <span>Mentorship</span>
         </a>
         <a href="students_career.html" class="nav-item">
             <i class="fas fa-briefcase"></i>
-            Career Center
+            <span>Career Center</span>
         </a>
-        <a href="students_profile.html" class="nav-item active">
-                    <i class="fas fa-user-cog"></i>
-                    Profile Settings
-                </a>
-    </nav>
+        <a href="students_profile.html" class="nav-item">
+            <i class="fas fa-user-cog"></i>
+            <span>Profile Settings</span>
+        </a>
+      </nav>
+    </div>
 
     <!-- Main Content -->
     <main class="main-content">
@@ -97,8 +100,11 @@
                     <input type="text" id="filterLocation" placeholder="Filter by location...">
                     <button id="applyFiltersBtn">Apply Filters</button>
                 </div>
+            </div>
+        </div>
+    </main>
+  </div>
     <script src="../assets/js/app.js"></script>
     <script src="../assets/js/student.js"></script>
-    </main>
-    </body>
+</body>
 </html>

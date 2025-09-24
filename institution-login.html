@@ -261,11 +261,40 @@
                 grid-template-columns: 1fr;
             }
         }
+
+        .logo-container {
+            text-align: center;
+            margin-bottom: 1rem;
+            background: #f8f9fa;
+            padding: 10px;
+            border-radius: 8px;
+            min-height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo-container img {
+            height: 80px;
+            max-width: 100%;
+            object-fit: contain;
+        }
+
+        .logo-container::before {
+            content: "Alumni Connect";
+            color: #666;
+            font-size: 14px;
+            position: absolute;
+            margin-top: 90px;
+        }
     </style>
 </head>
 <body>
     <div class="institution-container">
         <div class="institution-box">
+            <div class="logo-container">
+                <img src="./assets/logo.jpg" alt="Alumni Connect Logo" onerror="console.log('Logo failed to load'); this.style.display='none';">
+            </div>
             <h2><i class="fas fa-university"></i> Institution Portal</h2>
             <p class="subtitle">Manage your educational institution on Alumni Connect</p>
             
