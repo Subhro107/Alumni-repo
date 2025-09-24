@@ -12,7 +12,12 @@
 <body>
   <div class="container">
     <aside class="sidebar">
-      <div class="logo"><span>AU</span> Alumni Connect</div>
+      <div class="logo">
+        <div class="logo-image">
+          <img src="../assets/logo.jpg" alt="Alumni Connect Logo">
+        </div>
+        <span>Alumni Connect</span>
+      </div>
       <nav class="nav-menu">
         <a href="dashboard.html" class="nav-item"><i class="material-icons">dashboard</i>Dashboard</a>
         <a href="alumni-directory.html" class="nav-item"><i class="material-icons">groups</i>Alumni Directory</a>
@@ -50,7 +55,7 @@
             <div class="tab">Past Events</div>
             <div class="tab">My Events</div>
           </div>
-          <button class="btn">
+          <button class="btn" onclick="showCreateEventModal()">
             <span class="material-icons icon-18">add</span>
             Create Event
           </button>
@@ -157,7 +162,7 @@
             <span class="material-icons">event</span>
             <h3>No events created yet</h3>
             <p>You haven't created any events. Create your first event to engage with the alumni community.</p>
-            <button class="btn outline">Create Your First Event</button>
+            <button class="btn outline" onclick="showCreateEventModal()">Create Your First Event</button>
           </div>
         </div>
       </div>

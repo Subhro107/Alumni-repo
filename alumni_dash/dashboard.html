@@ -72,33 +72,78 @@
           <span class="desc">Active postings</span>
         </div>
       </div>
-      <div class="dashboard-content">
-        <section class="activity">
-          <div class="title">Recent Activity</div>
+      <!-- Content Grid -->
+      <div class="content-grid">
+        <!-- Recent Activity -->
+        <div class="content-section">
+          <div class="section-header">
+            <h2 class="section-title">
+              <i class="fas fa-bell section-icon"></i>
+              Recent Activity
+            </h2>
+          </div>
           <div class="activity-list">
             <div class="activity-item">
-              <span><span class="dot blue"></span><span class="main">New alumni registration</span></span>
-              <span class="sub">Sarah Johnson (Class of 2020) joined</span>
+              <div class="activity-dot blue"></div>
+              <div class="activity-content">
+                <h4>New alumni registration</h4>
+                <p>Sarah Johnson (Class of 2020) joined</p>
+              </div>
             </div>
             <div class="activity-item">
-              <span><span class="dot green"></span><span class="main">Upcoming event reminder</span></span>
-              <span class="sub">Annual Alumni Gala - 2 weeks away</span>
+              <div class="activity-dot green"></div>
+              <div class="activity-content">
+                <h4>Upcoming event reminder</h4>
+                <p>Annual Alumni Gala • 2 weeks away</p>
+              </div>
             </div>
             <div class="activity-item">
-              <span><span class="dot orange"></span><span class="main">New mentorship match</span></span>
-              <span class="sub">You've been matched with a student</span>
+              <div class="activity-dot orange"></div>
+              <div class="activity-content">
+                <h4>New mentorship match</h4>
+                <p>You've been matched with a student</p>
+              </div>
             </div>
           </div>
-        </section>
-        <section class="quick-actions">
-          <div class="title">Quick Actions</div>
-          <div class="quick-actions-grid">
-            <div class="quick-action">Find Alumni</div>
-            <div class="quick-action green">View Events</div>
-            <div class="quick-action yellow">Messages</div>
-            <div class="quick-action red">Donate</div>
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="content-section">
+          <div class="section-header">
+            <h2 class="section-title">
+              <i class="fas fa-lightning-bolt section-icon"></i>
+              Quick Actions
+            </h2>
           </div>
-        </section>
+          <div class="actions-list">
+            <div class="actions-grid">
+              <div class="action-card blue">
+                <div class="action-icon blue">
+                  <i class="fas fa-search"></i>
+                </div>
+                <div class="action-text">Find Alumni</div>
+              </div>
+              <div class="action-card green">
+                <div class="action-icon green">
+                  <i class="fas fa-calendar-plus"></i>
+                </div>
+                <div class="action-text">View Events</div>
+              </div>
+              <div class="action-card orange">
+                <div class="action-icon orange">
+                  <i class="fas fa-envelope"></i>
+                </div>
+                <div class="action-text">Messages</div>
+              </div>
+              <div class="action-card red">
+                <div class="action-icon red">
+                  <i class="fas fa-heart"></i>
+                </div>
+                <div class="action-text">Donate</div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </main>
   </div>

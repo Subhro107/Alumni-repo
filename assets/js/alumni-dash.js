@@ -143,6 +143,8 @@ function showModal(title, content, buttons = []) {
         button.onclick = () => {
           if (btn.action === 'closeCurrentModal') {
             document.body.removeChild(overlay);
+          } else if (btn.action === 'createEvent') {
+            createEvent();
           } else if (typeof btn.action === 'function') {
             btn.action();
           }
@@ -256,3 +258,122 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
 });
+
+// Create Event Functionality
+function showCreateEventModal() {
+  showModal(
+    'Create New Event',
+    `
+    <form id="createEventForm" style="display: flex; flex-direction: column; gap: 16px;">
+      <div style="display: flex; flex-direction: column; gap: 8px;">
+        <label style="font-weight: 600; color: #374151; font-size: 14px;">Event Title *</label>
+        <input type="text" id="eventTitle" required style="padding: 12px; border: 1px solid #d1d5db; border-radius: 8px; font-size: 14px;" placeholder="Enter event title">
+      </div>
+      
+      <div style="display: flex; gap: 16px;">
+        <div style="flex: 1; display: flex; flex-direction: column; gap: 8px;">
+          <label style="font-weight: 600; color: #374151; font-size: 14px;">Date *</label>
+          <input type="date" id="eventDate" required style="padding: 12px; border: 1px solid #d1d5db; border-radius: 8px; font-size: 14px;">
+        </div>
+        <div style="flex: 1; display: flex; flex-direction: column; gap: 8px;">
+          <label style="font-weight: 600; color: #374151; font-size: 14px;">Time *</label>
+          <input type="time" id="eventTime" required style="padding: 12px; border: 1px solid #d1d5db; border-radius: 8px; font-size: 14px;">
+        </div>
+      </div>
+      
+      <div style="display: flex; flex-direction: column; gap: 8px;">
+        <label style="font-weight: 600; color: #374151; font-size: 14px;">Location</label>
+        <input type="text" id="eventLocation" style="padding: 12px; border: 1px solid #d1d5db; border-radius: 8px; font-size: 14px;" placeholder="Enter event location">
+      </div>
+      
+      <div style="display: flex; flex-direction: column; gap: 8px;">
+        <label style="font-weight: 600; color: #374151; font-size: 14px;">Description *</label>
+        <textarea id="eventDescription" required rows="4" style="padding: 12px; border: 1px solid #d1d5db; border-radius: 8px; font-size: 14px; resize: vertical;" placeholder="Describe your event..."></textarea>
+      </div>
+      
+      <div style="display: flex; flex-direction: column; gap: 8px;">
+        <label style="font-weight: 600; color: #374151; font-size: 14px;">Event Type</label>
+        <select id="eventType" style="padding: 12px; border: 1px solid #d1d5db; border-radius: 8px; font-size: 14px;">
+          <option value="networking">Networking</option>
+          <option value="career">Career</option>
+          <option value="social">Social</option>
+          <option value="educational">Educational</option>
+          <option value="fundraising">Fundraising</option>
+          <option value="other">Other</option>
+        </select>
+      </div>
+      
+      <div style="display: flex; align-items: center; gap: 8px;">
+        <input type="checkbox" id="isPublic" checked style="width: 16px; height: 16px;">
+        <label for="isPublic" style="font-size: 14px; color: #374151;">Make this event public to all alumni</label>
+      </div>
+    </form>
+    `,
+    [
+      { text: 'Cancel', action: 'closeCurrentModal', className: 'btn-ghost' },
+      { text: 'Create Event', action: 'createEvent', className: 'btn-primary' }
+    ]
+  );
+}
+
+function createEvent() {
+  const form = document.getElementById('createEventForm');
+  const formData = new FormData(form);
+  
+  // Get form values
+  const eventData = {
+    title: document.getElementById('eventTitle').value,
+    date: document.getElementById('eventDate').value,
+    time: document.getElementById('eventTime').value,
+    location: document.getElementById('eventLocation').value,
+    description: document.getElementById('eventDescription').value,
+    type: document.getElementById('eventType').value,
+    isPublic: document.getElementById('isPublic').checked
+  };
+  
+  // Validate required fields
+  if (!eventData.title || !eventData.date || !eventData.time || !eventData.description) {
+    alert('Please fill in all required fields.');
+    return;
+  }
+  
+  // Validate date is not in the past
+  const eventDateTime = new Date(eventData.date + 'T' + eventData.time);
+  const now = new Date();
+  if (eventDateTime < now) {
+    alert('Event date and time cannot be in the past.');
+    return;
+  }
+  
+  // For now, we'll just show a success message and close the modal
+  // In a real application, this would send data to a server
+  console.log('Creating event:', eventData);
+  
+  // Close the current modal
+  const overlay = document.querySelector('div[style*="position: fixed"]');
+  if (overlay) {
+    overlay.remove();
+  }
+  
+  // Show success message
+  showModal(
+    'Event Created Successfully!',
+    `
+    <div style="text-align: center; padding: 24px 0;">
+      <div style="width: 64px; height: 64px; background: #10b981; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px;">
+        <i class="fas fa-check" style="color: white; font-size: 24px;"></i>
+      </div>
+      <h3 style="margin: 0 0 8px 0; color: #374151;">${eventData.title}</h3>
+      <p style="margin: 0; color: #6b7280;">Your event has been created and will be visible to other alumni shortly.</p>
+    </div>
+    `,
+    [
+      { text: 'View Events', action: 'closeCurrentModal', className: 'btn-primary' }
+    ]
+  );
+  
+  // Refresh the page after a short delay to show the new event
+  setTimeout(() => {
+    location.reload();
+  }, 2000);
+}
