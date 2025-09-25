@@ -89,8 +89,148 @@
 
             <!-- Page Content -->
             <div class="page-content">
-                <h1>Students</h1>
-                <p>Student information, enrollment details, and academic records.</p>
+                <div class="page-header">
+                    <h1>Student Management</h1>
+                    <p>Manage student enrollment, academic records, and track student progress throughout their academic journey.</p>
+                </div>
+
+                <!-- Student Actions -->
+                <div class="alumni-actions">
+                    <div class="action-card">
+                        <div class="action-icon">
+                            <i class="fas fa-upload"></i>
+                        </div>
+                        <div class="action-content">
+                            <h3>Import Student Data</h3>
+                            <p>Upload a CSV file containing student information to bulk import enrollment records.</p>
+                            <button class="btn btn-primary" onclick="showStudentUploadModal()">
+                                <i class="fas fa-file-csv"></i>
+                                Upload CSV File
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="action-card">
+                        <div class="action-icon">
+                            <i class="fas fa-user-plus"></i>
+                        </div>
+                        <div class="action-content">
+                            <h3>Add New Student</h3>
+                            <p>Manually enroll individual students with complete academic information.</p>
+                            <button class="btn btn-secondary">
+                                <i class="fas fa-plus"></i>
+                                Enroll Student
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="action-card">
+                        <div class="action-icon">
+                            <i class="fas fa-certificate"></i>
+                        </div>
+                        <div class="action-content">
+                            <h3>Generate Reports</h3>
+                            <p>Create academic reports, transcripts, and enrollment summaries.</p>
+                            <button class="btn btn-outline">
+                                <i class="fas fa-file-alt"></i>
+                                Generate Reports
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Student Statistics -->
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-user-graduate"></i>
+                        </div>
+                        <div class="stat-content">
+                            <div class="stat-number">2,845</div>
+                            <div class="stat-label">Total Students</div>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="stat-content">
+                            <div class="stat-number">647</div>
+                            <div class="stat-label">New Admissions</div>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-trophy"></i>
+                        </div>
+                        <div class="stat-content">
+                            <div class="stat-number">89%</div>
+                            <div class="stat-label">Pass Rate</div>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <div class="stat-content">
+                            <div class="stat-number">3.7</div>
+                            <div class="stat-label">Average CGPA</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Student Activity -->
+                <div class="recent-activity">
+                    <h2>Recent Student Activity</h2>
+                    <div class="activity-list">
+                        <div class="activity-item">
+                            <div class="activity-icon">
+                                <i class="fas fa-user-plus"></i>
+                            </div>
+                            <div class="activity-content">
+                                <h4>New Student Enrollment</h4>
+                                <p>Amit Kumar enrolled in Computer Science Engineering (2025 Batch)</p>
+                                <span class="activity-time">1 hour ago</span>
+                            </div>
+                        </div>
+
+                        <div class="activity-item">
+                            <div class="activity-icon">
+                                <i class="fas fa-graduation-cap"></i>
+                            </div>
+                            <div class="activity-content">
+                                <h4>Academic Achievement</h4>
+                                <p>Priya Sharma achieved Dean's List recognition for Semester 6</p>
+                                <span class="activity-time">3 hours ago</span>
+                            </div>
+                        </div>
+
+                        <div class="activity-item">
+                            <div class="activity-icon">
+                                <i class="fas fa-file-alt"></i>
+                            </div>
+                            <div class="activity-content">
+                                <h4>Result Declaration</h4>
+                                <p>Semester 4 results published for 342 students across all departments</p>
+                                <span class="activity-time">1 day ago</span>
+                            </div>
+                        </div>
+
+                        <div class="activity-item">
+                            <div class="activity-icon">
+                                <i class="fas fa-exclamation-triangle"></i>
+                            </div>
+                            <div class="activity-content">
+                                <h4>Academic Alert</h4>
+                                <p>15 students flagged for attendance below 75% threshold</p>
+                                <span class="activity-time">2 days ago</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

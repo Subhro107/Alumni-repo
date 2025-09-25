@@ -89,8 +89,148 @@
 
             <!-- Page Content -->
             <div class="page-content">
-                <h1>Faculty</h1>
-                <p>Information about faculty members, their profiles, and contact details.</p>
+                <div class="page-header">
+                    <h1>Faculty Management</h1>
+                    <p>Manage faculty profiles, track academic contributions, and maintain teaching records.</p>
+                </div>
+
+                <!-- Faculty Actions -->
+                <div class="alumni-actions">
+                    <div class="action-card">
+                        <div class="action-icon">
+                            <i class="fas fa-upload"></i>
+                        </div>
+                        <div class="action-content">
+                            <h3>Import Faculty Data</h3>
+                            <p>Upload a CSV file containing faculty information to bulk import profiles and details.</p>
+                            <button class="btn btn-primary" onclick="showFacultyUploadModal()">
+                                <i class="fas fa-file-csv"></i>
+                                Upload CSV File
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="action-card">
+                        <div class="action-icon">
+                            <i class="fas fa-user-tie"></i>
+                        </div>
+                        <div class="action-content">
+                            <h3>Add Faculty Member</h3>
+                            <p>Manually add individual faculty profiles with academic credentials and details.</p>
+                            <button class="btn btn-secondary">
+                                <i class="fas fa-plus"></i>
+                                Add Faculty
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="action-card">
+                        <div class="action-icon">
+                            <i class="fas fa-chart-bar"></i>
+                        </div>
+                        <div class="action-content">
+                            <h3>Performance Reports</h3>
+                            <p>Generate faculty performance reports, teaching evaluations, and research summaries.</p>
+                            <button class="btn btn-outline">
+                                <i class="fas fa-file-chart-line"></i>
+                                View Reports
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Faculty Statistics -->
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-chalkboard-teacher"></i>
+                        </div>
+                        <div class="stat-content">
+                            <div class="stat-number">187</div>
+                            <div class="stat-label">Total Faculty</div>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-user-graduate"></i>
+                        </div>
+                        <div class="stat-content">
+                            <div class="stat-number">42</div>
+                            <div class="stat-label">PhD Holders</div>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-microscope"></i>
+                        </div>
+                        <div class="stat-content">
+                            <div class="stat-number">28</div>
+                            <div class="stat-label">Research Projects</div>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-award"></i>
+                        </div>
+                        <div class="stat-content">
+                            <div class="stat-number">4.2</div>
+                            <div class="stat-label">Avg Rating</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Faculty Activity -->
+                <div class="recent-activity">
+                    <h2>Recent Faculty Activity</h2>
+                    <div class="activity-list">
+                        <div class="activity-item">
+                            <div class="activity-icon">
+                                <i class="fas fa-user-plus"></i>
+                            </div>
+                            <div class="activity-content">
+                                <h4>New Faculty Appointment</h4>
+                                <p>Dr. Rajesh Gupta joined as Associate Professor in Computer Science Department</p>
+                                <span class="activity-time">2 hours ago</span>
+                            </div>
+                        </div>
+
+                        <div class="activity-item">
+                            <div class="activity-icon">
+                                <i class="fas fa-book"></i>
+                            </div>
+                            <div class="activity-content">
+                                <h4>Research Publication</h4>
+                                <p>Prof. Meera Joshi published paper in IEEE Transactions on AI</p>
+                                <span class="activity-time">1 day ago</span>
+                            </div>
+                        </div>
+
+                        <div class="activity-item">
+                            <div class="activity-icon">
+                                <i class="fas fa-trophy"></i>
+                            </div>
+                            <div class="activity-content">
+                                <h4>Award Recognition</h4>
+                                <p>Dr. Anil Sharma received Best Teacher Award for Academic Year 2024-25</p>
+                                <span class="activity-time">3 days ago</span>
+                            </div>
+                        </div>
+
+                        <div class="activity-item">
+                            <div class="activity-icon">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <div class="activity-content">
+                                <h4>Workshop Conducted</h4>
+                                <p>Faculty Development Program on "Modern Teaching Methodologies" completed</p>
+                                <span class="activity-time">1 week ago</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

@@ -89,8 +89,289 @@
 
             <!-- Page Content -->
             <div class="page-content">
-                <h1>Announcements</h1>
-                <p>Latest news, updates, and important announcements from the institute.</p>
+                <div class="announcements-header">
+                    <div class="page-title">
+                        <h1><i class="fas fa-bullhorn"></i> Announcements</h1>
+                        <p>Create and manage announcements for alumni, students, and faculty</p>
+                    </div>
+                    <div class="header-actions">
+                        <button class="btn btn-primary" onclick="showCreateAnnouncementModal()">
+                            <i class="fas fa-plus"></i> Create Announcement
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Quick Stats -->
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-paper-plane"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3>42</h3>
+                            <p>Total Sent</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-eye"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3>38</h3>
+                            <p>Viewed</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3>1,247</h3>
+                            <p>Total Recipients</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3>3</h3>
+                            <p>Scheduled</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Filters and Actions -->
+                <div class="content-filters">
+                    <div class="filter-group">
+                        <label>Filter by Type:</label>
+                        <select class="filter-select">
+                            <option value="all">All Announcements</option>
+                            <option value="sent">Sent</option>
+                            <option value="draft">Drafts</option>
+                            <option value="scheduled">Scheduled</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label>Target Audience:</label>
+                        <select class="filter-select">
+                            <option value="all">All Recipients</option>
+                            <option value="alumni">Alumni</option>
+                            <option value="students">Students</option>
+                            <option value="faculty">Faculty</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label>Priority:</label>
+                        <select class="filter-select">
+                            <option value="all">All Priorities</option>
+                            <option value="high">High Priority</option>
+                            <option value="medium">Medium Priority</option>
+                            <option value="low">Low Priority</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Announcements List -->
+                <div class="announcements-container">
+                    <div class="announcements-list">
+                        <!-- Sample Announcement 1 -->
+                        <div class="announcement-card">
+                            <div class="announcement-header">
+                                <div class="announcement-meta">
+                                    <span class="priority-badge high">High Priority</span>
+                                    <span class="status-badge sent">Sent</span>
+                                </div>
+                                <div class="announcement-actions">
+                                    <button class="action-btn" title="View Analytics">
+                                        <i class="fas fa-chart-bar"></i>
+                                    </button>
+                                    <button class="action-btn" title="Edit">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button class="action-btn" title="Delete">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="announcement-content">
+                                <h3>Alumni Reunion 2025 - Registration Open</h3>
+                                <p>Dear Alumni, We are excited to announce that registration is now open for our Annual Alumni Reunion 2025. Join us for a memorable evening of networking, celebrations, and reconnecting with old friends.</p>
+                                <div class="announcement-details">
+                                    <div class="detail-item">
+                                        <i class="fas fa-users"></i>
+                                        <span>Recipients: Alumni (1,847 members)</span>
+                                    </div>
+                                    <div class="detail-item">
+                                        <i class="fas fa-calendar-alt"></i>
+                                        <span>Sent: Oct 15, 2025 at 10:30 AM</span>
+                                    </div>
+                                    <div class="detail-item">
+                                        <i class="fas fa-eye"></i>
+                                        <span>Viewed: 1,234 (67%)</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Sample Announcement 2 -->
+                        <div class="announcement-card">
+                            <div class="announcement-header">
+                                <div class="announcement-meta">
+                                    <span class="priority-badge medium">Medium Priority</span>
+                                    <span class="status-badge sent">Sent</span>
+                                </div>
+                                <div class="announcement-actions">
+                                    <button class="action-btn" title="View Analytics">
+                                        <i class="fas fa-chart-bar"></i>
+                                    </button>
+                                    <button class="action-btn" title="Edit">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button class="action-btn" title="Delete">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="announcement-content">
+                                <h3>Mid-Semester Examination Schedule</h3>
+                                <p>The mid-semester examinations for all departments will commence from November 1st, 2025. Please check your respective department portals for detailed schedules and examination guidelines.</p>
+                                <div class="announcement-details">
+                                    <div class="detail-item">
+                                        <i class="fas fa-users"></i>
+                                        <span>Recipients: Students (2,341 members)</span>
+                                    </div>
+                                    <div class="detail-item">
+                                        <i class="fas fa-calendar-alt"></i>
+                                        <span>Sent: Oct 10, 2025 at 2:15 PM</span>
+                                    </div>
+                                    <div class="detail-item">
+                                        <i class="fas fa-eye"></i>
+                                        <span>Viewed: 2,156 (92%)</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Sample Announcement 3 -->
+                        <div class="announcement-card">
+                            <div class="announcement-header">
+                                <div class="announcement-meta">
+                                    <span class="priority-badge low">Low Priority</span>
+                                    <span class="status-badge scheduled">Scheduled</span>
+                                </div>
+                                <div class="announcement-actions">
+                                    <button class="action-btn" title="View Analytics">
+                                        <i class="fas fa-chart-bar"></i>
+                                    </button>
+                                    <button class="action-btn" title="Edit">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button class="action-btn" title="Delete">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="announcement-content">
+                                <h3>Faculty Development Program</h3>
+                                <p>A comprehensive faculty development program on "Modern Teaching Methodologies" will be conducted next month. All faculty members are encouraged to participate to enhance their teaching skills.</p>
+                                <div class="announcement-details">
+                                    <div class="detail-item">
+                                        <i class="fas fa-users"></i>
+                                        <span>Recipients: Faculty (145 members)</span>
+                                    </div>
+                                    <div class="detail-item">
+                                        <i class="fas fa-clock"></i>
+                                        <span>Scheduled: Nov 1, 2025 at 9:00 AM</span>
+                                    </div>
+                                    <div class="detail-item">
+                                        <i class="fas fa-calendar-plus"></i>
+                                        <span>Created: Oct 20, 2025</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Sample Draft -->
+                        <div class="announcement-card draft">
+                            <div class="announcement-header">
+                                <div class="announcement-meta">
+                                    <span class="priority-badge medium">Medium Priority</span>
+                                    <span class="status-badge draft">Draft</span>
+                                </div>
+                                <div class="announcement-actions">
+                                    <button class="action-btn" title="Continue Editing">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button class="action-btn" title="Delete">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="announcement-content">
+                                <h3>Annual Sports Meet 2025</h3>
+                                <p>The annual sports meet is being planned for December. More details about events, registration, and schedule will be shared soon...</p>
+                                <div class="announcement-details">
+                                    <div class="detail-item">
+                                        <i class="fas fa-users"></i>
+                                        <span>Target: Students & Alumni</span>
+                                    </div>
+                                    <div class="detail-item">
+                                        <i class="fas fa-save"></i>
+                                        <span>Last saved: Oct 22, 2025 at 4:30 PM</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Sidebar Info -->
+                    <div class="announcements-sidebar">
+                        <div class="sidebar-card">
+                            <h3><i class="fas fa-info-circle"></i> Quick Tips</h3>
+                            <ul class="tips-list">
+                                <li>Use clear, concise subject lines</li>
+                                <li>Include call-to-action buttons when needed</li>
+                                <li>Preview before sending to large groups</li>
+                                <li>Schedule announcements for optimal times</li>
+                                <li>Track engagement to improve future communications</li>
+                            </ul>
+                        </div>
+
+                        <div class="sidebar-card">
+                            <h3><i class="fas fa-clock"></i> Recent Activity</h3>
+                            <div class="activity-list">
+                                <div class="activity-item">
+                                    <div class="activity-icon">
+                                        <i class="fas fa-paper-plane"></i>
+                                    </div>
+                                    <div class="activity-details">
+                                        <span>Alumni Reunion announcement sent</span>
+                                        <small>2 hours ago</small>
+                                    </div>
+                                </div>
+                                <div class="activity-item">
+                                    <div class="activity-icon">
+                                        <i class="fas fa-edit"></i>
+                                    </div>
+                                    <div class="activity-details">
+                                        <span>Exam schedule draft updated</span>
+                                        <small>5 hours ago</small>
+                                    </div>
+                                </div>
+                                <div class="activity-item">
+                                    <div class="activity-icon">
+                                        <i class="fas fa-clock"></i>
+                                    </div>
+                                    <div class="activity-details">
+                                        <span>Faculty program scheduled</span>
+                                        <small>1 day ago</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
