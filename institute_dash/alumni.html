@@ -89,9 +89,137 @@
 
             <!-- Page Content -->
             <div class="page-content">
-                <h1>Alumni</h1>
-                <p>Welcome to the Alumni section. Here you can find information about alumni events, networking opportunities, and resources for former students.</p>
-                <!-- Add more content as needed -->
+                <div class="page-header">
+                    <h1>Alumni Management</h1>
+                    <p>Manage alumni data, import records, and track engagement with former students.</p>
+                </div>
+
+                <!-- Alumni Actions -->
+                <div class="alumni-actions">
+                    <div class="action-card">
+                        <div class="action-icon">
+                            <i class="fas fa-upload"></i>
+                        </div>
+                        <div class="action-content">
+                            <h3>Import Alumni Data</h3>
+                            <p>Upload a CSV file containing alumni information to bulk import records into the system.</p>
+                            <button class="btn btn-primary" onclick="showUploadModal()">
+                                <i class="fas fa-file-csv"></i>
+                                Upload CSV File
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="action-card">
+                        <div class="action-icon">
+                            <i class="fas fa-plus"></i>
+                        </div>
+                        <div class="action-content">
+                            <h3>Add Individual Alumni</h3>
+                            <p>Manually add individual alumni records with detailed information.</p>
+                            <button class="btn btn-secondary">
+                                <i class="fas fa-user-plus"></i>
+                                Add Alumni
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="action-card">
+                        <div class="action-icon">
+                            <i class="fas fa-download"></i>
+                        </div>
+                        <div class="action-content">
+                            <h3>Export Alumni Data</h3>
+                            <p>Download current alumni data in CSV format for analysis or backup.</p>
+                            <button class="btn btn-outline">
+                                <i class="fas fa-file-export"></i>
+                                Export CSV
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Alumni Statistics -->
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <div class="stat-content">
+                            <div class="stat-number">1,247</div>
+                            <div class="stat-label">Total Alumni</div>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-calendar-check"></i>
+                        </div>
+                        <div class="stat-content">
+                            <div class="stat-number">156</div>
+                            <div class="stat-label">Recent Graduates</div>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-network-wired"></i>
+                        </div>
+                        <div class="stat-content">
+                            <div class="stat-number">892</div>
+                            <div class="stat-label">Active Network</div>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-briefcase"></i>
+                        </div>
+                        <div class="stat-content">
+                            <div class="stat-number">73%</div>
+                            <div class="stat-label">Employment Rate</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Alumni Activity -->
+                <div class="recent-activity">
+                    <h2>Recent Alumni Activity</h2>
+                    <div class="activity-list">
+                        <div class="activity-item">
+                            <div class="activity-icon">
+                                <i class="fas fa-user-plus"></i>
+                            </div>
+                            <div class="activity-content">
+                                <h4>New Alumni Registration</h4>
+                                <p>John Smith (Class of 2023) joined the alumni network</p>
+                                <span class="activity-time">2 hours ago</span>
+                            </div>
+                        </div>
+
+                        <div class="activity-item">
+                            <div class="activity-icon">
+                                <i class="fas fa-briefcase"></i>
+                            </div>
+                            <div class="activity-content">
+                                <h4>Job Update</h4>
+                                <p>Sarah Johnson updated her employment status at TechCorp</p>
+                                <span class="activity-time">5 hours ago</span>
+                            </div>
+                        </div>
+
+                        <div class="activity-item">
+                            <div class="activity-icon">
+                                <i class="fas fa-calendar"></i>
+                            </div>
+                            <div class="activity-content">
+                                <h4>Event Registration</h4>
+                                <p>25 alumni registered for the Annual Reunion 2025</p>
+                                <span class="activity-time">1 day ago</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
